@@ -66,10 +66,10 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Hello, World!',
-                    style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-                  ),
+                  // Text(
+                  //   'Hello, World!',
+                  //   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  // ),
                   SizedBox(height: 16.0),
                   Text(
                     'This is a responsive design example using Stack and Positioned widgets.',
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
             top: MediaQuery.of(context).size.height * 0.45,
             left: MediaQuery.of(context).size.width * 0.1,
             right: MediaQuery.of(context).size.width * 0.1,
-            child: CircleAvatar(backgroundColor: Colors.black,radius: 100,))
+            child: CircleAvatar(backgroundColor: Colors.black,radius: 60,))
         ],
       ),
         
