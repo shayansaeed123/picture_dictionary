@@ -4,11 +4,11 @@ import 'package:picture_dictionary/splash.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-    enabled: true,
-    builder: (context) => 
+    // DevicePreview(
+    // enabled: true,
+    // builder: (context) => 
     MyApp(), // Wrap your app
-  ),
+  // ),
   );
 }
 

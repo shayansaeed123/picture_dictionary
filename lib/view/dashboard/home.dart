@@ -1,0 +1,126 @@
+
+
+import 'package:flutter/material.dart';
+import 'package:picture_dictionary/res/reusablehomebtn.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      
+      appBar: AppBar(
+        backgroundColor: Color(0xFFffb64d),
+        title: Text('Home'),
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            Scaffold.of(context).openDrawer();
+          },
+        ),
+        automaticallyImplyLeading: false,
+        actions: [
+          reusablehomeBtn('ENG', (){}),
+          SizedBox(width: MediaQuery.of(context).size.width * .01,),
+          reusablehomeBtn('SEARCH', (){}),
+          SizedBox(width: MediaQuery.of(context).size.width * .01,),
+        ],
+        ),
+        drawer: Drawer(child: Icon(Icons.airline_stops_outlined)),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                // eb8815 f5d12d
+                Color(0xFFe5af55),
+                Color(0xFFe3e18e),
+              ],
+            ),
+          ),
+        child: Stack(
+        children: [
+          // Background image
+          // Positioned.fill(
+          //   child: Image.asset(
+          //     'assets/splash.png',
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          // Content
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.18,
+            left: MediaQuery.of(context).size.width * 0.1,
+            right: MediaQuery.of(context).size.width * 0.1,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.18,
+              color: Colors.white.withOpacity(0.8),
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'LEARN',
+                    style: TextStyle(color: Color(0xFFb1282e), fontSize: 24.0, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 16.0),
+                  // Text(
+                  //   'This is a responsive design example using Stack and Positioned widgets.',
+                  //   style: TextStyle(fontSize: 16.0),
+                  // ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.12,
+            left: MediaQuery.of(context).size.width * 0.1,
+            right: MediaQuery.of(context).size.width * 0.1,
+            child: CircleAvatar(backgroundColor: Colors.cyan,radius: MediaQuery.of(context).size.height * 0.065,child: Icon(Icons.book_outlined,size: 40,),)
+            ),
+            // Content
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.52,
+            left: MediaQuery.of(context).size.width * 0.1,
+            right: MediaQuery.of(context).size.width * 0.1,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.18,
+              color: Colors.white.withOpacity(0.8),
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'PLAY GAME',
+                    style: TextStyle(color: Color(0xFFb1282e), fontSize: 24.0, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 16.0),
+                  // Text(
+                  //   'This is a responsive design example using Stack and Positioned widgets.',
+                  //   style: TextStyle(fontSize: 16.0),
+                  // ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.46,
+            left: MediaQuery.of(context).size.width * 0.1,
+            right: MediaQuery.of(context).size.width * 0.1,
+            child: CircleAvatar(backgroundColor: Colors.cyan,radius: MediaQuery.of(context).size.height * 0.065,child: Icon(Icons.gamepad_outlined,size: 40,),)
+          )
+        ],
+      ),
+      )
+    );
+  }
+}
