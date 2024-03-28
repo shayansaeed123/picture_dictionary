@@ -99,8 +99,8 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color(0xFF56acdd),
-                          prefixIcon:
-                              Icon(Icons.password_outlined, color: Colors.white),
+                          prefixIcon: Icon(Icons.password_outlined,
+                              color: Colors.white),
                           hintText: 'Password',
                           hintStyle: TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
@@ -121,13 +121,15 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         keyboardType: TextInputType.text,
                       ),
-                      SizedBox(height: MediaQuery.of(context).size.height * .02),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * .02),
                       ElevatedButton(
                           style: ButtonStyle(
-                              padding:
-                              MaterialStateProperty.all(EdgeInsets.all(16.0)),
-                              fixedSize: MaterialStateProperty.all(Size.fromWidth(
-                                  MediaQuery.of(context).size.width)),
+                              padding: MaterialStateProperty.all(
+                                  EdgeInsets.all(16.0)),
+                              fixedSize: MaterialStateProperty.all(
+                                  Size.fromWidth(
+                                      MediaQuery.of(context).size.width)),
                               backgroundColor: MaterialStateColor.resolveWith(
                                   (states) => Color(0xFFcf93d9))),
                           onPressed: () {},
@@ -142,11 +144,13 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      reusableLoginBtn('Sign in as a Guest  ', 'assets/user.png',
-                          Colors.transparent, () {
-                            Navigator.push(context, MaterialPageRoute(builder: (_)=> HomePage()));
-                          }),
-                      SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                      reusableLoginBtn('Sign in as a Guest  ',
+                          'assets/user.png', Colors.transparent, () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => HomePage()));
+                      }),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.02),
                       reusableLoginBtn('Sign in With  ', 'assets/google.png',
                           Colors.white, () {})
                     ],
@@ -156,7 +160,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      
       ),
     );
   }
