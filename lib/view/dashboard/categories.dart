@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
+import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 
 class CategoriesPage extends StatefulWidget {
@@ -54,14 +55,19 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     elevation: 7,
                   ),
                   Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      // height: MediaQuery.of(context).size.height*0.05,
-                      margin: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
-                      // padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(color: Colors.purple.shade800,borderRadius: BorderRadius.circular(8.0)),
-                      child: Center(child: Text('Fruits',style: TextStyle(color: Colors.white),)),
-                    
+                    child: InkWell(
+                      onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ItemsPage(),));
+              },
+                      child: Container(
+                        width: double.infinity,
+                        // height: MediaQuery.of(context).size.height*0.05,
+                        margin: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
+                        // padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(color: Colors.purple.shade800,borderRadius: BorderRadius.circular(8.0)),
+                        child: Center(child: Text('Fruits',style: TextStyle(color: Colors.white),)),
+                      
+                      ),
                     ),
                   )
                 ],
