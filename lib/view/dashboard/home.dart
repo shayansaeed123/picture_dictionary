@@ -1,7 +1,10 @@
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
+import 'package:picture_dictionary/widget/sidebar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,17 +14,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      key: _scaffoldKey,
+      backgroundColor: Color(0xFFffb64d),
       appBar: AppBar(
         backgroundColor: Color(0xFFffb64d),
         title: Text('Home'),
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {
-            Scaffold.of(context).openDrawer();
+            _scaffoldKey.currentState!.openDrawer();
           },
         ),
         automaticallyImplyLeading: false,
@@ -32,95 +37,151 @@ class _HomePageState extends State<HomePage> {
           SizedBox(width: MediaQuery.of(context).size.width * .01,),
         ],
         ),
-        drawer: Drawer(child: Icon(Icons.airline_stops_outlined)),
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                // eb8815 f5d12d
-                Color(0xFFe5af55),
-                Color(0xFFe3e18e),
-              ],
-            ),
-          ),
-        child: Stack(
+        drawer: SideBar(),
+      body: Row(
         children: [
-          // Background image
-          // Positioned.fill(
-          //   child: Image.asset(
-          //     'assets/splash.png',
-          //     fit: BoxFit.cover,
-          //   ),
-          // ),
-          // Content
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.18,
-            left: MediaQuery.of(context).size.width * 0.1,
-            right: MediaQuery.of(context).size.width * 0.1,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.18,
-              color: Colors.white.withOpacity(0.8),
-              padding: EdgeInsets.all(16.0),
+          Padding(
+            padding:  EdgeInsets.all(MediaQuery.of(context).size.height * .01),
+            child: 
+            Container(
+              width: MediaQuery.of(context).size.width * .44,
+              height: MediaQuery.of(context).size.height * .261,
+              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(11),),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'LEARN',
-                    style: TextStyle(color: Color(0xFFb1282e), fontSize: 24.0, fontWeight: FontWeight.bold),
+                  Card(
+                    margin: EdgeInsets.all(5),
+                    child: Image.asset('assets/log.png',height: MediaQuery.of(context).size.height * .18,width: double.infinity,),
+                    elevation: 7,
                   ),
-                  SizedBox(height: 16.0),
-                  // Text(
-                  //   'This is a responsive design example using Stack and Positioned widgets.',
-                  //   style: TextStyle(fontSize: 16.0),
-                  // ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      // height: MediaQuery.of(context).size.height*0.05,
+                      margin: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
+                      // padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(color: Colors.purple.shade800,borderRadius: BorderRadius.circular(8.0)),
+                      child: Center(child: Text('Fruits',style: TextStyle(color: Colors.white),)),
+                    
+                    ),
+                  )
                 ],
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.12,
-            left: MediaQuery.of(context).size.width * 0.1,
-            right: MediaQuery.of(context).size.width * 0.1,
-            child: CircleAvatar(backgroundColor: Colors.cyan,radius: MediaQuery.of(context).size.height * 0.065,child: Icon(Icons.book_outlined,size: 40,),)
-            ),
-            // Content
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.52,
-            left: MediaQuery.of(context).size.width * 0.1,
-            right: MediaQuery.of(context).size.width * 0.1,
+          Padding(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.18,
-              color: Colors.white.withOpacity(0.8),
-              padding: EdgeInsets.all(16.0),
+              width: MediaQuery.of(context).size.width * .44,
+              height: MediaQuery.of(context).size.height * .261,
+              decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(11),),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'PLAY GAME',
-                    style: TextStyle(color: Color(0xFFb1282e), fontSize: 24.0, fontWeight: FontWeight.bold),
+                  Card(
+                    margin: EdgeInsets.all(5),
+                    child: Image.asset('assets/log.png',height: MediaQuery.of(context).size.height * .18,width: double.infinity,),
+                    elevation: 7,
                   ),
-                  SizedBox(height: 16.0),
-                  // Text(
-                  //   'This is a responsive design example using Stack and Positioned widgets.',
-                  //   style: TextStyle(fontSize: 16.0),
-                  // ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      // height: MediaQuery.of(context).size.height*0.05,
+                      margin: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
+                      // padding: EdgeInsets.all(MediaQuery.of(context).size.height * .02),
+                      decoration: BoxDecoration(color: Colors.purple.shade800,borderRadius: BorderRadius.circular(8.0)),
+                      child: Center(child: Text('Fruits',style: TextStyle(color: Colors.white),)),
+                    
+                    ),
+                  )
                 ],
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.46,
-            left: MediaQuery.of(context).size.width * 0.1,
-            right: MediaQuery.of(context).size.width * 0.1,
-            child: CircleAvatar(backgroundColor: Colors.cyan,radius: MediaQuery.of(context).size.height * 0.065,child: Icon(Icons.gamepad_outlined,size: 40,),)
-          )
+          
         ],
-      ),
       )
+      // Container(
+      //   decoration: BoxDecoration(
+      //       gradient: LinearGradient(
+      //         begin: Alignment.topCenter,
+      //         end: Alignment.bottomCenter,
+      //         colors: [
+      //           // eb8815 f5d12d
+      //           Color(0xFFe5af55),
+      //           Color(0xFFe3e18e),
+      //         ],
+      //       ),
+      //     ),
+      //   child: Stack(
+      //   children: [
+      //     // Background image
+      //     // Positioned.fill(
+      //     //   child: Image.asset(
+      //     //     'assets/splash.png',
+      //     //     fit: BoxFit.cover,
+      //     //   ),
+      //     // ),
+      //     // Content
+      //     Positioned(
+      //       top: MediaQuery.of(context).size.height * 0.18,
+      //       left: MediaQuery.of(context).size.width * 0.1,
+      //       right: MediaQuery.of(context).size.width * 0.1,
+      //       child: Container(
+      //         height: MediaQuery.of(context).size.height * 0.18,
+      //         color: Colors.white.withOpacity(0.8),
+      //         padding: EdgeInsets.all(16.0),
+      //         child: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.center,
+      //           mainAxisAlignment: MainAxisAlignment.end,
+      //           children: [
+      //             Text(
+      //               'LEARN',
+      //               style: TextStyle(color: Color(0xFFb1282e), fontSize: 24.0, fontWeight: FontWeight.bold),
+      //             ),
+      //             SizedBox(height: 16.0),
+      //           ],
+      //         ),
+      //       ),
+      //     ),
+      //     Positioned(
+      //       top: MediaQuery.of(context).size.height * 0.12,
+      //       left: MediaQuery.of(context).size.width * 0.1,
+      //       right: MediaQuery.of(context).size.width * 0.1,
+      //       child: CircleAvatar(backgroundColor: Colors.cyan,radius: MediaQuery.of(context).size.height * 0.065,child: Icon(Icons.book_outlined,size: 40,),)
+      //       ),
+      //       // Content
+      //     Positioned(
+      //       top: MediaQuery.of(context).size.height * 0.52,
+      //       left: MediaQuery.of(context).size.width * 0.1,
+      //       right: MediaQuery.of(context).size.width * 0.1,
+      //       child: Container(
+      //         height: MediaQuery.of(context).size.height * 0.18,
+      //         color: Colors.white.withOpacity(0.8),
+      //         padding: EdgeInsets.all(16.0),
+      //         child: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.center,
+      //           mainAxisAlignment: MainAxisAlignment.end,
+      //           children: [
+      //             Text(
+      //               'PLAY GAME',
+      //               style: TextStyle(color: Color(0xFFb1282e), fontSize: 24.0, fontWeight: FontWeight.bold),
+      //             ),
+      //             SizedBox(height: 16.0),
+      //           ],
+      //         ),
+      //       ),
+      //     ),
+      //     Positioned(
+      //       top: MediaQuery.of(context).size.height * 0.46,
+      //       left: MediaQuery.of(context).size.width * 0.1,
+      //       right: MediaQuery.of(context).size.width * 0.1,
+      //       child: CircleAvatar(backgroundColor: Colors.cyan,radius: MediaQuery.of(context).size.height * 0.065,child: Icon(Icons.gamepad_outlined,size: 40,),)
+      //     )
+      //   ],
+      // ),
+      // )
     );
   }
 }
