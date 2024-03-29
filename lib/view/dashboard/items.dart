@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
+import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 
 class ItemsPage extends StatefulWidget {
@@ -112,42 +113,47 @@ class _ItemsPageState extends State<ItemsPage> {
       //     ],
       //   ),
       // ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * .44,
-                      height: MediaQuery.of(context).size.height * .20,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Card(
-                            margin: EdgeInsets.all(5),
-                            child: Image.asset(
-                              'assets/log.png',
-                              height: MediaQuery.of(context).size.height * .15,
-                              width: double.infinity,
-                            ),
-                            elevation: 7,
-                            color: Colors.white,
-                          ),
-                          Expanded(
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.purple.shade800,
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> ItemDetails()));
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * .44,
+                        height: MediaQuery.of(context).size.height * .20,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Card(
+                              margin: EdgeInsets.all(5),
+                              child: Image.asset(
+                                'assets/log.png',
+                                height: MediaQuery.of(context).size.height * .15,
+                                width: double.infinity,
                               ),
-                              child: Center(
-                                child: Text(
-                                  'Fruits',
-                                  style: TextStyle(color: Colors.white),
+                              elevation: 7,
+                              color: Colors.white,
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.purple.shade800,
+                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Fruits',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -223,4 +229,5 @@ class _ItemsPageState extends State<ItemsPage> {
 
         );
   }
+
 }
