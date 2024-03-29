@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableloginbtn.dart';
 import 'package:picture_dictionary/view/dashboard/home.dart';
@@ -19,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration:const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -70,18 +69,18 @@ class _LoginPageState extends State<LoginPage> {
                           fillColor: Color(0xFF56acdd),
                           prefixIcon: Icon(Icons.email, color: Colors.white),
                           hintText: 'Email',
-                          hintStyle: TextStyle(color: Colors.white),
+                          hintStyle: const TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Color(0xFF67c9f2), width: 4)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Color(0xFF67c9f2), width: 4)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                   color: Color(0xFF67c9f2), width: 4)),
                           errorBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
@@ -98,8 +97,8 @@ class _LoginPageState extends State<LoginPage> {
                         obscuringCharacter: '*',
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Color(0xFF56acdd),
-                          prefixIcon: Icon(Icons.password_outlined,
+                          fillColor: const Color(0xFF56acdd),
+                          prefixIcon: const Icon(Icons.password_outlined,
                               color: Colors.white),
                           hintText: 'Password',
                           hintStyle: TextStyle(color: Colors.white),
