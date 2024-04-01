@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
-import 'package:picture_dictionary/widget/sidebar.dart';
 
 class ItemDetails extends StatefulWidget {
   const ItemDetails({super.key});
