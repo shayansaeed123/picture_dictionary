@@ -73,16 +73,21 @@ class _ItemDetailsState extends State<ItemDetails> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.white),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                          reusableitemdetailsrow('walnuts', Color(0xFF17a493), const Color.fromARGB(255, 51, 219, 177),  context),
-                          reusableitemdetailsrow('walnuts', Color(0xFF9753fe), Color.fromARGB(255, 161, 136, 204), context),
-                          reusableitemdetailsrow('walnuts', Color(0xFF4f5bfe), Colors.blue.shade500,  context),
-                          reusableitemdetailsrow('walnuts', Color(0xFFe14abe), Colors.pink.shade200,  context),
-                        ],),
-                      ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        reusableitemdetailsrow('walnuts', Color(0xFF17a493),
+                            const Color.fromARGB(255, 51, 219, 177), context),
+                        reusableitemdetailsrow('walnuts', Color(0xFF9753fe),
+                            Color.fromARGB(255, 161, 136, 204), context),
+                        reusableitemdetailsrow('walnuts', Color(0xFF4f5bfe),
+                            Colors.blue.shade500, context),
+                        reusableitemdetailsrow('walnuts', Color(0xFFe14abe),
+                            Colors.pink.shade200, context),
+                      ],
+                    ),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(
@@ -97,46 +102,59 @@ class _ItemDetailsState extends State<ItemDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.height * .01),
                         // height: MediaQuery.of(context).size.height * .07,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Color(0xFFffb64d),width: 4),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color(0xFFeb8815),
-                            Color(0xFFeb8815),
-                            // Color(0xFFe3e18e),
-                          ],
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border:
+                              Border.all(color: Color(0xFFffb64d), width: 4),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFFeb8815),
+                              Color(0xFFeb8815),
+                              // Color(0xFFe3e18e),
+                            ],
+                          ),
                         ),
-                      ),
-                      child:  Center(child: Icon(Icons.arrow_back_ios,size: 35,color: Color(0xFFe3e18e),)),
+                        child: Center(
+                            child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 35,
+                          color: Color(0xFFe3e18e),
+                        )),
                       ),
                       Text('data'),
                       Container(
-                        padding: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
+                        padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.height * .01),
                         // height: MediaQuery.of(context).size.height * .07,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Color(0xFFffb64d),width: 4),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color(0xFFeb8815),
-                            Color(0xFFeb8815),
-                            // Color(0xFFe3e18e),
-                          ],
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border:
+                              Border.all(color: Color(0xFFffb64d), width: 4),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFFeb8815),
+                              Color(0xFFeb8815),
+                              // Color(0xFFe3e18e),
+                            ],
+                          ),
                         ),
-                      ),
-                      child: Center(child: Icon(Icons.arrow_forward_ios,size: 35,color: Color(0xFFe3e18e),)),
-                          
+                        child: Center(
+                            child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 35,
+                          color: Color(0xFFe3e18e),
+                        )),
                       ),
                     ],
                   ),
-                ),  
+                ),
               ],
             ),
           ),
