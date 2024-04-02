@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/res/reusableitemdetailsrow.dart';
 import 'package:picture_dictionary/res/reusablenextitembtn.dart';
@@ -12,33 +13,12 @@ class ItemDetails extends StatefulWidget {
 }
 
 class _ItemDetailsState extends State<ItemDetails> {
-  // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // key: _scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: Color(0xFFffb64d),
-          title: Text('Categories Name'),
-          // leading: IconButton(
-          //   icon: Icon(Icons.menu),
-          //   onPressed: () {
-          //     _scaffoldKey.currentState!.openDrawer();
-          //   },
-          // ),
-          // automaticallyImplyLeading: false,
-          actions: [
-            reusablehomeBtn('ENG', () {}),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * .01,
-            ),
-            reusablehomeBtn('SEARCH', () {}),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * .01,
-            ),
-          ],
-        ),
-        // drawer: SideBar(),
+      key: _scaffoldKey,
+        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openEndDrawer();},'Categories Name'),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

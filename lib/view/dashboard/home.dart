@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,29 +15,34 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final contr = ZoomDrawerController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xFFffb64d),
-      appBar: AppBar(
-        backgroundColor: Color(0xFFffb64d),
-        title: Text('Home'),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
-        automaticallyImplyLeading: false,
-        actions: [
-          reusablehomeBtn('ENG', (){}),
-          SizedBox(width: MediaQuery.of(context).size.width * .01,),
-          reusablehomeBtn('SEARCH', (){}),
-          SizedBox(width: MediaQuery.of(context).size.width * .01,),
-        ],
-        ),
-        drawer: SideBar(),
+      appBar: reusableappbar(context, (){
+        ZoomDrawer.of(context)!.open();
+        _scaffoldKey.currentState!.openEndDrawer();
+      },'Home'),
+      // AppBar(
+      //   backgroundColor: Color(0xFFffb64d),
+      //   title: Text('Home'),
+      //   leading: IconButton(
+      //     icon: Icon(Icons.menu),
+      //     onPressed: () {
+      //       _scaffoldKey.currentState!.openDrawer();
+      //     },
+      //   ),
+      //   automaticallyImplyLeading: false,
+      //   actions: [
+      //     reusablehomeBtn('ENG', (){}),
+      //     SizedBox(width: MediaQuery.of(context).size.width * .01,),
+      //     reusablehomeBtn('SEARCH', (){}),
+      //     SizedBox(width: MediaQuery.of(context).size.width * .01,),
+      //   ],
+      //   ),
+        drawer: ZoomDrawer(controller: contr, menuScreen: HomePage(), mainScreen: HomePage(),angle: 0.0,),
       body: 
       Container(
         decoration: BoxDecoration(

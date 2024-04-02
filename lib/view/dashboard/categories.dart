@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
@@ -19,24 +20,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
     return Scaffold(
       key: _scaffoldKey,
       // backgroundColor: Color(0xFFffb64d),
-      appBar: AppBar(
-        backgroundColor: Color(0xFFffb64d),
-        title: Text('Categories'),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-        ),
-        automaticallyImplyLeading: false,
-        actions: [
-          reusablehomeBtn('ENG', (){}),
-          SizedBox(width: MediaQuery.of(context).size.width * .01,),
-          reusablehomeBtn('SEARCH', (){}),
-          SizedBox(width: MediaQuery.of(context).size.width * .01,),
-        ],
-        ),
-        drawer: SideBar(),
+      appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openEndDrawer();},'Categories'),
+      drawer: SideBar(),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(

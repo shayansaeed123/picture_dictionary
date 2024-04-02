@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
@@ -18,27 +19,7 @@ class _ItemsPageState extends State<ItemsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: Color(0xFFffb64d),
-          title: Text('Categories Name'),
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              _scaffoldKey.currentState!.openDrawer();
-            },
-          ),
-          automaticallyImplyLeading: false,
-          actions: [
-            reusablehomeBtn('ENG', () {}),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * .01,
-            ),
-            reusablehomeBtn('SEARCH', () {}),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * .01,
-            ),
-          ],
-        ),
+        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openEndDrawer();}, 'Categories Name'),
         drawer: SideBar(),
         body: Container(
           decoration: BoxDecoration(
