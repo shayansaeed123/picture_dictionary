@@ -73,7 +73,8 @@ class _ItemsPageState extends State<ItemsPage> {
                         width: MediaQuery.of(context).size.width * .44,
                         height: MediaQuery.of(context).size.height * .20,
                         decoration: BoxDecoration(
-                          color: Color(0xFFffb64d),
+                          color: Colors.white,
+                          // Color(0xFFffb64d),
                           borderRadius: BorderRadius.circular(11),
                         ),
                       ),
