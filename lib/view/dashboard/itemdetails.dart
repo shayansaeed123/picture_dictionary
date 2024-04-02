@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/res/reusableitemdetailsrow.dart';
+import 'package:picture_dictionary/res/reusablenextitembtn.dart';
 
 class ItemDetails extends StatefulWidget {
   const ItemDetails({super.key});
@@ -101,57 +102,9 @@ class _ItemDetailsState extends State<ItemDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.height * .01),
-                        // height: MediaQuery.of(context).size.height * .07,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border:
-                              Border.all(color: Color(0xFFffb64d), width: 4),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color(0xFFeb8815),
-                              Color(0xFFeb8815),
-                              // Color(0xFFe3e18e),
-                            ],
-                          ),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.arrow_back_ios,
-                          size: 35,
-                          color: Color(0xFFe3e18e),
-                        )),
-                      ),
-                      Text('data'),
-                      Container(
-                        padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.height * .01),
-                        // height: MediaQuery.of(context).size.height * .07,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border:
-                              Border.all(color: Color(0xFFffb64d), width: 4),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color(0xFFeb8815),
-                              Color(0xFFeb8815),
-                              // Color(0xFFe3e18e),
-                            ],
-                          ),
-                        ),
-                        child: Center(
-                            child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 35,
-                          color: Color(0xFFe3e18e),
-                        )),
-                      ),
+                      reusablenextitembtn(context, (){}),
+                      Text('1/12',style: TextStyle(color: Color(0xFFaf2307)),),
+                      reusablenextitembtn(context, (){},icon: Icons.arrow_forward_ios),
                     ],
                   ),
                 ),
