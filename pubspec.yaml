@@ -36,7 +36,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   device_preview: 
-  flutter_zoom_drawer:
+  # flutter_zoom_drawer:
+  google_sign_in: 
+  firebase_auth: 
 
 dev_dependencies:
   flutter_test:

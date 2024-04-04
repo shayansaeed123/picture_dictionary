@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableloginbtn.dart';
 import 'package:picture_dictionary/view/dashboard/home.dart';
@@ -13,6 +15,18 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  signInWithGoogle()async{
+    
+    GoogleSignInAccount? googleUser = await  GoogleSignIn().signIn();
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    UserCredential userCredential = await  FirebaseAuth.instance.signInWithCredential(credential);
+    print(userCredential.user!.displayName);
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -151,7 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02),
                       reusableLoginBtn('Sign in With  ', 'assets/google.png',
-                          Colors.white, () {})
+                          Colors.white, () {
+                            signInWithGoogle();
+                          })
                     ],
                   ),
                 )

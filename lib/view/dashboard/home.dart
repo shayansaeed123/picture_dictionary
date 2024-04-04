@@ -4,7 +4,6 @@ import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,15 +14,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final contr = ZoomDrawerController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xFFffb64d),
       appBar: reusableappbar(context, (){
-        ZoomDrawer.of(context)!.open();
-        _scaffoldKey.currentState!.openEndDrawer();
+        // ZoomDrawer.of(context)!.open();
+        _scaffoldKey.currentState!.openDrawer();
       },'Home'),
       // AppBar(
       //   backgroundColor: Color(0xFFffb64d),
@@ -42,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       //     SizedBox(width: MediaQuery.of(context).size.width * .01,),
       //   ],
       //   ),
-        drawer: ZoomDrawer(controller: contr, menuScreen: HomePage(), mainScreen: HomePage(),angle: 0.0,),
+      drawer: SideBar(),
       body: 
       Container(
         decoration: BoxDecoration(
@@ -96,7 +94,12 @@ class _HomePageState extends State<HomePage> {
             top: MediaQuery.of(context).size.height * 0.12,
             left: MediaQuery.of(context).size.width * 0.1,
             right: MediaQuery.of(context).size.width * 0.1,
-            child: CircleAvatar(backgroundColor: Colors.cyan,radius: MediaQuery.of(context).size.height * 0.065,child: Icon(Icons.book_outlined,size: 40,),)
+            child: CircleAvatar(
+              // backgroundColor: Colors.cyan,
+              radius: MediaQuery.of(context).size.height * 0.065,
+              child: Image.asset('assets/bok1.png'),
+              // child: Icon(Icons.book_outlined,size: 40,),
+              )
             ),
             // Content
           Positioned(
@@ -124,7 +127,11 @@ class _HomePageState extends State<HomePage> {
             top: MediaQuery.of(context).size.height * 0.46,
             left: MediaQuery.of(context).size.width * 0.1,
             right: MediaQuery.of(context).size.width * 0.1,
-            child: CircleAvatar(backgroundColor: Colors.cyan,radius: MediaQuery.of(context).size.height * 0.065,child: Icon(Icons.gamepad_outlined,size: 40,),)
+            child: CircleAvatar(
+              // backgroundColor: Colors.cyan,
+            radius: MediaQuery.of(context).size.height * 0.065,
+            child: Image.asset('assets/con.png'),
+            )
           )
         ],
       ),
