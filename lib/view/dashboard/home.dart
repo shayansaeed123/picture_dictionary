@@ -1,9 +1,11 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
-import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +77,10 @@ class _HomePageState extends State<HomePage> {
               },
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.18,
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15.0), bottomRight: Radius.circular(15.0)),
                 color: Colors.white.withOpacity(0.8),
+              ),
                 padding: EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -108,7 +114,11 @@ class _HomePageState extends State<HomePage> {
             right: MediaQuery.of(context).size.width * 0.1,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.18,
-              color: Colors.white.withOpacity(0.8),
+              
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15.0), bottomRight: Radius.circular(15.0)),
+                color: Colors.white.withOpacity(0.8),
+              ),
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

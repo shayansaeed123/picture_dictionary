@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
-import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/res/reusableitemdetailsrow.dart';
 import 'package:picture_dictionary/res/reusablenextitembtn.dart';
 
@@ -18,7 +17,7 @@ class _ItemDetailsState extends State<ItemDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openEndDrawer();},'Categories Name'),
+        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();},'Categories Name'),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

@@ -39,6 +39,9 @@ dependencies:
   # flutter_zoom_drawer:
   google_sign_in: 
   firebase_auth: 
+  http: 
+  cached_network_image: 
+  flutter_spinkit:
 
 dev_dependencies:
   flutter_test:
