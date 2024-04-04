@@ -80,7 +80,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                   ),
-                  itemCount: item.length - 5,
+                  itemCount: item.length > 5 ? item.length - 2 : 0,
                   itemBuilder: (context, index) {
                     final type = item[index];
                     return GestureDetector(
@@ -125,28 +125,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     ],
                   ),
                 ),
-                        
-                        // Column(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     // Display item image
-                        //     Image.network(
-                        //       type['image'],
-                        //       width: 100,
-                        //       height: 100,
-                        //       fit: BoxFit.cover,
-                        //     ),
-                        //     SizedBox(height: 10),
-                        //     // Display item name
-                        //     Text(
-                        //       type['english'],
-                        //       style: TextStyle(
-                        //         fontSize: 16,
-                        //         fontWeight: FontWeight.bold,
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
                       ),
                     );
                   },
