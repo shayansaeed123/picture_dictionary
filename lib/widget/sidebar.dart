@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:picture_dictionary/controller/color_controller.dart';
 
 
 class SideBar extends StatefulWidget {
@@ -43,7 +44,7 @@ class _SideBarState extends State<SideBar> {
   Widget build(BuildContext context) {
     return Drawer(
       clipBehavior: Clip.antiAlias,
-      backgroundColor: Color(0xFFe3e18e),
+      backgroundColor: colorController.sidebarBg,
       child: Column(
         // padding: EdgeInsets.zero,
         children: <Widget>[
@@ -57,8 +58,8 @@ class _SideBarState extends State<SideBar> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                  Color(0xFFe5af55),
-                  Color(0xFFe3e18e),
+                  colorController.bgColorup,
+                  colorController.bgColordown,
                 ])
               ),
               child: Text(

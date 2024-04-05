@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 
@@ -16,18 +17,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Color(0xFFffb64d),
+      // backgroundColor: Color(0xFFffb64d),
       appBar: reusableappbar(context, (){
         // ZoomDrawer.of(context)!.open();
         _scaffoldKey.currentState!.openDrawer();
       },'Home'),
       drawer: Drawer(
+        backgroundColor: colorController.sidebarBg,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                  colorController.bgColorup,
+                  colorController.bgColordown,
+                ])
             ),
             child: Text(
               'Drawer Header',
@@ -86,8 +94,8 @@ class _HomePageState extends State<HomePage> {
               end: Alignment.bottomCenter,
               colors: [
                 // eb8815 f5d12d
-                Color(0xFFe5af55),
-                Color(0xFFe3e18e),
+                 colorController.bgColorup,
+                  colorController.bgColordown,
               ],
             ),
           ),
@@ -122,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       'LEARN',
-                      style: TextStyle(color: Color(0xFFb1282e), fontSize: 24.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 16.0),
                   ],
@@ -160,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text(
                     'PLAY GAME',
-                    style: TextStyle(color: Color(0xFFb1282e), fontSize: 24.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16.0),
                 ],

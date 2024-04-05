@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
@@ -28,8 +29,8 @@ class _ItemsPageState extends State<ItemsPage> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Color(0xFFe5af55),
-                Color(0xFFe3e18e),
+               colorController.bgColorup,
+                  colorController.bgColordown,
               ],
             ),
           ),
@@ -55,7 +56,7 @@ class _ItemsPageState extends State<ItemsPage> {
                         width: MediaQuery.of(context).size.width * .44,
                         height: MediaQuery.of(context).size.height * .20,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: colorController.whiteColor,
                           // Color(0xFFffb64d),
                           borderRadius: BorderRadius.circular(11),
                         ),
@@ -104,7 +105,7 @@ class _ItemsPageState extends State<ItemsPage> {
                         width: MediaQuery.of(context).size.width * .44,
                         height: MediaQuery.of(context).size.height * .20,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: colorController.whiteColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
@@ -118,19 +119,19 @@ class _ItemsPageState extends State<ItemsPage> {
                                 width: double.infinity,
                               ),
                               elevation: 7,
-                              color: Colors.white,
+                              color: colorController.whiteColor,
                             ),
                             Expanded(
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: Colors.purple.shade800,
+                                  color: colorController.itemsBtnColor,
                                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
                                 ),
                                 child: Center(
                                   child: Text(
                                     'Fruits',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: colorController.whiteColor),
                                   ),
                                 ),
                               ),

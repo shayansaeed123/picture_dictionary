@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 
 class SearchItem extends StatefulWidget {
@@ -23,13 +24,13 @@ class _SearchItemState extends State<SearchItem> {
                 end: Alignment.bottomCenter,
                 colors: [
                   // eb8815 f5d12d
-                  Color(0xFFe5af55),
-                  Color(0xFFe3e18e),
+                  colorController.bgColorup,
+                  colorController.bgColordown,
                 ],
               ),
             ),
             // width: MediaQuery.of(context).size.width,
-            // height: MediaQuery.of(context).size.height,
+            // height: double.infinity,
             child: Column(
               children: [
                 Padding(
@@ -38,22 +39,22 @@ class _SearchItemState extends State<SearchItem> {
                     controller: _searchController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color(0xFF56acdd),
-                      prefixIcon: const Icon(Icons.search, color: Colors.white),
+                      fillColor: colorController.textformfillColor,
+                      prefixIcon:  Icon(Icons.search, color: colorController.whiteColor),
                       hintText: 'search',
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: colorController.whiteColor),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25),
                           borderSide:
-                              BorderSide(color: Color(0xFF67c9f2), width: 4)),
+                              BorderSide(color: colorController.textformborderColor, width: 4)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25),
                           borderSide:
-                              BorderSide(color: Color(0xFF67c9f2), width: 4)),
+                              BorderSide(color: colorController.textformborderColor, width: 4)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(25),
                           borderSide:
-                              BorderSide(color: Color(0xFF67c9f2), width: 4)),
+                              BorderSide(color: colorController.textformborderColor, width: 4)),
                       errorBorder: InputBorder.none,
                       disabledBorder: InputBorder.none,
                       // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),

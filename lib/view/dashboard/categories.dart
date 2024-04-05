@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
@@ -64,8 +65,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
               end: Alignment.bottomCenter,
               colors: [
                 // eb8815 f5d12d
-                Color(0xFFe5af55),
-                Color(0xFFe3e18e),
+                colorController.bgColorup,
+                  colorController.bgColordown,
               ],
             ),
           ),
@@ -93,14 +94,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: colorController.whiteColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         padding: EdgeInsets.all(10),
                         child:  Container(
                   width: MediaQuery.of(context).size.width * .44,
                   height: MediaQuery.of(context).size.height * .361,
-                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(11),),
+                  decoration: BoxDecoration(color: colorController.whiteColor,borderRadius: BorderRadius.circular(11),),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -118,7 +119,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         height: MediaQuery.of(context).size.height*0.05,
                         margin: EdgeInsets.all(MediaQuery.of(context).size.height * .001),
                         padding: EdgeInsets.all(MediaQuery.of(context).size.height * .003),
-                        decoration: BoxDecoration(color: Colors.purple.shade800,borderRadius: BorderRadius.circular(8.0)),
+                        decoration: BoxDecoration(color: colorController.categoryBtnColor,borderRadius: BorderRadius.circular(8.0)),
                         child: Center(child: Text(type['english'],style: TextStyle(color: Colors.white),)),
                       )
                     ],
