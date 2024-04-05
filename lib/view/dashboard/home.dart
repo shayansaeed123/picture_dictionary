@@ -1,11 +1,7 @@
-
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,24 +22,63 @@ class _HomePageState extends State<HomePage> {
         // ZoomDrawer.of(context)!.open();
         _scaffoldKey.currentState!.openDrawer();
       },'Home'),
-      // AppBar(
-      //   backgroundColor: Color(0xFFffb64d),
-      //   title: Text('Home'),
-      //   leading: IconButton(
-      //     icon: Icon(Icons.menu),
-      //     onPressed: () {
-      //       _scaffoldKey.currentState!.openDrawer();
-      //     },
-      //   ),
-      //   automaticallyImplyLeading: false,
-      //   actions: [
-      //     reusablehomeBtn('ENG', (){}),
-      //     SizedBox(width: MediaQuery.of(context).size.width * .01,),
-      //     reusablehomeBtn('SEARCH', (){}),
-      //     SizedBox(width: MediaQuery.of(context).size.width * .01,),
-      //   ],
-      //   ),
-      drawer: SideBar(),
+      drawer: Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text(
+              'Drawer Header',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Home'),
+              onTap: () {
+                // Handle settings tap
+              },
+            ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.help),
+            title: Text('Setting'),
+            onTap: () {
+              // Handle help tap
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info),
+            title: Text('Privacy Policy'),
+            onTap: () {
+              // Handle about tap
+            },
+          ),
+          Spacer(),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('About Us'),
+            onTap: () {
+              // Handle logout tap
+            },
+          ),
+          Spacer(),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Sign in'),
+            onTap: () {
+              // Handle logout tap
+            },
+          ),
+        ],
+      ),
+    ),
       body: 
       Container(
         decoration: BoxDecoration(
