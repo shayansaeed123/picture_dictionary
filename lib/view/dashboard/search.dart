@@ -16,18 +16,25 @@ class _SearchItemState extends State<SearchItem> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        
           appBar: reusableappbar(context, () {}, 'Search Item'),
           body: Container(
+            
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  // eb8815 f5d12d
-                  colorController.bgColorup,
-                  colorController.bgColordown,
-                ],
+              // backgroundBlendMode:  BlendMode.multiply,
+              image: DecorationImage(
+                image: AssetImage('assets/second_page.png'),
+                fit:  BoxFit.cover,
               ),
+              // gradient: LinearGradient(
+              //   begin: Alignment.topCenter,
+              //   end: Alignment.bottomCenter,
+              //   colors: [
+              //     // eb8815 f5d12d
+              //     colorController.bgColorup,
+              //     colorController.bgColordown,
+              //   ],
+              // ),
             ),
             // width: MediaQuery.of(context).size.width,
             // height: double.infinity,

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/view/dashboard/search.dart';
+import 'package:picture_dictionary/view/dashboard/select_language.dart';
 
  reusableappbar(BuildContext context, Function ontap,String name){
   return AppBar(
@@ -17,7 +18,9 @@ import 'package:picture_dictionary/view/dashboard/search.dart';
         ),
         automaticallyImplyLeading: false,
         actions: [
-          reusablehomeBtn('ENG', (){}),
+          reusablehomeBtn('ENG', (){
+            Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
+          }),
           SizedBox(width: MediaQuery.of(context).size.width * .01,),
           reusablehomeBtn('SEARCH', (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => SearchItem()));
