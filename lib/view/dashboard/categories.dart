@@ -49,13 +49,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> categories = item.map((e) => e['english'] as String).toList();
     return Scaffold(
         key: _scaffoldKey,
         // backgroundColor: Color(0xFFffb64d),
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
         }, 'Categories'),
-        drawer: SideBar(),
+        drawer: SideBar(fetchDataCallback: fetchData, categories: categories,),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -87,7 +88,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ItemsPage(),
+                            builder: (context) => ItemsPage(fetchDataCallback: fetchData, categories: categories,),
                           ));
                       },
                       child: Container(

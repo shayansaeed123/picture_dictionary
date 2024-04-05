@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableloginbtn.dart';
 import 'package:picture_dictionary/view/dashboard/home.dart';
@@ -32,14 +33,14 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          decoration:const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
                 // eb8815 f5d12d
-                Color(0xFFe5af55),
-                Color(0xFFe3e18e),
+                 colorController.bgColorup,
+                colorController.bgColordown,
               ],
             ),
           ),
@@ -72,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     // mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      reusabletext('Login', Colors.black, 23),
+                      reusabletext('Login', colorController.blackColor, 23),
                       // ClipRRect(
                       //   borderRadius: BorderRadius.circular(20),
                       //   child:
@@ -80,22 +81,22 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _emailController,
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Color(0xFF56acdd),
+                          fillColor: colorController.textformfillColor,
                           prefixIcon: Icon(Icons.email, color: Colors.white),
                           hintText: 'Email',
                           hintStyle: const TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                  color: Color(0xFF67c9f2), width: 4)),
+                              borderSide:  BorderSide(
+                                  color: colorController.textformborderColor, width: 4)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                  color: Color(0xFF67c9f2), width: 4)),
+                              borderSide:  BorderSide(
+                                  color: colorController.textformborderColor, width: 4)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide: const BorderSide(
-                                  color: Color(0xFF67c9f2), width: 4)),
+                              borderSide:  BorderSide(
+                                  color: colorController.textformborderColor, width: 4)),
                           errorBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
                           // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscuringCharacter: '*',
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: const Color(0xFF56acdd),
+                          fillColor: colorController.textformfillColor,
                           prefixIcon: const Icon(Icons.password_outlined,
                               color: Colors.white),
                           hintText: 'Password',
@@ -119,15 +120,15 @@ class _LoginPageState extends State<LoginPage> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide(
-                                  color: Color(0xFF67c9f2), width: 4)),
+                                  color: colorController.textformborderColor, width: 4)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide(
-                                  color: Color(0xFF67c9f2), width: 4)),
+                                  color: colorController.textformborderColor, width: 4)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide(
-                                  color: Color(0xFF67c9f2), width: 4)),
+                                  color: colorController.textformborderColor, width: 4)),
                           errorBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
                           // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
@@ -144,9 +145,9 @@ class _LoginPageState extends State<LoginPage> {
                                   Size.fromWidth(
                                       MediaQuery.of(context).size.width)),
                               backgroundColor: MaterialStateColor.resolveWith(
-                                  (states) => Color(0xFFcf93d9))),
+                                  (states) => colorController.loginBtnColor)),
                           onPressed: () {},
-                          child: reusabletext('SIGN IN', Colors.black, 18))
+                          child: reusabletext('SIGN IN', colorController.blackColor, 18))
                     ],
                   ),
                 ),
@@ -165,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02),
                       reusableLoginBtn('Sign in With  ', 'assets/google.png',
-                          Colors.white, () {
+                          colorController.whiteColor, () {
                             signInWithGoogle();
                           })
                     ],

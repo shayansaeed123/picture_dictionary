@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
-import 'package:picture_dictionary/widget/sidebar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

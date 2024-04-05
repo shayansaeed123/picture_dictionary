@@ -42,6 +42,7 @@ dependencies:
   http: 
   cached_network_image: 
   flutter_spinkit:
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:

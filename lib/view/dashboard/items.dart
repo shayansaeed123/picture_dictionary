@@ -6,7 +6,9 @@ import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 
 class ItemsPage extends StatefulWidget {
-  const ItemsPage({super.key});
+  final VoidCallback fetchDataCallback;
+  final List<String> categories;
+  const ItemsPage({super.key, required this.fetchDataCallback, required this.categories});
 
   @override
   State<ItemsPage> createState() => _ItemsPageState();
@@ -19,7 +21,7 @@ class _ItemsPageState extends State<ItemsPage> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();}, 'Categories Name'),
-        drawer: SideBar(),
+        drawer: SideBar(categories: widget.categories,fetchDataCallback: widget.fetchDataCallback,),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
