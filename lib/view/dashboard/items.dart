@@ -22,24 +22,61 @@ class ItemsPage extends StatefulWidget {
 class _ItemsPageState extends State<ItemsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  late Future<List<dynamic>> _data;
+  // late Future<List<dynamic>> _data;
+  List<Map<String, dynamic>> _data = [];
+  // List<Item> filteredItems = [];
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _data = fetchData();
+    fetchData();
   }
+  Future<void> fetchData() async {
+    // setState(() {
+    //   _isLoading = true;
+    // });
 
-  Future<List<dynamic>> fetchData() async {
-    final response =
-        await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
+    final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
+
     if (response.statusCode == 200) {
-      print('Shayannnn Iteemmmmmmmm ${response.body}');
-      return json.decode(response.body);
+      final List<Map<String, dynamic>> responseData = jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      setState(() {
+        _data = responseData;
+        _isLoading = false;
+        print('helooooo ${_data}');
+      });
     } else {
-      throw Exception('Failed to load data');
+      // Handle error
+      setState(() {
+        _isLoading = false;
+      });
+      print('Failed to fetch data. Error: ${response.reasonPhrase}');
     }
   }
+
+
+  List<Map<String, dynamic>> filterDataByCategory(String category) {
+     print('helooooo22222222 ${_data}');
+    return _data.where((item) => item['type_id'] == category).toList();
+  }
+  // void filterDataByCategory(String category) {
+  //    print('helooooo22222222 ${_data}');
+  //   filteredItems = _data.where((item) => item['type_id'] == category).toList();
+  // }
+  
+
+  // Future<List<dynamic>> fetchData() async {
+  //   final response =
+  //       await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
+  //   if (response.statusCode == 200) {
+  //     print('Shayannnn Iteemmmmmmmm ${response.body}');
+  //     return json.decode(response.body);
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
   
   
   
@@ -62,22 +99,23 @@ class _ItemsPageState extends State<ItemsPage> {
           ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: FutureBuilder(future: fetchData(), builder: (context, snapshot) {
-             if(snapshot.connectionState == ConnectionState.waiting){
-              return CircularProgressIndicator();
-             }else if(!snapshot.hasData){
-              return Center(child: Text('data'));
-             }else{
-              return GridView.builder(
+          child: 
+          // FutureBuilder(future: fetchData(), builder: (context, snapshot) {
+          //    if(snapshot.connectionState == ConnectionState.waiting){
+          //     return CircularProgressIndicator();
+          //    }else if(!snapshot.hasData){
+          //     return Center(child: Text('data'));
+          //    }else{
+          //     return 
+              GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, mainAxisSpacing: 10),
-                itemCount: snapshot.data!.length,
+                itemCount: filterDataByCategory('items').length,
+                
             itemBuilder: (context, index) {
-              var item = snapshot.data![index];
-              print('item: $item');
-print('items type: ${item['items'].runtimeType}');
-print('items length: ${item['items'].length}');
-
+              // var item = snapshot.data![index];
+              final name = filterDataByCategory('items')[index]['english'];
+              final img = filterDataByCategory('items')[index]['image'];
               return Stack(
                 children: [
                   Positioned(
@@ -150,8 +188,8 @@ print('items length: ${item['items'].length}');
                           children: [
                             Card(
                               margin: EdgeInsets.all(5),
-                              child: Image.asset(
-                                'assets/log.png',
+                              child: Image.network(
+                                img.toString(),
                                 height: MediaQuery.of(context).size.height * .15,
                                 width: double.infinity,
                               ),
@@ -167,7 +205,7 @@ print('items length: ${item['items'].length}');
                                 ),
                                 child: Center(
                                   child: Text(
-                                    item['items'][index]['english'].toString(),
+                                    name.toString(),
                                     style: TextStyle(color: colorController.whiteColor),
                                   ),
                                 ),
@@ -181,9 +219,10 @@ print('items length: ${item['items'].length}');
                 ],
               );
             },
-          );
-             }
-          },)
+          )
+          // ;
+          //    }
+          // },)
         )
 
         // Container(
