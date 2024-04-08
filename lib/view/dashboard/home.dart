@@ -37,13 +37,14 @@ class _HomePageState extends State<HomePage> {
                   colorController.bgColordown,
                 ])
             ),
-            child: Text(
-              'Drawer Header',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                Image.asset('assets/ic_launcher.png',alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width * .5,
+                height: MediaQuery.of(context).size.height * .1,),
+                Text('Lorem Lipsam')
+              ],),
           ),
             ListTile(
               leading: Icon(Icons.settings),

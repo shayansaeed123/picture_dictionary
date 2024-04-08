@@ -120,7 +120,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         margin: EdgeInsets.all(MediaQuery.of(context).size.height * .001),
                         padding: EdgeInsets.all(MediaQuery.of(context).size.height * .003),
                         decoration: BoxDecoration(color: colorController.categoryBtnColor,borderRadius: BorderRadius.circular(8.0)),
-                        child: Center(child: Text('${type['english']}',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
+                        child: Center(child: Text('${type['english'] + type['id']}',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
                       )
                     ],
                   ),

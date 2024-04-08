@@ -34,32 +34,14 @@ class _ItemsPageState extends State<ItemsPage> {
     final response =
         await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
     if (response.statusCode == 200) {
-      print('Shayannnn Iteemmmmmmmm $response');
+      print('Shayannnn Iteemmmmmmmm ${response.body}');
       return json.decode(response.body);
     } else {
       throw Exception('Failed to load data');
     }
   }
   
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   fetchItem();
-  // }
-
-  // Future<List<itemModel>> fetchItem()async{
-    
-  //   final String = 'https://kulyatudawah.com/public/vocgame/apis/get_items.php'; 
-  //   final response =
-  //       await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
-  //   if (response.statusCode == 200) {
-  //     print('Shayannnn Iteemmmmmmmm $response');
-  //     return json.decode(response.body);
-  //   } else {
-  //     throw Exception('Failed to load data');
-  //   }
-  // }
+  
   
   @override
   Widget build(BuildContext context) {
@@ -89,8 +71,13 @@ class _ItemsPageState extends State<ItemsPage> {
               return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, mainAxisSpacing: 10),
-                itemCount: 10,
+                itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
+              var item = snapshot.data![index];
+              print('item: $item');
+print('items type: ${item['items'].runtimeType}');
+print('items length: ${item['items'].length}');
+
               return Stack(
                 children: [
                   Positioned(
@@ -180,7 +167,7 @@ class _ItemsPageState extends State<ItemsPage> {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Fruits',
+                                    item['items'][index]['english'].toString(),
                                     style: TextStyle(color: colorController.whiteColor),
                                   ),
                                 ),
