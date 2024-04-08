@@ -8,7 +8,7 @@ import 'package:picture_dictionary/view/dashboard/select_language.dart';
  reusableappbar(BuildContext context, Function ontap,String name){
   return AppBar(
         backgroundColor: Color(0xFFffb64d),
-        title: Text('$name'),
+        title: Text('$name',style: TextStyle(fontSize: 18),),
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {

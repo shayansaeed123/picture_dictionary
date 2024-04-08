@@ -5,6 +5,7 @@ import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableloginbtn.dart';
 import 'package:picture_dictionary/view/dashboard/home.dart';
+import 'package:picture_dictionary/view/login/Methods.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,17 +18,18 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  signInWithGoogle()async{
-    
-    GoogleSignInAccount? googleUser = await  GoogleSignIn().signIn();
+  signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
     AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    UserCredential userCredential = await  FirebaseAuth.instance.signInWithCredential(credential);
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
     print(userCredential.user!.displayName);
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
               end: Alignment.bottomCenter,
               colors: [
                 // eb8815 f5d12d
-                 colorController.bgColorup,
+                colorController.bgColorup,
                 colorController.bgColordown,
               ],
             ),
@@ -58,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/log.png',
+                      'assets/ic_launcher.png',
                       height: 130,
                       width: 130,
                     )
@@ -87,16 +89,19 @@ class _LoginPageState extends State<LoginPage> {
                           hintStyle: const TextStyle(color: Colors.white),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide:  BorderSide(
-                                  color: colorController.textformborderColor, width: 4)),
+                              borderSide: BorderSide(
+                                  color: colorController.textformborderColor,
+                                  width: 4)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide:  BorderSide(
-                                  color: colorController.textformborderColor, width: 4)),
+                              borderSide: BorderSide(
+                                  color: colorController.textformborderColor,
+                                  width: 4)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
-                              borderSide:  BorderSide(
-                                  color: colorController.textformborderColor, width: 4)),
+                              borderSide: BorderSide(
+                                  color: colorController.textformborderColor,
+                                  width: 4)),
                           errorBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
                           // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
@@ -120,15 +125,18 @@ class _LoginPageState extends State<LoginPage> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide(
-                                  color: colorController.textformborderColor, width: 4)),
+                                  color: colorController.textformborderColor,
+                                  width: 4)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide(
-                                  color: colorController.textformborderColor, width: 4)),
+                                  color: colorController.textformborderColor,
+                                  width: 4)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide(
-                                  color: colorController.textformborderColor, width: 4)),
+                                  color: colorController.textformborderColor,
+                                  width: 4)),
                           errorBorder: InputBorder.none,
                           disabledBorder: InputBorder.none,
                           // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
@@ -146,8 +154,30 @@ class _LoginPageState extends State<LoginPage> {
                                       MediaQuery.of(context).size.width)),
                               backgroundColor: MaterialStateColor.resolveWith(
                                   (states) => colorController.loginBtnColor)),
-                          onPressed: () {},
-                          child: reusabletext('SIGN IN', colorController.blackColor, 18))
+                          onPressed: () {
+                            // if (_emailController.text.isNotEmpty &&
+                            //     _passwordController.text.isNotEmpty) {
+                            //   logIn(_emailController.text, _passwordController.text).then((user) {
+                            //     if (user != null) {
+                            //       print("Login Sucessfull");
+                            //       setState(() {
+                            //         isLoading = false;
+                            //       });
+                            //       Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (_) => HomePage()));
+                            //     } else {
+                            //       print("Login Failed");
+                            //       setState(() {
+                            //         isLoading = false;
+                            //       });
+                            //     }
+                            //   });
+                            // }
+                          },
+                          child: reusabletext(
+                              'SIGN IN', colorController.blackColor, 18))
                     ],
                   ),
                 ),
@@ -167,8 +197,8 @@ class _LoginPageState extends State<LoginPage> {
                           height: MediaQuery.of(context).size.height * 0.02),
                       reusableLoginBtn('Sign in With  ', 'assets/google.png',
                           colorController.whiteColor, () {
-                            signInWithGoogle();
-                          })
+                        signInWithGoogle();
+                      })
                     ],
                   ),
                 )

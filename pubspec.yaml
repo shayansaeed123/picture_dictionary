@@ -39,6 +39,7 @@ dependencies:
   # flutter_zoom_drawer:
   google_sign_in: 
   firebase_auth: 
+  # cloud_firestore: 
   http: 
   cached_network_image: 
   flutter_spinkit:
@@ -82,11 +83,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: English1
+      fonts:
+        # - asset: assets/fonts/eng_1_tragic_marker.ttf
+        - asset: assets/fonts/eng_2_magistral.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

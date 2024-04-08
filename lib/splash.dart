@@ -30,11 +30,20 @@ class _SplashState extends State<Splash> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Image.asset(
-                'assets/splash.png',
-                height: MediaQuery.of(context).size.height,
-                fit: BoxFit.fitHeight,
-              ),
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage("assets/sky.png"), alignment: Alignment.topCenter,fit: BoxFit.fitHeight)
+        ),
+        child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage("assets/ground.png"),  alignment: Alignment.bottomCenter,fit: BoxFit.contain)
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(MediaQuery.of(context).size.height * .1),
+          child: Image.asset('assets/logo_pic_dic.png',alignment: Alignment.topCenter,),
+        ),
+        )
       ),
     );
   }

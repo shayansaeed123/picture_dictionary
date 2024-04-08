@@ -56,7 +56,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         // backgroundColor: Color(0xFFffb64d),
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
-        }, 'Categories'),
+        }, 'CATEGORIES'),
         drawer: SideBar(fetchDataCallback: fetchData, categories: categories,),
         body: Container(
           decoration: BoxDecoration(
@@ -107,11 +107,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     children: [
                       Expanded(
                         child: CachedNetworkImage(imageUrl: type['image'],
-                        errorWidget: (context, url, error) => Icon(Icons.error_outline),
+                        errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
                         width: double.infinity,
                         fit: BoxFit.contain,
                         filterQuality: FilterQuality.high,
-                        placeholder: (context, url) => spinkits().spinKit,
+                        placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
                         )
                       ),
                       Container(
@@ -120,7 +120,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         margin: EdgeInsets.all(MediaQuery.of(context).size.height * .001),
                         padding: EdgeInsets.all(MediaQuery.of(context).size.height * .003),
                         decoration: BoxDecoration(color: colorController.categoryBtnColor,borderRadius: BorderRadius.circular(8.0)),
-                        child: Center(child: Text(type['english'],style: TextStyle(color: Colors.white),)),
+                        child: Center(child: Text('${type['english']}',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
                       )
                     ],
                   ),
@@ -130,75 +130,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   },
                 ),
           ),
-          
-          // child: Row(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Padding(
-          //       padding:  EdgeInsets.all(MediaQuery.of(context).size.height * .01),
-          //       child:
-                // Container(
-                //   width: MediaQuery.of(context).size.width * .44,
-                //   height: MediaQuery.of(context).size.height * .261,
-                //   decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(11),),
-                //   child: Column(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Card(
-                //         margin: EdgeInsets.all(5),
-                //         child: Image.asset('assets/log.png',height: MediaQuery.of(context).size.height * .18,width: double.infinity,),
-                //         elevation: 7,
-                //       ),
-                //       Expanded(
-                //         child: InkWell(
-                //           onTap: (){
-                //     Navigator.push(context, MaterialPageRoute(builder: (context) => ItemsPage(),));
-                //   },
-                //           child: Container(
-                //             width: double.infinity,
-                //             // height: MediaQuery.of(context).size.height*0.05,
-                //             margin: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
-                //             // padding: EdgeInsets.all(10),
-                //             decoration: BoxDecoration(color: Colors.purple.shade800,borderRadius: BorderRadius.circular(8.0)),
-                //             child: Center(child: Text('Fruits',style: TextStyle(color: Colors.white),)),
-                //           ),
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-          //     ),
-          //     Padding(
-          //       padding: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
-          //       child: Container(
-          //         width: MediaQuery.of(context).size.width * .44,
-          //         height: MediaQuery.of(context).size.height * .261,
-          //         decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(11),),
-          //         child: Column(
-          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //           children: [
-          //             Card(
-          //               margin: EdgeInsets.all(5),
-          //               child: Image.asset('assets/log.png',height: MediaQuery.of(context).size.height * .18,width: double.infinity,),
-          //               elevation: 7,
-          //             ),
-          //             Expanded(
-          //               child: Container(
-          //                 width: double.infinity,
-          //                 // height: MediaQuery.of(context).size.height*0.05,
-          //                 margin: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
-          //                 // padding: EdgeInsets.all(MediaQuery.of(context).size.height * .02),
-          //                 decoration: BoxDecoration(color: Colors.purple.shade800,borderRadius: BorderRadius.circular(8.0)),
-          //                 child: Center(child: Text('Fruits',style: TextStyle(color: Colors.white),)),
-
-          //               ),
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ));
   }
 }

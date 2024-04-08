@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
+import 'package:picture_dictionary/models/item_model.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
+import 'package:http/http.dart' as http;
 
 class ItemsPage extends StatefulWidget {
   final VoidCallback fetchDataCallback;
@@ -17,6 +21,46 @@ class ItemsPage extends StatefulWidget {
 
 class _ItemsPageState extends State<ItemsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late Future<List<dynamic>> _data;
+
+  @override
+  void initState() {
+    super.initState();
+    _data = fetchData();
+  }
+
+  Future<List<dynamic>> fetchData() async {
+    final response =
+        await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
+    if (response.statusCode == 200) {
+      print('Shayannnn Iteemmmmmmmm $response');
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+  
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   fetchItem();
+  // }
+
+  // Future<List<itemModel>> fetchItem()async{
+    
+  //   final String = 'https://kulyatudawah.com/public/vocgame/apis/get_items.php'; 
+  //   final response =
+  //       await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
+  //   if (response.statusCode == 200) {
+  //     print('Shayannnn Iteemmmmmmmm $response');
+  //     return json.decode(response.body);
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +80,13 @@ class _ItemsPageState extends State<ItemsPage> {
           ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: GridView.builder(
+          child: FutureBuilder(future: fetchData(), builder: (context, snapshot) {
+             if(snapshot.connectionState == ConnectionState.waiting){
+              return CircularProgressIndicator();
+             }else if(!snapshot.hasData){
+              return Center(child: Text('data'));
+             }else{
+              return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, mainAxisSpacing: 10),
                 itemCount: 10,
@@ -144,7 +194,9 @@ class _ItemsPageState extends State<ItemsPage> {
                 ],
               );
             },
-          ),
+          );
+             }
+          },)
         )
 
         // Container(
