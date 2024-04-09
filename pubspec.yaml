@@ -44,6 +44,8 @@ dependencies:
   cached_network_image: 
   flutter_spinkit:
   get: ^4.6.6
+  get_storage: ^2.1.1
+  lottie: 
 
 dev_dependencies:
   flutter_test:

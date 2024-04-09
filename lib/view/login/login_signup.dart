@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/re_text.dart';
+import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/res/reusableloginbtn.dart';
 import 'package:picture_dictionary/view/dashboard/home.dart';
 import 'package:picture_dictionary/view/login/Methods.dart';
@@ -15,11 +16,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _isLoading = false;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
   signInWithGoogle() async {
-    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    setState(() {
+      _isLoading = true;
+    });
+    try{
+      setState(() {
+      _isLoading = false;
+    });
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
     AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
@@ -28,6 +37,13 @@ class _LoginPageState extends State<LoginPage> {
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     print(userCredential.user!.displayName);
+    }catch(e){
+      print('Error $e');
+    }finally{
+       setState(() {
+      _isLoading = false;
+    });
+    }
   }
 
   @override
@@ -201,7 +217,9 @@ class _LoginPageState extends State<LoginPage> {
                       })
                     ],
                   ),
-                )
+                ),
+                if (_isLoading == true) reusableloadingrow(context, _isLoading),
+              reusableloadingrow(context, _isLoading)
               ],
             ),
           ),

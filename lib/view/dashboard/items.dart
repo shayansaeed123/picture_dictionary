@@ -24,7 +24,7 @@ class _ItemsPageState extends State<ItemsPage> {
 
   // late Future<List<dynamic>> _data;
   List<Map<String, dynamic>> _data = [];
-  // List<Item> filteredItems = [];
+  // List<itemModel> filteredItems = [];
   bool _isLoading = false;
 
   @override
