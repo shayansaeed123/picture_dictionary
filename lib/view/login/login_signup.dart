@@ -6,7 +6,6 @@ import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/res/reusableloginbtn.dart';
 import 'package:picture_dictionary/view/dashboard/home.dart';
-import 'package:picture_dictionary/view/login/Methods.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

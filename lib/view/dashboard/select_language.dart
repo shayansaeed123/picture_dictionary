@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
-import 'package:picture_dictionary/widget/sidebar.dart';
 
 class SelectLanguage extends StatefulWidget {
   const SelectLanguage({super.key});
