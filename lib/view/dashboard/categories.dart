@@ -9,6 +9,7 @@ import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -67,9 +68,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   final AudioPlayer audioPlayer = AudioPlayer();
 
-  void playAudio() {
-    audioPlayer.play('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-  }
+  // void playAudio() {
+  //   audioPlayer.play('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +117,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
                               MaterialPageRoute(
                                 builder: (context) => ItemsPage(fetchDataCallback: fetchData, categories: categories,),
                               ));
+                              void playAudio(){
+                                audioPlayer.play(type['english_voice']);
+                              }
                           },
                           child: Container(
                             decoration: BoxDecoration(
