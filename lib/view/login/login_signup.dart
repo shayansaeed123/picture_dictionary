@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
@@ -21,40 +22,37 @@ class _LoginPageState extends State<LoginPage> {
   // final FirebaseAuth _auth = FirebaseAuth.instance;
   String _errorMessage = '';
 
-  Future<void> _signInWithEmailAndPassword() async {
-  setState(() {
-    _isLoading = true;
-  });
-  try {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    final UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
-    final User? user = userCredential.user;
-    if (user != null) {
-      // Navigate to the home screen upon successful login
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-    } else {
-      setState(() {
-        _errorMessage = 'User not found';
-      });
-    }
-  } catch (e) {
-    setState(() {
-      _errorMessage = e.toString();
-    });
-  } finally {
-    setState(() {
-      _isLoading = false;
-    });
-  }
-}
+//   Future<void> _signInWithEmailAndPassword() async {
+//   setState(() {
+//     _isLoading = true;
+//   });
+//   try {
+
+//     if (_emailController.text.isNotEmpty &&
+//                                 _passwordController.text.isNotEmpty) {
+//                                      MySharedPrefrence().setUserLoginStatus(true);  
+//       MySharedPrefrence().set_user_email(_emailController.text.toString());
+//       print(MySharedPrefrence().get_user_email());
+//       Navigator.push(
+//                             context,
+//                             MaterialPageRoute(
+//                               builder: (context) => WillPopScope(
+//                                   onWillPop: () async => false,
+//                                   child: HomePage()),
+//                             ));
+//                                 }else{
+//                                   print('Login Error');
+//                                 }
+//   } catch (e) {
+//     setState(() {
+//       _errorMessage = e.toString();
+//     });
+//   } finally {
+//     setState(() {
+//       _isLoading = false;
+//     });
+//   }
+// }
 
 
   signInWithGoogle() async {
@@ -73,7 +71,18 @@ class _LoginPageState extends State<LoginPage> {
       );
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      print(userCredential.user!.displayName);
+          MySharedPrefrence().set_user_name(googleUser!.displayName);
+          MySharedPrefrence().setUserLoginStatus(true); 
+            MySharedPrefrence().set_user_email(googleUser.email);
+      print(MySharedPrefrence().get_user_name());
+      print(MySharedPrefrence().getUserLoginStatus());
+      print(MySharedPrefrence().get_user_email());
+      Navigator.push(context,
+                            MaterialPageRoute(
+                              builder: (context) => WillPopScope(
+                                  onWillPop: () async => false,
+                                  child: HomePage()),
+                            ));
     } catch (e) {
       print('Error $e');
     } finally {
@@ -81,6 +90,14 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = false;
       });
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('Status  ${MySharedPrefrence().getUserLoginStatus()}');
+    print('email  ${MySharedPrefrence().get_user_email()}');
   }
 
   @override
@@ -208,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                               backgroundColor: MaterialStateColor.resolveWith(
                                   (states) => colorController.loginBtnColor)),
                           onPressed: () {
-                            _signInWithEmailAndPassword();
+                            // _signInWithEmailAndPassword();
                             print('object');
                             
                             // if (_emailController.text.isNotEmpty &&
@@ -259,6 +276,7 @@ class _LoginPageState extends State<LoginPage> {
                       reusableLoginBtn('Sign in With  ', 'assets/google.png',
                           colorController.whiteColor, () {
                         signInWithGoogle();
+                        
                       })
                     ],
                   ),

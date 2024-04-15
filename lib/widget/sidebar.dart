@@ -3,7 +3,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
+import 'package:picture_dictionary/view/login/login_signup.dart';
 
 
 class SideBar extends StatefulWidget {
@@ -22,6 +25,7 @@ class _SideBarState extends State<SideBar> {
   void initState() {
     super.initState();
     // fetchData();
+    print('One  ${MySharedPrefrence().getUserLoginStatus()}');
   }
 
   // Future<void> fetchData() async {
@@ -68,7 +72,7 @@ class _SideBarState extends State<SideBar> {
                 Image.asset('assets/ic_launcher.png',alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * .5,
                 height: MediaQuery.of(context).size.height * .1,),
-                Text('Lorem Lipsam')
+                Text('${MySharedPrefrence().get_user_name().length > 0 ? MySharedPrefrence().get_user_name(): ''}',)
               ],),
             ),
           ),
@@ -115,13 +119,30 @@ class _SideBarState extends State<SideBar> {
           // Spacer(),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
+            title: Text(MySharedPrefrence().getUserLoginStatus()  ? 'Log Out' : 'Sign In'),
             onTap: () {
               // Handle logout tap
+              setState(() {
+                
+              });
+              MySharedPrefrence().logout();
+              MySharedPrefrence().setUserLoginStatus(false); 
+              _handleSignOut();
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => WillPopScope(
+                                          onWillPop: () async => false,
+                                          child: LoginPage())),
+                                );
             },
           ),
         ],
       ),
     );
   }
+  Future<void> _handleSignOut() async {
+  GoogleSignIn _googleSignIn = GoogleSignIn();
+  await _googleSignIn.signOut();
+}
+
 }

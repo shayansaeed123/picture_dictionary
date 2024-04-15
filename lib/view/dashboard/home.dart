@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
@@ -14,6 +16,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+ Future<void> _handleSignOut() async {
+  GoogleSignIn _googleSignIn = GoogleSignIn();
+  await _googleSignIn.signOut();
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                 Image.asset('assets/ic_launcher.png',alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * .5,
                 height: MediaQuery.of(context).size.height * .1,),
-                Text('Lorem Lipsam')
+                Text('${MySharedPrefrence().get_user_name().length > 0 ? MySharedPrefrence().get_user_name(): ''}',)
               ],),
           ),
             ListTile(
@@ -80,10 +86,17 @@ class _HomePageState extends State<HomePage> {
           Spacer(),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text('Sign in'),
+            title: Text(MySharedPrefrence().getUserLoginStatus()  ? 'Log Out' : 'Sign In'),
             onTap: () {
               // Handle logout tap
-              
+              MySharedPrefrence().logout();
+              _handleSignOut();
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => WillPopScope(
+                                          onWillPop: () async => false,
+                                          child: LoginPage())),
+                                );
             },
           ),
         ],
