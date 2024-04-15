@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
+import 'package:picture_dictionary/view/login/login_signup.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -82,6 +83,7 @@ class _HomePageState extends State<HomePage> {
             title: Text('Sign in'),
             onTap: () {
               // Handle logout tap
+              
             },
           ),
         ],

@@ -18,30 +18,68 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _errorMessage = '';
+
+  Future<void> _signInWithEmailAndPassword() async {
+  setState(() {
+    _isLoading = true;
+  });
+  try {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+    final User? user = userCredential.user;
+    if (user != null) {
+      // Navigate to the home screen upon successful login
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    } else {
+      setState(() {
+        _errorMessage = 'User not found';
+      });
+    }
+  } catch (e) {
+    setState(() {
+      _errorMessage = e.toString();
+    });
+  } finally {
+    setState(() {
+      _isLoading = false;
+    });
+  }
+}
+
 
   signInWithGoogle() async {
     setState(() {
       _isLoading = true;
     });
-    try{
+    try {
       setState(() {
-      _isLoading = false;
-    });
+        _isLoading = false;
+      });
       GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-    AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-    print(userCredential.user!.displayName);
-    }catch(e){
+      GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      print(userCredential.user!.displayName);
+    } catch (e) {
       print('Error $e');
-    }finally{
-       setState(() {
-      _isLoading = false;
-    });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -170,6 +208,9 @@ class _LoginPageState extends State<LoginPage> {
                               backgroundColor: MaterialStateColor.resolveWith(
                                   (states) => colorController.loginBtnColor)),
                           onPressed: () {
+                            _signInWithEmailAndPassword();
+                            print('object');
+                            
                             // if (_emailController.text.isNotEmpty &&
                             //     _passwordController.text.isNotEmpty) {
                             //   logIn(_emailController.text, _passwordController.text).then((user) {
@@ -205,8 +246,13 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       reusableLoginBtn('Sign in as a Guest  ',
                           'assets/user.png', Colors.transparent, () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => HomePage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WillPopScope(
+                                  onWillPop: () async => false,
+                                  child: HomePage()),
+                            ));
                       }),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.02),
@@ -218,7 +264,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 if (_isLoading == true) reusableloadingrow(context, _isLoading),
-              reusableloadingrow(context, _isLoading)
+                reusableloadingrow(context, _isLoading)
               ],
             ),
           ),
