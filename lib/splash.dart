@@ -18,10 +18,10 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     navigateToScreen();
-    print('new stts${MySharedPrefrence().getUserLoginStatus()}');
+    print('check email ${MySharedPrefrence().get_user_email()}');
   //   Future.delayed(const Duration(seconds: 3), (){
   //     Navigator.push(context, 
   //     MaterialPageRoute(builder: 
@@ -49,24 +49,34 @@ class _SplashState extends State<Splash> {
   // }
 
   Future<void> navigateToScreen() async {
-    if (MySharedPrefrence().get_user_email() != null) {
+    String? userEmail = MySharedPrefrence().get_user_email();
+    if (userEmail != ''  || userEmail != null) {
       setState(() {
-         Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => WillPopScope(
-                onWillPop: () async => false, child: HomePage())),
-      );
-      print('home');
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
+});
+      //   Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => WillPopScope(
+      //           onWillPop: () async => false, child: HomePage())),
+      // );
+      // print('home');
       });
      
     } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                WillPopScope(onWillPop: () async => false, child: LoginPage())),
-      );
+      setState(() {
+        
+      });
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => LoginPage()));
+});
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) =>
+      //           WillPopScope(onWillPop: () async => false, child: LoginPage())),
+      // );
       print('login');
     }
   }
