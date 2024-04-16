@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/view/dashboard/home.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -18,17 +19,10 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    navigateToScreen();
-    print('check email ${MySharedPrefrence().get_user_email()}');
-  //   Future.delayed(const Duration(seconds: 3), (){
-  //     Navigator.push(context, 
-  //     MaterialPageRoute(builder: 
-  //     (context) => WillPopScope(onWillPop: 
-  //     () async => false, child: LoginPage()),));
-  //   }
-  //   );
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    login(context);
   }
   bool _isLoggedIn = false;
 
@@ -48,39 +42,35 @@ class _SplashState extends State<Splash> {
   //   });
   // }
 
-  Future<void> navigateToScreen() async {
-    String? userEmail = MySharedPrefrence().get_user_email();
-    Fire
-    if (userEmail != '') {
-      setState(() {
-        WidgetsBinding.instance!.addPostFrameCallback((_) {
-  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
-});
-      //   Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => WillPopScope(
-      //           onWillPop: () async => false, child: HomePage())),
-      // );
-      // print('home');
+  void login(BuildContext context){
+    final auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+
+    if(user != null){
+      Timer(Duration(seconds: 3), () {
+        print('check user login ${user}');
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                WillPopScope(onWillPop: () async => false, child: HomePage())),
+      );
       });
-     
-    } else {
-      setState(() {
-        
+    }else{
+      Timer(Duration(seconds: 3), () {
+        print('check user without login ${user}');
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                WillPopScope(onWillPop: () async => false, child: LoginPage())),
+      );
       });
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
-  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => LoginPage()));
-});
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) =>
-      //           WillPopScope(onWillPop: () async => false, child: LoginPage())),
-      // );
-      print('login');
     }
   }
+
+      
+     
 
   @override
   Widget build(BuildContext context) {

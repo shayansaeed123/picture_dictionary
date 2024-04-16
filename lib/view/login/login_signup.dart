@@ -22,38 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   // final FirebaseAuth _auth = FirebaseAuth.instance;
   String _errorMessage = '';
 
-//   Future<void> _signInWithEmailAndPassword() async {
-//   setState(() {
-//     _isLoading = true;
-//   });
-//   try {
-
-//     if (_emailController.text.isNotEmpty &&
-//                                 _passwordController.text.isNotEmpty) {
-//                                      MySharedPrefrence().setUserLoginStatus(true);  
-//       MySharedPrefrence().set_user_email(_emailController.text.toString());
-//       print(MySharedPrefrence().get_user_email());
-//       Navigator.push(
-//                             context,
-//                             MaterialPageRoute(
-//                               builder: (context) => WillPopScope(
-//                                   onWillPop: () async => false,
-//                                   child: HomePage()),
-//                             ));
-//                                 }else{
-//                                   print('Login Error');
-//                                 }
-//   } catch (e) {
-//     setState(() {
-//       _errorMessage = e.toString();
-//     });
-//   } finally {
-//     setState(() {
-//       _isLoading = false;
-//     });
-//   }
-// }
-
 
   signInWithGoogle() async {
     setState(() {
@@ -71,20 +39,11 @@ class _LoginPageState extends State<LoginPage> {
       );
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
-          setState(() {
-            
-          });
-          MySharedPrefrence().set_user_name(googleUser!.displayName);
+          MySharedPrefrence().set_user_name(userCredential.user!.displayName);
           MySharedPrefrence().setUserLoginStatus(true); 
-          setState(() {
-            
-          });
-            MySharedPrefrence().set_user_email(googleUser.email);
+            MySharedPrefrence().set_user_email(userCredential.user!.email);
       print(MySharedPrefrence().get_user_name());
       print(MySharedPrefrence().getUserLoginStatus());
-      setState(() {
-        
-      });
       print(MySharedPrefrence().get_user_email());
       Navigator.push(context,
                             MaterialPageRoute(

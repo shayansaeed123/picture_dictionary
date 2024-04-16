@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
@@ -16,10 +17,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
- Future<void> _handleSignOut() async {
+ void _handleSignOut() async {
   GoogleSignIn _googleSignIn = GoogleSignIn();
   await _googleSignIn.signOut();
+   FirebaseAuth auth = FirebaseAuth.instance;
+  await auth.signOut().then((value) {
+     Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => WillPopScope(
+                                          onWillPop: () async => false,
+                                          child: LoginPage())),
+                                );
+  });
+  print('User signed out');
 }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,14 +102,9 @@ class _HomePageState extends State<HomePage> {
             title: Text(MySharedPrefrence().getUserLoginStatus()  ? 'Log Out' : 'Sign In'),
             onTap: () {
               // Handle logout tap
-              MySharedPrefrence().logout();
+              // MySharedPrefrence().logout();
               _handleSignOut();
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) => WillPopScope(
-                                          onWillPop: () async => false,
-                                          child: LoginPage())),
-                                );
+                               
             },
           ),
         ],
