@@ -40,13 +40,25 @@ class _SelectLanguageState extends State<SelectLanguage> {
               left: MediaQuery.of(context).size.width * 0.15,
               right: MediaQuery.of(context).size.width * 0.15,
               bottom: MediaQuery.of(context).size.height * 0.42,
-                child: Image.asset('assets/ar_tab.png',)),
+              child: InkWell(
+                  onTap: (){
+                     MyApp.of(context)!.setLocale(Locale('ar'));
+                     print('ghgf');
+                     Navigator.pop(context);
+                  },
+                child: Image.asset('assets/ar_tab.png',))),
                 Positioned.fill(
                 top: MediaQuery.of(context).size.height * 0.27,
               left: MediaQuery.of(context).size.width * 0.15,
               right: MediaQuery.of(context).size.width * 0.15,
               bottom: MediaQuery.of(context).size.height * 0.32,
-                child: Image.asset('assets/eng_tab.png',)),
+              child: InkWell(
+                  onTap: (){
+                     MyApp.of(context)!.setLocale(Locale('en'));
+                     print('ghgf');
+                     Navigator.pop(context);
+                  },
+                child: Image.asset('assets/eng_tab.png',))),
                 Positioned.fill(
                 top: MediaQuery.of(context).size.height * 0.53,
               left: MediaQuery.of(context).size.width * 0.15,
@@ -64,7 +76,13 @@ class _SelectLanguageState extends State<SelectLanguage> {
               left: MediaQuery.of(context).size.width * 0.15,
               right: MediaQuery.of(context).size.width * 0.15,
               // bottom: MediaQuery.of(context).size.height * 0.00001,
-                child: Image.asset('assets/tur_tab.png',)),
+                child: InkWell(
+                  onTap: (){
+                     MyApp.of(context)!.setLocale(Locale('tr'));
+                     print('ghgf');
+                    //  Navigator.popUntil(context);
+                  },
+                  child: Image.asset('assets/tur_tab.png',))),
               // Positioned(child: child)
             ],
           )
