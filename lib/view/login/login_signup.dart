@@ -71,11 +71,20 @@ class _LoginPageState extends State<LoginPage> {
       );
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
+          setState(() {
+            
+          });
           MySharedPrefrence().set_user_name(googleUser!.displayName);
           MySharedPrefrence().setUserLoginStatus(true); 
+          setState(() {
+            
+          });
             MySharedPrefrence().set_user_email(googleUser.email);
       print(MySharedPrefrence().get_user_name());
       print(MySharedPrefrence().getUserLoginStatus());
+      setState(() {
+        
+      });
       print(MySharedPrefrence().get_user_email());
       Navigator.push(context,
                             MaterialPageRoute(

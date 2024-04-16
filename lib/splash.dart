@@ -50,7 +50,8 @@ class _SplashState extends State<Splash> {
 
   Future<void> navigateToScreen() async {
     String? userEmail = MySharedPrefrence().get_user_email();
-    if (userEmail != ''  || userEmail != null) {
+    Fire
+    if (userEmail != '') {
       setState(() {
         WidgetsBinding.instance!.addPostFrameCallback((_) {
   Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
