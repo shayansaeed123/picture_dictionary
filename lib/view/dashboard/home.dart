@@ -6,6 +6,7 @@ import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _hasImage = false;
 
  void _handleSignOut() async {
   GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -152,11 +154,11 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'LEARN',
-                      style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 16.0),
+                    Text('LEARN ${AppLocalizations.of(context)!.language}',
+                                          style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(height: 16.0),
+                    
                   ],
                 ),
               ),

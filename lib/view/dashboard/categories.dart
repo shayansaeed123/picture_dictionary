@@ -66,10 +66,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
   }
 
   final AudioPlayer audioPlayer = AudioPlayer();
-
-  // void playAudio() {
-  //   audioPlayer.play('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-  // }
+  Future<void> playAudioFromUrl(String url) async {
+    await audioPlayer.play(UrlSource(url));
+    if(url == 1){
+      print('succes');
+    }else{
+      print('fail');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,15 +114,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         final type = item[index];
                         return GestureDetector(
                           onTap: () {
-                            // Handle item tap
+                            playAudioFromUrl('${type['english_voice']}');
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => ItemsPage(fetchDataCallback: fetchData, categories: categories,),
                               ));
-                              void playAudio(){
-                                audioPlayer.play(type['english_voice']);
-                              }
+                              
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -148,7 +150,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             margin: EdgeInsets.all(MediaQuery.of(context).size.height * .001),
                             padding: EdgeInsets.all(MediaQuery.of(context).size.height * .003),
                             decoration: BoxDecoration(color: colorController.categoryBtnColor,borderRadius: BorderRadius.circular(8.0)),
-                            child: Center(child: Text('${type['english'] + type['id']}',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
+                            child: Center(child: Text('${type['english'] }',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
                           ),
                         ],
                       ),

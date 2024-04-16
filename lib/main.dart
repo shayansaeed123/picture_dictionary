@@ -1,8 +1,11 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/l10n/l10n.dart';
 import 'package:picture_dictionary/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,9 +19,22 @@ void main()async {
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
-  
+class MyApp extends StatefulWidget {
+  static _MyAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_MyAppState>();
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale = const Locale('en');
+
+  void setLocale(Locale newLocale) {
+    setState(() {
+      _locale = newLocale;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,6 +43,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'English1'
       ),
+      supportedLocales: L10n.all,
+      locale: _locale,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
     );
   }
 }

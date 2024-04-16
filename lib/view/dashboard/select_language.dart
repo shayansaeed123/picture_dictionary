@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:picture_dictionary/main.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 
 class SelectLanguage extends StatefulWidget {
@@ -51,7 +52,13 @@ class _SelectLanguageState extends State<SelectLanguage> {
               left: MediaQuery.of(context).size.width * 0.15,
               right: MediaQuery.of(context).size.width * 0.15,
               bottom: MediaQuery.of(context).size.height * 0.22,
-                child: Image.asset('assets/ur_tab.png',)),
+                child: InkWell(
+                  onTap: (){
+                     MyApp.of(context)!.setLocale(Locale('ur'));
+                     print('ghgf');
+                     Navigator.pop(context);
+                  },
+                  child: Image.asset('assets/ur_tab.png',))),
                 Positioned.fill(
                 top: MediaQuery.of(context).size.height * 0.7,
               left: MediaQuery.of(context).size.width * 0.15,
