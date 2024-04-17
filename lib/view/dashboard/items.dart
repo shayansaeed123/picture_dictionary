@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localization/flutter_localization.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
+import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:http/http.dart' as http;
@@ -117,7 +118,7 @@ class _ItemsPageState extends State<ItemsPage> {
           child: 
           FutureBuilder(future: widget.itemsFuture, builder: (context, snapshot) {
              if(snapshot.connectionState == ConnectionState.waiting){
-              return CircularProgressIndicator();
+              return Center(child: reusableloadingrow(context, true),);
              }else if(!snapshot.hasData){
               return Center(child: Text('data'));
              }else{
@@ -189,7 +190,17 @@ class _ItemsPageState extends State<ItemsPage> {
                     InkWell(
                       onTap: (){
                         playAudioFromUrl('${item['english_voice']}');
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=> ItemDetails()));
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=> ItemDetails(
+                          ar_voice: item['arabic_voice'], 
+                          ur_voice: item['urdu_voice'], 
+                          en_voice: item['english_voice'], 
+                          tr_voice: item['turkish_voice'], 
+                          ar_name: item['arabic'], 
+                          ur_name: item['urdu'], 
+                          en_name: item['english'], 
+                          tr_name: item['turkish'], 
+                          img: item['image']
+                          )));
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width * .44,

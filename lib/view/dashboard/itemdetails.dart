@@ -6,7 +6,18 @@ import 'package:picture_dictionary/res/reusablenextitembtn.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 
 class ItemDetails extends StatefulWidget {
-  const ItemDetails({super.key});
+  String ar_voice ,ur_voice , en_voice, tr_voice , ar_name , ur_name , en_name , tr_name , img;
+   ItemDetails({super.key, 
+  required this.ar_voice, 
+  required this.ur_voice,
+  required this.en_voice, 
+  required this.tr_voice,
+  required this.ar_name, 
+  required this.ur_name,
+  required this.en_name, 
+  required this.tr_name,
+  required this.img, 
+  });
 
   @override
   State<ItemDetails> createState() => _ItemDetailsState();
@@ -19,7 +30,7 @@ class _ItemDetailsState extends State<ItemDetails> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: SideBar(),
-        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();},'Categories Name'),
+        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();},'${widget.en_name.toString().toUpperCase()}'),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -59,13 +70,13 @@ class _ItemDetailsState extends State<ItemDetails> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        reusableitemdetailsrow('walnuts', Color(0xFF17a493),
+                        reusableitemdetailsrow('${widget.ar_name.toString().toUpperCase()}', Color(0xFF17a493),
                             const Color.fromARGB(255, 51, 219, 177), context),
-                        reusableitemdetailsrow('walnuts', Color(0xFF9753fe),
+                        reusableitemdetailsrow('${widget.en_name.toString().toUpperCase()}', Color(0xFF9753fe),
                             Color.fromARGB(255, 161, 136, 204), context),
-                        reusableitemdetailsrow('walnuts', Color(0xFF4f5bfe),
+                        reusableitemdetailsrow('${widget.ur_name.toString().toUpperCase()}', Color.fromARGB(255, 34, 37, 87),
                             Colors.blue.shade500, context),
-                        reusableitemdetailsrow('walnuts', Color(0xFFe14abe),
+                        reusableitemdetailsrow('${widget.tr_name.toString().toUpperCase()}', Color(0xFFe14abe),
                             Colors.pink.shade200, context),
                       ],
                     ),
