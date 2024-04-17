@@ -1,11 +1,13 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/l10n/l10n.dart';
 import 'package:picture_dictionary/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,20 +39,23 @@ class _MyAppState extends State<MyApp> {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Splash(),
-      theme: ThemeData(
-        fontFamily: 'English1'
+    return ChangeNotifierProvider(
+      create: (context) => TextVisibilityProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Splash(),
+        theme: ThemeData(
+          fontFamily: 'English1'
+        ),
+        supportedLocales: L10n.all,
+        locale: _locale,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate
+        ],
       ),
-      supportedLocales: L10n.all,
-      locale: _locale,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
-      ],
     );
   }
 }

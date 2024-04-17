@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -154,11 +156,43 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('LEARN ${AppLocalizations.of(context)!.language}',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      Text('LEARN ',
+                    // ${AppLocalizations.of(context)!.language}',
                                           style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),
                                         ),
                                         SizedBox(height: 16.0),
-                    
+                      Consumer<TextVisibilityProvider>(
+          builder: (context, textVisibilityProvider, child) {
+            return Row(
+              children: [
+                Visibility(
+                  visible: textVisibilityProvider.isFirstTextVisible,
+                  child: Text('| يتعلم'),
+                ),
+                Visibility(
+                  visible: textVisibilityProvider.isSecondTextVisible,
+                  child: Text(''),
+                ),
+                 Visibility(
+                  visible: textVisibilityProvider.isThirdTextVisible,
+                  child: Text('| سیکھیں'),
+                ),
+                Visibility(
+                  visible: textVisibilityProvider.isForTextVisible,
+                  child: Text('| öğrenmek'),
+                ),
+              ],
+            );
+            // Visibility(
+            //   visible: textVisibilityProvider.isVisible,
+            //   child: Text(textVisibilityProvider.displayText,style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold)),
+            // );
+          },
+        ),
+                    ],)
                   ],
                 ),
               ),

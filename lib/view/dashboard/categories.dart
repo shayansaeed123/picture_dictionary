@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
+import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
@@ -19,15 +20,16 @@ class CategoriesPage extends StatefulWidget {
 
 class _CategoriesPageState extends State<CategoriesPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  PictureRepo pictureRepo = PictureRepo();
   List<dynamic> item = [];
   bool _isLoading = false;
   late int id;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    fetchData();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   fetchData();
+  // }
 
   Future<dynamic> fetchData() async {
     setState(() {
@@ -42,7 +44,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
     if (response.statusCode == 200) {
       print('response ${response.body.toString()}');
-      final data = json.decode(response.body);
+      final data = json.decode(response.body.toString());
       print('data ${data.toString()}');
       // print('idddddddddddddd ${data['types']['id']}');
       setState(() {
@@ -75,6 +77,22 @@ class _CategoriesPageState extends State<CategoriesPage> {
     }
   }
 
+  // String selectedCategory = 'Fruits'; 
+  // late Future<List<Map<String, dynamic>>> itemsFuture;
+
+  late String selectedCategory;
+  late Future<List<String>> categoriesFuture;
+  late Future<List<Map<String, dynamic>>> itemsFuture;
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+    selectedCategory = 'Fruits'; // Default selected category
+    categoriesFuture = pictureRepo.fetchCategories();
+    itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> categories = item.map((e) => e['english'] as String).toList();
@@ -103,24 +121,41 @@ class _CategoriesPageState extends State<CategoriesPage> {
               height: MediaQuery.of(context).size.height,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(
+                child: FutureBuilder(
+                  future: pictureRepo.fetchData(),
+                  builder: (context, snapshot) {
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return Center(child: CircularProgressIndicator());
+                    }else if(!snapshot.hasData){
+                      return Center(child: Text('No Data Found'));
+                    }else{
+                      List<Map<String, dynamic>> data = snapshot.data!;
+                      return GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
                       ),
-                      itemCount: item.length > 5 ? item.length - 2 : 0,
+                      itemCount: data.length > 5 ? data.length - 2 : 0,
+                      // item.length > 5 ? item.length - 2 : 0,
                       itemBuilder: (context, index) {
-                        final type = item[index];
+                         Map<String, dynamic> type = data[index];
+                        // final type = item[index];
                         return GestureDetector(
                           onTap: () {
                             playAudioFromUrl('${type['english_voice']}');
-                            Navigator.push(
+                            
+                              setState(() {
+                                selectedCategory = type['english'];
+                itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+                print('itemsssssssssssssss ${itemsFuture.toString()}');
+                Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ItemsPage(fetchDataCallback: fetchData, categories: categories,),
+                                
+                                builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
                               ));
-                              
+              });
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -158,7 +193,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           ),
                         );
                       },
-                    ),
+                    );
+                    }
+                  },
+                )
               ),
             ),
               if (_isLoading == true) reusableloadingrow(context, _isLoading),

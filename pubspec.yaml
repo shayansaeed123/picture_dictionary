@@ -49,7 +49,7 @@ dependencies:
   audioplayers: 
   flutter_localization: 
   intl:
-
+  provider: 
 
 dev_dependencies:
   flutter_test:

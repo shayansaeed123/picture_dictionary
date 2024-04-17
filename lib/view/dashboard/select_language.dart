@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/main.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
+import 'package:provider/provider.dart';
 
 class SelectLanguage extends StatefulWidget {
   const SelectLanguage({super.key});
@@ -42,8 +44,8 @@ class _SelectLanguageState extends State<SelectLanguage> {
               bottom: MediaQuery.of(context).size.height * 0.42,
               child: InkWell(
                   onTap: (){
-                     MyApp.of(context)!.setLocale(Locale('ar'));
                      print('ghgf');
+                     Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFirst();
                      Navigator.pop(context);
                   },
                 child: Image.asset('assets/ar_tab.png',))),
@@ -54,8 +56,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
               bottom: MediaQuery.of(context).size.height * 0.32,
               child: InkWell(
                   onTap: (){
-                     MyApp.of(context)!.setLocale(Locale('en'));
-                     print('ghgf');
+                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowSecond();
                      Navigator.pop(context);
                   },
                 child: Image.asset('assets/eng_tab.png',))),
@@ -66,8 +67,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
               bottom: MediaQuery.of(context).size.height * 0.22,
                 child: InkWell(
                   onTap: (){
-                     MyApp.of(context)!.setLocale(Locale('ur'));
-                     print('ghgf');
+                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowThird();
                      Navigator.pop(context);
                   },
                   child: Image.asset('assets/ur_tab.png',))),
@@ -78,9 +78,8 @@ class _SelectLanguageState extends State<SelectLanguage> {
               // bottom: MediaQuery.of(context).size.height * 0.00001,
                 child: InkWell(
                   onTap: (){
-                     MyApp.of(context)!.setLocale(Locale('tr'));
-                     print('ghgf');
-                    //  Navigator.popUntil(context);
+                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFor();
+                     Navigator.pop(context);
                   },
                   child: Image.asset('assets/tur_tab.png',))),
               // Positioned(child: child)
