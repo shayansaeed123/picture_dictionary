@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableitemdetailsrow.dart';
 import 'package:picture_dictionary/res/reusablenextitembtn.dart';
+import 'package:picture_dictionary/widget/sidebar.dart';
 
 class ItemDetails extends StatefulWidget {
   const ItemDetails({super.key});
@@ -17,6 +18,7 @@ class _ItemDetailsState extends State<ItemDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      drawer: SideBar(),
         appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();},'Categories Name'),
         body: Container(
           decoration: BoxDecoration(

@@ -102,7 +102,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
         }, 'CATEGORIES'),
-        drawer: SideBar(fetchDataCallback: fetchData, categories: categories,),
+        drawer: SideBar(),
         body: Stack(
           children: [
             Container(
@@ -125,7 +125,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   future: pictureRepo.fetchData(),
                   builder: (context, snapshot) {
                     if(snapshot.connectionState == ConnectionState.waiting){
-                      return Center(child: CircularProgressIndicator());
+                      return Center(child: reusableloadingrow(context, true));
                     }else if(!snapshot.hasData){
                       return Center(child: Text('No Data Found'));
                     }else{

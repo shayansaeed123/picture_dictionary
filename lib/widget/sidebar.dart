@@ -1,18 +1,24 @@
 
 
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
+import 'package:picture_dictionary/repo/category_repo.dart';
+import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
 
 
 class SideBar extends StatefulWidget {
-   final VoidCallback fetchDataCallback;
-  final List<String> categories;
-  const SideBar({super.key, required this.fetchDataCallback, required this.categories});
+  //  final VoidCallback fetchDataCallback;
+  // final List<String> categories;
+  const SideBar({super.key,
+  //  required this.fetchDataCallback, required this.categories
+   });
 
   @override
   State<SideBar> createState() => _SideBarState();
@@ -42,6 +48,8 @@ class _SideBarState extends State<SideBar> {
   //     // Handle API error
   //   }
   // }
+
+  PictureRepo pictureRepo = PictureRepo();
 
 
   @override
@@ -85,11 +93,18 @@ class _SideBarState extends State<SideBar> {
             //   },
             // ),
             Expanded(
-              child: ListView.separated(
+              child: FutureBuilder(future: pictureRepo.fetchData(),builder: (context, snapshot) {
+                if(snapshot.connectionState == ConnectionState.waiting){
+                  return Center(child: reusableloadingrow(context,true));
+                }else if(!snapshot.hasData){
+                  return Center(child: Text('No Data Found'));
+                }else{
+                  return ListView.separated(
                   padding: EdgeInsets.zero,
-                  itemCount: widget.categories.length > 5 ? widget.categories.length - 2 : 0,
+                  itemCount: snapshot.data!.length> 5 ? snapshot.data!.length - 2 : 0,
+                  // widget.categories.length > 5 ? widget.categories.length - 2 : 0,
                   itemBuilder: (context, index) {
-                    var category = widget.categories[index];
+                    var category = snapshot.data![index]['english'];
                     return ListTile(
                       leading: Icon(Icons.square_foot),
                       title: Text(category),
@@ -99,7 +114,9 @@ class _SideBarState extends State<SideBar> {
                     );
                   },
                   separatorBuilder: (context, index) => Divider(),
-                ),
+                );
+                }
+              },)
             ),
           //   Divider(),
           // ListTile(
