@@ -239,6 +239,20 @@ class MySharedPrefrence {
     return ''.val('distributor_name', getBox: preferences).val;
   }
 
+
+  void setname(String? name) {
+    ''.val('name', getBox: preferences).val = name ?? '';
+  }
+
+  String getname() {
+    return ''.val('name', getBox: preferences).val;
+  }
+
+
+
+
+
+
   void set_store_distributor_id(int? user_id) {
     0.val('store_distributor_id', getBox: preferences).val = user_id ?? 0;
   }
