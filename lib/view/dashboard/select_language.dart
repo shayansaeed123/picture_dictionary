@@ -27,7 +27,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
           height:  double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage('assets/second_page.png'),fit:  BoxFit.fitHeight),
+            image: DecorationImage(image: AssetImage('assets/second_page.png'),fit:  BoxFit.fill),
           ),
           child: Stack(
             // alignment: Alignment.center,

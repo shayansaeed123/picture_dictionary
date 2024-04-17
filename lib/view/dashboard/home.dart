@@ -170,19 +170,19 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Visibility(
                   visible: textVisibilityProvider.isFirstTextVisible,
-                  child: Text('| يتعلم'),
+                  child: Text('| يتعلم', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
                 ),
                 Visibility(
                   visible: textVisibilityProvider.isSecondTextVisible,
-                  child: Text(''),
+                  child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
                 ),
                  Visibility(
                   visible: textVisibilityProvider.isThirdTextVisible,
-                  child: Text('| سیکھیں'),
+                  child: Text('| سیکھیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
                 ),
                 Visibility(
                   visible: textVisibilityProvider.isForTextVisible,
-                  child: Text('| öğrenmek'),
+                  child: Text('| öğrenmek', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
                 ),
               ],
             );

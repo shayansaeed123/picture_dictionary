@@ -1,3 +1,5 @@
+import 'package:audioplayers/audioplayers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
@@ -25,6 +27,15 @@ class ItemDetails extends StatefulWidget {
 
 class _ItemDetailsState extends State<ItemDetails> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final AudioPlayer audioPlayer = AudioPlayer();
+  Future<void> playAudioFromUrl(String url) async {
+    await audioPlayer.play(UrlSource(url));
+    if(url == 1){
+      print('succes');
+    }else{
+      print('fail');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +67,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.white),
+                      child: CachedNetworkImage(imageUrl: '${widget.img}'),
                 ),
                 Container(
                   margin: EdgeInsets.only(
@@ -71,13 +83,21 @@ class _ItemDetailsState extends State<ItemDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         reusableitemdetailsrow('${widget.ar_name.toString().toUpperCase()}', Color(0xFF17a493),
-                            const Color.fromARGB(255, 51, 219, 177), context),
+                            const Color.fromARGB(255, 51, 219, 177), context,(){
+                              playAudioFromUrl(widget.ar_voice);
+                            }),
                         reusableitemdetailsrow('${widget.en_name.toString().toUpperCase()}', Color(0xFF9753fe),
-                            Color.fromARGB(255, 161, 136, 204), context),
-                        reusableitemdetailsrow('${widget.ur_name.toString().toUpperCase()}', Color.fromARGB(255, 34, 37, 87),
-                            Colors.blue.shade500, context),
+                            Color.fromARGB(255, 161, 136, 204), context,(){
+                              playAudioFromUrl(widget.en_voice);
+                            }),
+                        reusableitemdetailsrow('${widget.ur_name.toString().toUpperCase()}', Color(0xFF4e59ff),
+                            Color(0xFF5d80fe), context,(){
+                              playAudioFromUrl(widget.ur_voice);
+                            }),
                         reusableitemdetailsrow('${widget.tr_name.toString().toUpperCase()}', Color(0xFFe14abe),
-                            Colors.pink.shade200, context),
+                            Colors.pink.shade200, context,(){
+                              playAudioFromUrl(widget.tr_voice);
+                            }),
                       ],
                     ),
                   ),
