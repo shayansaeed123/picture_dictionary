@@ -93,7 +93,7 @@ class _SearchItemState extends State<SearchItem> {
                   ),
                 ),
                 Expanded(
-                  child: FutureBuilder(future: PictureRepo().fetchData(), builder: (context, snapshot) {
+                  child: FutureBuilder(future: PictureRepo().fetchData() ?? PictureRepo().fetchData(), builder: (context, snapshot) {
                     if(!snapshot.hasData){
                       return Expanded(
                     child: Column(
@@ -115,7 +115,7 @@ class _SearchItemState extends State<SearchItem> {
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                         ),
-                        itemCount:  data.length,
+                        // itemCount:  data.length,
                         //  > 5 ? data.length - 2 : 0,
                         // item.length > 5 ? item.length - 2 : 0,
                         itemBuilder: (context, index) {

@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool _hasImage = false;
+int _selectedIndex = 0;
   @override
   void initState() {
     // TODO: implement initState
@@ -230,15 +230,44 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white.withOpacity(0.8),
               ),
               padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'PLAY GAME',
+                    'PLAY GAME ',
                     style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 16.0),
+                  // SizedBox(height: 16.0),
+                  Consumer<TextVisibilityProvider>(
+                        builder: (context, textVisibilityProvider, child) {
+                          return Row(
+              children: [
+                Visibility(
+                  visible: textVisibilityProvider.isFirstTextVisible,
+                  child: Text('| ألعب لعبة', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+                ),
+                Visibility(
+                  visible: textVisibilityProvider.isSecondTextVisible,
+                  child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+                ),
+                 Visibility(
+                  visible: textVisibilityProvider.isThirdTextVisible,
+                  child: Text('| کھیل کھیلیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+                ),
+                Visibility(
+                  visible: textVisibilityProvider.isForTextVisible,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text('| Oyun oynamak', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+                    )),
+                ),
+              ],
+                          );
+                        },
+                      ),
                 ],
               ),
             ),
