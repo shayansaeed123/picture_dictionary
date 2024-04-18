@@ -117,235 +117,239 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                // eb8815 f5d12d
-                colorController.bgColorup,
-                colorController.bgColordown,
-              ],
-            ),
-          ),
-          // margin: EdgeInsets.all(10.0),
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * .06,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/ic_launcher.png',
-                      height: 130,
-                      width: 130,
-                    )
+        body: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    // eb8815 f5d12d
+                    colorController.bgColorup,
+                    colorController.bgColordown,
                   ],
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * .1,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // mainAxisAlignment: MainAxisAlignment.start,
+              ),
+              // margin: EdgeInsets.all(10.0),
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .06,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        reusabletext('Login', colorController.blackColor, 23),
-                        // ClipRRect(
-                        //   borderRadius: BorderRadius.circular(20),
-                        //   child:
-                        if(!isLoginPage)
-                          TextFormField(
-                          controller: _userController,
-                          validator: (value) {
-                          if(value!.isEmpty){
-                            return 'incorrect username';
-                          }
-                          return null;
-                        },
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: colorController.textformfillColor,
-                            prefixIcon: Icon(Icons.person, color: Colors.white),
-                            hintText: 'Username',
-                            hintStyle: const TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-                          ),
-                          keyboardType: TextInputType.text,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * .01,
-                        ),
-                        
-                    
-                      TextFormField(
-                          controller: _emailController,
-                          validator: (value) {
-                          if(value!.isEmpty){
-                            return 'incorrect Email';
-                          }
-                          return null;
-                        },
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: colorController.textformfillColor,
-                            prefixIcon: Icon(Icons.email, color: Colors.white),
-                            hintText: 'Email',
-                            hintStyle: const TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * .01,
-                        ),
-                        TextFormField(
-                          controller: _passwordController,
-                          validator: (value) {
-                          if(value!.isEmpty){
-                            return 'incorrect passwordrr';
-                          }
-                          return null;
-                        },
-                          obscureText: true,
-                          obscuringCharacter: '*',
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: colorController.textformfillColor,
-                            prefixIcon: const Icon(Icons.password_outlined,
-                                color: Colors.white),
-                            hintText: 'Password',
-                            hintStyle: TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    color: colorController.textformborderColor,
-                                    width: 4)),
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-                          ),
-                          keyboardType: TextInputType.text,
-                        ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .02),
-                        ElevatedButton(
-                            style: ButtonStyle(
-                                padding: MaterialStateProperty.all(
-                                    EdgeInsets.all(16.0)),
-                                fixedSize: MaterialStateProperty.all(
-                                    Size.fromWidth(
-                                        MediaQuery.of(context).size.width)),
-                                backgroundColor: MaterialStateColor.resolveWith(
-                                    (states) => colorController.loginBtnColor)),
-                            onPressed: () {
-                              startAuthentication();
-                              print('object');
-                              
-                            },
-                            child: isLoginPage ? reusabletext(
-                                'SIGN IN', colorController.blackColor, 18) : reusabletext(
-                                'SIGN UP', colorController.blackColor, 18)),
-                            //     SizedBox(
-                            // height: MediaQuery.of(context).size.height * .01),
-                                 TextButton(onPressed: (){
-                        setState(() {
-                    
-                        });
-                        isLoginPage=!isLoginPage;
-                      }, child: isLoginPage ? 
-                      Text('Not a Member?',style: TextStyle(color: colorController.blackColor,fontWeight: FontWeight.bold),) 
-                      : Text('Already a Member?',style: TextStyle(color: colorController.blackColor,fontWeight: FontWeight.bold),))
+                        Image.asset(
+                          'assets/ic_launcher.png',
+                          height: 130,
+                          width: 130,
+                        )
                       ],
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * .03,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      reusableLoginBtn('Sign in as a Guest  ',
-                          'assets/user.png', Colors.transparent, () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WillPopScope(
-                                  onWillPop: () async => false,
-                                  child: HomePage()),
-                            ));
-                      }),
-                      SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02),
-                      reusableLoginBtn('Sign in With  ', 'assets/google.png',
-                          colorController.whiteColor, () {
-                        signInWithGoogle();
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .1,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            reusabletext('Login', colorController.blackColor, 23),
+                            // ClipRRect(
+                            //   borderRadius: BorderRadius.circular(20),
+                            //   child:
+                            if(!isLoginPage)
+                              TextFormField(
+                              controller: _userController,
+                              validator: (value) {
+                              if(value!.isEmpty){
+                                return 'incorrect username';
+                              }
+                              return null;
+                            },
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: colorController.textformfillColor,
+                                prefixIcon: Icon(Icons.person, color: Colors.white),
+                                hintText: 'Username',
+                                hintStyle: const TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+                              ),
+                              keyboardType: TextInputType.text,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * .01,
+                            ),
+                            
                         
-                      })
-                    ],
-                  ),
+                          TextFormField(
+                              controller: _emailController,
+                              validator: (value) {
+                              if(value!.isEmpty){
+                                return 'incorrect Email';
+                              }
+                              return null;
+                            },
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: colorController.textformfillColor,
+                                prefixIcon: Icon(Icons.email, color: Colors.white),
+                                hintText: 'Email',
+                                hintStyle: const TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * .01,
+                            ),
+                            TextFormField(
+                              controller: _passwordController,
+                              validator: (value) {
+                              if(value!.isEmpty){
+                                return 'incorrect password';
+                              }
+                              return null;
+                            },
+                              obscureText: true,
+                              obscuringCharacter: '*',
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: colorController.textformfillColor,
+                                prefixIcon: const Icon(Icons.password_outlined,
+                                    color: Colors.white),
+                                hintText: 'Password',
+                                hintStyle: TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                    borderSide: BorderSide(
+                                        color: colorController.textformborderColor,
+                                        width: 4)),
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+                              ),
+                              keyboardType: TextInputType.text,
+                            ),
+                            SizedBox(
+                                height: MediaQuery.of(context).size.height * .02),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    padding: MaterialStateProperty.all(
+                                        EdgeInsets.all(16.0)),
+                                    fixedSize: MaterialStateProperty.all(
+                                        Size.fromWidth(
+                                            MediaQuery.of(context).size.width)),
+                                    backgroundColor: MaterialStateColor.resolveWith(
+                                        (states) => colorController.loginBtnColor)),
+                                onPressed: () {
+                                  startAuthentication();
+                                  print('object');
+                                  
+                                },
+                                child: isLoginPage ? reusabletext(
+                                    'SIGN IN', colorController.blackColor, 18) : reusabletext(
+                                    'SIGN UP', colorController.blackColor, 18)),
+                                //     SizedBox(
+                                // height: MediaQuery.of(context).size.height * .01),
+                                     TextButton(onPressed: (){
+                            setState(() {
+                        
+                            });
+                            isLoginPage=!isLoginPage;
+                          }, child: isLoginPage ? 
+                          Text('Not a Member?',style: TextStyle(color: colorController.blackColor,fontWeight: FontWeight.bold),) 
+                          : Text('Already a Member?',style: TextStyle(color: colorController.blackColor,fontWeight: FontWeight.bold),))
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .03,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          reusableLoginBtn('Sign in as a Guest  ',
+                              'assets/user.png', Colors.transparent, () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => WillPopScope(
+                                      onWillPop: () async => false,
+                                      child: HomePage()),
+                                ));
+                          }),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02),
+                          reusableLoginBtn('Sign in With  ', 'assets/google.png',
+                              colorController.whiteColor, () {
+                            signInWithGoogle();
+                            
+                          })
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                if (_isLoading == true) Center(child: reusableloadingrow(context, _isLoading)),
-                Center(child: reusableloadingrow(context, _isLoading))
-              ],
+              ),
             ),
-          ),
+            if (_isLoading == true) Center(child: reusableloadingrow(context, _isLoading)),
+                Center(child: reusableloadingrow(context, _isLoading))
+          ],
         ),
       ),
     );

@@ -9,7 +9,12 @@ import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
+extension TruncateText on String {
+  String truncateWithEllipsis(int maxLength) {
+    if (length <= maxLength) return this;
+    return substring(0, maxLength - 5) + '...'; // Subtract 3 to account for ellipsis
+  }
+}
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -27,6 +32,8 @@ int _selectedIndex = 0;
     super.initState();
     print(MySharedPrefrence().getUserLoginStatus());
   }
+
+  
  void _handleSignOut() async {
   MySharedPrefrence().logout();
   MySharedPrefrence().setUserLoginStatus(false);
@@ -257,12 +264,7 @@ int _selectedIndex = 0;
                 ),
                 Visibility(
                   visible: textVisibilityProvider.isForTextVisible,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text('| Oyun oynamak', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                    )),
+                  child: Text('| Oyun oynamak'.truncateWithEllipsis(11),overflow: TextOverflow.ellipsis, style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
                 ),
               ],
                           );
