@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -80,7 +81,7 @@ class _SideBarState extends State<SideBar> {
                 Image.asset('assets/ic_launcher.png',alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * .5,
                 height: MediaQuery.of(context).size.height * .1,),
-                Text('${MySharedPrefrence().get_user_name().length > 0 ? MySharedPrefrence().get_user_name(): ''}',)
+                Text('${FirebaseAuth.instance.currentUser == null || FirebaseAuth.instance.currentUser!.displayName == null? '' : FirebaseAuth.instance.currentUser!.displayName }',)
               ],),
             ),
           ),
@@ -136,7 +137,7 @@ class _SideBarState extends State<SideBar> {
           // Spacer(),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text(MySharedPrefrence().getUserLoginStatus()  ? 'Log Out' : 'Sign In'),
+            title: Text(FirebaseAuth.instance.currentUser != null ? 'Log Out' : 'Sign In'),
             onTap: () {
               // Handle logout tap
               setState(() {

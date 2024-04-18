@@ -19,9 +19,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _hasImage = false;
 
+  bool _hasImage = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(MySharedPrefrence().getUserLoginStatus());
+  }
  void _handleSignOut() async {
+  MySharedPrefrence().logout();
+  MySharedPrefrence().setUserLoginStatus(false);
   GoogleSignIn _googleSignIn = GoogleSignIn();
   await _googleSignIn.signOut();
    FirebaseAuth auth = FirebaseAuth.instance;
@@ -67,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 Image.asset('assets/ic_launcher.png',alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * .5,
                 height: MediaQuery.of(context).size.height * .1,),
-                Text('${MySharedPrefrence().get_user_name().length > 0 ? MySharedPrefrence().get_user_name(): ''}',)
+                Text('${FirebaseAuth.instance.currentUser == null || FirebaseAuth.instance.currentUser!.displayName == null? '' : FirebaseAuth.instance.currentUser!.displayName }',)
               ],),
           ),
             ListTile(
@@ -103,7 +111,7 @@ class _HomePageState extends State<HomePage> {
           Spacer(),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text(MySharedPrefrence().getUserLoginStatus()  ? 'Log Out' : 'Sign In'),
+            title: Text(FirebaseAuth.instance.currentUser != null ? 'Log Out' : 'Sign In'),
             onTap: () {
               // Handle logout tap
               // MySharedPrefrence().logout();
