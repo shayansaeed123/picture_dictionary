@@ -11,6 +11,7 @@ import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
+import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
 
 
@@ -31,8 +32,9 @@ class _SideBarState extends State<SideBar> {
   @override
   void initState() {
     super.initState();
-    // fetchData();
-    print('One  ${MySharedPrefrence().getUserLoginStatus()}');
+    selectedCategory = 'Fruits'; // Default selected category
+    categoriesFuture = pictureRepo.fetchCategories();
+    itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
   }
 
   // Future<void> fetchData() async {
@@ -51,6 +53,11 @@ class _SideBarState extends State<SideBar> {
   // }
 
   PictureRepo pictureRepo = PictureRepo();
+  late String selectedCategory;
+  late Future<List<String>> categoriesFuture;
+  late Future<List<Map<String, dynamic>>> itemsFuture;
+
+ 
 
 
   @override
@@ -111,6 +118,18 @@ class _SideBarState extends State<SideBar> {
                       title: Text(category),
                       onTap: () {
                         // Handle category tap
+                          setState(() {
+                                selectedCategory = category;
+                itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+                print('itemsssssssssssssss ${itemsFuture.toString()}');
+                Navigator.pop(context);
+                Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                
+                                builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
+                              ));
+              });
                       },
                     );
                   },

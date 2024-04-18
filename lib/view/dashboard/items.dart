@@ -131,6 +131,7 @@ class _ItemsPageState extends State<ItemsPage> {
                 
             itemBuilder: (context, index) {
               Map<String, dynamic> item = items[index];
+                            int currentItem = index;
               return Stack(
                 children: [
                   Positioned(
@@ -199,7 +200,9 @@ class _ItemsPageState extends State<ItemsPage> {
                           ur_name: item['urdu'], 
                           en_name: item['english'], 
                           tr_name: item['turkish'], 
-                          img: item['image']
+                          img: item['image'],
+                          items: items,
+                          current: currentItem,
                           )));
                       },
                       child: Container(

@@ -9,6 +9,8 @@ import 'package:picture_dictionary/widget/sidebar.dart';
 
 class ItemDetails extends StatefulWidget {
   String ar_voice ,ur_voice , en_voice, tr_voice , ar_name , ur_name , en_name , tr_name , img;
+  int current;
+  List<Map<String, dynamic>> items;
    ItemDetails({super.key, 
   required this.ar_voice, 
   required this.ur_voice,
@@ -19,6 +21,8 @@ class ItemDetails extends StatefulWidget {
   required this.en_name, 
   required this.tr_name,
   required this.img, 
+  required this.items,
+  required this.current,
   });
 
   @override
@@ -28,6 +32,7 @@ class ItemDetails extends StatefulWidget {
 class _ItemDetailsState extends State<ItemDetails> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final AudioPlayer audioPlayer = AudioPlayer();
+  int currentt = 0;
   Future<void> playAudioFromUrl(String url) async {
     await audioPlayer.play(UrlSource(url));
     if(url == 1){
@@ -114,9 +119,32 @@ class _ItemDetailsState extends State<ItemDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      reusablenextitembtn(context, (){}),
-                      Text('1/12',style: TextStyle(color: Color(0xFFaf2307)),),
-                      reusablenextitembtn(context, (){},icon: Icons.arrow_forward_ios),
+                      
+//                       reusablenextitembtn(context, (){
+//   if (currentt < widget.items.length - 1) {
+//     setState(() {
+//       currentt++; // Move to the next item
+//       print('next');
+//     });
+//   }
+// }),
+// Text('${currentt + 1}/${widget.items.length}', style: TextStyle(color: Color(0xFFaf2307))),
+// reusablenextitembtn(context, (){
+//   if (currentt > 0) {
+//     setState(() {
+//       currentt--; // Move to the previous item
+//       print('back');
+//     });
+//   }
+// }, icon: Icons.arrow_forward_ios),
+
+                      reusablenextitembtn(context, (){
+                        //how to move to next item
+                      }),
+                      Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
+                      reusablenextitembtn(context, (){
+                        //how to move to back item
+                      },icon: Icons.arrow_forward_ios),
                     ],
                   ),
                 ),
