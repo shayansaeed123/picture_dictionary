@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/utils.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
@@ -91,115 +92,115 @@ class _SearchItemState extends State<SearchItem> {
                     keyboardType: TextInputType.text,
                   ),
                 ),
-                FutureBuilder(future: PictureRepo().fetchData(), builder: (context, snapshot) {
-                  if(!snapshot.hasData){
-                    return Expanded(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(child: Text('Type to Search', style: TextStyle(fontSize: 25),)),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Center(child: Text('Enter any category in your prefered language to search', style: TextStyle(fontSize: 16),)),
-                        ),
-                    ],),
-                );
-                  }else{
-
-
-
-                    if(_searchController.text.isEmpty){
+                Expanded(
+                  child: FutureBuilder(future: PictureRepo().fetchData(), builder: (context, snapshot) {
+                    if(!snapshot.hasData){
                       return Expanded(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Center(child: Text('Type to Search', style: TextStyle(fontSize: 25),)),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Center(child: Text('Enter any category in your prefered language to search', style: TextStyle(fontSize: 16),)),
-                        ),
-                    ],),
-                );
-                    }else {
-                      List<Map<String, dynamic>> data = snapshot.data!;
-                      return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                      ),
-                      itemCount: data.length > 5 ? data.length - 2 : 0,
-                      // item.length > 5 ? item.length - 2 : 0,
-                      itemBuilder: (context, index) {
-                         Map<String, dynamic> type = data[index];
-                        // final type = item[index];
-                        return GestureDetector(
-                          onTap: () {
-                            playAudioFromUrl('${type['english_voice']}');
-                            
-                              setState(() {
-                                selectedCategory = type['english'];
-                itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
-                print('itemsssssssssssssss ${itemsFuture.toString()}');
-                Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                
-                                builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
-                              ));
-              });
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: colorController.whiteColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: EdgeInsets.all(10),
-                            child:  Container(
-                      width: MediaQuery.of(context).size.width * .44,
-                      height: MediaQuery.of(context).size.height * .361,
-                      decoration: BoxDecoration(color: colorController.whiteColor,borderRadius: BorderRadius.circular(11),),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Expanded(
-                            child: CachedNetworkImage(imageUrl: type['image'],
-                            errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
-                            width: double.infinity,
-                            fit: BoxFit.contain,
-                            filterQuality: FilterQuality.high,
-                            placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
-                            )
+                          Center(child: Text('Type to Search', style: TextStyle(fontSize: 25),)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Center(child: Text('Enter any category in your prefered language to search', style: TextStyle(fontSize: 16),)),
                           ),
-                          Container(
-                            width: double.infinity,
-                            height: MediaQuery.of(context).size.height*0.05,
-                            margin: EdgeInsets.all(MediaQuery.of(context).size.height * .001),
-                            padding: EdgeInsets.all(MediaQuery.of(context).size.height * .003),
-                            decoration: BoxDecoration(color: colorController.categoryBtnColor,borderRadius: BorderRadius.circular(8.0)),
-                            child: Center(child: Text('${type['english'] }',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
+                      ],),
+                  );
+                    }else{
+                      List<Map<String, dynamic>> data = snapshot.data!;
+                        return GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:  2,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                        ),
+                        itemCount:  data.length,
+                        //  > 5 ? data.length - 2 : 0,
+                        // item.length > 5 ? item.length - 2 : 0,
+                        itemBuilder: (context, index) {
+                           Map<String, dynamic> type = data[index];
+                          //  String name = type['english'];
+                          // final type = item[index];
+                          if(_searchController.text.isEmpty){
+                        return Expanded(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(child: Text('Type to Search', style: TextStyle(fontSize: 25),)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Center(child: Text('Enter any category in your prefered language to search', style: TextStyle(fontSize: 16),)),
                           ),
-                        ],
+                      ],),
+                  );
+                      }if(type['english'].toLowerCase().contains(_searchController.text.toLowerCase())){
+                            return GestureDetector(
+                            onTap: () {
+                              playAudioFromUrl('${type['english_voice']}');
+                              
+                                setState(() {
+                                  selectedCategory = type['english'];
+                  itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+                  print('itemsssssssssssssss ${itemsFuture.toString()}');
+                  Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  
+                                  builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
+                                ));
+                                });
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: colorController.whiteColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: EdgeInsets.all(10),
+                              child:  Container(
+                        width: MediaQuery.of(context).size.width * .44,
+                        height: MediaQuery.of(context).size.height * .361,
+                        decoration: BoxDecoration(color: colorController.whiteColor,borderRadius: BorderRadius.circular(11),),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: CachedNetworkImage(imageUrl: type['image'],
+                              errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
+                              width: double.infinity,
+                              fit: BoxFit.contain,
+                              filterQuality: FilterQuality.high,
+                              placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
+                              )
+                            ),
+                            Container(
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height*0.05,
+                              margin: EdgeInsets.all(MediaQuery.of(context).size.height * .001),
+                              padding: EdgeInsets.all(MediaQuery.of(context).size.height * .003),
+                              decoration: BoxDecoration(color: colorController.categoryBtnColor,borderRadius: BorderRadius.circular(8.0)),
+                              child: Center(child: Text('${type['english'] }',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                          ),
-                        );
-                      },
-                    );
-
-
-
-
-
+                            ),
+                          );
+                          }
+                          
+                        },
+                      );
+                  
+                  
+                      
+                  
+                  
+                  
+                  
                     }
-
-
-
-
-                  }
-                },),
+                  },),
+                ),
                 
                     
                   
@@ -211,3 +212,60 @@ class _SearchItemState extends State<SearchItem> {
     );
   }
 }
+
+
+
+
+// if(name.toLowerCase().contains(_searchController.text.toLowerCase())){
+//                           return GestureDetector(
+//                           onTap: () {
+//                             playAudioFromUrl('${type['english_voice']}');
+                            
+//                               setState(() {
+//                                 selectedCategory = type['english'];
+//                 itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+//                 print('itemsssssssssssssss ${itemsFuture.toString()}');
+//                 Navigator.push(
+//                               context,
+//                               MaterialPageRoute(
+                                
+//                                 builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
+//                               ));
+//               });
+//                           },
+//                           child: Container(
+//                             decoration: BoxDecoration(
+//                               color: colorController.whiteColor,
+//                               borderRadius: BorderRadius.circular(10),
+//                             ),
+//                             padding: EdgeInsets.all(10),
+//                             child:  Container(
+//                       width: MediaQuery.of(context).size.width * .44,
+//                       height: MediaQuery.of(context).size.height * .361,
+//                       decoration: BoxDecoration(color: colorController.whiteColor,borderRadius: BorderRadius.circular(11),),
+//                       child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.start,
+//                         children: [
+//                           Expanded(
+//                             child: CachedNetworkImage(imageUrl: type['image'],
+//                             errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
+//                             width: double.infinity,
+//                             fit: BoxFit.contain,
+//                             filterQuality: FilterQuality.high,
+//                             placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
+//                             )
+//                           ),
+//                           Container(
+//                             width: double.infinity,
+//                             height: MediaQuery.of(context).size.height*0.05,
+//                             margin: EdgeInsets.all(MediaQuery.of(context).size.height * .001),
+//                             padding: EdgeInsets.all(MediaQuery.of(context).size.height * .003),
+//                             decoration: BoxDecoration(color: colorController.categoryBtnColor,borderRadius: BorderRadius.circular(8.0)),
+//                             child: Center(child: Text('${type['english'] }',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                           ),
+//                         );
+//                         }
