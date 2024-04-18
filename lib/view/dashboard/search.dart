@@ -123,18 +123,7 @@ class _SearchItemState extends State<SearchItem> {
                           //  String name = type['english'];
                           // final type = item[index];
                           if(_searchController.text.isEmpty){
-                        return Expanded(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Center(child: Text('Type to Search', style: TextStyle(fontSize: 25),)),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Center(child: Text('Enter any category in your prefered language to search', style: TextStyle(fontSize: 16),)),
-                          ),
-                      ],),
-                  );
+                        return Text('');
                       }if(type['english'].toLowerCase().contains(_searchController.text.toLowerCase())){
                             return GestureDetector(
                             onTap: () {
