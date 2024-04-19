@@ -32,7 +32,6 @@ class ItemDetails extends StatefulWidget {
 class _ItemDetailsState extends State<ItemDetails> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final AudioPlayer audioPlayer = AudioPlayer();
-  int currentt = 0;
   Future<void> playAudioFromUrl(String url) async {
     await audioPlayer.play(UrlSource(url));
     if(url == 1){
@@ -41,6 +40,34 @@ class _ItemDetailsState extends State<ItemDetails> {
       print('fail');
     }
   }
+
+  
+
+
+
+
+void moveToNextItem() {
+  if (widget.current < widget.items.length ) {
+    setState(() {
+      widget.current++; // Move to the next ID
+    });
+    // Fetch data for the new ID from the API
+    // fetchData(currentItemId);
+  }
+}
+
+void moveToPreviousItem() {
+  if (widget.current > 0) {
+    setState(() {
+      widget.current--; 
+      // print('hello');
+    });
+
+    // fetchData(currentItemId);
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +99,14 @@ class _ItemDetailsState extends State<ItemDetails> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.white),
-                      child: CachedNetworkImage(imageUrl: '${widget.img}'),
+                      child: 
+                      CachedNetworkImage(imageUrl: '${widget.img}',
+                            errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
+                            width: double.infinity,
+                            fit: BoxFit.contain,
+                            filterQuality: FilterQuality.high,
+                            placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
+                            ),
                 ),
                 Container(
                   margin: EdgeInsets.only(
@@ -87,7 +121,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        reusableitemdetailsrow('${widget.ar_name.toString().toUpperCase()}', Color(0xFF17a493),
+                        reusableitemdetailsrow('${widget.en_name}', Color(0xFF17a493),
                             const Color.fromARGB(255, 51, 219, 177), context,(){
                               playAudioFromUrl(widget.ar_voice);
                             }),
@@ -119,32 +153,24 @@ class _ItemDetailsState extends State<ItemDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      
-//                       reusablenextitembtn(context, (){
-//   if (currentt < widget.items.length - 1) {
-//     setState(() {
-//       currentt++; // Move to the next item
-//       print('next');
-//     });
-//   }
-// }),
-// Text('${currentt + 1}/${widget.items.length}', style: TextStyle(color: Color(0xFFaf2307))),
-// reusablenextitembtn(context, (){
-//   if (currentt > 0) {
-//     setState(() {
-//       currentt--; // Move to the previous item
-//       print('back');
-//     });
-//   }
-// }, icon: Icons.arrow_forward_ios),
-
                       reusablenextitembtn(context, (){
                         //how to move to next item
+                        print(
+                          widget.current
+                        );
+                        moveToPreviousItem();
                       }),
                       Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
                       reusablenextitembtn(context, (){
+                        print(
+                          widget.current
+                        );
                         //how to move to back item
+                        moveToNextItem();
                       },icon: Icons.arrow_forward_ios),
+
+                      // Text('${widget.items[int.parse(widget.ar_name)]}')
+                      
                     ],
                   ),
                 ),

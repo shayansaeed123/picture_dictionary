@@ -23,7 +23,9 @@ Widget reusablenextitembtn(BuildContext context, Function ontap,{IconData icon =
                         ),
                         child: Center(
                             child: InkWell(
-                              onTap: ontap(),
+                              onTap: (){
+                                return ontap();
+                              },
                               child: Icon(
                                                         icon,
                                                         size: 35,

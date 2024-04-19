@@ -15,7 +15,7 @@ Widget reusableitemdetailsrow(String name, Color  color, bordercolor, BuildConte
             color: color,
              borderRadius: BorderRadius.circular(11),
           ),
-          child: Center(child: Text(name,style: TextStyle(color: ColorController().whiteColor,fontSize: 20),)),
+          child: Center(child: Text(name,style: TextStyle(color: ColorController().whiteColor,fontSize: 18),)),
         ),
       ),
       InkWell(

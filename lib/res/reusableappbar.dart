@@ -1,9 +1,12 @@
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/res/reusablehomebtn.dart';
 import 'package:picture_dictionary/view/dashboard/search.dart';
 import 'package:picture_dictionary/view/dashboard/select_language.dart';
+import 'package:provider/provider.dart';
 
  reusableappbar(BuildContext context, Function ontap,String name){
   return AppBar(
@@ -18,9 +21,42 @@ import 'package:picture_dictionary/view/dashboard/select_language.dart';
         ),
         automaticallyImplyLeading: false,
         actions: [
-          reusablehomeBtn('ENG', (){
-            Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
-          }),
+          Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+            return Row(
+              children: [
+                Visibility(
+            visible: textVisibilityProvider.isFirstTextVisible,
+            child: reusablehomeBtn('AR', (){
+              Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
+            }),
+          ),
+                Visibility(
+            visible: textVisibilityProvider.isSecondTextVisible,
+            child: reusablehomeBtn('ENG', (){
+              Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
+            }),
+          ),
+                Visibility(
+            visible: textVisibilityProvider.isThirdTextVisible,
+            child: reusablehomeBtn('UR', (){
+              Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
+            }),
+          ),
+                Visibility(
+            visible: textVisibilityProvider.isForTextVisible,
+            child: reusablehomeBtn('TUR', (){
+              Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
+            }),
+          ),
+           Visibility(
+            visible: textVisibilityProvider.englishbtn,
+            child: reusablehomeBtn('ENG', (){
+              Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
+            }),
+          ),
+              ]);
+            
+          },),
           SizedBox(width: MediaQuery.of(context).size.width * .01,),
           reusablehomeBtn('SEARCH', (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => SearchItem()));

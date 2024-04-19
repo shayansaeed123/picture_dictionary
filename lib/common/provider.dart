@@ -5,6 +5,11 @@ class TextVisibilityProvider with ChangeNotifier {
   bool isSecondTextVisible = false;
   bool isThirdTextVisible = false;
   bool isForTextVisible = false;
+  bool englishbtn = true;
+  bool eng = false;
+  bool ar = false;
+  bool ur = false;
+  bool tr = false;
 
   void toggleFirstTextVisibility() {
     isFirstTextVisible = !isFirstTextVisible;
@@ -23,6 +28,12 @@ class TextVisibilityProvider with ChangeNotifier {
 
   void toggleForTextVisibility() {
     isForTextVisible = !isForTextVisible;
+    notifyListeners();
+  }
+
+  void toggleEnglishTextVisibility() {
+    englishbtn = !englishbtn;
+
     notifyListeners();
   }
 
@@ -46,11 +57,17 @@ class TextVisibilityProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void hideEnglishText() {
+    englishbtn = !englishbtn;
+    notifyListeners();
+  }
+
   void hideAllTextsAndShowThird() {
     isFirstTextVisible = false;
     isSecondTextVisible = false;
     isThirdTextVisible = true;
     isForTextVisible = false;
+    englishbtn = false;
     notifyListeners();
   }
   void hideAllTextsAndShowFirst() {
@@ -58,6 +75,7 @@ class TextVisibilityProvider with ChangeNotifier {
     isSecondTextVisible = false;
     isThirdTextVisible = false;
     isForTextVisible = false;
+    englishbtn = false;
     notifyListeners();
   }
   void hideAllTextsAndShowSecond() {
@@ -65,6 +83,7 @@ class TextVisibilityProvider with ChangeNotifier {
     isSecondTextVisible = true;
     isThirdTextVisible = false;
     isForTextVisible = false;
+    englishbtn = false;
     notifyListeners();
   }
 
@@ -73,7 +92,21 @@ class TextVisibilityProvider with ChangeNotifier {
     isSecondTextVisible = false;
     isThirdTextVisible = false;
     isForTextVisible = true;
+    englishbtn = false;
     notifyListeners();
   }
+
+  // void hideAllTextsAndShowEnglish() {
+
+  //   if(isFirstTextVisible == true || isSecondTextVisible == true || isThirdTextVisible == true || isForTextVisible == true){
+  //   englishbtn = false;
+  //   }
+  //   // isFirstTextVisible = false;
+  //   // isSecondTextVisible = false;
+  //   // isThirdTextVisible = false;
+  //   // isForTextVisible = false;
+  //   // englishbtn = true;
+  //   notifyListeners();
+  // }
 
 }

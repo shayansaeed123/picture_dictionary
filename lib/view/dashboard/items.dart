@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -128,67 +129,40 @@ class _ItemsPageState extends State<ItemsPage> {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, mainAxisSpacing: 10),
                 itemCount: items.length,
-                
             itemBuilder: (context, index) {
               Map<String, dynamic> item = items[index];
                             int currentItem = index;
               return Stack(
                 children: [
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.03,
-                    left: MediaQuery.of(context).size.width * 0.03,
-                    right: MediaQuery.of(context).size.width * 0.03,
-                    child: 
-                    Transform.rotate(
-                      angle: 45  / 180,
-                      // 45 * 3.1415927 / 180,
-                      child: 
-                      Container(
-                        width: MediaQuery.of(context).size.width * .44,
-                        height: MediaQuery.of(context).size.height * .20,
-                        decoration: BoxDecoration(
-                          color: colorController.whiteColor,
-                          // Color(0xFFffb64d),
-                          borderRadius: BorderRadius.circular(11),
-                        ),
-                      ),
+                    top: MediaQuery.of(context).size.height * 0.01,
+                    left: MediaQuery.of(context).size.width * 0.01,
+                    right: MediaQuery.of(context).size.width * 0.01,
+                    child: Image.asset('assets/tilt_round_img.png',filterQuality: FilterQuality.high,fit: BoxFit.fill,
+                    width: MediaQuery.of(context).size.width * .44,
+                    height: MediaQuery.of(context).size.height * .20,)
+                    // Transform.rotate(
+                    //   angle: 45  / 180,
+                    //   // 45 * 3.1415927 / 180,
+                    //   child: 
+                      // Container(
+                      //   width: MediaQuery.of(context).size.width * .44,
+                      //   height: MediaQuery.of(context).size.height * .25,
+                      //   decoration: BoxDecoration(
+                      //     // color: colorController.whiteColor,
+                      //     image: DecorationImage(image: AssetImage('assets/quad_round_img.png',),filterQuality: FilterQuality.high,fit: BoxFit.fill),
+                      //     // Color(0xFFffb64d),
+                      //     borderRadius: BorderRadius.circular(11),
+                      //   ),
+                      // ),
                     ),
-                  ),
+                  // ),
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.03,
-                    left: MediaQuery.of(context).size.width * 0.03,
-                    right: MediaQuery.of(context).size.width * 0.03,
-                    child: 
-      //               Card(
-      //   elevation: 2.0,
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.stretch,
-      //     children: <Widget>[
-      //       Container(
-      //           width: MediaQuery.of(context).size.width * .44,
-      //                 height: MediaQuery.of(context).size.height * .261,
-      //         color: Colors.blue,
-      //         child: Center(
-      //           child: Text(
-      //             'Item $index',
-      //             style: TextStyle(color: Colors.white),
-      //           ),
-      //         ),
-      //       ),
-      //       // Padding(
-      //       //   padding: EdgeInsets.all(8.0),
-      //         // child: 
-      //         ElevatedButton(
-      //           onPressed: () {
-      //             // Button action
-      //           },
-      //           child: Text('Button $index'),
-      //         ),
-      //       // ),
-      //     ],
-      //   ),
-      // ),
-                    InkWell(
+                    top: MediaQuery.of(context).size.height * 0.035,
+                    left: MediaQuery.of(context).size.width * 0.05,
+                    right: MediaQuery.of(context).size.width * 0.05,
+                    bottom: MediaQuery.of(context).size.width * 0.02,
+                    child:  InkWell(
                       onTap: (){
                         playAudioFromUrl('${item['english_voice']}');
                         Navigator.push(context, MaterialPageRoute(builder: (_)=> ItemDetails(
@@ -215,19 +189,32 @@ class _ItemsPageState extends State<ItemsPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Card(
-                              margin: EdgeInsets.all(5),
-                              child: Image.network(
-                                item['image'],
-                                height: MediaQuery.of(context).size.height * .15,
-                                width: double.infinity,
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                margin: EdgeInsets.all(5),
+                                child: CachedNetworkImage(imageUrl: item['image'],
+                              errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height * .15,
+                              fit: BoxFit.contain,
+                              filterQuality: FilterQuality.high,
+                              placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
                               ),
-                              elevation: 7,
-                              color: colorController.whiteColor,
+                                // Image.network(
+                                //   item['image'],
+                                //   height: MediaQuery.of(context).size.height * .15,
+                                //   width: double.infinity,
+                                // ),
+                                // elevation: 7,
+                                color: colorController.whiteColor,
+                              ),
                             ),
                             Expanded(
+                              flex: 1,
                               child: Container(
                                 width: double.infinity,
+                                height: MediaQuery.of(context).size.height * .05,
                                 decoration: BoxDecoration(
                                   color: colorController.itemsBtnColor,
                                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
