@@ -168,9 +168,6 @@ void moveToPreviousItem() {
                         //how to move to back item
                         moveToNextItem();
                       },icon: Icons.arrow_forward_ios),
-
-                      // Text('${widget.items[int.parse(widget.ar_name)]}')
-                      
                     ],
                   ),
                 ),
