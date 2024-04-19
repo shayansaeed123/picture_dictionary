@@ -421,9 +421,7 @@ class _ItemsPageState extends State<ItemsPage> {
   // }
 
   
-// String selectedCategory = 'fruits'; // Default selected category
-// late Future<List<Map<String, dynamic>>> itemsFuture;
-  
+
 
   // @override
   // void initState() {
