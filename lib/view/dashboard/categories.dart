@@ -28,61 +28,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
   List<dynamic> item = [];
   
   late int id;
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   fetchData();
-  // }
-
-  // Future<dynamic> fetchData() async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
-
-  //   try{
-  //     // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-  //   String apiUrl =
-  //       'https://kulyatudawah.com/public/vocgame/apis/get_types.php';
-  //   final response = await http.get(Uri.parse(apiUrl));
-
-  //   if (response.statusCode == 200) {
-  //     print('response ${response.body.toString()}');
-  //     final data = json.decode(response.body.toString());
-  //     print('data ${data.toString()}');
-  //     // print('idddddddddddddd ${data['types']['id']}');
-  //     setState(() {
-  //       final items = data['types'] as List<dynamic>;
-  //       item = items;
-  //     });
-  //     setState(() {
-  //     _isLoading = false;
-  //   });
-  //     return data;
-  //   } else {
-  //     // Handle API error
-  //   }
-  //   }catch(e){
-  //     print("Error $e");
-  //   }finally{
-  //     setState(() {
-  //     _isLoading = false;
-  //   });
-  //   }
-  // }
-
-  // final AudioPlayer audioPlayer = AudioPlayer();
-  // Future<void> playAudioFromUrl(String url) async {
-  //   await audioPlayer.play(UrlSource(url));
-  //   if(url == 1){
-  //     print('succes');
-  //   }else{
-  //     print('fail');
-  //   }
-  // }
-
-  // String selectedCategory = 'Fruits'; 
-  // late Future<List<Map<String, dynamic>>> itemsFuture;
 
   late String selectedCategory;
   late Future<List<String>> categoriesFuture;
