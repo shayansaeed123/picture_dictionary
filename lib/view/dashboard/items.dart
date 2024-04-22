@@ -6,12 +6,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
+import 'package:picture_dictionary/res/reusableItemBackground.dart';
+import 'package:picture_dictionary/res/reusableItemTextBtn.dart';
+import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class ItemsPage extends StatefulWidget {
   // final VoidCallback fetchDataCallback;
@@ -134,28 +139,39 @@ class _ItemsPageState extends State<ItemsPage> {
                             int currentItem = index;
               return Stack(
                 children: [
-                  Positioned(
-                    top: MediaQuery.of(context).size.height * 0.01,
-                    left: MediaQuery.of(context).size.width * 0.01,
-                    right: MediaQuery.of(context).size.width * 0.01,
-                    child: Image.asset('assets/tilt_round_img.png',filterQuality: FilterQuality.high,fit: BoxFit.fill,
-                    width: MediaQuery.of(context).size.width * .44,
-                    height: MediaQuery.of(context).size.height * .20,)
-                    // Transform.rotate(
-                    //   angle: 45  / 180,
-                    //   // 45 * 3.1415927 / 180,
-                    //   child: 
-                      // Container(
-                      //   width: MediaQuery.of(context).size.width * .44,
-                      //   height: MediaQuery.of(context).size.height * .25,
-                      //   decoration: BoxDecoration(
-                      //     // color: colorController.whiteColor,
-                      //     image: DecorationImage(image: AssetImage('assets/quad_round_img.png',),filterQuality: FilterQuality.high,fit: BoxFit.fill),
-                      //     // Color(0xFFffb64d),
-                      //     borderRadius: BorderRadius.circular(11),
-                      //   ),
-                      // ),
-                    ),
+                  reusableItemBackground(context, 'assets/tilt_round_img.png'),
+                  reusableVisibility(reusableItemBackground(context, 'assets/quad_round_img.png'),
+                  Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,
+                  ),
+                  reusableVisibility(reusableItemBackground(context, 'assets/octa_round_img.png'),
+                  Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,
+                  ),
+                  reusableVisibility(reusableItemBackground(context, 'assets/drag_round_img.png'),
+                  Provider.of<TextVisibilityProvider>(context).isForTextVisible,
+                  ),
+                  
+                  // Positioned(
+                  //   top: MediaQuery.of(context).size.height * 0.01,
+                  //   left: MediaQuery.of(context).size.width * 0.01,
+                  //   right: MediaQuery.of(context).size.width * 0.01,
+                  //   child: Image.asset('assets/tilt_round_img.png',filterQuality: FilterQuality.high,fit: BoxFit.fill,
+                  //   width: MediaQuery.of(context).size.width * .44,
+                  //   height: MediaQuery.of(context).size.height * .20,)
+                  //   // Transform.rotate(
+                  //   //   angle: 45  / 180,
+                  //   //   // 45 * 3.1415927 / 180,
+                  //   //   child: 
+                  //     // Container(
+                  //     //   width: MediaQuery.of(context).size.width * .44,
+                  //     //   height: MediaQuery.of(context).size.height * .25,
+                  //     //   decoration: BoxDecoration(
+                  //     //     // color: colorController.whiteColor,
+                  //     //     image: DecorationImage(image: AssetImage('assets/quad_round_img.png',),filterQuality: FilterQuality.high,fit: BoxFit.fill),
+                  //     //     // Color(0xFFffb64d),
+                  //     //     borderRadius: BorderRadius.circular(11),
+                  //     //   ),
+                  //     // ),
+                  //   ),
                   // ),
                   Positioned(
                     top: MediaQuery.of(context).size.height * 0.035,
@@ -210,23 +226,22 @@ class _ItemsPageState extends State<ItemsPage> {
                                 color: colorController.whiteColor,
                               ),
                             ),
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                width: double.infinity,
-                                height: MediaQuery.of(context).size.height * .05,
-                                decoration: BoxDecoration(
-                                  color: colorController.itemsBtnColor,
-                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    item['english'],
-                                    style: TextStyle(color: colorController.whiteColor),
-                                  ),
-                                ),
-                              ),
+                            reusableItemTextBtn(context, colorController.itemsBtnColor, item['english'],
+                            BorderRadius.only(bottomLeft: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0), bottomRight: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0)),
                             ),
+                            
+                           reusableVisibility(reusableItemTextBtn(context, colorController.arabicTextBtnColor, item['arabic'],
+                           BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),),
+                           Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,
+                           ),
+                           reusableVisibility(reusableItemTextBtn(context, colorController.urduTextBtnColor, item['urdu'],
+                           BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),),
+                           Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,
+                           ),
+                           reusableVisibility(reusableItemTextBtn(context, colorController.turkishTextBtnColor, item['turkish'],
+                           BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),),
+                           Provider.of<TextVisibilityProvider>(context).isForTextVisible,
+                           ),
                           ],
                         ),
                       ),

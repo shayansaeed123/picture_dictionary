@@ -15,6 +15,9 @@ class ColorController extends GetxController{
   Color itemsBtnColor= Color(0xFF934dfe);
   Color homeTxtColor = Color(0xFFb1282e);
     Color sidebarBg = Color(0xFFe3e18e);
+      Color arabicTextBtnColor = Color(0xFF15a79d);
+      Color urduTextBtnColor = Color(0xFF4d53ff);
+      Color turkishTextBtnColor = Color(0xFFdd46ba);
 
 }
 ColorController colorController=Get.put(ColorController());

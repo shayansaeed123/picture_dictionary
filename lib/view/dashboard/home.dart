@@ -4,6 +4,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
+import 'package:picture_dictionary/res/re_text.dart';
+import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
@@ -174,39 +176,44 @@ int _selectedIndex = 0;
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                      Text('LEARN ',
-                    // ${AppLocalizations.of(context)!.language}',
-                                          style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),
-                                        ),
+                      reusabletext('LEARN ', colorController.homeTxtColor, 24.0),
                                         SizedBox(height: 16.0),
-                      Consumer<TextVisibilityProvider>(
-          builder: (context, textVisibilityProvider, child) {
-            return Row(
-              children: [
-                Visibility(
-                  visible: textVisibilityProvider.isFirstTextVisible,
-                  child: Text('| يتعلم', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                ),
-                Visibility(
-                  visible: textVisibilityProvider.isSecondTextVisible,
-                  child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                ),
-                 Visibility(
-                  visible: textVisibilityProvider.isThirdTextVisible,
-                  child: Text('| سیکھیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                ),
-                Visibility(
-                  visible: textVisibilityProvider.isForTextVisible,
-                  child: Text('| öğrenmek', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                ),
-              ],
-            );
-            // Visibility(
-            //   visible: textVisibilityProvider.isVisible,
-            //   child: Text(textVisibilityProvider.displayText,style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold)),
-            // );
-          },
-        ),
+                                        Row(children: [
+                                          reusableVisibility(reusabletext('| يتعلم', colorController.homeTxtColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                                          reusableVisibility(reusabletext('| سیکھیں', colorController.homeTxtColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                                          reusableVisibility(reusabletext('| öğrenmek', colorController.homeTxtColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                                        ],),
+        //               Consumer<TextVisibilityProvider>(
+        //   builder: (context, textVisibilityProvider, child) {
+        //     return Row(
+        //       children: [
+        //         Visibility(
+        //           visible: textVisibilityProvider.isFirstTextVisible,
+        //           child: Text('| يتعلم', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+        //         ),
+        //         Visibility(
+        //           visible: textVisibilityProvider.isSecondTextVisible,
+        //           child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+        //         ),
+        //          Visibility(
+        //           visible: textVisibilityProvider.isThirdTextVisible,
+        //           child: Text('| سیکھیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+        //         ),
+        //         Visibility(
+        //           visible: textVisibilityProvider.isForTextVisible,
+        //           child: Text('| öğrenmek', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+        //         ),
+        //       ],
+        //     );
+        //     // Visibility(
+        //     //   visible: textVisibilityProvider.isVisible,
+        //     //   child: Text(textVisibilityProvider.displayText,style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold)),
+        //     // );
+        //   },
+        // ),
                     ],)
                   ],
                 ),
@@ -241,35 +248,40 @@ int _selectedIndex = 0;
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'PLAY GAME ',
-                    style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),
-                  ),
+                  reusabletext('PLAY GAME ', colorController.homeTxtColor, 24.0),
                   // SizedBox(height: 16.0),
-                  Consumer<TextVisibilityProvider>(
-                        builder: (context, textVisibilityProvider, child) {
-                          return Row(
-              children: [
-                Visibility(
-                  visible: textVisibilityProvider.isFirstTextVisible,
-                  child: Text('| ألعب لعبة', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                ),
-                Visibility(
-                  visible: textVisibilityProvider.isSecondTextVisible,
-                  child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                ),
-                 Visibility(
-                  visible: textVisibilityProvider.isThirdTextVisible,
-                  child: Text('| کھیل کھیلیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                ),
-                Visibility(
-                  visible: textVisibilityProvider.isForTextVisible,
-                  child: Text('| Oyun oynamak'.truncateWithEllipsis(11),overflow: TextOverflow.ellipsis, style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-                ),
-              ],
-                          );
-                        },
-                      ),
+                  Row(children: [
+                    reusableVisibility(reusabletext('| ألعب لعبة', colorController.homeTxtColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                                          reusableVisibility(reusabletext('| کھیل کھیلیں', colorController.homeTxtColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                                          reusableVisibility(reusabletext('| Oyun oynamak'.truncateWithEllipsis(11), colorController.homeTxtColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                  ],),
+              //     Consumer<TextVisibilityProvider>(
+              //           builder: (context, textVisibilityProvider, child) {
+              //             return Row(
+              // children: [
+              //   Visibility(
+              //     visible: textVisibilityProvider.isFirstTextVisible,
+              //     child: Text('| ألعب لعبة', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+              //   ),
+              //   Visibility(
+              //     visible: textVisibilityProvider.isSecondTextVisible,
+              //     child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+              //   ),
+              //    Visibility(
+              //     visible: textVisibilityProvider.isThirdTextVisible,
+              //     child: Text('| کھیل کھیلیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+              //   ),
+              //   Visibility(
+              //     visible: textVisibilityProvider.isForTextVisible,
+              //     child: Text('| Oyun oynamak'.truncateWithEllipsis(11),overflow: TextOverflow.ellipsis, style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+              //   ),
+              // ],
+              //             );
+              //           },
+              //         ),
                 ],
               ),
             ),

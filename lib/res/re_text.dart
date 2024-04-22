@@ -5,7 +5,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-Text  reusabletext(String txt, Color clr, double txtsize) {
+Text  reusabletext(String txt, Color clr, double txtsize,) {
   return Text(
     txt,
     style:
