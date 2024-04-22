@@ -1,11 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class PictureRepo{
-
-
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
   Future<List<Map<String, dynamic>>> fetchData() async {
-    final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_types.php'));
+    _isLoading = true;
+   try{
+    _isLoading = false;
+     final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_types.php'));
 
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
@@ -16,6 +20,12 @@ class PictureRepo{
     } else {
       throw Exception('Failed to load data');
     }
+   }catch(e){
+    print('Error : $e');
+    rethrow; 
+   }finally{
+      _isLoading = false;
+   }
   }
 
   Future<List<Map<String, dynamic>>> fetchItemsByCategory(String category) async {

@@ -7,7 +7,6 @@ import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
-import 'package:http/http.dart' as http;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -22,7 +21,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   PictureRepo pictureRepo = PictureRepo();
   List<dynamic> item = [];
-  bool _isLoading = false;
+  
   late int id;
   // @override
   // void initState() {
@@ -31,41 +30,41 @@ class _CategoriesPageState extends State<CategoriesPage> {
   //   fetchData();
   // }
 
-  Future<dynamic> fetchData() async {
-    setState(() {
-      _isLoading = true;
-    });
+  // Future<dynamic> fetchData() async {
+    // setState(() {
+    //   _isLoading = true;
+    // });
 
-    try{
-      // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-    String apiUrl =
-        'https://kulyatudawah.com/public/vocgame/apis/get_types.php';
-    final response = await http.get(Uri.parse(apiUrl));
+  //   try{
+  //     // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
+  //   String apiUrl =
+  //       'https://kulyatudawah.com/public/vocgame/apis/get_types.php';
+  //   final response = await http.get(Uri.parse(apiUrl));
 
-    if (response.statusCode == 200) {
-      print('response ${response.body.toString()}');
-      final data = json.decode(response.body.toString());
-      print('data ${data.toString()}');
-      // print('idddddddddddddd ${data['types']['id']}');
-      setState(() {
-        final items = data['types'] as List<dynamic>;
-        item = items;
-      });
-      setState(() {
-      _isLoading = false;
-    });
-      return data;
-    } else {
-      // Handle API error
-    }
-    }catch(e){
-      print("Error $e");
-    }finally{
-      setState(() {
-      _isLoading = false;
-    });
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     print('response ${response.body.toString()}');
+  //     final data = json.decode(response.body.toString());
+  //     print('data ${data.toString()}');
+  //     // print('idddddddddddddd ${data['types']['id']}');
+  //     setState(() {
+  //       final items = data['types'] as List<dynamic>;
+  //       item = items;
+  //     });
+  //     setState(() {
+  //     _isLoading = false;
+  //   });
+  //     return data;
+  //   } else {
+  //     // Handle API error
+  //   }
+  //   }catch(e){
+  //     print("Error $e");
+  //   }finally{
+  //     setState(() {
+  //     _isLoading = false;
+  //   });
+  //   }
+  // }
 
   final AudioPlayer audioPlayer = AudioPlayer();
   Future<void> playAudioFromUrl(String url) async {
@@ -86,7 +85,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   @override
   void initState() {
-    fetchData();
+    // fetchData();
     super.initState();
     selectedCategory = 'Fruits'; // Default selected category
     categoriesFuture = pictureRepo.fetchCategories();
@@ -95,7 +94,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> categories = item.map((e) => e['english'] as String).toList();
+    // List<String> categories = item.map((e) => e['english'] as String).toList();
     return Scaffold(
         key: _scaffoldKey,
         // backgroundColor: Color(0xFFffb64d),
@@ -199,8 +198,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 )
               ),
             ),
-              if (_isLoading == true) reusableloadingrow(context, _isLoading),
-              reusableloadingrow(context, _isLoading)
+              if (pictureRepo.isLoading == true) reusableloadingrow(context, pictureRepo.isLoading),
+              reusableloadingrow(context, pictureRepo.isLoading)
           ],
         ));
   }
