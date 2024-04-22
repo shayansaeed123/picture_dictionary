@@ -8,11 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
+import 'package:picture_dictionary/res/reusableSidebarItems.dart';
+import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
+import 'package:provider/provider.dart';
 
 
 class SideBar extends StatefulWidget {
@@ -61,7 +65,21 @@ class _SideBarState extends State<SideBar> {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
+    void hello(String name){
+      setState(() {
+                                selectedCategory = name;
+                itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+                print('itemsssssssssssssss ${itemsFuture.toString()}');
+                Navigator.pop(context);
+                Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                
+                                builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
+                              ));
+              });
+    }
     return Drawer(
       clipBehavior: Clip.antiAlias,
       backgroundColor: colorController.sidebarBg,
@@ -112,26 +130,43 @@ class _SideBarState extends State<SideBar> {
                   itemCount: snapshot.data!.length> 5 ? snapshot.data!.length - 2 : 0,
                   // widget.categories.length > 5 ? widget.categories.length - 2 : 0,
                   itemBuilder: (context, index) {
-                    var category = snapshot.data![index]['english'];
-                    return ListTile(
-                      leading: Icon(Icons.square_foot),
-                      title: Text(category),
-                      onTap: () {
-                        // Handle category tap
-                          setState(() {
-                                selectedCategory = category;
-                itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
-                print('itemsssssssssssssss ${itemsFuture.toString()}');
-                Navigator.pop(context);
-                Navigator.push(
-                              context,
-                              MaterialPageRoute(
+                    var categoryEng = snapshot.data![index]['english'];
+                    var categoryAr = snapshot.data![index]['arabic'];
+                    var categoryUr = snapshot.data![index]['urdu'];
+                    var categoryTur = snapshot.data![index]['turkish'];
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      reusableSidebarItems(context,categoryEng, (){
+                              hello(categoryEng);
+                      }),
+                      reusableVisibility(reusableSidebarItems(context,categoryAr, (){
+                        hello(categoryAr);
+                      }), 
+                      Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+
+                    ],
+                  );
+              //       return ListTile(
+              //         leading: Icon(Icons.square_foot),
+              //         title: Text(category),
+              //         onTap: () {
+              //           // Handle category tap
+              //             setState(() {
+              //                   selectedCategory = category;
+              //   itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+              //   print('itemsssssssssssssss ${itemsFuture.toString()}');
+              //   Navigator.pop(context);
+              //   Navigator.push(
+              //                 context,
+              //                 MaterialPageRoute(
                                 
-                                builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
-                              ));
-              });
-                      },
-                    );
+              //                   builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
+              //                 ));
+              // });
+              //         },
+              //       );
                   },
                   separatorBuilder: (context, index) => Divider(),
                 );
