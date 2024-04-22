@@ -1,9 +1,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:picture_dictionary/common/provider.dart';
-import 'package:picture_dictionary/view/dashboard/select_language.dart';
-import 'package:provider/provider.dart';
 
 Widget reusablehomeBtn(String name ,Function ontap){
 

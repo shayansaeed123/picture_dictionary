@@ -1,5 +1,3 @@
-
-
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,13 +16,13 @@ import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
 import 'package:provider/provider.dart';
 
-
 class SideBar extends StatefulWidget {
   //  final VoidCallback fetchDataCallback;
   // final List<String> categories;
-  const SideBar({super.key,
-  //  required this.fetchDataCallback, required this.categories
-   });
+  const SideBar({
+    super.key,
+    //  required this.fetchDataCallback, required this.categories
+  });
 
   @override
   State<SideBar> createState() => _SideBarState();
@@ -32,7 +30,6 @@ class SideBar extends StatefulWidget {
 
 class _SideBarState extends State<SideBar> {
   List<String> categories = [];
-
   @override
   void initState() {
     super.initState();
@@ -41,45 +38,32 @@ class _SideBarState extends State<SideBar> {
     itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
   }
 
-  // Future<void> fetchData() async {
-  //   // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-  //   String apiUrl = 'YOUR_API_ENDPOINT';
-  //   final response = await http.get(Uri.parse(apiUrl));
-
-  //   if (response.statusCode == 200) {
-  //     List<dynamic> data = json.decode(response.body);
-  //     setState(() {
-  //       categories = data.map((item) => item['name'].toString()).toList();
-  //     });
-  //   } else {
-  //     // Handle API error
-  //   }
-  // }
-
   PictureRepo pictureRepo = PictureRepo();
   late String selectedCategory;
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
 
- 
-
+  void hello(String name) {
+    setState(() {
+      selectedCategory = name;
+      itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+      print('itemsssssssssssssss ${itemsFuture.toString()}');
+      Navigator.pop(context);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ItemsPage(
+              categoriesFuture: categoriesFuture,
+              itemsFuture: itemsFuture,
+            ),
+          ));
+    });
+  }
 
   @override
-  Widget build(BuildContext context,) {
-    void hello(String name){
-      setState(() {
-                                selectedCategory = name;
-                itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
-                print('itemsssssssssssssss ${itemsFuture.toString()}');
-                Navigator.pop(context);
-                Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                
-                                builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
-                              ));
-              });
-    }
+  Widget build(
+    BuildContext context,
+  ) {
     return Drawer(
       clipBehavior: Clip.antiAlias,
       backgroundColor: colorController.sidebarBg,
@@ -91,43 +75,43 @@ class _SideBarState extends State<SideBar> {
             padding: EdgeInsets.zero,
             child: DrawerHeader(
               decoration: BoxDecoration(
-                // color: Colors.blue,
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                  colorController.bgColorup,
-                  colorController.bgColordown,
-                ])
-              ),
+                  // color: Colors.blue,
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                    colorController.bgColorup,
+                    colorController.bgColordown,
+                  ])),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                Image.asset('assets/ic_launcher.png',alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width * .5,
-                height: MediaQuery.of(context).size.height * .1,),
-                Text('${FirebaseAuth.instance.currentUser == null || FirebaseAuth.instance.currentUser!.displayName == null? '' : FirebaseAuth.instance.currentUser!.displayName }',)
-              ],),
+                  Image.asset(
+                    'assets/ic_launcher.png',
+                    alignment: Alignment.center,
+                    width: MediaQuery.of(context).size.width * .5,
+                    height: MediaQuery.of(context).size.height * .1,
+                  ),
+                  Text(
+                    '${FirebaseAuth.instance.currentUser == null || FirebaseAuth.instance.currentUser!.displayName == null ? '' : FirebaseAuth.instance.currentUser!.displayName}',
+                  )
+                ],
+              ),
             ),
           ),
-            // for (var category in widget.categories)
-            // ListTile(
-            //   leading: Icon(Icons.category),
-            //   title: Text(category),
-            //   onTap: () {
-            //     // Handle category tap
-            //   },
-            // ),
-            Expanded(
-              child: FutureBuilder(future: pictureRepo.fetchData(),builder: (context, snapshot) {
-                if(snapshot.connectionState == ConnectionState.waiting){
-                  return Center(child: reusableloadingrow(context,true));
-                }else if(!snapshot.hasData){
-                  return Center(child: Text('No Data Found'));
-                }else{
-                  return ListView.separated(
+          Expanded(
+              child: FutureBuilder(
+            future: pictureRepo.fetchData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: reusableloadingrow(context, true));
+              } else if (!snapshot.hasData) {
+                return Center(child: Text('No Data Found'));
+              } else {
+                return ListView.separated(
                   padding: EdgeInsets.zero,
-                  itemCount: snapshot.data!.length> 5 ? snapshot.data!.length - 2 : 0,
+                  itemCount:
+                      snapshot.data!.length > 5 ? snapshot.data!.length - 2 : 0,
                   // widget.categories.length > 5 ? widget.categories.length - 2 : 0,
                   itemBuilder: (context, index) {
                     var categoryEng = snapshot.data![index]['english'];
@@ -135,86 +119,66 @@ class _SideBarState extends State<SideBar> {
                     var categoryUr = snapshot.data![index]['urdu'];
                     var categoryTur = snapshot.data![index]['turkish'];
 
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      reusableSidebarItems(context,categoryEng, (){
-                              hello(categoryEng);
-                      }),
-                      reusableVisibility(reusableSidebarItems(context,categoryAr, (){
-                        hello(categoryAr);
-                      }), 
-                      Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-
-                    ],
-                  );
-              //       return ListTile(
-              //         leading: Icon(Icons.square_foot),
-              //         title: Text(category),
-              //         onTap: () {
-              //           // Handle category tap
-              //             setState(() {
-              //                   selectedCategory = category;
-              //   itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
-              //   print('itemsssssssssssssss ${itemsFuture.toString()}');
-              //   Navigator.pop(context);
-              //   Navigator.push(
-              //                 context,
-              //                 MaterialPageRoute(
-                                
-              //                   builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
-              //                 ));
-              // });
-              //         },
-              //       );
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        reusableSidebarItems(context, categoryEng, () {
+                          hello(categoryEng);
+                        }),
+                        reusableVisibility(
+                          reusableSidebarItems(context, categoryAr, () {
+                            hello(categoryAr);
+                          }),
+                          Provider.of<TextVisibilityProvider>(context)
+                              .isFirstTextVisible,
+                        ),
+                        reusableVisibility(
+                          reusableSidebarItems(context, categoryUr, () {
+                            hello(categoryUr);
+                          }),
+                          Provider.of<TextVisibilityProvider>(context)
+                              .isThirdTextVisible,
+                        ),
+                        reusableVisibility(
+                          reusableSidebarItems(context, categoryTur, () {
+                            hello(categoryTur);
+                          }),
+                          Provider.of<TextVisibilityProvider>(context)
+                              .isForTextVisible,
+                        ),
+                      ],
+                    );
                   },
                   separatorBuilder: (context, index) => Divider(),
                 );
-                }
-              },)
-            ),
-          //   Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.help),
-          //   title: Text('Help'),
-          //   onTap: () {
-          //     // Handle help tap
-          //   },
-          // ),
-          // ListTile(
-          //   leading: Icon(Icons.info),
-          //   title: Text('About'),
-          //   onTap: () {
-          //     // Handle about tap
-          //   },
-          // ),
-          // Spacer(),
+              }
+            },
+          )),
           ListTile(
             leading: Icon(Icons.exit_to_app),
-            title: Text(FirebaseAuth.instance.currentUser != null ? 'Log Out' : 'Sign In'),
+            title: Text(FirebaseAuth.instance.currentUser != null
+                ? 'Log Out'
+                : 'Sign In'),
             onTap: () {
               // Handle logout tap
-              setState(() {
-                
-              });
+              setState(() {});
               MySharedPrefrence().logout();
-              MySharedPrefrence().setUserLoginStatus(false); 
+              MySharedPrefrence().setUserLoginStatus(false);
               _handleSignOut();
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) => WillPopScope(
-                                          onWillPop: () async => false,
-                                          child: LoginPage())),
-                                );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (context) => WillPopScope(
+                        onWillPop: () async => false, child: LoginPage())),
+              );
             },
           ),
         ],
       ),
     );
   }
-  Future<void> _handleSignOut() async {
-  GoogleSignIn _googleSignIn = GoogleSignIn();
-  await _googleSignIn.signOut();
-}
 
+  Future<void> _handleSignOut() async {
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+    await _googleSignIn.signOut();
+  }
 }

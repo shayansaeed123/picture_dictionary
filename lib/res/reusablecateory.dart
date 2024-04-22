@@ -5,31 +5,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
-import 'package:picture_dictionary/repo/category_repo.dart';
-import 'package:picture_dictionary/view/dashboard/items.dart';
 
 Widget reusableCategory(BuildContext context, String imgUrl, String text, Function ontap){
 
-  // PictureRepo pictureRepo = PictureRepo();
-  // String selectedCategory;
-  // // Future<List<String>> categoriesFuture;
-  // Future<List<Map<String, dynamic>>> itemsFuture;
   return GestureDetector(
                           onTap: () {
                             ontap();
-                //             pictureRepo.playAudioFromUrl('${audioUrl}');
-                            
-                //               // setState(() {
-                //                 selectedCategory = text;
-                // itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
-                // print('itemsssssssssssssss ${itemsFuture.toString()}');
-                // Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                                
-                //                 builder: (context) => ItemsPage(categoriesFuture: pictureRepo.fetchCategories(),itemsFuture: itemsFuture,),
-                //               ));
-              // });
                           },
                           child: Container(
                             decoration: BoxDecoration(

@@ -3,7 +3,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:picture_dictionary/controller/color_controller.dart';
 
 Widget reusableCategoryTextBtn(BuildContext context, String text, Color color){
   return Container(

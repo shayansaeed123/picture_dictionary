@@ -1,9 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
-import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
-import 'package:provider/provider.dart';
 
 Widget reusableItemTextBtn(BuildContext context , Color color, String text,BorderRadius borderRadius){
   return Expanded(
