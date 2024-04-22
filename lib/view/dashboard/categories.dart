@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
+import 'package:picture_dictionary/res/reusablecateory.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
@@ -66,15 +67,15 @@ class _CategoriesPageState extends State<CategoriesPage> {
   //   }
   // }
 
-  final AudioPlayer audioPlayer = AudioPlayer();
-  Future<void> playAudioFromUrl(String url) async {
-    await audioPlayer.play(UrlSource(url));
-    if(url == 1){
-      print('succes');
-    }else{
-      print('fail');
-    }
-  }
+  // final AudioPlayer audioPlayer = AudioPlayer();
+  // Future<void> playAudioFromUrl(String url) async {
+  //   await audioPlayer.play(UrlSource(url));
+  //   if(url == 1){
+  //     print('succes');
+  //   }else{
+  //     print('fail');
+  //   }
+  // }
 
   // String selectedCategory = 'Fruits'; 
   // late Future<List<Map<String, dynamic>>> itemsFuture;
@@ -140,9 +141,24 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       itemBuilder: (context, index) {
                          Map<String, dynamic> type = data[index];
                         // final type = item[index];
+              //           return reusableCategory(context, type['image'], type['arabic'], (){
+              //             pictureRepo.playAudioFromUrl('${type['arabic_voice']}');
+                            
+              //                 setState(() {
+              //                   selectedCategory = type['arabic'];
+              //   itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+              //   print('itemsssssssssssssss ${itemsFuture.toString()}');
+              //   Navigator.push(
+              //                 context,
+              //                 MaterialPageRoute(
+                                
+              //                   builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
+              //                 ));
+              // });
+              //           });
                         return GestureDetector(
                           onTap: () {
-                            playAudioFromUrl('${type['english_voice']}');
+                            pictureRepo.playAudioFromUrl('${type['english_voice']}');
                             
                               setState(() {
                                 selectedCategory = type['english'];
@@ -164,7 +180,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             padding: EdgeInsets.all(10),
                             child:  Container(
                       width: MediaQuery.of(context).size.width * .44,
-                      height: MediaQuery.of(context).size.height * .361,
+                      height: MediaQuery.of(context).size.height * .561,
                       decoration: BoxDecoration(color: colorController.whiteColor,borderRadius: BorderRadius.circular(11),),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -177,6 +193,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             filterQuality: FilterQuality.high,
                             placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
                             )
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: MediaQuery.of(context).size.height*0.05,
+                            margin: EdgeInsets.all(MediaQuery.of(context).size.height * .001),
+                            padding: EdgeInsets.all(MediaQuery.of(context).size.height * .003),
+                            decoration: BoxDecoration(color: colorController.categoryBtnColor,borderRadius: BorderRadius.circular(8.0)),
+                            child: Center(child: Text('${type['english'] }',textAlign: TextAlign.center, softWrap: true, style: TextStyle(color: Colors.white, fontFamily: 'English1',),)),
                           ),
                           Container(
                             width: double.infinity,

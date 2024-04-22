@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -29,7 +30,10 @@ class PictureRepo{
   }
 
   Future<List<Map<String, dynamic>>> fetchItemsByCategory(String category) async {
-    final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
+    _isLoading = true;
+    try{
+      _isLoading = false;
+      final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
 
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
@@ -46,10 +50,19 @@ class PictureRepo{
     } else {
       throw Exception('Failed to load data');
     }
+    }catch(e){
+      print(e.toString());
+      rethrow;
+    }finally{
+      _isLoading = false;
+    }
   }
 
   Future<List<String>> fetchCategories() async {
-    final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_types.php'));
+    _isLoading = true;
+    try{
+      _isLoading = false;
+      final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_types.php'));
 
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
@@ -59,6 +72,22 @@ class PictureRepo{
       return categories;
     } else {
       throw Exception('Failed to load data');
+    }
+  }catch(e){
+    print(e.toString());
+    rethrow;
+  }finally{
+    _isLoading = false;
+  }
+    }
+
+    final AudioPlayer audioPlayer = AudioPlayer();
+  Future<void> playAudioFromUrl(String url) async {
+    await audioPlayer.play(UrlSource(url));
+    if(url == 1){
+      print('succes');
+    }else{
+      print('fail');
     }
   }
 
