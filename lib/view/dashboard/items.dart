@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localization/flutter_localization.dart';
+import 'package:get/utils.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableItemBackground.dart';
@@ -227,19 +228,19 @@ class _ItemsPageState extends State<ItemsPage> {
                                 color: colorController.whiteColor,
                               ),
                             ),
-                            reusableVisibility(reusableItemTextBtn(context, colorController.arabicTextBtnColor, item['arabic'].toString().toUpperCase(),
+                            reusableVisibility(reusableItemTextBtn(context, colorController.arabicTextBtnColor, '${item['arabic'].toString().capitalize}',
                            BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,
                            ),
-                            reusableVisibility(reusableItemTextBtn(context, colorController.urduTextBtnColor, item['urdu'].toString().toUpperCase(),
+                            reusableVisibility(reusableItemTextBtn(context, colorController.urduTextBtnColor, '${item['urdu'].toString().capitalize}',
                            BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,
                            ),
-                           reusableVisibility(reusableItemTextBtn(context, colorController.turkishTextBtnColor, item['turkish'].toString().toUpperCase(),
+                           reusableVisibility(reusableItemTextBtn(context, colorController.turkishTextBtnColor, '${item['turkish'].toString().capitalize}',
                            BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                            ),
-                            reusableItemTextBtn(context, colorController.itemsBtnColor, item['english'].toString().toUpperCase(),
+                            reusableItemTextBtn(context, colorController.itemsBtnColor, '${item['english'].toString().capitalize}',
                             // BorderRadius.only(bottomLeft: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0), bottomRight: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0)
                             // ),
                             BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),

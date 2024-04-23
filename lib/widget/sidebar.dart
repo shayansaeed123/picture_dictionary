@@ -43,6 +43,23 @@ class _SideBarState extends State<SideBar> {
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
 
+   void _handleSignOut() async {
+  MySharedPrefrence().logout();
+  MySharedPrefrence().setUserLoginStatus(false);
+  GoogleSignIn _googleSignIn = GoogleSignIn();
+  await _googleSignIn.signOut();
+   FirebaseAuth auth = FirebaseAuth.instance;
+  await auth.signOut().then((value) {
+     Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => WillPopScope(
+                                          onWillPop: () async => false,
+                                          child: LoginPage())),
+                                );
+  });
+  print('User signed out');
+}
+
   void hello(String name) {
     setState(() {
       selectedCategory = name;
@@ -161,14 +178,14 @@ class _SideBarState extends State<SideBar> {
             onTap: () {
               // Handle logout tap
               setState(() {});
-              MySharedPrefrence().logout();
-              MySharedPrefrence().setUserLoginStatus(false);
+              // MySharedPrefrence().logout();
+              // MySharedPrefrence().setUserLoginStatus(false);
               _handleSignOut();
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => WillPopScope(
-                        onWillPop: () async => false, child: LoginPage())),
-              );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //       builder: (context) => WillPopScope(
+              //           onWillPop: () async => false, child: LoginPage())),
+              // );
             },
           ),
         ],
@@ -176,8 +193,8 @@ class _SideBarState extends State<SideBar> {
     );
   }
 
-  Future<void> _handleSignOut() async {
-    GoogleSignIn _googleSignIn = GoogleSignIn();
-    await _googleSignIn.signOut();
-  }
+  // Future<void> _handleSignOut() async {
+  //   GoogleSignIn _googleSignIn = GoogleSignIn();
+  //   await _googleSignIn.signOut();
+  // }
 }
