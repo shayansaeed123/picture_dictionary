@@ -34,8 +34,15 @@ class _CategoriesPageState extends State<CategoriesPage> {
   late String selectedCategory;
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
-  final auth = FirebaseAuth.instance;
-  User? user = auth.currentUser;
+  
+  bool isLogin(){
+    final auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    if(user != null){
+      return true;
+    }
+    return false;
+  }
 
   @override
   void initState() {
@@ -89,13 +96,16 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
                       ),
-                      itemCount: data.length > 5 ? data.length - 2 : 0,
+                      itemCount: isLogin() ? data.length : 3, // Show all items if logged in, else show only 3
+                      // itemCount: data.length > 5 ? data.length - 2 : 0,
                       // item.length > 5 ? item.length - 2 : 0,
                       itemBuilder: (context, index) {
                          Map<String, dynamic> type = data[index];
+                         bool isLocked = !isLogin() && index >= 3; // Check if the item is locked
                         return GestureDetector(
                           onTap: () {
-                            pictureRepo.playAudioFromUrl('${type['english_voice']}');
+                            if(!isLocked){
+                              pictureRepo.playAudioFromUrl('${type['english_voice']}');
                             
                               setState(() {
                                 selectedCategory = type['english'];
@@ -108,10 +118,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                 builder: (context) => ItemsPage(categoriesFuture: categoriesFuture,itemsFuture: itemsFuture,),
                               ));
               });
+                            }
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: colorController.whiteColor,
+                              color: isLocked ? Colors.grey : colorController.whiteColor, // Use different color for locked items
+                              // color: colorController.whiteColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             padding: EdgeInsets.all(10),
