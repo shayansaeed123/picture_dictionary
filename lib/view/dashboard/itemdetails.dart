@@ -121,7 +121,7 @@ void moveToPreviousItem() {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        reusableitemdetailsrow('${widget.en_name}', Color(0xFF17a493),
+                        reusableitemdetailsrow('${widget.ar_name}', Color(0xFF17a493),
                             const Color.fromARGB(255, 51, 219, 177), context,(){
                               playAudioFromUrl(widget.ar_voice);
                             }),

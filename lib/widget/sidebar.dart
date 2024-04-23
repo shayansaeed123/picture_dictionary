@@ -112,7 +112,6 @@ class _SideBarState extends State<SideBar> {
                   padding: EdgeInsets.zero,
                   itemCount:
                       snapshot.data!.length > 5 ? snapshot.data!.length - 2 : 0,
-                  // widget.categories.length > 5 ? widget.categories.length - 2 : 0,
                   itemBuilder: (context, index) {
                     var categoryEng = snapshot.data![index]['english'];
                     var categoryAr = snapshot.data![index]['arabic'];
@@ -127,21 +126,21 @@ class _SideBarState extends State<SideBar> {
                         }),
                         reusableVisibility(
                           reusableSidebarItems(context, categoryAr, () {
-                            hello(categoryAr);
+                            hello(categoryEng);
                           }),
                           Provider.of<TextVisibilityProvider>(context)
                               .isFirstTextVisible,
                         ),
                         reusableVisibility(
                           reusableSidebarItems(context, categoryUr, () {
-                            hello(categoryUr);
+                            hello(categoryEng);
                           }),
                           Provider.of<TextVisibilityProvider>(context)
                               .isThirdTextVisible,
                         ),
                         reusableVisibility(
                           reusableSidebarItems(context, categoryTur, () {
-                            hello(categoryTur);
+                            hello(categoryEng);
                           }),
                           Provider.of<TextVisibilityProvider>(context)
                               .isForTextVisible,

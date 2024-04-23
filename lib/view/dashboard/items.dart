@@ -150,6 +150,7 @@ class _ItemsPageState extends State<ItemsPage> {
                   Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                   ),
                   
+                  
                   // Positioned(
                   //   top: MediaQuery.of(context).size.height * 0.01,
                   //   left: MediaQuery.of(context).size.width * 0.01,
@@ -226,22 +227,31 @@ class _ItemsPageState extends State<ItemsPage> {
                                 color: colorController.whiteColor,
                               ),
                             ),
-                            reusableItemTextBtn(context, colorController.itemsBtnColor, item['english'],
-                            BorderRadius.only(bottomLeft: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0), bottomRight: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0)),
-                            ),
-                            
-                           reusableVisibility(reusableItemTextBtn(context, colorController.arabicTextBtnColor, item['arabic'],
-                           BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),),
+                            reusableVisibility(reusableItemTextBtn(context, colorController.arabicTextBtnColor, item['arabic'].toString().toUpperCase(),
+                           BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,
                            ),
-                           reusableVisibility(reusableItemTextBtn(context, colorController.urduTextBtnColor, item['urdu'],
-                           BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),),
+                            reusableVisibility(reusableItemTextBtn(context, colorController.urduTextBtnColor, item['urdu'].toString().toUpperCase(),
+                           BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,
                            ),
-                           reusableVisibility(reusableItemTextBtn(context, colorController.turkishTextBtnColor, item['turkish'],
-                           BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),),
+                           reusableVisibility(reusableItemTextBtn(context, colorController.turkishTextBtnColor, item['turkish'].toString().toUpperCase(),
+                           BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                            ),
+                            reusableItemTextBtn(context, colorController.itemsBtnColor, item['english'].toString().toUpperCase(),
+                            // BorderRadius.only(bottomLeft: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0), bottomRight: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0)
+                            // ),
+                            BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0)),
+                            ),
+                            
+                           
+                          //  reusableVisibility(reusableItemTextBtn(context, colorController.urduTextBtnColor, item['english'],
+                          //  BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
+                          //  Provider.of<TextVisibilityProvider>(context).isSecondTextVisible,
+                          //  ),
+                          
+                           
                           ],
                         ),
                       ),

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
@@ -32,6 +34,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
   late String selectedCategory;
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
+  final auth = FirebaseAuth.instance;
+  User? user = auth.currentUser;
 
   @override
   void initState() {
@@ -128,19 +132,20 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
                             )
                           ),
-                          reusableCategoryTextBtn(context, type['english'], colorController.categoryBtnColor),
+                          reusableCategoryTextBtn(context, '${type['english'].toString().capitalize}', colorController.categoryBtnColor),
                           reusableVisibility(
-                            reusableCategoryTextBtn(context, type['arabic'], colorController.arabicTextBtnColor),
+                            reusableCategoryTextBtn(context, '${type['arabic'].toString().capitalize}', colorController.arabicTextBtnColor),
                             Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,
                           ),
                           reusableVisibility(
-                            reusableCategoryTextBtn(context, type['urdu'], colorController.urduTextBtnColor),
+                            reusableCategoryTextBtn(context, '${type['urdu'].toString().capitalize}', colorController.urduTextBtnColor),
                             Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,
                           ),
                           reusableVisibility(
-                            reusableCategoryTextBtn(context, type['turkish'], colorController.turkishTextBtnColor),
+                            reusableCategoryTextBtn(context, '${type['turkish'].toString().capitalize}', colorController.turkishTextBtnColor),
                             Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                           ),
+                          
                         ],
                       ),
                     ),
