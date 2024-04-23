@@ -13,11 +13,11 @@ void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    DevicePreview(
-    enabled: true,
-    builder: (context) => 
+    // DevicePreview(
+    // enabled: true,
+    // builder: (context) => 
     MyApp(), // Wrap your app
-  ),
+  // ),
   );
 }
 

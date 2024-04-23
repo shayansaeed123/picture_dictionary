@@ -133,11 +133,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: isLocked
-                                      ? Colors.grey
-                                      : colorController
-                                          .whiteColor, // Use different color for locked items
-                                  // color: colorController.whiteColor,
+                                  // color: isLocked
+                                  //     ? Colors.grey
+                                  //     : colorController
+                                  //         .whiteColor, // Use different color for locked items
+                                  color: colorController.whiteColor,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 padding: EdgeInsets.all(10),
@@ -152,19 +152,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      // if(isLogin() == true)...{
-                                      //   Text('text hello'),
-                                      // }else...{
-                                      //   Text('Shayan')
-                                      // }
-
                                       if(isLogin() ==  true || isLogin() == false)...{
                                         Expanded(
                                           child: CachedNetworkImage(
                                         imageUrl: isLocked ? 'assets/lock.png': type['image'],
                                         errorWidget: (context, url, error) =>
                                             Image.asset(
-                                                'assets/placeholder_not_found.png'),
+                                                isLocked ? 'assets/lock.png' : 'assets/placeholder_not_found.png'),
                                         width: double.infinity,
                                         // height: MediaQuery.of(context).size.height * .4,
                                         fit: BoxFit.contain,
