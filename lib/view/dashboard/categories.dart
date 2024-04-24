@@ -83,7 +83,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
               height: MediaQuery.of(context).size.height,
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: FutureBuilder(
+                  child: Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                    return FutureBuilder(
                     future: pictureRepo.fetchData(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -111,17 +112,28 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             return GestureDetector(
                               onTap: () {
                                 if (!isLocked) {
+                                  String voiceUrl;
+                        if (textVisibilityProvider .isFirstTextVisible) {
+                          voiceUrl = '${type['arabic_voice']}';
+                        } else if (textVisibilityProvider .isThirdTextVisible) {
+                          voiceUrl = '${type['urdu_voice']}';
+                        } else if (textVisibilityProvider .isForTextVisible) {
+                          voiceUrl = '${type['turkish_voice']}';
+                        } else {
+                          voiceUrl = '${type['english_voice']}';
+                        }
 
-                                  if(Provider.of<TextVisibilityProvider>(context).isFirstTextVisible){
-                                    pictureRepo.playAudioFromUrl('${type['arabic_voice']}');
-                                  }else if(Provider.of<TextVisibilityProvider>(context).isThirdTextVisible){
-                                    pictureRepo.playAudioFromUrl('${type['urdu_voice']}');
-                                  }else if(Provider.of<TextVisibilityProvider>(context).isForTextVisible){
-                                    pictureRepo.playAudioFromUrl('${type['turkish_voice']}');
-                                  }else{
-                                    pictureRepo.playAudioFromUrl(
-                                      '${type['english_voice']}');
-                                  }
+                        pictureRepo.playAudioFromUrl(voiceUrl);
+                                  // if(Provider.of<TextVisibilityProvider>(context).isFirstTextVisible){
+                                  //   pictureRepo.playAudioFromUrl('${type['arabic_voice']}');
+                                  // }else if(Provider.of<TextVisibilityProvider>(context).isThirdTextVisible){
+                                  //   pictureRepo.playAudioFromUrl('${type['urdu_voice']}');
+                                  // }else if(Provider.of<TextVisibilityProvider>(context).isForTextVisible){
+                                  //   pictureRepo.playAudioFromUrl('${type['turkish_voice']}');
+                                  // }else{
+                                  //   pictureRepo.playAudioFromUrl(
+                                  //     '${type['english_voice']}');
+                                  // }
                                   
 
                                   setState(() {
@@ -219,7 +231,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         );
                       }
                     },
-                  )),
+                  );
+                  },)
+                  ),
             ),
             if (pictureRepo.isLoading == true)
               reusableloadingrow(context, pictureRepo.isLoading),

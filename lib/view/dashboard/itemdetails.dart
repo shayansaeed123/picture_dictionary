@@ -159,7 +159,8 @@ void moveToPreviousItem() {
                           widget.current
                         );
                         moveToPreviousItem();
-                      }),
+                      },'assets/back_blue.png'),
+                      
                       Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
                       reusablenextitembtn(context, (){
                         print(
@@ -167,7 +168,7 @@ void moveToPreviousItem() {
                         );
                         //how to move to back item
                         moveToNextItem();
-                      },icon: Icons.arrow_forward_ios),
+                      },'assets/next_blue.png'),
                     ],
                   ),
                 ),
