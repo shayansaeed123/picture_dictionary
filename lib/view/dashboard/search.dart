@@ -9,7 +9,6 @@ import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
-import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:http/http.dart' as http;
