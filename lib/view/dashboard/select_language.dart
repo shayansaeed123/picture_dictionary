@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/common/provider.dart';
-import 'package:picture_dictionary/main.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:provider/provider.dart';
 
