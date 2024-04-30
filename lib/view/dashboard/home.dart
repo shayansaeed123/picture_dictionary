@@ -8,6 +8,7 @@ import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
+import 'package:picture_dictionary/view/dashboard/game_page.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -186,34 +187,7 @@ int _selectedIndex = 0;
                                           reusableVisibility(reusabletext('| öğrenmek', colorController.homeTxtColor, 24.0), 
                                           Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
                                         ],),
-        //               Consumer<TextVisibilityProvider>(
-        //   builder: (context, textVisibilityProvider, child) {
-        //     return Row(
-        //       children: [
-        //         Visibility(
-        //           visible: textVisibilityProvider.isFirstTextVisible,
-        //           child: Text('| يتعلم', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-        //         ),
-        //         Visibility(
-        //           visible: textVisibilityProvider.isSecondTextVisible,
-        //           child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-        //         ),
-        //          Visibility(
-        //           visible: textVisibilityProvider.isThirdTextVisible,
-        //           child: Text('| سیکھیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-        //         ),
-        //         Visibility(
-        //           visible: textVisibilityProvider.isForTextVisible,
-        //           child: Text('| öğrenmek', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-        //         ),
-        //       ],
-        //     );
-        //     // Visibility(
-        //     //   visible: textVisibilityProvider.isVisible,
-        //     //   child: Text(textVisibilityProvider.displayText,style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold)),
-        //     // );
-        //   },
-        // ),
+        
                     ],)
                   ],
                 ),
@@ -236,53 +210,58 @@ int _selectedIndex = 0;
             top: MediaQuery.of(context).size.height * 0.52,
             left: MediaQuery.of(context).size.width * 0.1,
             right: MediaQuery.of(context).size.width * 0.1,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.18,
-              
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15.0), bottomRight: Radius.circular(15.0)),
-                color: Colors.white.withOpacity(0.8),
-              ),
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  reusabletext('PLAY GAME ', colorController.homeTxtColor, 24.0),
-                  // SizedBox(height: 16.0),
-                  Row(children: [
-                    reusableVisibility(reusabletext('| ألعب لعبة', colorController.homeTxtColor, 24.0), 
-                                          Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                                          reusableVisibility(reusabletext('| کھیل کھیلیں', colorController.homeTxtColor, 24.0), 
-                                          Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                                          reusableVisibility(reusabletext('| Oyun oynamak'.truncateWithEllipsis(11), colorController.homeTxtColor, 24.0), 
-                                          Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-                  ],),
-              //     Consumer<TextVisibilityProvider>(
-              //           builder: (context, textVisibilityProvider, child) {
-              //             return Row(
-              // children: [
-              //   Visibility(
-              //     visible: textVisibilityProvider.isFirstTextVisible,
-              //     child: Text('| ألعب لعبة', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-              //   ),
-              //   Visibility(
-              //     visible: textVisibilityProvider.isSecondTextVisible,
-              //     child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-              //   ),
-              //    Visibility(
-              //     visible: textVisibilityProvider.isThirdTextVisible,
-              //     child: Text('| کھیل کھیلیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-              //   ),
-              //   Visibility(
-              //     visible: textVisibilityProvider.isForTextVisible,
-              //     child: Text('| Oyun oynamak'.truncateWithEllipsis(11),overflow: TextOverflow.ellipsis, style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
-              //   ),
-              // ],
-              //             );
-              //           },
-              //         ),
-                ],
+            child: InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Games(),));
+              },
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.18,
+                
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15.0), bottomRight: Radius.circular(15.0)),
+                  color: Colors.white.withOpacity(0.8),
+                ),
+                padding: EdgeInsets.all(16.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    reusabletext('PLAY GAME ', colorController.homeTxtColor, 24.0),
+                    // SizedBox(height: 16.0),
+                    Row(children: [
+                      reusableVisibility(reusabletext('| ألعب لعبة', colorController.homeTxtColor, 24.0), 
+                                            Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                                            reusableVisibility(reusabletext('| کھیل کھیلیں', colorController.homeTxtColor, 24.0), 
+                                            Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                                            reusableVisibility(reusabletext('| Oyun oynamak'.truncateWithEllipsis(11), colorController.homeTxtColor, 24.0), 
+                                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                    ],),
+                //     Consumer<TextVisibilityProvider>(
+                //           builder: (context, textVisibilityProvider, child) {
+                //             return Row(
+                // children: [
+                //   Visibility(
+                //     visible: textVisibilityProvider.isFirstTextVisible,
+                //     child: Text('| ألعب لعبة', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+                //   ),
+                //   Visibility(
+                //     visible: textVisibilityProvider.isSecondTextVisible,
+                //     child: Text('', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+                //   ),
+                //    Visibility(
+                //     visible: textVisibilityProvider.isThirdTextVisible,
+                //     child: Text('| کھیل کھیلیں', style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+                //   ),
+                //   Visibility(
+                //     visible: textVisibilityProvider.isForTextVisible,
+                //     child: Text('| Oyun oynamak'.truncateWithEllipsis(11),overflow: TextOverflow.ellipsis, style: TextStyle(color: colorController.homeTxtColor, fontSize: 24.0, fontWeight: FontWeight.bold),),
+                //   ),
+                // ],
+                //             );
+                //           },
+                //         ),
+                  ],
+                ),
               ),
             ),
           ),
