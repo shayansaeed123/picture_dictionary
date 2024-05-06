@@ -93,6 +93,7 @@ int _selectedIndex = 0;
               title: Text('Home'),
               onTap: () {
                 // Handle settings tap
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
               },
             ),
           Divider(),
@@ -110,7 +111,7 @@ int _selectedIndex = 0;
               // Handle about tap
             },
           ),
-          Spacer(),
+          // Spacer(),
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('About Us'),
@@ -118,7 +119,7 @@ int _selectedIndex = 0;
               // Handle logout tap
             },
           ),
-          Spacer(),
+          // Spacer(),
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text(FirebaseAuth.instance.currentUser != null ? 'Log Out' : 'Sign In'),

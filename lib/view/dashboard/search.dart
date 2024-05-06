@@ -20,6 +20,7 @@ class SearchItem extends StatefulWidget {
 }
 
 class _SearchItemState extends State<SearchItem> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late List<Map<String, dynamic>> items;
   late List<Map<String, dynamic>> filteredItems;
   TextEditingController _searchController = TextEditingController();
@@ -84,8 +85,9 @@ class _SearchItemState extends State<SearchItem> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         drawer: SideBar(),
-          appBar: reusableappbar(context, () {}, 'Search Item'),
+          appBar: reusableappbar(context, () {_scaffoldKey.currentState!.openDrawer();}, 'Search Item'),
           body: Container(
             decoration: BoxDecoration(
               // backgroundBlendMode:  BlendMode.multiply,

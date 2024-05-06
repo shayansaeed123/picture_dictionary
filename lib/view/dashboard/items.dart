@@ -9,6 +9,7 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:get/utils.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
+import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/reusableItemBackground.dart';
 import 'package:picture_dictionary/res/reusableItemTextBtn.dart';
 import 'package:picture_dictionary/res/reusableVisibility.dart';
@@ -35,15 +36,16 @@ class ItemsPage extends StatefulWidget {
 class _ItemsPageState extends State<ItemsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final AudioPlayer audioPlayer = AudioPlayer();
-  Future<void> playAudioFromUrl(String url) async {
-    await audioPlayer.play(UrlSource(url));
-    if(url == 1){
-      print('succes');
-    }else{
-      print('fail');
-    }
-  }
+PictureRepo pictureRepo = PictureRepo();
+  // final AudioPlayer audioPlayer = AudioPlayer();
+  // Future<void> playAudioFromUrl(String url) async {
+  //   await audioPlayer.play(UrlSource(url));
+  //   if(url == 1){
+  //     print('succes');
+  //   }else{
+  //     print('fail');
+  //   }
+  // }
 
   // // late Future<List<dynamic>> _data;
   // List<Map<String, dynamic>> _data = [];
@@ -138,6 +140,7 @@ class _ItemsPageState extends State<ItemsPage> {
             itemBuilder: (context, index) {
               Map<String, dynamic> item = items[index];
                             int currentItem = index;
+                            int id = int.parse(items[index]['id']);
               return Stack(
                 children: [
                   reusableItemBackground(context, 'assets/tilt_round_img.png'),
@@ -180,21 +183,36 @@ class _ItemsPageState extends State<ItemsPage> {
                     left: MediaQuery.of(context).size.width * 0.05,
                     right: MediaQuery.of(context).size.width * 0.05,
                     bottom: MediaQuery.of(context).size.width * 0.02,
-                    child:  InkWell(
+                    child:  
+                    Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                      return InkWell(
                       onTap: (){
-                        playAudioFromUrl('${item['english_voice']}');
+
+                        String voiceUrl;
+                        if (textVisibilityProvider .isFirstTextVisible) {
+                          voiceUrl = '${item['arabic_voice']}';
+                        } else if (textVisibilityProvider .isThirdTextVisible) {
+                          voiceUrl = '${item['urdu_voice']}';
+                        } else if (textVisibilityProvider .isForTextVisible) {
+                          voiceUrl = '${item['turkish_voice']}';
+                        } else {
+                          voiceUrl = '${item['english_voice']}';
+                        }
+                        // playAudioFromUrl('${item['english_voice']}');
+                        pictureRepo.playAudioFromUrl(voiceUrl);
                         Navigator.push(context, MaterialPageRoute(builder: (_)=> ItemDetails(
-                          ar_voice: item['arabic_voice'], 
-                          ur_voice: item['urdu_voice'], 
-                          en_voice: item['english_voice'], 
-                          tr_voice: item['turkish_voice'], 
-                          ar_name: item['arabic'], 
-                          ur_name: item['urdu'], 
-                          en_name: item['english'], 
-                          tr_name: item['turkish'], 
-                          img: item['image'],
+                          // ar_voice: item['arabic_voice'], 
+                          // ur_voice: item['urdu_voice'], 
+                          // en_voice: item['english_voice'], 
+                          // tr_voice: item['turkish_voice'], 
+                          // ar_name: item['arabic'], 
+                          // ur_name: item['urdu'], 
+                          // en_name: item['english'], 
+                          // tr_name: item['turkish'], 
+                          // img: item['image'],
                           items: items,
                           current: currentItem,
+                          id: id,
                           )));
                       },
                       child: Container(
@@ -256,7 +274,8 @@ class _ItemsPageState extends State<ItemsPage> {
                           ],
                         ),
                       ),
-                    ),
+                    );
+                    },)
                   ),
                 ],
               );

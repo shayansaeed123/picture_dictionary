@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/re_text.dart';
+import 'package:picture_dictionary/res/reusabledailog.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/res/reusableloginbtn.dart';
 import 'package:picture_dictionary/view/dashboard/home.dart';
@@ -61,6 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                             ));
     } catch (e) {
       print('Error $e');
+      reusabledialog(context, "Login Failed",
+            "An error occurred while trying to log in.", "Ok", () {});
     } finally {
       setState(() {
         _isLoading = false;
@@ -98,6 +101,8 @@ class _LoginPageState extends State<LoginPage> {
 
     }catch(e){
       print(e);
+      reusabledialog(context, "Login Failed",
+            "An error occurred while trying to log in.", "Ok", () {});
     }finally{
       setState(() {
         _isLoading = false;
@@ -325,13 +330,14 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           reusableLoginBtn('Sign in as a Guest  ',
                               'assets/user.png', Colors.transparent, () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => WillPopScope(
-                                      onWillPop: () async => false,
-                                      child: HomePage()),
-                                ));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => WillPopScope(
+                            //           onWillPop: () async => false,
+                            //           child: HomePage()),
+                            //     ));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
                           }),
                           SizedBox(
                               height: MediaQuery.of(context).size.height * 0.02),

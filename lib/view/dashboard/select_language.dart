@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
+import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:provider/provider.dart';
 
 class SelectLanguage extends StatefulWidget {
@@ -19,6 +20,8 @@ class _SelectLanguageState extends State<SelectLanguage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: SideBar(),
         appBar: reusableappbar(context, (){
           _scaffoldKey.currentState!.openDrawer();
         }, 'Choose Language'),

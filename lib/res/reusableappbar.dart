@@ -79,10 +79,10 @@ import 'package:provider/provider.dart';
           reusablehomeBtn('SEARCH', (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => SearchItem()));
           }),
-          SizedBox(width: MediaQuery.of(context).size.width * .01,),
-          reusablehomeBtn('SEARCH', (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SearchItem()));
-          }),
+          // SizedBox(width: MediaQuery.of(context).size.width * .01,),
+          // reusablehomeBtn('SEARCH', (){
+          //   Navigator.push(context, MaterialPageRoute(builder: (context) => SearchItem()));
+          // }),
           SizedBox(width: MediaQuery.of(context).size.width * .01,),
         ],
         );

@@ -8,21 +8,22 @@ import 'package:picture_dictionary/res/reusablenextitembtn.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 
 class ItemDetails extends StatefulWidget {
-  String ar_voice ,ur_voice , en_voice, tr_voice , ar_name , ur_name , en_name , tr_name , img;
-  int current;
+  // String ar_voice ,ur_voice , en_voice, tr_voice , ar_name , ur_name , en_name , tr_name , img;
+  int current,id;
   List<Map<String, dynamic>> items;
    ItemDetails({super.key, 
-  required this.ar_voice, 
-  required this.ur_voice,
-  required this.en_voice, 
-  required this.tr_voice,
-  required this.ar_name, 
-  required this.ur_name,
-  required this.en_name, 
-  required this.tr_name,
-  required this.img, 
+  // required this.ar_voice, 
+  // required this.ur_voice,
+  // required this.en_voice, 
+  // required this.tr_voice,
+  // required this.ar_name, 
+  // required this.ur_name,
+  // required this.en_name, 
+  // required this.tr_name,
+  // required this.img, 
   required this.items,
   required this.current,
+  required this.id,
   });
 
   @override
@@ -42,6 +43,48 @@ class _ItemDetailsState extends State<ItemDetails> {
   }
 
   
+String currentImageUrl = ''; // Add this variable to hold the current image URL
+  String currentNameEng = '';
+  String currentNameAr = '';
+  String currentNameUr = '';
+  String currentNameTur = ''; // Add this variable to hold the current name
+  String currentVoiceEng = '';
+  String currentVoiceAr = '';
+  String currentVoiceUr = '';
+  String currentVoiceTur = '';
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the image and name based on the initial ID
+    updateImageAndName();
+  }
+
+  void updateImageAndName() {
+  // Fetch image URL and name based on the current ID
+  Map<String, dynamic>? currentItem = widget.items.firstWhere(
+    (item) => int.parse(item['id']) == widget.id,
+    orElse: () => null!,
+  );
+
+  setState(() {
+    if (currentItem != null) {
+      currentImageUrl = currentItem['image'] ?? '';
+      currentNameEng = currentItem['english'] ?? '';
+      currentNameUr = currentItem['urdu'] ?? '';
+      currentNameAr = currentItem['arabic'] ?? '';
+      currentNameTur = currentItem['turkish'] ?? '';
+      currentVoiceEng = currentItem['english_voice'] ?? '';
+      currentVoiceUr = currentItem['urdu_voice'] ?? '';
+      currentVoiceAr = currentItem['arabic_voice'] ?? '';
+      currentVoiceTur = currentItem['turkish_voice'] ?? '';
+    } else {
+      // Handle the case when currentItem is null (ID not found)
+      currentImageUrl = ''; // Set default image URL or show an error image
+      currentNameEng = ''; // Set default name or show an error message
+    }
+  });
+}
 
 
 
@@ -50,6 +93,9 @@ void moveToNextItem() {
   if (widget.current < widget.items.length ) {
     setState(() {
       widget.current++; // Move to the next ID
+      widget.id = int.parse(widget.items[widget.current]['id']); // Update ID
+      print(widget.id);
+      updateImageAndName(); // Update image and name when ID changes
     });
     // Fetch data for the new ID from the API
     // fetchData(currentItemId);
@@ -60,6 +106,9 @@ void moveToPreviousItem() {
   if (widget.current > 0) {
     setState(() {
       widget.current--; 
+      widget.id = int.parse(widget.items[widget.current]['id']); // Update ID
+      print(widget.id);
+      updateImageAndName(); // Update image and name when ID changes
       // print('hello');
     });
 
@@ -73,7 +122,7 @@ void moveToPreviousItem() {
     return Scaffold(
       key: _scaffoldKey,
       drawer: SideBar(),
-        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();},'${widget.en_name.toString().toUpperCase()}'),
+        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();},'${currentNameEng.toString().toUpperCase()}'),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -100,7 +149,7 @@ void moveToPreviousItem() {
                       borderRadius: BorderRadius.circular(16),
                       color: Colors.white),
                       child: 
-                      CachedNetworkImage(imageUrl: '${widget.img}',
+                      CachedNetworkImage(imageUrl: '${currentImageUrl}',
                             errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
                             width: double.infinity,
                             fit: BoxFit.contain,
@@ -121,21 +170,21 @@ void moveToPreviousItem() {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        reusableitemdetailsrow('${widget.ar_name}', Color(0xFF17a493),
+                        reusableitemdetailsrow('${currentNameAr}', Color(0xFF17a493),
                             const Color.fromARGB(255, 51, 219, 177), context,(){
-                              playAudioFromUrl(widget.ar_voice);
+                              playAudioFromUrl(currentVoiceAr);
                             }),
-                        reusableitemdetailsrow('${widget.en_name.toString().toUpperCase()}', Color(0xFF9753fe),
+                        reusableitemdetailsrow('${currentNameEng.toString().toUpperCase()}', Color(0xFF9753fe),
                             Color.fromARGB(255, 161, 136, 204), context,(){
-                              playAudioFromUrl(widget.en_voice);
+                              playAudioFromUrl(currentVoiceEng);
                             }),
-                        reusableitemdetailsrow('${widget.ur_name.toString().toUpperCase()}', Color(0xFF4e59ff),
+                        reusableitemdetailsrow('${currentNameUr.toString().toUpperCase()}', Color(0xFF4e59ff),
                             Color(0xFF5d80fe), context,(){
-                              playAudioFromUrl(widget.ur_voice);
+                              playAudioFromUrl(currentVoiceUr);
                             }),
-                        reusableitemdetailsrow('${widget.tr_name.toString().toUpperCase()}', Color(0xFFe14abe),
+                        reusableitemdetailsrow('${currentNameTur.toString().toUpperCase()}', Color(0xFFe14abe),
                             Colors.pink.shade200, context,(){
-                              playAudioFromUrl(widget.tr_voice);
+                              playAudioFromUrl(currentVoiceTur);
                             }),
                       ],
                     ),
