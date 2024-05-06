@@ -229,13 +229,36 @@ void moveToPreviousItem() {
                       },),
                       
                       Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
-                      reusablenextitembtn(context, (){
+                      Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                        return reusablenextitembtn(context, (){
+                        //how to move to next item
                         print(
                           widget.current
                         );
-                        //how to move to back item
                         moveToNextItem();
-                      },'assets/next_blue.png'),
+                        setState(() {});
+                        String voiceUrl;
+                        if (textVisibilityProvider .isFirstTextVisible) {
+                          voiceUrl = '${currentVoiceAr}';
+                        } else if (textVisibilityProvider .isThirdTextVisible) {
+                          voiceUrl = '${currentVoiceUr}';
+                        } else if (textVisibilityProvider .isForTextVisible) {
+                          voiceUrl = '${currentVoiceTur}';
+                        } else {
+                          voiceUrl = '${currentVoiceEng}';
+                        }
+                        // playAudioFromUrl('${item['english_voice']}');
+                        playAudioFromUrl(voiceUrl);
+                        setState(() {});
+                      },'assets/next_blue.png');
+                      },),
+                      // reusablenextitembtn(context, (){
+                      //   print(
+                      //     widget.current
+                      //   );
+                      //   //how to move to back item
+                      //   moveToNextItem();
+                      // },'assets/next_blue.png'),
                     ],
                   ),
                 ),

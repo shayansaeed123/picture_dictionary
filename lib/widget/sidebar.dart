@@ -35,7 +35,7 @@ class _SideBarState extends State<SideBar> {
     super.initState();
     selectedCategory = 'Fruits'; // Default selected category
     categoriesFuture = pictureRepo.fetchCategories();
-    itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
+    itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory,);
   }
 
   PictureRepo pictureRepo = PictureRepo();

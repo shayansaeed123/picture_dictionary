@@ -90,7 +90,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(child: reusableloadingrow(context, true));
                       } else if (!snapshot.hasData) {
-                        return Center(child: Text('No Data Found'));
+                        return 
+                        Center(child: Text('No Data Found'));
                       } else {
                         List<Map<String, dynamic>> data = snapshot.data!;
                         return GridView.builder(

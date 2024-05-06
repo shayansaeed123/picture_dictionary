@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:picture_dictionary/res/reusabledailog.dart';
 
 class PictureRepo{
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  late BuildContext context;
   Future<List<Map<String, dynamic>>> fetchData() async {
     _isLoading = true;
    try{
@@ -18,11 +24,16 @@ class PictureRepo{
 
       return listResponse;
     } else {
-      throw Exception('Failed to load data');
+      return reusabledialog(context, "Error",
+            "Please check your internet connection", "Ok", () {});
     }
    }catch(e){
     print('Error : $e');
-    rethrow; 
+    return
+    //  SocketException(
+      reusabledialog(context, "Error",
+            "Please check your internet connection", "Ok", () {});
+    
    }finally{
       _isLoading = false;
    }
@@ -47,11 +58,13 @@ class PictureRepo{
 
       return items;
     } else {
-      throw Exception('Failed to load data');
+      return reusabledialog(context, "Error",
+            "Please check your internet connection", "Ok", () {});
     }
     }catch(e){
       print(e.toString());
-      rethrow;
+      return reusabledialog(context, "Error",
+            "Please check your internet connection", "Ok", () {});
     }finally{
       _isLoading = false;
     }
@@ -70,11 +83,13 @@ class PictureRepo{
           .toList();
       return categories;
     } else {
-      throw Exception('Failed to load data');
+      return reusabledialog(context, "Error",
+            "Please check your internet connection", "Ok", () {});
     }
   }catch(e){
     print(e.toString());
-    rethrow;
+    return reusabledialog(context, "Error",
+            "Please check your internet connection", "Ok", () {});
   }finally{
     _isLoading = false;
   }
