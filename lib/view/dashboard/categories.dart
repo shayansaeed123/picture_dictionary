@@ -178,10 +178,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                       if(isLogin() ==  true || isLogin() == false)...{
                                         Expanded(
                                           child: CachedNetworkImage(
-                                        imageUrl: isLocked ? 'assets/lock.png': type['image'],
+                                        imageUrl: isLocked ? 'assets/a.png': type['image'],
                                         errorWidget: (context, url, error) =>
                                             Image.asset(
-                                                isLocked ? 'assets/lock.png' : 'assets/placeholder_not_found.png'),
+                                                isLocked ? 'assets/a.png' : 'assets/placeholder_not_found.png'),
                                         width: double.infinity,
                                         // height: MediaQuery.of(context).size.height * .4,
                                         fit: BoxFit.contain,
