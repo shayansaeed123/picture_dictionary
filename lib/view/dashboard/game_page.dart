@@ -26,6 +26,20 @@ class _GamesState extends State<Games> {
         body: Container(
           width: double.infinity,
           height: double.infinity,
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              ), 
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    image: 
+                  ),
+                );
+              },),
         ),
     );
   }
