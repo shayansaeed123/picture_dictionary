@@ -2,10 +2,12 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableitemdetailsrow.dart';
 import 'package:picture_dictionary/res/reusablenextitembtn.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
+import 'package:provider/provider.dart';
 
 class ItemDetails extends StatefulWidget {
   // String ar_voice ,ur_voice , en_voice, tr_voice , ar_name , ur_name , en_name , tr_name , img;
@@ -202,13 +204,29 @@ void moveToPreviousItem() {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      reusablenextitembtn(context, (){
+                      Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                        return reusablenextitembtn(context, (){
                         //how to move to next item
                         print(
                           widget.current
                         );
                         moveToPreviousItem();
-                      },'assets/back_blue.png'),
+                        setState(() {});
+                        String voiceUrl;
+                        if (textVisibilityProvider .isFirstTextVisible) {
+                          voiceUrl = '${currentVoiceAr}';
+                        } else if (textVisibilityProvider .isThirdTextVisible) {
+                          voiceUrl = '${currentVoiceUr}';
+                        } else if (textVisibilityProvider .isForTextVisible) {
+                          voiceUrl = '${currentVoiceTur}';
+                        } else {
+                          voiceUrl = '${currentVoiceEng}';
+                        }
+                        // playAudioFromUrl('${item['english_voice']}');
+                        playAudioFromUrl(voiceUrl);
+                        setState(() {});
+                      },'assets/back_blue.png');
+                      },),
                       
                       Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
                       reusablenextitembtn(context, (){

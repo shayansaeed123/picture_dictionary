@@ -189,11 +189,11 @@ PictureRepo pictureRepo = PictureRepo();
                       onTap: (){
 
                         String voiceUrl;
-                        if (textVisibilityProvider .isFirstTextVisible) {
+                        if (textVisibilityProvider.isFirstTextVisible) {
                           voiceUrl = '${item['arabic_voice']}';
-                        } else if (textVisibilityProvider .isThirdTextVisible) {
+                        } else if (textVisibilityProvider.isThirdTextVisible) {
                           voiceUrl = '${item['urdu_voice']}';
-                        } else if (textVisibilityProvider .isForTextVisible) {
+                        } else if (textVisibilityProvider.isForTextVisible) {
                           voiceUrl = '${item['turkish_voice']}';
                         } else {
                           voiceUrl = '${item['english_voice']}';
