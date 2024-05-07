@@ -29,12 +29,12 @@ class MySharedPrefrence {
 
 
 
-  String get_user_loginstatus() {
-    return ''.val('login_status', getBox: preferences).val;
+  String get_cat_id() {
+    return ''.val('cat_id', getBox: preferences).val;
   }
 
-  void set_user_loginstatus(String? login_status) {
-    ''.val('login_status', getBox: preferences).val = login_status ?? '';
+  void set_cat_id(String? cat_id) {
+    ''.val('cat_id', getBox: preferences).val = cat_id ?? '';
   }
 
 
