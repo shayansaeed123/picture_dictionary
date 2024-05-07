@@ -181,7 +181,7 @@ setState(() {});
                         return GridView.builder(
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
+                            crossAxisCount: 2,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
                           ),
@@ -201,7 +201,7 @@ setState(() {});
                                 index >= 3; // Check if the item is locked
                             return GestureDetector(
                               onTap: () {
-                                if (!isLocked) {
+                                // if (!isLocked) {
                                   String voiceUrl;
                         if (textVisibilityProvider .isFirstTextVisible) {
                           voiceUrl = '${type['arabic_voice']}';
@@ -237,8 +237,8 @@ setState(() {});
                                           ),
                                         ));
                                   });
-                                }
-                              },
+                                },
+                              // },
                               child: Container(
                                 decoration: BoxDecoration(
                                   // color: isLocked
@@ -263,10 +263,13 @@ setState(() {});
                                       if(isLogin() ==  true || isLogin() == false)...{
                                         Expanded(
                                           child: CachedNetworkImage(
-                                        imageUrl: isLocked ? 'assets/a.png': type['image'],
+                                        imageUrl: 
+                                        // isLocked ? 'assets/a.png':
+                                         type['image'],
                                         errorWidget: (context, url, error) =>
                                             Image.asset(
-                                                isLocked ? 'assets/a.png' : 'assets/placeholder_not_found.png'),
+                                                // isLocked ? 'assets/a.png' : 
+                                                'assets/placeholder_not_found.png'),
                                         width: double.infinity,
                                         // height: MediaQuery.of(context).size.height * .4,
                                         fit: BoxFit.contain,
