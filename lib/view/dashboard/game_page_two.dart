@@ -76,13 +76,77 @@ class _GamePageTwoState extends State<GamePageTwo> {
 //     }
 //   }
 
+Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
+
+//     final apiUrl = 'https://eleprogram.turk.pk/api/assignment1.php';
+//     try {
+//       final response = await http.post(
+//         Uri.parse(apiUrl),
+        // body: {
+        //   'type_id':  MySharedPrefrence().get_cat_id().toString(),
+        //   },
+//       );
+
+//       if (response.statusCode == 200) {
+//         final List<Map<String, dynamic>> data =
+//             json.decode(response.body).cast<Map<String, dynamic>>();
+//         print(data);
+//   return 
+//  data;
+//       }
+//        else {
+//         throw Exception('Failed to load data from API');
+//       }
+//     } catch (e) {
+//       throw Exception('Error fetching data: $e');
+//     }
+//   }
+// _isLoading = true;
+  try {
+    // _isLoading = false;
+    print('myshared ${MySharedPrefrence().get_cat_id()}');
+    final response = await http.post(
+      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
+      body: {
+        'type_id': cat_id,
+        // MySharedPrefrence().get_cat_id(),
+      },
+    );
+
+    print('ID1 ${cat_id}');
+
+    if (response.statusCode == 200) {
+      dynamic jsonResponse = jsonDecode(response.body);
+      List<Map<String, dynamic>> items = [];
+      for (var type in jsonResponse) {
+          print('ID2 ${type['type_id']}');
+        if (type['type_id'] == categoryId) { // Convert type_id to String
+          items.addAll(type['items'].cast<Map<String, dynamic>>());
+          print('Added items: $items');
+          break;
+        }
+      }
+      print('Game All Items $items');
+      
+      return items;
+    } else {
+      throw Exception('failed to load data');
+    }
+  } catch (e) {
+    print('Error: $e');
+    throw Exception('failed to load data');
+  } finally {
+    // _isLoading = false;
+  }
+   }
+
   @override
   void initState() {
     // fetchData();
     super.initState();
     selectedCategory = '76'; // Default selected category
     categoriesFuture = pictureRepo.fetchCategories();
-    itemsFuture = pictureRepo.fetchGameCategories(selectedCategory);
+    itemsFuture = fetchGameCategories(selectedCategory);
     isLogin();
     
   }
@@ -141,7 +205,8 @@ class _GamePageTwoState extends State<GamePageTwo> {
                           itemBuilder: (context, index) {
                             Map<String, dynamic> type = data[index];
                             // setState(() {});
-                             MySharedPrefrence().set_cat_id(type['id']);
+                            //  MySharedPrefrence().set_cat_id(type['id']);
+                            cat_id = type['id'];
                             bool isLocked = !isLogin() &&
                                 index >= 3; // Check if the item is locked
                             return GestureDetector(
@@ -172,9 +237,8 @@ class _GamePageTwoState extends State<GamePageTwo> {
                                   
 
                                   setState(() {
-                                    pictureRepo.fetchGameCategories(selectedCategory);
                                     selectedCategory = type['id'];
-                                    itemsFuture = pictureRepo.fetchGameCategories(selectedCategory);
+                                    itemsFuture = fetchGameCategories(selectedCategory);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
