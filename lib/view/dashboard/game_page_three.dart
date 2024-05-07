@@ -1,43 +1,178 @@
-
-
-
+import 'dart:convert';
+import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
+import 'package:http/http.dart' as http;
 
 class GamePageThree extends StatefulWidget {
-  final Future<List<String>> categoriesFuture;
+  final String selectedCategory;
   final Future<List<Map<String, dynamic>>> itemsFuture;
-  const GamePageThree({super.key,required this.categoriesFuture, required this.itemsFuture});
+  const GamePageThree({Key? key,required this.selectedCategory, required this.itemsFuture}) : super(key: key);
 
   @override
   State<GamePageThree> createState() => _GamePageThreeState();
 }
 
 class _GamePageThreeState extends State<GamePageThree> {
+  late Future<List<Map<String, dynamic>>> _itemsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _itemsFuture = widget.itemsFuture;
+  }
+  // String userid = '';
+
+  // bool isLogin() {
+  //   final auth = FirebaseAuth.instance;
+  //   final user = auth.currentUser;
+    
+  //   // String userid = user!.uid.toString();
+  //   // print('User Id $userid');
+  //   if (user != null) {
+  //     userid = user.uid.toString();
+  //     print('User Id $userid');
+  //     return true;
+  //   }
+  //   userid = '101';
+  //   return false;
+  // }
+
+  // Future<String> questionApi()async{
+  //   final response = await http.post(
+  //     Uri.parse('https://kulyatudawah.com/public/vocgame/apis/add_question_answers_status.php'),
+  //     body: {
+  //       'user_id': userid.toString(),
+  //       'type_id': widget.selectedCategory.toString(),
+  //       'item_id_question': 
+  //       // MySharedPrefrence().get_cat_id(),
+  //     },
+  //   );
+  //  }
+
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           Expanded(
-            child: FutureBuilder(future: widget.itemsFuture, builder: (context, snapshot) {
-               if(snapshot.connectionState == ConnectionState.waiting){
-                return Center(child: reusableloadingrow(context, true),);
-               }else if(!snapshot.hasData){
-                return Center(child: Text('data'));
-               }else{
-                List<Map<String, dynamic>> items = snapshot.data!;
-                return ListView.builder(
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    Map<String, dynamic> item = items[index];
-                  return Text(item['english'].toString(),style: TextStyle(color: Colors.black,fontSize: 37),);
-                },);
-               }}),
-          )
+            child: FutureBuilder(
+              future: _itemsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: reusableloadingrow(context, true));
+                } else if (!snapshot.hasData) {
+                  return Center(child: Text('No data'));
+                } else {
+                  List<Map<String, dynamic>> items =
+                      snapshot.data as List<Map<String, dynamic>>;
+                  return ListView.builder(
+                    itemCount: items.length,
+                    itemBuilder: (context, index) {
+                      Map<String, dynamic> item = items[index];
+                      return Column(
+                        children: [
+                          Center(
+                            child: Text(
+                              item['english'].toString(),
+                              style: TextStyle(color: Colors.black, fontSize: 37),
+                            ),
+                          ),
+                          Image.network(item['image'],height: 150,width: 150,),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+          ElevatedButton(
+            onPressed: _refreshItems,
+            child: Text('Refresh'),
+          ),
         ],
       ),
     );
   }
+
+  Future<void> _refreshItems() async {
+    setState(() {
+      _itemsFuture = fetchGameCategories(widget.selectedCategory);
+    });
+  }
+
+
+
+
+  Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
+
+//     final apiUrl = 'https://eleprogram.turk.pk/api/assignment1.php';
+//     try {
+//       final response = await http.post(
+//         Uri.parse(apiUrl),
+        // body: {
+        //   'type_id':  MySharedPrefrence().get_cat_id().toString(),
+        //   },
+//       );
+
+//       if (response.statusCode == 200) {
+//         final List<Map<String, dynamic>> data =
+//             json.decode(response.body).cast<Map<String, dynamic>>();
+//         print(data);
+//   return 
+//  data;
+//       }
+//        else {
+//         throw Exception('Failed to load data from API');
+//       }
+//     } catch (e) {
+//       throw Exception('Error fetching data: $e');
+//     }
+//   }
+// _isLoading = true;
+  try {
+    // _isLoading = false;
+    // print('myshared ${MySharedPrefrence().get_cat_id()}');
+    final response = await http.post(
+      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
+      body: {
+        'type_id': widget.selectedCategory.toString(),
+        // MySharedPrefrence().get_cat_id(),
+      },
+    );
+setState(() {});
+    print('ID1 ${widget.selectedCategory}');
+setState(() {});
+    if (response.statusCode == 200) {
+      dynamic jsonResponse = jsonDecode(response.body);
+      List<Map<String, dynamic>> items = [];
+      for (var type in jsonResponse) {
+        setState(() {});
+          print('ID2 ${categoryId}');
+        if (type['type_id'] == categoryId) { // Convert type_id to String
+          items.addAll(type['items'].cast<Map<String, dynamic>>());
+          print('Added items: $items');
+          break;
+        }
+      }
+      print('Game All Items $items');
+      
+      return items;
+    } else {
+      throw Exception('failed to load data');
+    }
+  } catch (e) {
+    print('Error: $e');
+    throw Exception('failed to load data');
+  } finally {
+    // _isLoading = false;
+  }
+   }
 }

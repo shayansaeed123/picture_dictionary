@@ -34,19 +34,25 @@ class _GamePageTwoState extends State<GamePageTwo> {
 
   late int id;
 
-  late String selectedCategory;
+  String selectedCategory = '';
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
   String cat_id = '';
+  String userid = '';
 
   bool isLogin() {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
+    
     // String userid = user!.uid.toString();
     // print('User Id $userid');
     if (user != null) {
+      userid = user.uid.toString();
+      print('User Id $userid');
       return true;
     }
+    userid = '101';
+    print('shayan id witout login $userid');
     return false;
   }
 
@@ -77,57 +83,32 @@ class _GamePageTwoState extends State<GamePageTwo> {
 //   }
 
 Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
-
-//     final apiUrl = 'https://eleprogram.turk.pk/api/assignment1.php';
-//     try {
-//       final response = await http.post(
-//         Uri.parse(apiUrl),
-        // body: {
-        //   'type_id':  MySharedPrefrence().get_cat_id().toString(),
-        //   },
-//       );
-
-//       if (response.statusCode == 200) {
-//         final List<Map<String, dynamic>> data =
-//             json.decode(response.body).cast<Map<String, dynamic>>();
-//         print(data);
-//   return 
-//  data;
-//       }
-//        else {
-//         throw Exception('Failed to load data from API');
-//       }
-//     } catch (e) {
-//       throw Exception('Error fetching data: $e');
-//     }
-//   }
-// _isLoading = true;
   try {
     // _isLoading = false;
-    print('myshared ${MySharedPrefrence().get_cat_id()}');
+    // print('myshared ${MySharedPrefrence().get_cat_id()}');
     final response = await http.post(
       Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
       body: {
-        'type_id': cat_id,
+        'type_id': selectedCategory.toString(),
         // MySharedPrefrence().get_cat_id(),
       },
     );
-
-    print('ID1 ${cat_id}');
-
+setState(() {});
+    print('ID1 ${selectedCategory}');
+setState(() {});
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
       List<Map<String, dynamic>> items = [];
       for (var type in jsonResponse) {
-          print('ID2 ${type['type_id']}');
+        setState(() {});
+          print('ID2 ${categoryId}');
         if (type['type_id'] == categoryId) { // Convert type_id to String
           items.addAll(type['items'].cast<Map<String, dynamic>>());
           print('Added items: $items');
           break;
         }
-      }
+        }
       print('Game All Items $items');
-      
       return items;
     } else {
       throw Exception('failed to load data');
@@ -140,13 +121,20 @@ Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async 
   }
    }
 
+
+
+
+
+   
+
   @override
   void initState() {
     // fetchData();
     super.initState();
-    selectedCategory = '76'; // Default selected category
+    // selectedCategory = ''; // Default selected category
     categoriesFuture = pictureRepo.fetchCategories();
     itemsFuture = fetchGameCategories(selectedCategory);
+    
     isLogin();
     
   }
@@ -206,7 +194,9 @@ Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async 
                             Map<String, dynamic> type = data[index];
                             // setState(() {});
                             //  MySharedPrefrence().set_cat_id(type['id']);
+                            
                             cat_id = type['id'];
+                            print(cat_id);
                             bool isLocked = !isLogin() &&
                                 index >= 3; // Check if the item is locked
                             return GestureDetector(
@@ -234,8 +224,6 @@ Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async 
                                   //   pictureRepo.playAudioFromUrl(
                                   //     '${type['english_voice']}');
                                   // }
-                                  
-
                                   setState(() {
                                     selectedCategory = type['id'];
                                     itemsFuture = fetchGameCategories(selectedCategory);
@@ -243,8 +231,9 @@ Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async 
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => GamePageThree(
-                                            categoriesFuture: categoriesFuture,
+                                            // categoriesFuture: categoriesFuture,
                                             itemsFuture: itemsFuture,
+                                            selectedCategory: selectedCategory,
                                           ),
                                         ));
                                   });

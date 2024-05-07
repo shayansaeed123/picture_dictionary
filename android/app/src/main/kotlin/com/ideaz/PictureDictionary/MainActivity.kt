@@ -1,4 +1,4 @@
-package com.example.picture_dictionary
+package com.ideaz.PictureDictionary
 
 import io.flutter.embedding.android.FlutterActivity
 
