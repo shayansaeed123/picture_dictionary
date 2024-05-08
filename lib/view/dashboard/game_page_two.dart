@@ -28,6 +28,52 @@ class GamePageTwo extends StatefulWidget {
 }
 
 class _GamePageTwoState extends State<GamePageTwo> {
+
+  Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {
+  try {
+    final response = await http.post(
+      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
+      body: {
+        'type_id': selectedCategory.toString(),
+      },
+    );
+
+    if (response.statusCode == 200) {
+      dynamic jsonResponse = jsonDecode(response.body);
+      Map<String, dynamic> itemsMap = {
+        'items': [],
+        'repeatedItems': [],
+      };
+
+      for (var category in jsonResponse) {
+        if (category['type_id'] == categoryId) {
+          itemsMap['items'].addAll(category['items']);
+          if (category.containsKey('repeateditems')) {
+            itemsMap['repeatedItems'].addAll(category['repeateditems']);
+          }
+          break;
+        }
+      }
+
+      print('Game All Items $itemsMap');
+      return itemsMap;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  } catch (e) {
+    print('Error: $e');
+    throw Exception('Failed to load data');
+  }
+}
+
+late Future<Map<String, dynamic>> itemsFuture2;
+
+
+
+
+
+
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   PictureRepo pictureRepo = PictureRepo();
   List<dynamic> item = [];
@@ -37,6 +83,7 @@ class _GamePageTwoState extends State<GamePageTwo> {
   String selectedCategory = '';
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
+  // late Future<List<Map<String, dynamic>>> btnItemsFuture;
   String cat_id = '';
   String userid = '';
 
@@ -99,16 +146,27 @@ setState(() {});
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
       List<Map<String, dynamic>> items = [];
-      for (var type in jsonResponse) {
-        setState(() {});
-          print('ID2 ${categoryId}');
-        if (type['type_id'] == categoryId) { // Convert type_id to String
-          items.addAll(type['items'].cast<Map<String, dynamic>>());
-          items.addAll(type['items'].cast<Map<String, dynamic>>());
-          print('Added items: $items');
+      // for (var type in jsonResponse) {
+      //   setState(() {});
+      //     print('ID2 ${categoryId}');
+      //   if (type['type_id'] == categoryId) { // Convert type_id to String
+      //     items.addAll(type['items'].cast<Map<String, dynamic>>());
+      //     items.addAll(type['repeateditems'].cast<Map<String, dynamic>>());
+      //     print('Added items: $items');
+      //     break;
+      //   }
+      //   }
+
+      for (var category in jsonResponse) {
+        if (category['type_id'] == categoryId) {
+          items.addAll(category['items'].cast<Map<String, dynamic>>());
+          // Check if repeated items exist and add them
+          if (category.containsKey('repeateditems')) {
+            items.addAll(category['repeateditems'].cast<Map<String, dynamic>>());
+          }
           break;
         }
-        }
+      }
       print('Game All Items $items');
       return items;
     } else {
@@ -121,6 +179,46 @@ setState(() {});
     // _isLoading = false;
   }
    }
+
+//    Future<List<Map<String, dynamic>>> fetchGameBtnData(String categoryId,) async {
+//   try {
+//     // _isLoading = false;
+//     // print('myshared ${MySharedPrefrence().get_cat_id()}');
+//     final response = await http.post(
+//       Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
+//       body: {
+//         'type_id': selectedCategory.toString(),
+//         // MySharedPrefrence().get_cat_id(),
+//       },
+//     );
+// setState(() {});
+//     print('ID1 ${selectedCategory}');
+// setState(() {});
+//     if (response.statusCode == 200) {
+//       dynamic jsonResponse = jsonDecode(response.body);
+//       List<Map<String, dynamic>> items = [];
+//       for (var type in jsonResponse) {
+//         setState(() {});
+//           print('ID2 ${categoryId}');
+//         if (type['type_id'] == categoryId) { // Convert type_id to String
+//           items.addAll(type['repeateditems'].cast<Map<String, dynamic>>());
+//           // items.addAll(type['repeateditems'].cast<Map<String, dynamic>>());
+//           print('Added items: $items');
+//           break;
+//         }
+//         }
+//       print('Game All Items $items');
+//       return items;
+//     } else {
+//       throw Exception('failed to load data');
+//     }
+//   } catch (e) {
+//     print('Error: $e');
+//     throw Exception('failed to load data');
+//   } finally {
+//     // _isLoading = false;
+//   }
+//    }
 
 
 
@@ -135,10 +233,24 @@ setState(() {});
     // selectedCategory = ''; // Default selected category
     categoriesFuture = pictureRepo.fetchCategories();
     itemsFuture = fetchGameCategories(selectedCategory);
-    
+    // initializeData();
+    itemsFuture2 =  fetchGameCategories2(selectedCategory);
+    // btnItemsFuture = fetchGameBtnData(selectedCategory);
     isLogin();
     
   }
+
+//   void initializeData() async {
+//   try {
+//     Map<String, dynamic> items = await fetchGameCategories2(selectedCategory);
+//     setState(() {
+//       itemsFuture2 = items;
+//     });
+//   } catch (e) {
+//     // Handle error
+//     print(e.toString());
+//   }
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -198,11 +310,12 @@ setState(() {});
                             
                             cat_id = type['id'];
                             print(cat_id);
-                            bool isLocked = !isLogin() &&
-                                index >= 3; // Check if the item is locked
+                            // bool isLocked = !isLogin() &&
+                            //     index >= 3; // Check if the item is locked
+                                bool isLocked = index >= 1;
                             return GestureDetector(
                               onTap: () {
-                                // if (!isLocked) {
+                                if (!isLocked) {
                                   String voiceUrl;
                         if (textVisibilityProvider .isFirstTextVisible) {
                           voiceUrl = '${type['arabic_voice']}';
@@ -228,6 +341,7 @@ setState(() {});
                                   setState(() {
                                     selectedCategory = type['id'];
                                     itemsFuture = fetchGameCategories(selectedCategory);
+                                    itemsFuture2 =  fetchGameCategories2(selectedCategory);
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -235,11 +349,12 @@ setState(() {});
                                             // categoriesFuture: categoriesFuture,
                                             itemsFuture: itemsFuture,
                                             selectedCategory: selectedCategory,
+                                            itemsFuture2: itemsFuture2,
                                           ),
                                         ));
                                   });
-                                },
-                              // },
+                                }
+                              },
                               child: Container(
                                 decoration: BoxDecoration(
                                   // color: isLocked
@@ -265,11 +380,11 @@ setState(() {});
                                         Expanded(
                                           child: CachedNetworkImage(
                                         imageUrl: 
-                                        // isLocked ? 'assets/a.png':
+                                        isLocked ? 'assets/a.png':
                                          type['image'],
                                         errorWidget: (context, url, error) =>
                                             Image.asset(
-                                                // isLocked ? 'assets/a.png' : 
+                                                isLocked ? 'assets/a.png' : 
                                                 'assets/placeholder_not_found.png'),
                                         width: double.infinity,
                                         // height: MediaQuery.of(context).size.height * .4,
