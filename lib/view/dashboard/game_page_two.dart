@@ -82,7 +82,7 @@ class _GamePageTwoState extends State<GamePageTwo> {
 //     }
 //   }
 
-Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
+Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId,) async {
   try {
     // _isLoading = false;
     // print('myshared ${MySharedPrefrence().get_cat_id()}');
@@ -103,6 +103,7 @@ setState(() {});
         setState(() {});
           print('ID2 ${categoryId}');
         if (type['type_id'] == categoryId) { // Convert type_id to String
+          items.addAll(type['items'].cast<Map<String, dynamic>>());
           items.addAll(type['items'].cast<Map<String, dynamic>>());
           print('Added items: $items');
           break;

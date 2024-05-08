@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
+import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,6 +27,7 @@ class _GamePageThreeState extends State<GamePageThree> {
     super.initState();
     _itemsFuture = widget.itemsFuture;
   }
+  String get_item = '';
   // String userid = '';
 
   // bool isLogin() {
@@ -60,49 +63,93 @@ class _GamePageThreeState extends State<GamePageThree> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder(
-              future: _itemsFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: reusableloadingrow(context, true));
-                } else if (!snapshot.hasData) {
-                  return Center(child: Text('No data'));
-                } else {
-                  List<Map<String, dynamic>> items =
-                      snapshot.data as List<Map<String, dynamic>>;
-                  return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10
-                      ),
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      Map<String, dynamic> item = items[index];
-                      return 
-                          Container(
-                            child: Padding(
-                              padding: EdgeInsets.all(MediaQuery.of(context).size.width * .07),
-                              child: Card(
-                                color: colorController.whiteColor,
-                                elevation: 0,
-                                child: Center(child: Image.network(item['image'],height: 150,width: 150,))),
-                            ));
-                       
-                    },
-                  );
-                }
-              },
+      appBar: AppBar(title: Text('Fruits'),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
+
+      body: Container(
+        decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    // eb8815 f5d12d
+                    colorController.bgColorup,
+                    colorController.bgColordown,
+                  ],
+                ),
+              ),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height *1,
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding:  EdgeInsets.all(MediaQuery.of(context).size.width * .05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  reusabletext('Quiz # ', colorController.blackColor, 22),
+                  reusabletext('Score: /10', colorController.blackColor, 22)
+                ],
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: _refreshItems,
-            child: Text('Refresh'),
-          ),
-        ],
+            Container(
+              height: MediaQuery.of(context).size.height * .78,
+              child: 
+              // Expanded(
+              //   child: 
+                FutureBuilder(
+                  future: _itemsFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: reusableloadingrow(context, true));
+                    } else if (!snapshot.hasData) {
+                      return Center(child: Text('No data'));
+                    } else {
+                      List<Map<String, dynamic>> items =
+                          snapshot.data as List<Map<String, dynamic>>;
+                      return Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 30,
+                            mainAxisSpacing: 10
+                            ),
+                          itemCount: items.length,
+                          itemBuilder: (context, index) {
+                            Map<String, dynamic> item = items[index];
+                            return 
+                                Container(
+                                  // height: MediaQuery.of(context).size.height * .75,
+                                  decoration: BoxDecoration(
+                                color: colorController.whiteColor,
+                                borderRadius: BorderRadius.circular(11),
+                                
+                                                              ),
+                                                              child: Center(child: Image.network(item['image'],width: 150,)),
+                                 );
+                             
+                          },
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            // ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                // margin: EdgeInsets.only(bottom: 40),
+                child: ElevatedButton(
+                  onPressed: _refreshItems,
+                  child: Text('Refresh'),
+                ),
+              ),
+            ),
+          ],
+        ),
+        
       ),
     );
   }
@@ -135,7 +182,8 @@ setState(() {});
         setState(() {});
           print('ID2 ${categoryId}');
         if (type['type_id'] == categoryId) { // Convert type_id to String
-          items.addAll(type['items'].cast<Map<String, dynamic>>());
+          // items.addAll(type['items'].cast<Map<String, dynamic>>());
+          items.addAll(type[get_item].cast<Map<String, dynamic>>());
           print('Added items: $items');
           break;
         }
