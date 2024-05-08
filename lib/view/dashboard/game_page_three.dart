@@ -112,31 +112,6 @@ class _GamePageThreeState extends State<GamePageThree> {
 
 
   Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
-
-//     final apiUrl = 'https://eleprogram.turk.pk/api/assignment1.php';
-//     try {
-//       final response = await http.post(
-//         Uri.parse(apiUrl),
-        // body: {
-        //   'type_id':  MySharedPrefrence().get_cat_id().toString(),
-        //   },
-//       );
-
-//       if (response.statusCode == 200) {
-//         final List<Map<String, dynamic>> data =
-//             json.decode(response.body).cast<Map<String, dynamic>>();
-//         print(data);
-//   return 
-//  data;
-//       }
-//        else {
-//         throw Exception('Failed to load data from API');
-//       }
-//     } catch (e) {
-//       throw Exception('Error fetching data: $e');
-//     }
-//   }
-// _isLoading = true;
   try {
     // _isLoading = false;
     // print('myshared ${MySharedPrefrence().get_cat_id()}');
