@@ -113,8 +113,6 @@ class _GamePageThreeState extends State<GamePageThree> {
 
   Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
   try {
-    // _isLoading = false;
-    // print('myshared ${MySharedPrefrence().get_cat_id()}');
     final response = await http.post(
       Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
       body: {
