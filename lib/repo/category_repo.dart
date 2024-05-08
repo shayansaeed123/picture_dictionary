@@ -84,13 +84,16 @@ class PictureRepo{
           .toList();
       return categories;
     } else {
-      return reusabledialog(context, "Error",
-            "Please check your internet connection", "Ok", () {});
+       print('Error');
+       throw Exception('failed to load data');
+      // return reusabledialog(context, "Error",
+      //       "Please check your internet connection", "Ok", () {});
     }
   }catch(e){
     print(e.toString());
-    return reusabledialog(context, "Error",
-            "Please check your internet connection", "Ok", () {});
+    throw Exception('failed to load data');
+    // return reusabledialog(context, "Error",
+    //         "Please check your internet connection", "Ok", () {});
   }finally{
     _isLoading = false;
   }

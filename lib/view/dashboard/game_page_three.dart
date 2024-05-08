@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:http/http.dart' as http;
@@ -72,21 +73,25 @@ class _GamePageThreeState extends State<GamePageThree> {
                 } else {
                   List<Map<String, dynamic>> items =
                       snapshot.data as List<Map<String, dynamic>>;
-                  return ListView.builder(
+                  return GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10
+                      ),
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       Map<String, dynamic> item = items[index];
-                      return Column(
-                        children: [
-                          Center(
-                            child: Text(
-                              item['english'].toString(),
-                              style: TextStyle(color: Colors.black, fontSize: 37),
-                            ),
-                          ),
-                          Image.network(item['image'],height: 150,width: 150,),
-                        ],
-                      );
+                      return 
+                          Container(
+                            child: Padding(
+                              padding: EdgeInsets.all(MediaQuery.of(context).size.width * .07),
+                              child: Card(
+                                color: colorController.whiteColor,
+                                elevation: 0,
+                                child: Center(child: Image.network(item['image'],height: 150,width: 150,))),
+                            ));
+                       
                     },
                   );
                 }
