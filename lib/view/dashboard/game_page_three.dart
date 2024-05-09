@@ -281,10 +281,10 @@ int count = 1;
                         count = 0;
                         setState(() {
                           
-                          if(countValue.toString() > '6'){
-                            reusableAnimation(context, 'assets/congrats.json', 'Next');
+                          if(int.parse(countValue.toString()) >= int.parse('6')){
+                            reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
                           }else{
-                            reusableAnimation(context, 'assets/failed.json', 'Try Again');
+                            reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
                           }
                           // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
                         });

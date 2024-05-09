@@ -21,7 +21,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class GamePageTwo extends StatefulWidget {
-  const GamePageTwo({super.key});
+  GamePageTwo({super.key,});
 
   @override
   State<GamePageTwo> createState() => _GamePageTwoState();
@@ -333,10 +333,15 @@ setState(() {});
                             //  MySharedPrefrence().set_cat_id(type['id']);
                             
                             cat_id = type['id'];
+                            
                             print(cat_id);
+                            
+                            // Unlock the next category if count is greater than or equal to 6
+                           
                             // bool isLocked = !isLogin() &&
                             //     index >= 3; // Check if the item is locked
-                                bool isLocked = index >= 1;
+                                bool isLocked = index >= 1  ;
+                                // bool isLocked = int.parse(widget.countValue) >= 6 ? index+ : ;
                             return GestureDetector(
                               onTap: () {
                                 if (!isLocked) {
