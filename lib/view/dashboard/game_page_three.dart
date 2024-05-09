@@ -6,13 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusableAnimation.dart';
+import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:picture_dictionary/view/dashboard/game_page_two.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GamePageThree extends StatefulWidget {
@@ -301,7 +304,26 @@ int count = 1;
                       decoration: BoxDecoration(image: DecorationImage(
                         
                         image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
-                      child: Center(child: reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22))),
+                      child: Center(child: 
+                      
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      reusabletext('${item['english'].toString().capitalize} | ', colorController.whiteColor, 24.0),
+                                        SizedBox(height: 16.0),
+                                        Row(children: [
+                                          reusableVisibility(reusabletext('${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                                          reusableVisibility(reusabletext('${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                                          reusableVisibility(reusabletext('${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                                        ],),
+                      ]
+                      )
+                      // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
+                      
+                      )),
                   ),
           ],
         );
