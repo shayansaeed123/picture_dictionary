@@ -1,6 +1,7 @@
 
 
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -85,7 +86,29 @@ late Future<Map<String, dynamic>> itemsFuture2;
   late Future<List<Map<String, dynamic>>> itemsFuture;
   // late Future<List<Map<String, dynamic>>> btnItemsFuture;
   String cat_id = '';
-  String userid = '';
+  // String userid = '';
+
+  // bool isLogin() {
+  //   final auth = FirebaseAuth.instance;
+  //   final user = auth.currentUser;
+    
+  //   // String userid = user!.uid.toString();
+  //   // print('User Id $userid');
+  //   if (user != null) {
+  //     userid = user.uid.toString();
+  //     // print('User Id $userid');
+  //     return true;
+  //   }
+  //   // userid = '101';
+  //   // print('shayan id witout login $userid');
+  //   return false;
+  // }
+
+
+  late String userid;
+
+
+
 
   bool isLogin() {
     final auth = FirebaseAuth.instance;
@@ -94,13 +117,24 @@ late Future<Map<String, dynamic>> itemsFuture2;
     // String userid = user!.uid.toString();
     // print('User Id $userid');
     if (user != null) {
-      userid = user.uid.toString();
-      // print('User Id $userid');
+      // userid = user.uid.toString();
+      setState(() {
+        
+      });
+      MySharedPrefrence().set_user_id(user.uid.toString());
+      print('User Id ${MySharedPrefrence().get_user_id()}');
+      setState(() {
+        MySharedPrefrence().get_user_id();
+      });
       return true;
-    }
-    userid = '101';
-    print('shayan id witout login $userid');
+      
+    }else{
+      userid = randomNumber.toString();
+      print('Shayan    $userid');
+      MySharedPrefrence().set_user_id(userid);
     return false;
+    }
+    
   }
 
   Future<Map<String, dynamic>> clearData()async{
@@ -245,10 +279,13 @@ setState(() {});
 
 
 
-   
+     late Random random;
+  late int randomNumber;
 
   @override
   void initState() {
+    random = Random();
+    randomNumber = random.nextInt(100000);
     // fetchData();
     super.initState();
     // selectedCategory = ''; // Default selected category

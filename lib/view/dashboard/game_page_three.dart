@@ -34,10 +34,14 @@ class _GamePageThreeState extends State<GamePageThree> {
   late Future<List<Map<String, dynamic>>> _itemsFuture;
   late Future<Map<String, dynamic>> _itemsFuture2;
    String countValue = '1';
+     late Random random;
+  late int randomNumber;
 
   @override
   void initState() {
     super.initState();
+    random = Random();
+    randomNumber = random.nextInt(100000);
     _itemsFuture = widget.itemsFuture;
     _itemsFuture2 = widget.itemsFuture2;
     items = widget.itemsFuture2;
@@ -54,7 +58,9 @@ class _GamePageThreeState extends State<GamePageThree> {
     // _btnItemsFuture = widget.btnItemsFuture;
   }
   late String userid;
-  
+
+
+
 
   String isLogin() {
     final auth = FirebaseAuth.instance;
@@ -74,7 +80,9 @@ class _GamePageThreeState extends State<GamePageThree> {
       });
       return MySharedPrefrence().get_user_id();
     }else{
-      userid = '101';
+      userid = randomNumber.toString();
+      print('Shayan    $userid');
+      MySharedPrefrence().set_user_id(userid);
     return userid;
     }
     
@@ -181,7 +189,7 @@ int count = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Fruits'),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
+      appBar: AppBar(title: Text('Play'),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
 
       body: Container(
         decoration: BoxDecoration(
@@ -309,14 +317,14 @@ int count = 1;
                       Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                      reusabletext('${item['english'].toString().capitalize} | ', colorController.whiteColor, 24.0),
+                      reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
                                         SizedBox(height: 16.0),
                                         Row(children: [
-                                          reusableVisibility(reusabletext('${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                          reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
                                           Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                                          reusableVisibility(reusabletext('${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                          reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
                                           Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                                          reusableVisibility(reusabletext('${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                          reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
                                           Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
                                         ],),
                       ]
