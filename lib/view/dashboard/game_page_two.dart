@@ -95,13 +95,34 @@ late Future<Map<String, dynamic>> itemsFuture2;
     // print('User Id $userid');
     if (user != null) {
       userid = user.uid.toString();
-      print('User Id $userid');
+      // print('User Id $userid');
       return true;
     }
     userid = '101';
     print('shayan id witout login $userid');
     return false;
   }
+
+  Future<Map<String, dynamic>> clearData()async{
+    final response = await http.post(
+      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/clear_result.php'),
+      body: {
+        'user_id': userid.toString(),
+        // 'type_id': widget.selectedCategory.toString(),
+        // 'item_id_question': questionID.toString(),
+        // 'item_id_answer' : answerID.toString()
+        // MySharedPrefrence().get_cat_id(),
+      },
+      
+    );
+    var data;
+    if(response.statusCode == 200){
+       data = jsonDecode(response.body.toString());
+      print('Clear Data Api Response : ${data}');
+      return data;
+    }
+    return data;
+   }
 
 //   Future<List<Map<String, dynamic>>> fetchTimeWiseData() async {
 
@@ -236,7 +257,10 @@ setState(() {});
     // initializeData();
     itemsFuture2 =  fetchGameCategories2(selectedCategory);
     // btnItemsFuture = fetchGameBtnData(selectedCategory);
-    isLogin();
+    // isLogin();
+      // print('User Id ${MySharedPrefrence().get_user_id()}');
+
+    clearData();
     
   }
 
