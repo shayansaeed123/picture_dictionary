@@ -9,6 +9,7 @@ import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/re_text.dart';
+import 'package:picture_dictionary/res/reusableAnimation.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:picture_dictionary/view/dashboard/game_page_two.dart';
@@ -284,7 +285,9 @@ void gamescore(){
                         count = 0;
                         setState(() {
                           if(countValue == '7'){
-                            
+                            reusableAnimation(context, 'assets/congrats.json', 'Next');
+                          }else{
+                            reusableAnimation(context, 'assets/failed.json', 'Try Again');
                           }
                           // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
                         });
