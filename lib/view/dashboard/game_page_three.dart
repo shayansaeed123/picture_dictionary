@@ -30,6 +30,7 @@ class GamePageThree extends StatefulWidget {
 class _GamePageThreeState extends State<GamePageThree> {
   late Future<List<Map<String, dynamic>>> _itemsFuture;
   late Future<Map<String, dynamic>> _itemsFuture2;
+   String countValue = '1';
 
   @override
   void initState() {
@@ -50,7 +51,7 @@ class _GamePageThreeState extends State<GamePageThree> {
     // _btnItemsFuture = widget.btnItemsFuture;
   }
   late String userid;
-  late int countValue;
+  
 
   String isLogin() {
     final auth = FirebaseAuth.instance;
@@ -112,7 +113,8 @@ class _GamePageThreeState extends State<GamePageThree> {
       var data = jsonDecode(response.body.toString());
       setState(() {
         // Update the global variable with the count value
-        countValue = int.parse(data['count']);
+        // countValue = int.parse(data['count']);
+        countValue = data['count'];
       });
       print('Count Api Response : $data');
       print('User Id ${MySharedPrefrence().get_user_id()}');
@@ -167,15 +169,9 @@ Future<int> getSelectedIndex() async {
 }
 
 int count = 1;
-int score = 0;
 
-void gamescore(){
-  if(answerID == questionID){
-    score++;
-  }else{
-    score = score;
-  }
-}
+
+
 
   
 
@@ -279,12 +275,13 @@ void gamescore(){
                       questionID = item['id'];
                       questionApi();
                       CountApi();
-                      gamescore();
                       _refreshItems();
+                      print('Count value every click $countValue');
                       if(count == 10){
                         count = 0;
                         setState(() {
-                          if(countValue == '7'){
+                          
+                          if(countValue.toString() > '6'){
                             reusableAnimation(context, 'assets/congrats.json', 'Next');
                           }else{
                             reusableAnimation(context, 'assets/failed.json', 'Try Again');
