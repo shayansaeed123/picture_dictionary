@@ -118,14 +118,14 @@ late Future<Map<String, dynamic>> itemsFuture2;
     // print('User Id $userid');
     if (user != null) {
       // userid = user.uid.toString();
-      setState(() {
+      // setState(() {
         
-      });
+      // });
       MySharedPrefrence().set_user_id(user.uid.toString());
       print('User Id ${MySharedPrefrence().get_user_id()}');
-      setState(() {
+      // setState(() {
         MySharedPrefrence().get_user_id();
-      });
+      // });
       return true;
       
     }else{
