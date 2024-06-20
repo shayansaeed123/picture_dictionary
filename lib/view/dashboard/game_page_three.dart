@@ -139,24 +139,6 @@ class _GamePageThreeState extends State<GamePageThree> {
     throw Exception('HTTP error ${response.statusCode}: ${response.reasonPhrase}');
   }
 
-  // if (response.statusCode == 200) {
-  //   try {
-  //     print('object');
-  //     var data = jsonDecode(response.body.toString());
-  //     setState(() {});
-  //     print('Count Api Response : $data');
-  //     print('User Id ${MySharedPrefrence().get_user_id()}');
-  //     return data;
-  //   } catch (e) {
-  //     print('Error parsing JSON: $e');
-  //     // Handle the error, return a default value, or show an error message
-  //     throw Exception('Error $e');
-  //   }
-  // } else {
-  //   print('HTTP error ${response.statusCode}: ${response.reasonPhrase}');
-  //   // Handle the HTTP error, return a default value, or show an error message
-  //   throw Exception('Error $e');
-  // }
 }
 
 
@@ -180,12 +162,6 @@ Future<int> getSelectedIndex() async {
 }
 
 int count = 1;
-
-
-
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -337,195 +313,18 @@ int count = 1;
         );
       }
   }))
-      //   return ListView(
-      //     children: [
-      //       Text('Items:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            // for (var item in items)
-            //   ListTile(
-            //     title: Text(item['english']),
-            //     subtitle: Image.network(item['image']),
-            //   ),
-      //       Text('Repeated Items:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-      //       for (var item in repeatedItems)
-      //         InkWell(
-      //           onTap: () {
-      //             _refreshItems();
-      //           },
-      //           child: ListTile(
-      //             title: Text(item['english']),
-      //             subtitle: Image.network(item['image']),
-      //           ),
-      //         ),
-      //     ],
-      //   );
-      // }
-      //         },)
-      //       ),
-
-            // ListView(
-            //         children: [
-            //           Text('Items:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            //           for (var item in items)
-            //                 ListTile(
-            //   title: Text(item['english']),
-            //   subtitle: Image.network(item['image']),
-            //                 ),
-            //           Text('Repeated Items:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            //           for (var item in repeatedItems)
-            //                 InkWell(
-            //   onTap: (){
-            //     setState(() {
-                  
-            //     });
-            //     initializeData();
-            //     print('object');
-            //     setState(() {
-                  
-            //     });
-            //   },
-            //   child: ListTile(
-            //     title: Text(item['english']),
-            //     subtitle: Image.network(item['image']),
-            //   ),
-            //                 ),
-            //         ],
-            //       )
-            // Container(
-            //   height: MediaQuery.of(context).size.height * .78,
-            //   child: 
-
-            //   // Expanded(
-            //   //   child: 
-            //     FutureBuilder(
-            //       future: _itemsFuture,
-            //       builder: (context, snapshot) {
-            //         if (snapshot.connectionState == ConnectionState.waiting) {
-            //           return Center(child: reusableloadingrow(context, true));
-            //         } else if (!snapshot.hasData) {
-            //           return Center(child: Text('No data'));
-            //         } else {
-            //           List<Map<String, dynamic>> items =
-            //               snapshot.data as List<Map<String, dynamic>>;
-            //           return Padding(
-            //             padding: const EdgeInsets.all(20.0),
-            //             child: GridView.builder(
-            //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //                 crossAxisCount: 2,
-            //                 crossAxisSpacing: 30,
-            //                 mainAxisSpacing: 10
-            //                 ),
-            //               itemCount: items.length -1 ,
-            //               itemBuilder: (context, index) {
-            //                 Map<String, dynamic> item = items[index];
-            //                 print('object${item['id']}');
-            //                 return 
-            //                     Column(
-            //                       children: [
-            //                         Container(
-            //                           // height: MediaQuery.of(context).size.height * .75,
-            //                           decoration: BoxDecoration(
-            //                         color: colorController.whiteColor,
-            //                         borderRadius: BorderRadius.circular(11),
-                                    
-            //                                                       ),
-            //                                                       child: Center(child: Image.network(item['image'],width: 150,)),
-            //                          ),
-            //                         if (index == items.length - 2)... {
-            //    Center(
-            //     child: InkWell(
-            //       onTap: (){
-            //         _refreshItems();
-            //       },
-            //       child: reusabletext(item['english'], colorController.blackColor, 22)),
-            //   ),
-            // }
-            //                         //  reusabletext(item['english'], colorController.blackColor, 22)
-            //                       ],
-            //                     );
-                             
-            //               },
-            //             ),
-            //           );
-            //         }
-            //       },
-            //     ),
-            //   ),
-            // ),
-  //           Expanded(
-  //             child: FutureBuilder(future: _itemsFuture,builder: (context, snapshot) {
-  //               if (snapshot.connectionState == ConnectionState.waiting) {
-  //                     return Center(child: reusableloadingrow(context, true));
-  //                   } else if (!snapshot.hasData) {
-  //                     return Center(child: Text('No data'));
-  //                   } else {
-  //               List<Map<String, dynamic>> items =
-  //                         snapshot.data as List<Map<String, dynamic>>;
-
-  //                         return ListView.builder(
-  //                           itemCount: items.length,
-  //                           itemBuilder: (context, index) {
-  //                           Map<String, dynamic> item = items[index];
-  //                           return InkWell(
-  //                             onTap: (){
-  //                               print('objectbfsdgifggfbliakgSLFGVHJfkdsFVDFVSJDFV ${item['id']}');
-  //                                _refreshItems();
-  //                   // _refreshBtnItems();
-  //                   // hello();
-  //                             },
-  //                             child: Container(
-  //                               decoration: BoxDecoration(
-  //                                 image: DecorationImage(
-  //                                   image: AssetImage('assets/et_bg.png'),
-  //                                   filterQuality: FilterQuality.high,
-  //                                   fit: BoxFit.contain
-  //                                 ),
-  //                               ),
-  //                               child: Center(child: reusabletext(item['english'], colorController.blackColor, 20),)
-  //                             ),
-  //                           ) ;
-  //                         },);
-  // }},)
-  //           )
-
-  
-            // Expanded(
-            //   flex: 1,
-            //   child: Container(
-            //     // margin: EdgeInsets.only(bottom: 40),
-            //     child: ElevatedButton(
-            //       onPressed: (){
-                    // _refreshItems();
-                    // _refreshBtnItems();
-            //       },
-            //       child: Text('Refresh'),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
         
       ),
     );
   }
-
   void _refreshItems(){
     setState(() {
       _itemsFuture2 =  fetchGameCategories2(widget.selectedCategory);
     });
   }
 
- 
-
-// Future<void> _refreshBtnItems() async {
-//     setState(() {
-//       print('kbfjbvkxhbujkf.bjx.kjbf.kbvgf.0');
-//       _btnItemsFuture = fetchGameBtnData(widget.selectedCategory);
-//     });
-//   }
-  // Future<void> hello()async{
-  //   await _refreshItems();
-  //   await _refreshBtnItems();
-  // }
 
 
   Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
@@ -537,22 +336,9 @@ int count = 1;
         // MySharedPrefrence().get_cat_id(),
       },
     );
-// setState(() {});
-//     print('ID1 ${widget.selectedCategory}');
-// setState(() {});
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
       List<Map<String, dynamic>> items = [];
-      // for (var type in jsonResponse) {
-      //   setState(() {});
-      //     print('ID2 ${categoryId}');
-      //   if (type['type_id'] == categoryId) { // Convert type_id to String
-      //     items.addAll(type['items'].cast<Map<String, dynamic>>());
-      //     items.addAll(type['repeateditems'].cast<Map<String, dynamic>>());
-      //     print('Added items: $items');
-      //     break;
-      //   }
-      // }
 
 
       for (var category in jsonResponse) {
@@ -578,45 +364,6 @@ int count = 1;
     // _isLoading = false;
   }
    }
-
-//    Future<List<Map<String, dynamic>>> fetchGameBtnData(String categoryId) async {
-//   try {
-//     final response = await http.post(
-//       Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
-//       body: {
-//         'type_id': widget.selectedCategory.toString(),
-//         // MySharedPrefrence().get_cat_id(),
-//       },
-//     );
-// setState(() {});
-//     print('ID1 ${widget.selectedCategory}');
-// setState(() {});
-//     if (response.statusCode == 200) {
-//       dynamic jsonResponse = jsonDecode(response.body);
-//       List<Map<String, dynamic>> items = [];
-//       for (var type in jsonResponse) {
-//         setState(() {});
-//           print('ID2 ${categoryId}');
-//         if (type['type_id'] == categoryId) { // Convert type_id to String
-//           // items.addAll(type['items'].cast<Map<String, dynamic>>());
-//           items.addAll(type['repeateditems'].cast<Map<String, dynamic>>());
-//           print('Added items: $items');
-//           break;
-//         }
-//       }
-//       print('Game All Items $items');
-      
-//       return items;
-//     } else {
-//       throw Exception('failed to load data');
-//     }
-//   } catch (e) {
-//     print('Error: $e');
-//     throw Exception('failed to load data');
-//   } finally {
-//     // _isLoading = false;
-//   }
-//    }
 
 
   Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {

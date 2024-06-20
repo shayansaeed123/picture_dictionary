@@ -2,11 +2,10 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/common/provider.dart';
-import 'package:picture_dictionary/l10n/l10n.dart';
 import 'package:picture_dictionary/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 void main()async {
@@ -47,14 +46,14 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           fontFamily: 'English1'
         ),
-        supportedLocales: L10n.all,
+        // supportedLocales: L10n.all,
         locale: _locale,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate
-        ],
+        // localizationsDelegates: [
+        //   AppLocalizations.delegate,
+        //   GlobalMaterialLocalizations.delegate,
+        //   GlobalCupertinoLocalizations.delegate,
+        //   GlobalWidgetsLocalizations.delegate
+        // ],
       ),
     );
   }

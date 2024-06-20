@@ -10,7 +10,6 @@ import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/view/dashboard/game_page.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 extension TruncateText on String {
   String truncateWithEllipsis(int maxLength) {

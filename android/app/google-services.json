@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:940006378866:android:7c71cfe04745e7f50721eb",
+        "mobilesdk_app_id": "1:940006378866:android:a0ad42a4dccddc3c0721eb",
         "android_client_info": {
-          "package_name": "com.ideaz.PictureDictionary"
+          "package_name": "com.ideaz.PictureDic"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "940006378866-qcitiu6l7s48ckoklrdnuqg8nlmcvsnj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.ideaz.PictureDictionary",
-            "certificate_hash": "d054473a432c1eb86ca6df66c8c6f3b6a7bc1633"
-          }
-        },
         {
           "client_id": "940006378866-op3agam8k3voutjk5k5ak4diqpjrv3bb.apps.googleusercontent.com",
           "client_type": 3
