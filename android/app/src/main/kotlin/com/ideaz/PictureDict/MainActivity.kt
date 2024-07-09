@@ -1,4 +1,4 @@
-package com.ideaz.PictureDic
+package com.ideaz.PictureDict
 
 import io.flutter.embedding.android.FlutterActivity
 
