@@ -10,6 +10,7 @@ import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/aboutus.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/view/dashboard/game_page.dart';
+import 'package:picture_dictionary/view/dashboard/privacypolicy.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
 import 'package:provider/provider.dart';
 extension TruncateText on String {
@@ -108,7 +109,8 @@ int _selectedIndex = 0;
             leading: Icon(Icons.info),
             title: Text('Privacy Policy'),
             onTap: () {
-              // Handle about tap
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PrivacyPolicy(),));
             },
           ),
           // Spacer(),
