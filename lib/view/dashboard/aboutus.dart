@@ -107,7 +107,7 @@ kendinizide de test edebilirsiniz.
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               reusabletext(aboutusTextEnglish, colorController.whiteColor, 16),
-              Text(aboutusTextUrdu, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu')),
+              Text(aboutusTextUrdu, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu2')),
               Text(aboutusTextArabi, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu')),
               reusabletext(aboutusTextTurkey, colorController.whiteColor, 16),
             ],
