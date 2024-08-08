@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 
@@ -10,7 +11,7 @@ class AboutUs extends StatefulWidget {
 }
 
 class _AboutUsState extends State<AboutUs> {
-  String aboutusText = """
+  String aboutusTextEnglish = """
 English Language:
 Picture Dictionary | PD
 Play And Learn In Four Different Languages
@@ -29,7 +30,8 @@ Picture Dictionary can be used globally, and users from different regions and la
 it for learning purposes.
 PD also has games that can be used for revision. If you are learning fruits’ names through 
 Picture Dictionary, you can take the test for correction in a fun way.
-
+""";
+String aboutusTextUrdu = """
 اردوزابن:
 ابوصتریتغل | یپ ڈی
 ںیلیھک اور اچر فلتخم ااب ںم س ں ںیھک
@@ -48,7 +50,8 @@ Picture Dictionary, you can take the test for correction in a fun way.
 رکےتکس ںیہ۔
 یپ ڈی س ں اےسی لیھک یھب ںیہ وج درہایئ ےک ےیل اامعتسل سوےتکس ںیہ۔ ارگ آپ ابوصت يتغلےک ذرہعی ولھپم ےکانم ھکیس رےہ ںیہ،
 وت آپ رفتیحی ااداا س ں زمدیرتہبی ےک ےیل ٹسییھبےل ےتکس ںیہ۔
-
+""";
+String aboutusTextArabi = """
 عیب زابن: 
 القاموس املصور/یب دی
 العب وتعلم يف أربع لغات خمتلفة.
@@ -69,7 +72,8 @@ Picture Dictionary, you can take the test for correction in a fun way.
 ّ
 مسلي يمكن استخدامها للمراجعة، إذا تتعلم بهذا القاموس أسماء 
 الفواكه فتستطيع أن ختترب نفسك بأسلوب ممتع.
-
+""";
+String aboutusTextTurkey = """
 Türkçe : 
 Resimli sözlük/PD 
 Oynayarak dört farklı dil öğren.
@@ -93,14 +97,21 @@ kendinizide de test edebilirsiniz.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('About Us'),),
       backgroundColor: colorController.bgColorup,
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            reusabletext(aboutusText, colorController.whiteColor, 14),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              reusabletext(aboutusTextEnglish, colorController.whiteColor, 16),
+              Text(aboutusTextUrdu, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu')),
+              Text(aboutusTextArabi, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu')),
+              reusabletext(aboutusTextTurkey, colorController.whiteColor, 16),
+            ],
+          ),
         ),
       ),
     );

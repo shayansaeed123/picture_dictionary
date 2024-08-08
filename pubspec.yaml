@@ -102,6 +102,9 @@ flutter:
       fonts:
         # - asset: assets/fonts/eng_1_tragic_marker.ttf
         - asset: assets/fonts/eng_2_magistral.ttf
+    - family: urdu
+      fonts:
+        - asset: assets/fonts/Traditional Naskh Regular.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
