@@ -123,20 +123,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         } else {
                           voiceUrl = '${type['english_voice']}';
                         }
-
                         pictureRepo.playAudioFromUrl(voiceUrl);
-                                  // if(Provider.of<TextVisibilityProvider>(context).isFirstTextVisible){
-                                  //   pictureRepo.playAudioFromUrl('${type['arabic_voice']}');
-                                  // }else if(Provider.of<TextVisibilityProvider>(context).isThirdTextVisible){
-                                  //   pictureRepo.playAudioFromUrl('${type['urdu_voice']}');
-                                  // }else if(Provider.of<TextVisibilityProvider>(context).isForTextVisible){
-                                  //   pictureRepo.playAudioFromUrl('${type['turkish_voice']}');
-                                  // }else{
-                                  //   pictureRepo.playAudioFromUrl(
-                                  //     '${type['english_voice']}');
-                                  // }
-                                  
-
                                   setState(() {
                                     selectedCategory = type['english'];
                                     itemsFuture = pictureRepo
