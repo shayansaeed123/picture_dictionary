@@ -17,11 +17,8 @@ import 'package:picture_dictionary/view/login/login_signup.dart';
 import 'package:provider/provider.dart';
 
 class SideBar extends StatefulWidget {
-  //  final VoidCallback fetchDataCallback;
-  // final List<String> categories;
   const SideBar({
     super.key,
-    //  required this.fetchDataCallback, required this.categories
   });
 
   @override
@@ -193,8 +190,4 @@ class _SideBarState extends State<SideBar> {
     );
   }
 
-  // Future<void> _handleSignOut() async {
-  //   GoogleSignIn _googleSignIn = GoogleSignIn();
-  //   await _googleSignIn.signOut();
-  // }
 }
