@@ -22,7 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _userController = TextEditingController();
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
   String _errorMessage = '';
 
   final _formKey = GlobalKey<FormState>();
@@ -136,7 +135,6 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
               ),
-              // margin: EdgeInsets.all(10.0),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: SingleChildScrollView(
@@ -243,7 +241,6 @@ class _LoginPageState extends State<LoginPage> {
                                         width: 4)),
                                 errorBorder: InputBorder.none,
                                 disabledBorder: InputBorder.none,
-                                // contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 30),
                               ),
                               keyboardType: TextInputType.emailAddress,
                             ),
