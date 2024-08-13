@@ -31,28 +31,6 @@
 //   }
 // }
 
-// Future<User?> logIn(String email, String password) async {
-//   FirebaseAuth _auth = FirebaseAuth.instance;
-//   FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-//   try {
-//     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-//         email: email, password: password);
-
-//     print("Login Sucessfull");
-//     _firestore
-//         .collection('users')
-//         .doc(_auth.currentUser!.uid)
-//         .get()
-//         .then((value) => userCredential.user!.updateDisplayName(value['name']));
-
-//     return userCredential.user;
-//   } catch (e) {
-//     print(e);
-//     return null;
-//   }
-// }
-
 // Future logOut(BuildContext context) async {
 //   FirebaseAuth _auth = FirebaseAuth.instance;
 
