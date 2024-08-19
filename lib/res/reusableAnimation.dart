@@ -15,8 +15,9 @@ import 'package:picture_dictionary/view/dashboard/game_page_two.dart';
       actions: [
         ElevatedButton(
           onPressed: () {
-      Navigator.of(context).pop();
-Navigator.of(context).pop();
+      Navigator.pop(context, countValue);
+      Navigator.pop(context, countValue);
+// Navigator.of(context).pop();
           },
           child: Text(btntxt),
         ),

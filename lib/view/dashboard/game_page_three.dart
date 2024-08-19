@@ -33,7 +33,7 @@ class GamePageThree extends StatefulWidget {
 class _GamePageThreeState extends State<GamePageThree> {
   late Future<List<Map<String, dynamic>>> _itemsFuture;
   late Future<Map<String, dynamic>> _itemsFuture2;
-   String countValue = '1';
+   String countValue = '0';
      late Random random;
   late int randomNumber;
 
@@ -209,107 +209,109 @@ int count = 1;
         print('userId ${MySharedPrefrence().get_user_id()}');
         print('type_id ${widget.selectedCategory.toString()}');
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GridView(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10),
-            
-              children: [
-                // for (var item in items)
-                
-                for (int index = 0; index < items.length; index++)
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
-                    child: InkWell(
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GridView(
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10),
+              
+                children: [
+                  // for (var item in items)
+                  
+                  for (int index = 0; index < items.length; index++)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
+                      child: InkWell(
+                        onTap: (){
+                          
+                          setState(() {
+                            selectedContainerIndex = index;
+                             
+                          });
+                          answerID = items[index]['id'];
+                          saveSelectedIndex(index);
+                        },
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * .45,
+                          decoration: BoxDecoration(
+                            // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
+                            color: colorController.whiteColor,
+                            borderRadius: BorderRadius.circular(13),
+                            border: Border.all(
+                      color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
+                      width: 2,
+                    ),
+                          ),
+                          child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
+                            return Image.asset('assets/placeholder_not_found.png');
+                          },)
+                          ),
+                      ),
+                    ),
+                  
+                ],
+                 ),
+                 SizedBox(height: MediaQuery.of(context).size.height * .01,),
+                 for (var item in repeatedItems)
+                    InkWell(
                       onTap: (){
+                        questionID = item['id'];
+                        questionApi();
+                        CountApi();
+                        _refreshItems();
+                        print('Count value every click $countValue');
+                        if(count == 10){
+                          count = 0;
+                          setState(() {
+                            
+                            if(int.parse(countValue.toString()) >= int.parse('6')){
+                              reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
+                            }else{
+                              reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
+                            }
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
+                          });
+                        }else{
+                          setState(() {
+                            count++;
+                          });
+                        }
                         
-                        setState(() {
-                          selectedContainerIndex = index;
-                           
-                        });
-                        answerID = items[index]['id'];
-                        saveSelectedIndex(index);
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * .45,
-                        decoration: BoxDecoration(
-                          // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                          color: colorController.whiteColor,
-                          borderRadius: BorderRadius.circular(13),
-                          border: Border.all(
-                    color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                    width: 2,
-                  ),
-                        ),
-                        child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
-                          return Image.asset('assets/placeholder_not_found.png');
-                        },)
-                        ),
-                    ),
-                  ),
-                
-              ],
-               ),
-               SizedBox(height: MediaQuery.of(context).size.height * .02,),
-               for (var item in repeatedItems)
-                  InkWell(
-                    onTap: (){
-                      questionID = item['id'];
-                      questionApi();
-                      CountApi();
-                      _refreshItems();
-                      print('Count value every click $countValue');
-                      if(count == 10){
-                        count = 0;
-                        setState(() {
+                        height: MediaQuery.of(context).size.height * .25,
+                        width: MediaQuery.of(context).size.width * .8,
+                        decoration: BoxDecoration(image: DecorationImage(
                           
-                          if(int.parse(countValue.toString()) >= int.parse('6')){
-                            reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
-                          }else{
-                            reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
-                          }
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
-                        });
-                      }else{
-                        setState(() {
-                          count++;
-                        });
-                      }
-                      
-                    },
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * .25,
-                      width: MediaQuery.of(context).size.width * .8,
-                      decoration: BoxDecoration(image: DecorationImage(
+                          image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
+                        child: Center(child: 
                         
-                        image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
-                      child: Center(child: 
-                      
-                      Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                      reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
-                                        SizedBox(height: 16.0),
-                                        Row(children: [
-                                          reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                          Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                                          reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                          Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                                          reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
-                                          Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-                                        ],),
-                      ]
-                      )
-                      // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
-                      
-                      )),
-                  ),
-          ],
+                        Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                        reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
+                                          SizedBox(height: 16.0),
+                                          Row(children: [
+                                            reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                            Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                                            reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                            Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                                            reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                                          ],),
+                        ]
+                        )
+                        // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
+                        
+                        )),
+                    ),
+            ],
+          ),
         );
       }
   }))

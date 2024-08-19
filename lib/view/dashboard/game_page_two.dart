@@ -74,7 +74,8 @@ late Future<Map<String, dynamic>> itemsFuture2;
   List<dynamic> item = [];
 
   late int id;
-
+  // String? receivedCountValue;
+  // int unlockedCategoryIndex = -1;
   String selectedCategory = '';
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
@@ -168,17 +169,6 @@ setState(() {});
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
       List<Map<String, dynamic>> items = [];
-      // for (var type in jsonResponse) {
-      //   setState(() {});
-      //     print('ID2 ${categoryId}');
-      //   if (type['type_id'] == categoryId) { // Convert type_id to String
-      //     items.addAll(type['items'].cast<Map<String, dynamic>>());
-      //     items.addAll(type['repeateditems'].cast<Map<String, dynamic>>());
-      //     print('Added items: $items');
-      //     break;
-      //   }
-      //   }
-
       for (var category in jsonResponse) {
         if (category['type_id'] == categoryId) {
           items.addAll(category['items'].cast<Map<String, dynamic>>());
@@ -285,8 +275,12 @@ setState(() {});
                             
                             print(cat_id);
                             
+                            
                             // Unlock the next category if count is greater than or equal to 6
-                           
+                          //  bool isLocked = receivedCountValue != null &&
+                          //     int.parse(receivedCountValue!) >= 6
+                          // ? false
+                          // : index >= 1;
                             // bool isLocked = !isLogin() &&
                             //     index >= 3; // Check if the item is locked
                                 bool isLocked = index >= 1  ;
@@ -330,15 +324,19 @@ setState(() {});
                                             itemsFuture2: itemsFuture2,
                                           ),
                                         ));
+                              //           .then((returnedValue) {
+                              //   // Get the countValue from PageThree
+                              //   if (returnedValue != null) {
+                              //     setState(() {
+                              //       receivedCountValue = returnedValue;
+                              //     });
+                              //   }
+                              // });
                                   });
                                 }
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  // color: isLocked
-                                  //     ? Colors.grey
-                                  //     : colorController
-                                  //         .whiteColor, // Use different color for locked items
                                   color: colorController.whiteColor,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
