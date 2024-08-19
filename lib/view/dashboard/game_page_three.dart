@@ -66,8 +66,6 @@ class _GamePageThreeState extends State<GamePageThree> {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     
-    // String userid = user!.uid.toString();
-    // print('User Id $userid');
     if (user != null) {
       // userid = user.uid.toString();
       setState(() {
