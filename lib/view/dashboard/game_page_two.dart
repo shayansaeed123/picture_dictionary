@@ -79,32 +79,9 @@ late Future<Map<String, dynamic>> itemsFuture2;
   String selectedCategory = '';
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
-  // late Future<List<Map<String, dynamic>>> btnItemsFuture;
   String cat_id = '';
-  // String userid = '';
-
-  // bool isLogin() {
-  //   final auth = FirebaseAuth.instance;
-  //   final user = auth.currentUser;
-    
-  //   // String userid = user!.uid.toString();
-  //   // print('User Id $userid');
-  //   if (user != null) {
-  //     userid = user.uid.toString();
-  //     // print('User Id $userid');
-  //     return true;
-  //   }
-  //   // userid = '101';
-  //   // print('shayan id witout login $userid');
-  //   return false;
-  // }
-
-
   late String userid;
-
-
-
-
+  
   bool isLogin() {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
