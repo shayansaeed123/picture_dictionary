@@ -137,12 +137,7 @@ late Future<Map<String, dynamic>> itemsFuture2;
       Uri.parse('https://kulyatudawah.com/public/vocgame/apis/clear_result.php'),
       body: {
         'user_id': userid.toString(),
-        // 'type_id': widget.selectedCategory.toString(),
-        // 'item_id_question': questionID.toString(),
-        // 'item_id_answer' : answerID.toString()
-        // MySharedPrefrence().get_cat_id(),
       },
-      
     );
     var data;
     if(response.statusCode == 200){
