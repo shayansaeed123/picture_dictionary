@@ -87,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
       if(isLoginPage){
        UserCredential userCredential = await auth.signInWithEmailAndPassword(email: _emailController.text.toString(), password: _passwordController.text.toString());
        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
+       
       }else{
        await auth.createUserWithEmailAndPassword(email: _emailController.text.toString(), password: _passwordController.text.toString());
         isLoginPage = true;
