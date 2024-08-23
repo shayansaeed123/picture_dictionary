@@ -203,12 +203,15 @@ int _selectedIndex = 0;
             top: MediaQuery.of(context).size.height * 0.12,
             left: MediaQuery.of(context).size.width * 0.1,
             right: MediaQuery.of(context).size.width * 0.1,
-            child: CircleAvatar(
-              // backgroundColor: Colors.cyan,
-              radius: MediaQuery.of(context).size.height * 0.065,
-              child: Image.asset('assets/bok1.png'),
-              // child: Icon(Icons.book_outlined,size: 40,),
-              )
+            child: InkWell(
+              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriesPage(),));},
+              child: CircleAvatar(
+                // backgroundColor: Colors.cyan,
+                radius: MediaQuery.of(context).size.height * 0.065,
+                child: Image.asset('assets/bok1.png'),
+                // child: Icon(Icons.book_outlined,size: 40,),
+                ),
+            )
             ),
             // Content
           Positioned(
@@ -274,10 +277,13 @@ int _selectedIndex = 0;
             top: MediaQuery.of(context).size.height * 0.46,
             left: MediaQuery.of(context).size.width * 0.1,
             right: MediaQuery.of(context).size.width * 0.1,
-            child: CircleAvatar(
-              // backgroundColor: Colors.cyan,
-            radius: MediaQuery.of(context).size.height * 0.065,
-            child: Image.asset('assets/con.png'),
+            child: InkWell(
+              onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Games(),));},
+              child: CircleAvatar(
+                // backgroundColor: Colors.cyan,
+              radius: MediaQuery.of(context).size.height * 0.065,
+              child: Image.asset('assets/con.png'),
+              ),
             )
           )
         ],

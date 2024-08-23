@@ -17,18 +17,19 @@ import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/game_page_three.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
+import 'package:picture_dictionary/view/dashboard/voice_game_two.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
-class GamePageTwo extends StatefulWidget {
-  const GamePageTwo({super.key});
+class voicegameone extends StatefulWidget {
+  const voicegameone({super.key});
 
   @override
-  State<GamePageTwo> createState() => _GamePageTwoState();
+  State<voicegameone> createState() => _GamePageTwoState();
 }
 
-class _GamePageTwoState extends State<GamePageTwo> {
+class _GamePageTwoState extends State<voicegameone> {
 
   Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {
   try {
@@ -270,7 +271,7 @@ int unlockedIndex = 0;
 
              final result = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => GamePageThree( 
+              MaterialPageRoute(builder: (context) => voicegametwo( 
                 itemsFuture: itemsFuture,
                 selectedCategory: selectedCategory,
                 itemsFuture2: itemsFuture2,)),

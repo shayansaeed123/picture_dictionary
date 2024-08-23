@@ -53,6 +53,7 @@ dependencies:
   rename_app: ^1.3.2
   change_app_package_name: 
   shared_preferences:
+  just_audio: 
 
 dev_dependencies:
   flutter_test:

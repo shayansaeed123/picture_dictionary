@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,19 +19,21 @@ import 'package:picture_dictionary/view/dashboard/game_page_two.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class GamePageThree extends StatefulWidget {
+import '../../res/audioplayer.dart';
+
+class voicegametwo extends StatefulWidget {
   final String selectedCategory;
   final Future<List<Map<String, dynamic>>> itemsFuture;
   final Future<Map<String, dynamic>> itemsFuture2;
-  const GamePageThree({Key? key,required this.selectedCategory, required this.itemsFuture,
+  const voicegametwo({Key? key,required this.selectedCategory, required this.itemsFuture,
   required this.itemsFuture2
   }) : super(key: key);
 
   @override
-  State<GamePageThree> createState() => _GamePageThreeState();
+  State<voicegametwo> createState() => _GamePageThreeState();
 }
 
-class _GamePageThreeState extends State<GamePageThree> {
+class _GamePageThreeState extends State<voicegametwo> {
   late Future<List<Map<String, dynamic>>> _itemsFuture;
   late Future<Map<String, dynamic>> _itemsFuture2;
    String countValue = '0';
@@ -85,7 +88,7 @@ class _GamePageThreeState extends State<GamePageThree> {
 
   Future<Map<String, dynamic>> questionApi()async{
     final response = await http.post(
-      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/add_question_answers_status.php'),
+      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/add_question_answers_status_voice.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id(),
         'type_id': widget.selectedCategory.toString(),
@@ -108,7 +111,7 @@ class _GamePageThreeState extends State<GamePageThree> {
 
    Future<Map<String, dynamic>> CountApi() async {
   final response = await http.post(
-    Uri.parse('https://kulyatudawah.com/public/vocgame/apis/count_question_answers.php'),
+    Uri.parse('https://kulyatudawah.com/public/vocgame/apis/count_question_answers_voice.php'),
     body: {
       'user_id': MySharedPrefrence().get_user_id(),
       'type_id': widget.selectedCategory.toString(),
@@ -136,6 +139,17 @@ class _GamePageThreeState extends State<GamePageThree> {
 
 }
 
+
+final AudioPlayer audioPlayer = AudioPlayer();
+  Future<void> playAudioFromUrl(String url) async {
+    await audioPlayer.play(UrlSource(url));
+    if(url == 1){
+      print('succes');
+    }else{
+      print('fail');
+    }
+  }
+
   late Future<Map<String,dynamic>> items;
   late Future<Map<String,dynamic>> repeatedItems;
   String questionID = '';
@@ -153,11 +167,13 @@ Future<int> getSelectedIndex() async {
   return prefs.getInt('selected_index') ?? -1; // Return -1 if the index is not found
 }
 
+
+
 int count = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Play"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
+      appBar: AppBar(title: Text("Voice Game"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
       body: Container(
         decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -203,51 +219,89 @@ int count = 1;
         return SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+           
             children: [
-              GridView(
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10),
-              
-                children: [
-                  // for (var item in items)
-                  
-                  for (int index = 0; index < items.length; index++)
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
-                      child: InkWell(
-                        onTap: (){
-                          
+               SizedBox(height: MediaQuery.of(context).size.height * .01,),
+                 for (var item in repeatedItems)
+                    InkWell(
+                      onTap: (){
+                        questionID = item['id'];
+                        questionApi();
+                        CountApi();
+                        _refreshItems();
+                        print('Count value every click $countValue');
+                        if(count == 10){
+                          count = 0;
                           setState(() {
-                            selectedContainerIndex = index;
-                             
+                            if(int.parse(countValue.toString()) >= int.parse('6')){
+                              reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
+                            }else{
+                              reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
+                            }
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
                           });
-                          answerID = items[index]['id'];
-                          saveSelectedIndex(index);
-                        },
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * .45,
-                          decoration: BoxDecoration(
-                            // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                            color: colorController.whiteColor,
-                            borderRadius: BorderRadius.circular(13),
-                            border: Border.all(
-                      color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                      width: 2,
+                        }else{
+                          setState(() {
+                            count++;
+                          });
+                        }
+                        
+                      },
+                       child: Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: AudioPlayerWidget(
+                                        audioUrl: '${item['english_voice'].toString()}',
+                                      ),
+                       ),
                     ),
-                          ),
-                          child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
-                            return Image.asset('assets/placeholder_not_found.png');
-                          },)
-                          ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 25),
+                child: GridView(
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10),
+                
+                  children: [
+                    // for (var item in items)
+                    
+                    for (int index = 0; index < items.length; index++)
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
+                        child: InkWell(
+                          onTap: (){
+                            
+                            setState(() {
+                              selectedContainerIndex = index;
+                               
+                            });
+                            answerID = items[index]['id'];
+                            saveSelectedIndex(index);
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * .45,
+                            decoration: BoxDecoration(
+                              // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
+                              color: colorController.whiteColor,
+                              borderRadius: BorderRadius.circular(13),
+                              border: Border.all(
+                        color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
+                        width: 2,
                       ),
-                    ),
-                  
-                ],
-                 ),
-                 SizedBox(height: MediaQuery.of(context).size.height * .01,),
+                            ),
+                            child: Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)),
+                            // child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
+                            //   return Image.asset('assets/placeholder_not_found.png');
+                            // },)
+                            ),
+                        ),
+                      ),
+                       ],
+                   ),
+              ),
+               SizedBox(height: MediaQuery.of(context).size.height * .01,),
                  for (var item in repeatedItems)
                     InkWell(
                       onTap: (){
@@ -274,7 +328,7 @@ int count = 1;
                         
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * .25,
+                        height: MediaQuery.of(context).size.height * .19,
                         width: MediaQuery.of(context).size.width * .8,
                         decoration: BoxDecoration(image: DecorationImage(
                           
@@ -284,22 +338,86 @@ int count = 1;
                         Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                        reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
-                                          SizedBox(height: 16.0),
-                                          Row(children: [
-                                            reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-                                          ],),
+                        reusabletext('SUBMIT', colorController.whiteColor, 24.0),
+                                          // SizedBox(height: 16.0),
+                                          // Row(children: [
+                                          //   reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                          //   Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                                          //   reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                          //   Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                                          //   reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                          //   Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                                          // ],),
                         ]
                         )
                         // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
                         
                         )),
                     ),
+                 
+                //  SizedBox(height: MediaQuery.of(context).size.height * .01,),
+                //  for (var item in repeatedItems)
+                //     InkWell(
+                //       onTap: (){
+                //         questionID = item['id'];
+                //         questionApi();
+                //         CountApi();
+                //         _refreshItems();
+                //         print('Count value every click $countValue');
+                //         if(count == 10){
+                //           count = 0;
+                //           setState(() {
+                //             if(int.parse(countValue.toString()) >= int.parse('6')){
+                //               reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
+                //             }else{
+                //               reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
+                //             }
+                //             // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
+                //           });
+                //         }else{
+                //           setState(() {
+                //             count++;
+                //           });
+                //         }
+                        
+                //       },
+                //        child: AudioPlayerWidget(
+                //                       audioUrl: '${item['english_voice'].toString()}',
+                //                     ),
+
+                      
+                      // child: Container(
+                      //   height: MediaQuery.of(context).size.height * .25,
+                      //   width: MediaQuery.of(context).size.width * .8,
+                      //   decoration: BoxDecoration(image: DecorationImage(
+                          
+                      //     image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
+                      //   child: Center(child: 
+                        
+                      //   Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //       AudioPlayerWidget(
+                      //                 audioUrl: '${item['english_voice'].toString()}',
+                      //               ),
+                      
+                      //     //  playAudioFromUrl('${item['english'].toString()}'),
+                      //   // reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0), 
+                      //                     SizedBox(height: 16.0),
+                      //                     Row(children: [
+                      //                       reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                      //                       Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                      //                       reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                      //                       Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                      //                       reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                      //                       Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                      //                     ],),
+                      //   ]
+                      //   )
+                      //   // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
+                        
+                      //   )),
+                    // ),
             ],
           ),
         );
