@@ -174,25 +174,18 @@ setState(() {});
     randomNumber = random.nextInt(100000);
     // fetchData();
     super.initState();
-    // selectedCategory = ''; // Default selected category
     categoriesFuture = pictureRepo.fetchCategories();
     itemsFuture = fetchGameCategories(selectedCategory);
-    // initializeData();
     itemsFuture2 =  fetchGameCategories2(selectedCategory);
-    // btnItemsFuture = fetchGameBtnData(selectedCategory);
-    // isLogin();
-      // print('User Id ${MySharedPrefrence().get_user_id()}');
 
     clearData();
     
   }
 int unlockedIndex = 0; 
-// String receivedCountValue = "7";
 
  String? countValue = "0";
   @override
   Widget build(BuildContext context) {
-    // List<String> categories = item.map((e) => e['english'] as String).toList();
     return Scaffold(
         key: _scaffoldKey,
         // backgroundColor: Color(0xFFffb64d),

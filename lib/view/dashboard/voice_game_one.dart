@@ -180,9 +180,6 @@ setState(() {});
     itemsFuture = fetchGameCategories(selectedCategory);
     // initializeData();
     itemsFuture2 =  fetchGameCategories2(selectedCategory);
-    // btnItemsFuture = fetchGameBtnData(selectedCategory);
-    // isLogin();
-      // print('User Id ${MySharedPrefrence().get_user_id()}');
 
     clearData();
     
