@@ -173,19 +173,15 @@ setState(() {});
   void initState() {
     random = Random();
     randomNumber = random.nextInt(100000);
-    // fetchData();
     super.initState();
-    // selectedCategory = ''; // Default selected category
     categoriesFuture = pictureRepo.fetchCategories();
     itemsFuture = fetchGameCategories(selectedCategory);
-    // initializeData();
     itemsFuture2 =  fetchGameCategories2(selectedCategory);
 
     clearData();
     
   }
 int unlockedIndex = 0; 
-// String receivedCountValue = "7";
 
  String? countValue = "0";
   @override
