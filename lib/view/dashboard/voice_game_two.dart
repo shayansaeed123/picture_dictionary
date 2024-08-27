@@ -247,12 +247,40 @@ int count = 1;
                         }
                         
                       },
-                       child: Padding(
+                       child: Column(
+                        children: [
+                          reusableVisibility(Padding(
                          padding: const EdgeInsets.all(8.0),
                          child: AudioPlayerWidget(
                                         audioUrl: '${item['english_voice'].toString()}',
                                       ),
-                       ),
+                       ), Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
+                       reusableVisibility(Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: AudioPlayerWidget(
+                                        audioUrl: '${item['arabic_voice'].toString()}',
+                                      ),
+                       ), Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
+                       reusableVisibility(Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: AudioPlayerWidget(
+                                        audioUrl: '${item['urdu_voice'].toString()}',
+                                      ),
+                       ), Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
+                       reusableVisibility(Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: AudioPlayerWidget(
+                                        audioUrl: '${item['turkish_voice'].toString()}',
+                                      ),
+                       ), Provider.of<TextVisibilityProvider>(context).isForTextVisible),
+                       reusableVisibility(Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: AudioPlayerWidget(
+                                        audioUrl: '${item['english_voice'].toString()}',
+                                      ),
+                       ), Provider.of<TextVisibilityProvider>(context).englishbtn),
+                        ],
+                       )
                     ),
 
               Padding(
@@ -291,7 +319,21 @@ int count = 1;
                         width: 2,
                       ),
                             ),
-                            child: Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).englishbtn),
+                                reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
+                                reusableVisibility(Center(child: Text(items[index]['arabic'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
+                                reusableVisibility(Center(child: Text(items[index]['urdu'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
+                                reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isForTextVisible),
+                              ],
+                            )
                             // child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
                             //   return Image.asset('assets/placeholder_not_found.png');
                             // },)
