@@ -226,9 +226,9 @@ int count = 1;
                     InkWell(
                       onTap: (){
                         questionID = item['id'];
-                        questionApi();
-                        CountApi();
-                        _refreshItems();
+                        // questionApi();
+                        // CountApi();
+                        // _refreshItems();
                         print('Count value every click $countValue');
                         if(count == 10){
                           count = 0;
