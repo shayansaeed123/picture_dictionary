@@ -334,9 +334,6 @@ int count = 1;
                                 Provider.of<TextVisibilityProvider>(context).isForTextVisible),
                               ],
                             )
-                            // child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
-                            //   return Image.asset('assets/placeholder_not_found.png');
-                            // },)
                             ),
                         ),
                       ),
