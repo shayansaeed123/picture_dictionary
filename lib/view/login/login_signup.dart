@@ -339,11 +339,11 @@ class _LoginPageState extends State<LoginPage> {
                           }),
                           SizedBox(
                               height: MediaQuery.of(context).size.height * 0.02),
-                          // reusableLoginBtn('Sign in With  ', 'assets/google.png',
-                          //     colorController.whiteColor, () {
-                          //   signInWithGoogle();
+                          reusableLoginBtn('Sign in With  ', 'assets/google.png',
+                              colorController.whiteColor, () {
+                            signInWithGoogle();
                             
-                          // })
+                          })
                         ],
                       ),
                     ),
