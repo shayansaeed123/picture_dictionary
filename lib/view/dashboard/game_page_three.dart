@@ -255,6 +255,7 @@ int count = 1;
                         questionApi();
                         CountApi();
                         _refreshItems();
+                        selectedContainerIndex = -1;
                         print('Count value every click $countValue');
                         if(count == 10){
                           count = 0;
@@ -271,16 +272,13 @@ int count = 1;
                             count++;
                           });
                         }
-                        
                       },
                       child: Container(
                         height: MediaQuery.of(context).size.height * .25,
                         width: MediaQuery.of(context).size.width * .8,
                         decoration: BoxDecoration(image: DecorationImage(
-                          
                           image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
                         child: Center(child: 
-                        
                         Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

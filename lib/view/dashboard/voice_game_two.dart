@@ -348,6 +348,7 @@ int count = 1;
                         questionApi();
                         CountApi();
                         _refreshItems();
+                        selectedContainerIndex = -1;
                         print('Count value every click $countValue');
                         if(count == 10){
                           count = 0;
