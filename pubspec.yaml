@@ -110,8 +110,10 @@ flutter:
     - family: urdu2
       fonts:
         - asset: assets/fonts/Jameel Noori Nastaleeq Kasheeda.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+
+    - family: arabicfont
+      fonts:
+        - asset: assets/fonts/UthmanTN1 Ver09.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

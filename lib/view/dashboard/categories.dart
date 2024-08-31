@@ -180,12 +180,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                       reusableCategoryTextBtn(
                                           context, 
                                           '${type['english'].toString().capitalize}',
-                                          colorController.categoryBtnColor),
+                                          colorController.categoryBtnColor,'English1'),
                                       reusableVisibility(
                                         reusableCategoryTextBtn(
                                             context,
                                             '${type['arabic'].toString().capitalize}',
-                                            colorController.arabicTextBtnColor),
+                                            colorController.arabicTextBtnColor,
+                                            'arabicfont',
+                                            ),
                                         Provider.of<TextVisibilityProvider>(
                                                 context)
                                             .isFirstTextVisible,
@@ -194,7 +196,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                         reusableCategoryTextBtn(
                                             context,
                                             '${type['urdu'].toString().capitalize}',
-                                            colorController.urduTextBtnColor),
+                                            colorController.urduTextBtnColor,'urdu2'),
                                         Provider.of<TextVisibilityProvider>(
                                                 context)
                                             .isThirdTextVisible,
@@ -204,7 +206,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                             context,
                                             '${type['turkish'].toString().capitalize}',
                                             colorController
-                                                .turkishTextBtnColor),
+                                                .turkishTextBtnColor,''),
                                         Provider.of<TextVisibilityProvider>(
                                                 context)
                                             .isForTextVisible,
