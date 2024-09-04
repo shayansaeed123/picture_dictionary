@@ -89,12 +89,12 @@ class MySharedPrefrence {
     return ''.val('user_number', getBox: preferences).val;
   }
 
-  void set_user_id(String? user_id) {
-    ''.val('user_id', getBox: preferences).val = user_id ?? '';
+  void set_user_id(int? user_id) {
+    0.val('user_id', getBox: preferences).val = user_id ?? 0;
   }
 
-  String get_user_id() {
-    return ''.val('user_id', getBox: preferences).val;
+  int get_user_id() {
+    return 0.val('user_id', getBox: preferences).val;
   }
 
   void set_user_type(String? user_type) {

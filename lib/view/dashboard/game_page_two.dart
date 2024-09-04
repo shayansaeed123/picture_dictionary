@@ -80,31 +80,28 @@ late Future<Map<String, dynamic>> itemsFuture2;
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
   String cat_id = '';
-  late String userid;
-  
-  bool isLogin() {
+  late int userid;
+
+  int isLogin() {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     
-    // String userid = user!.uid.toString();
-    // print('User Id $userid');
     if (user != null) {
       // userid = user.uid.toString();
-      // setState(() {
+      setState(() {
         
-      // });
-      MySharedPrefrence().set_user_id(user.uid.toString());
-      print('User Id ${MySharedPrefrence().get_user_id()}');
-      // setState(() {
-        MySharedPrefrence().get_user_id();
-      // });
-      return true;
-      
+      });
+      // MySharedPrefrence().set_user_id(user.uid);
+      // print('User Id ${MySharedPrefrence().get_user_id()}');
+      setState(() {
+        
+      });
+      return MySharedPrefrence().get_user_id();
     }else{
-      userid = randomNumber.toString();
+      userid = randomNumber;
       print('Shayan    $userid');
       MySharedPrefrence().set_user_id(userid);
-    return false;
+    return MySharedPrefrence().get_user_id();
     }
     
   }
@@ -113,7 +110,7 @@ late Future<Map<String, dynamic>> itemsFuture2;
     final response = await http.post(
       Uri.parse('https://kulyatudawah.com/public/vocgame/apis/clear_result.php'),
       body: {
-        'user_id': userid.toString(),
+        'user_id': MySharedPrefrence().get_user_id().toString(),
       },
     );
     var data;
@@ -177,7 +174,7 @@ setState(() {});
     categoriesFuture = pictureRepo.fetchCategories();
     itemsFuture = fetchGameCategories(selectedCategory);
     itemsFuture2 =  fetchGameCategories2(selectedCategory);
-
+    print('ghdfg  ${MySharedPrefrence().get_user_id()}');
     clearData();
     
   }
@@ -268,6 +265,7 @@ int unlockedIndex = 0;
                 selectedCategory: selectedCategory,
                 itemsFuture2: itemsFuture2,)),
             );
+            setState(() {});
             if (result != null) {
               setState(() {
                 countValue = result;

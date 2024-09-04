@@ -18,18 +18,19 @@ import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/game_page_three.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/view/dashboard/voice_game_two.dart';
+import 'package:picture_dictionary/view/dashboard/wheel_game_two.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
-class voicegameone extends StatefulWidget {
-  const voicegameone({super.key});
+class wheelgameone extends StatefulWidget {
+  const wheelgameone({super.key});
 
   @override
-  State<voicegameone> createState() => _GamePageTwoState();
+  State<wheelgameone> createState() => _wheelgameoneState();
 }
 
-class _GamePageTwoState extends State<voicegameone> {
+class _wheelgameoneState extends State<wheelgameone> {
 
   Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {
   try {
@@ -174,11 +175,11 @@ setState(() {});
     categoriesFuture = pictureRepo.fetchCategories();
     itemsFuture = fetchGameCategories(selectedCategory);
     itemsFuture2 =  fetchGameCategories2(selectedCategory);
-
     clearData();
     
   }
 int unlockedIndex = 0; 
+// String receivedCountValue = "7";
 
  String? countValue = "0";
   @override
@@ -227,15 +228,11 @@ int unlockedIndex = 0;
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
                           ),
-                          // itemCount: isLogin()
-                          //     ? data.length
-                          //     : 3, // Show all items if logged in, else show only 3
+                    
                           itemCount: data.length > 5 ? data.length - 2 : 0,
-                          // item.length > 5 ? item.length - 2 : 0,
+                      
                           itemBuilder: (context, index) {
   Map<String, dynamic> type = data[index];
-
-  // Determine if the current index should be locked
   bool isLocked = index > unlockedIndex;
 
   return GestureDetector(
@@ -261,7 +258,7 @@ int unlockedIndex = 0;
 
              final result = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => voicegametwo( 
+              MaterialPageRoute(builder: (context) => wheelgametwo( 
                 itemsFuture: itemsFuture,
                 selectedCategory: selectedCategory,
                 itemsFuture2: itemsFuture2,)),
@@ -272,18 +269,7 @@ int unlockedIndex = 0;
                 countValue = result;
               });
             }
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => GamePageThree(
-          //       itemsFuture: itemsFuture,
-          //       selectedCategory: selectedCategory,
-          //       itemsFuture2: itemsFuture2,
-          //     ),
-          //   ),
-          // );
-
-          // If the countValue condition is met, unlock the next index
+         
           if (index == unlockedIndex && int.parse(countValue!) >= 6) {
             unlockedIndex++;
           }
@@ -322,22 +308,24 @@ int unlockedIndex = 0;
             reusableCategoryTextBtn(
               context,
               '${type['english'].toString().capitalize}',
-              colorController.categoryBtnColor,'English1'
+              colorController.categoryBtnColor,
+              'English1',
             ),
             reusableVisibility(
               reusableCategoryTextBtn(
-                                            context,
-                                            '${type['arabic'].toString().capitalize}',
-                                            colorController.arabicTextBtnColor,
-                                            'arabicfont',
-                                            ),
+                context,
+                '${type['arabic'].toString().capitalize}',
+                colorController.arabicTextBtnColor,
+                'arabicfont',
+              ),
               Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,
             ),
             reusableVisibility(
               reusableCategoryTextBtn(
                 context,
                 '${type['urdu'].toString().capitalize}',
-                colorController.urduTextBtnColor,'urdu2'
+                colorController.urduTextBtnColor,
+                'urdu2',
               ),
               Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,
             ),
@@ -345,7 +333,8 @@ int unlockedIndex = 0;
               reusableCategoryTextBtn(
                 context,
                 '${type['turkish'].toString().capitalize}',
-                colorController.turkishTextBtnColor,''
+                colorController.turkishTextBtnColor,
+                '',
               ),
               Provider.of<TextVisibilityProvider>(context).isForTextVisible,
             ),
@@ -355,149 +344,7 @@ int unlockedIndex = 0;
     ),
   );
 },
-                        //   itemBuilder: (context, index) {
-                        //     Map<String, dynamic> type = data[index];
-                        //     // setState(() {});
-                        //     //  MySharedPrefrence().set_cat_id(type['id']);
-                            
-                        //     cat_id = type['id'];
-                            
-                        //     print(cat_id);
-                            
-                            
-                        //     // Unlock the next category if count is greater than or equal to 6
-                        //   //  bool isLocked = receivedCountValue != null &&
-                        //   //     int.parse(receivedCountValue!) >= 6
-                        //   // ? false
-                        //   // : index >= 1;
-                        //     // bool isLocked = !isLogin() &&
-                        //     //     index >= 3; // Check if the item is locked
-                        //         bool isLocked = index >= 1  ;
-                        //         // bool isLocked = int.parse(widget.countValue) >= 6 ? index+ : ;
-                        //     return GestureDetector(
-                        //       onTap: () {
-                        //         if (!isLocked) {
-                        //           String voiceUrl;
-                        // if (textVisibilityProvider .isFirstTextVisible) {
-                        //   voiceUrl = '${type['arabic_voice']}';
-                        // } else if (textVisibilityProvider .isThirdTextVisible) {
-                        //   voiceUrl = '${type['urdu_voice']}';
-                        // } else if (textVisibilityProvider .isForTextVisible) {
-                        //   voiceUrl = '${type['turkish_voice']}';
-                        // } else {
-                        //   voiceUrl = '${type['english_voice']}';
-                        // }
-
-                        // pictureRepo.playAudioFromUrl(voiceUrl);
-                        //           // if(Provider.of<TextVisibilityProvider>(context).isFirstTextVisible){
-                        //           //   pictureRepo.playAudioFromUrl('${type['arabic_voice']}');
-                        //           // }else if(Provider.of<TextVisibilityProvider>(context).isThirdTextVisible){
-                        //           //   pictureRepo.playAudioFromUrl('${type['urdu_voice']}');
-                        //           // }else if(Provider.of<TextVisibilityProvider>(context).isForTextVisible){
-                        //           //   pictureRepo.playAudioFromUrl('${type['turkish_voice']}');
-                        //           // }else{
-                        //           //   pictureRepo.playAudioFromUrl(
-                        //           //     '${type['english_voice']}');
-                        //           // }
-                        //           setState(() {
-                        //             selectedCategory = type['id'];
-                        //             itemsFuture = fetchGameCategories(selectedCategory);
-                        //             itemsFuture2 =  fetchGameCategories2(selectedCategory);
-                        //             Navigator.push(
-                        //                 context,
-                        //                 MaterialPageRoute(
-                        //                   builder: (context) => GamePageThree(
-                        //                     // categoriesFuture: categoriesFuture,
-                        //                     itemsFuture: itemsFuture,
-                        //                     selectedCategory: selectedCategory,
-                        //                     itemsFuture2: itemsFuture2,
-                        //                   ),
-                        //                 ));
-                        //       //           .then((returnedValue) {
-                        //       //   // Get the countValue from PageThree
-                        //       //   if (returnedValue != null) {
-                        //       //     setState(() {
-                        //       //       receivedCountValue = returnedValue;
-                        //       //     });
-                        //       //   }
-                        //       // });
-                        //           });
-                        //         }
-                        //       },
-                        //       child: Container(
-                        //         decoration: BoxDecoration(
-                        //           color: colorController.whiteColor,
-                        //           borderRadius: BorderRadius.circular(10),
-                        //         ),
-                        //         padding: EdgeInsets.all(10),
-                        //         child: Container(
-                        //           width:
-                        //               MediaQuery.of(context).size.width * .44,
-                        //           // height: MediaQuery.of(context).size.height * .6,
-                        //           decoration: BoxDecoration(
-                        //             color: colorController.whiteColor,
-                        //             borderRadius: BorderRadius.circular(11),
-                        //           ),
-                        //           child: Column(
-                        //             mainAxisAlignment: MainAxisAlignment.start,
-                        //             children: [
-                        //               if(isLogin() ==  true || isLogin() == false)...{
-                        //                 Expanded(
-                        //                   child: CachedNetworkImage(
-                        //                 imageUrl: 
-                        //                 isLocked ? 'assets/a.png':
-                        //                  type['image'],
-                        //                 errorWidget: (context, url, error) =>
-                        //                     Image.asset(
-                        //                         isLocked ? 'assets/a.png' : 
-                        //                         'assets/placeholder_not_found.png'),
-                        //                 width: double.infinity,
-                        //                 // height: MediaQuery.of(context).size.height * .4,
-                        //                 fit: BoxFit.contain,
-                        //                 filterQuality: FilterQuality.high,
-                        //                 placeholder: (context, url) =>
-                        //                     Image.asset(
-                        //                         'assets/placeholder_loading.png'),
-                        //               )),
-                        //               reusableCategoryTextBtn(
-                        //                   context, 
-                        //                   '${type['english'].toString().capitalize}',
-                        //                   colorController.categoryBtnColor),
-                        //               reusableVisibility(
-                        //                 reusableCategoryTextBtn(
-                        //                     context,
-                        //                     '${type['arabic'].toString().capitalize}',
-                        //                     colorController.arabicTextBtnColor),
-                        //                 Provider.of<TextVisibilityProvider>(
-                        //                         context)
-                        //                     .isFirstTextVisible,
-                        //               ),
-                        //               reusableVisibility(
-                        //                 reusableCategoryTextBtn(
-                        //                     context,
-                        //                     '${type['urdu'].toString().capitalize}',
-                        //                     colorController.urduTextBtnColor),
-                        //                 Provider.of<TextVisibilityProvider>(
-                        //                         context)
-                        //                     .isThirdTextVisible,
-                        //               ),
-                        //               reusableVisibility(
-                        //                 reusableCategoryTextBtn(
-                        //                     context,
-                        //                     '${type['turkish'].toString().capitalize}',
-                        //                     colorController
-                        //                         .turkishTextBtnColor),
-                        //                 Provider.of<TextVisibilityProvider>(
-                        //                         context)
-                        //                     .isForTextVisible,
-                        //               ),
-                        //               }
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     );
-                        //   },
+                      
                         );
                       }
                     },

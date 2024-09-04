@@ -57,9 +57,9 @@ class _GamePageThreeState extends State<GamePageThree> {
   });
     // _btnItemsFuture = widget.btnItemsFuture;
   }
-  late String userid;
+  late int userid;
 
-  String isLogin() {
+  int isLogin() {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     
@@ -68,17 +68,17 @@ class _GamePageThreeState extends State<GamePageThree> {
       setState(() {
         
       });
-      MySharedPrefrence().set_user_id(user.uid.toString());
-      print('User Id ${MySharedPrefrence().get_user_id()}');
+      // MySharedPrefrence().set_user_id(user.uid);
+      // print('User Id ${MySharedPrefrence().get_user_id()}');
       setState(() {
         
       });
       return MySharedPrefrence().get_user_id();
     }else{
-      userid = randomNumber.toString();
+      userid = randomNumber;
       print('Shayan    $userid');
       MySharedPrefrence().set_user_id(userid);
-    return userid;
+    return MySharedPrefrence().get_user_id();
     }
     
   }
@@ -87,7 +87,7 @@ class _GamePageThreeState extends State<GamePageThree> {
     final response = await http.post(
       Uri.parse('https://kulyatudawah.com/public/vocgame/apis/add_question_answers_status.php'),
       body: {
-        'user_id': MySharedPrefrence().get_user_id(),
+        'user_id': MySharedPrefrence().get_user_id().toString(),
         'type_id': widget.selectedCategory.toString(),
         'item_id_question': questionID.toString(),
         'item_id_answer' : answerID.toString()
@@ -110,7 +110,7 @@ class _GamePageThreeState extends State<GamePageThree> {
   final response = await http.post(
     Uri.parse('https://kulyatudawah.com/public/vocgame/apis/count_question_answers.php'),
     body: {
-      'user_id': MySharedPrefrence().get_user_id(),
+      'user_id': MySharedPrefrence().get_user_id().toString(),
       'type_id': widget.selectedCategory.toString(),
     },
   );
