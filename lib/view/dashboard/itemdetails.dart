@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/common/provider.dart';
+import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableitemdetailsrow.dart';
 import 'package:picture_dictionary/res/reusablenextitembtn.dart';
@@ -50,10 +51,14 @@ String currentImageUrl = ''; // Add this variable to hold the current image URL
   String currentNameAr = '';
   String currentNameUr = '';
   String currentNameTur = ''; // Add this variable to hold the current name
+  String currentNameChi = '';
+  String currentNamePas = ''; 
   String currentVoiceEng = '';
   String currentVoiceAr = '';
   String currentVoiceUr = '';
   String currentVoiceTur = '';
+  String currentVoiceChi = '';
+  String currentVoicePas = '';
 
   @override
   void initState() {
@@ -76,10 +81,14 @@ String currentImageUrl = ''; // Add this variable to hold the current image URL
       currentNameUr = currentItem['urdu'] ?? '';
       currentNameAr = currentItem['arabic'] ?? '';
       currentNameTur = currentItem['turkish'] ?? '';
+      currentNameChi = currentItem['chinese'] ?? '';
+      currentNamePas = currentItem['pashto'] ?? '';
       currentVoiceEng = currentItem['english_voice'] ?? '';
       currentVoiceUr = currentItem['urdu_voice'] ?? '';
       currentVoiceAr = currentItem['arabic_voice'] ?? '';
       currentVoiceTur = currentItem['turkish_voice'] ?? '';
+      currentVoiceChi = currentItem['chinese_voice'] ?? '';
+      currentVoicePas = currentItem['pashto_voice'] ?? '';
     } else {
       // Handle the case when currentItem is null (ID not found)
       currentImageUrl = ''; // Set default image URL or show an error image
@@ -188,6 +197,15 @@ void moveToPreviousItem() {
                             Colors.pink.shade200, context,(){
                               playAudioFromUrl(currentVoiceTur);
                             }),
+
+                            reusableitemdetailsrow('${currentNameChi.toString().toUpperCase()}', colorController.chineseTextBtnColor,
+                            colorController.chineseTextBtnColor, context,(){
+                              playAudioFromUrl(currentVoiceChi);
+                            }),
+                        reusableitemdetailsrow('${currentNamePas.toString().toUpperCase()}', colorController.pashtoTextBtnColor,
+                            colorController.pashtoTextBtnColor, context,(){
+                              playAudioFromUrl(currentVoicePas);
+                            }),
                       ],
                     ),
                   ),
@@ -219,6 +237,10 @@ void moveToPreviousItem() {
                           voiceUrl = '${currentVoiceUr}';
                         } else if (textVisibilityProvider .isForTextVisible) {
                           voiceUrl = '${currentVoiceTur}';
+                        }else if (textVisibilityProvider .isFiveTextVisible) {
+                          voiceUrl = '${currentVoiceChi}';
+                        } else if (textVisibilityProvider .isSixTextVisible) {
+                          voiceUrl = '${currentVoicePas}';
                         } else {
                           voiceUrl = '${currentVoiceEng}';
                         }
@@ -244,6 +266,10 @@ void moveToPreviousItem() {
                           voiceUrl = '${currentVoiceUr}';
                         } else if (textVisibilityProvider .isForTextVisible) {
                           voiceUrl = '${currentVoiceTur}';
+                        }else if (textVisibilityProvider .isFiveTextVisible) {
+                          voiceUrl = '${currentVoiceChi}';
+                        } else if (textVisibilityProvider .isSixTextVisible) {
+                          voiceUrl = '${currentVoicePas}';
                         } else {
                           voiceUrl = '${currentVoiceEng}';
                         }

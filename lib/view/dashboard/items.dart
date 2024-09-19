@@ -153,12 +153,12 @@ PictureRepo pictureRepo = PictureRepo();
                   Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                   ),
 
-                  // reusableVisibility(reusableItemBackground(context, 'assets/octa_round_img.png'),
-                  // Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
-                  // ),
-                  // reusableVisibility(reusableItemBackground(context, 'assets/drag_round_img.png'),
-                  // Provider.of<TextVisibilityProvider>(context).isSixTextVisible,
-                  // ),
+                  reusableVisibility(reusableItemBackground(context, 'assets/octa_round_img.png'),
+                  Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
+                  ),
+                  reusableVisibility(reusableItemBackground(context, 'assets/drag_round_img.png'),
+                  Provider.of<TextVisibilityProvider>(context).isSixTextVisible,
+                  ),
                   
                   
                   // Positioned(
@@ -267,6 +267,15 @@ PictureRepo pictureRepo = PictureRepo();
                            reusableVisibility(reusableItemTextBtn(context, colorController.turkishTextBtnColor, '${item['turkish'].toString().capitalize}',
                            BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,
+                           ),
+
+                            reusableVisibility(reusableItemTextBtn(context, colorController.chineseTextBtnColor, '${item['chinese'].toString().capitalize}',
+                           BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
+                           Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
+                           ),
+                           reusableVisibility(reusableItemTextBtn(context, colorController.pashtoTextBtnColor, '${item['pashto'].toString().capitalize}',
+                           BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
+                           Provider.of<TextVisibilityProvider>(context).isSixTextVisible,
                            ),
                             reusableItemTextBtn(context, colorController.itemsBtnColor, '${item['english'].toString().capitalize}',
                             // BorderRadius.only(bottomLeft: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0), bottomRight: Provider.of<TextVisibilityProvider>(context).isSecondTextVisible == false ?  Radius.circular(0) : Radius.circular(20.0)

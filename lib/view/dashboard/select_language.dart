@@ -44,22 +44,61 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   top: MediaQuery.of(context).size.height * 0.1,
                   left: MediaQuery.of(context).size.width * 0.15,
               right: MediaQuery.of(context).size.width * 0.15,
-              bottom: MediaQuery.of(context).size.height * 0.42,
+              // bottom: MediaQuery.of(context).size.height * 0.42,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Center(
-                        child: GestureDetector(
-                                          onTap: (){
-                         print('ghgf');
-                         Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFirst();
-                         Navigator.pop(context);
-                                          },
-                                        child: Image.asset(
-                                          width: MediaQuery.of(context).size.width * 0.73,
-                                          'assets/ar_tab.png',)),
-                      )
+                      GestureDetector(
+                                        onTap: (){
+                       print('ghgf');
+                       Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFirst();
+                       Navigator.pop(context);
+                                        },
+                                      child: Image.asset(
+                                        width: MediaQuery.of(context).size.width * 0.73,
+                                        'assets/ar_tab.png',)),
+                      GestureDetector(
+                  onTap: (){
+                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowSecond();
+                     Navigator.pop(context);
+                  },
+                child: Image.asset(
+                  width: MediaQuery.of(context).size.width * 0.73,
+                  'assets/eng_tab.png',)),
+                  GestureDetector(
+                  onTap: (){
+                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowThird();
+                     Navigator.pop(context);
+                  },
+                  child: Image.asset(
+                    width: MediaQuery.of(context).size.width * 0.73,
+                    'assets/ur_tab.png',)),
+                    GestureDetector(
+                  onTap: (){
+                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFor();
+                     Navigator.pop(context);
+                  },
+                  child: Image.asset(
+               width: MediaQuery.of(context).size.width * 0.73,
+              'assets/tur_tab.png',)),
+              GestureDetector(
+                  onTap: (){
+                     print('ghgf');
+                     Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFive();
+                     Navigator.pop(context);
+                  },
+                child: Image.asset(
+                  width: MediaQuery.of(context).size.width * 0.73,
+                  'assets/ar_tab.png',)),
+                  InkWell(
+                  onTap: (){
+                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowSix();
+                     Navigator.pop(context);
+                  },
+                child: Image.asset(
+                  width: MediaQuery.of(context).size.width * 0.73,
+                  'assets/eng_tab.png',))
                     ],
                   ),
                 )
