@@ -35,55 +35,106 @@ class _SelectLanguageState extends State<SelectLanguage> {
             // alignment: Alignment.center,
             children: [
               Positioned.fill(
-                top: MediaQuery.of(context).size.height * 0.01,
-              left: MediaQuery.of(context).size.width * 0.15,
-              right: MediaQuery.of(context).size.width * 0.15,
-                child: Image.asset('assets/rope.png',fit: BoxFit.contain,)),
-                Positioned.fill(
                 // top: MediaQuery.of(context).size.height * 0.01,
               left: MediaQuery.of(context).size.width * 0.15,
               right: MediaQuery.of(context).size.width * 0.15,
+                child: Image.asset('assets/rope.png',fit: BoxFit.contain,)),
+
+                Positioned.fill(
+                  top: MediaQuery.of(context).size.height * 0.1,
+                  left: MediaQuery.of(context).size.width * 0.15,
+              right: MediaQuery.of(context).size.width * 0.15,
               bottom: MediaQuery.of(context).size.height * 0.42,
-              child: InkWell(
-                  onTap: (){
-                     print('ghgf');
-                     Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFirst();
-                     Navigator.pop(context);
-                  },
-                child: Image.asset('assets/ar_tab.png',))),
-                Positioned.fill(
-                top: MediaQuery.of(context).size.height * 0.27,
-              left: MediaQuery.of(context).size.width * 0.15,
-              right: MediaQuery.of(context).size.width * 0.15,
-              bottom: MediaQuery.of(context).size.height * 0.32,
-              child: InkWell(
-                  onTap: (){
-                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowSecond();
-                     Navigator.pop(context);
-                  },
-                child: Image.asset('assets/eng_tab.png',))),
-                Positioned.fill(
-                top: MediaQuery.of(context).size.height * 0.53,
-              left: MediaQuery.of(context).size.width * 0.15,
-              right: MediaQuery.of(context).size.width * 0.15,
-              bottom: MediaQuery.of(context).size.height * 0.22,
-                child: InkWell(
-                  onTap: (){
-                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowThird();
-                     Navigator.pop(context);
-                  },
-                  child: Image.asset('assets/ur_tab.png',))),
-                Positioned.fill(
-                top: MediaQuery.of(context).size.height * 0.7,
-              left: MediaQuery.of(context).size.width * 0.15,
-              right: MediaQuery.of(context).size.width * 0.15,
-              // bottom: MediaQuery.of(context).size.height * 0.00001,
-                child: InkWell(
-                  onTap: (){
-                    Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFor();
-                     Navigator.pop(context);
-                  },
-                  child: Image.asset('assets/tur_tab.png',))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Center(
+                        child: GestureDetector(
+                                          onTap: (){
+                         print('ghgf');
+                         Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFirst();
+                         Navigator.pop(context);
+                                          },
+                                        child: Image.asset(
+                                          width: MediaQuery.of(context).size.width * 0.73,
+                                          'assets/ar_tab.png',)),
+                      )
+                    ],
+                  ),
+                )
+              //   Positioned.fill(
+              //   top: MediaQuery.of(context).size.height * 0.00,
+              // left: MediaQuery.of(context).size.width * 0.15,
+              // right: MediaQuery.of(context).size.width * 0.15,
+              // bottom: MediaQuery.of(context).size.height * 0.42,
+              // child: GestureDetector(
+              //     onTap: (){
+              //        print('ghgf');
+              //        Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFirst();
+              //        Navigator.pop(context);
+              //     },
+              //   child: Image.asset('assets/ar_tab.png',))),
+              //   Positioned.fill(
+              //   // top: MediaQuery.of(context).size.height * 0.17,
+              // left: MediaQuery.of(context).size.width * 0.15,
+              // right: MediaQuery.of(context).size.width * 0.15,
+              // // bottom: MediaQuery.of(context).size.height * 0.32,
+              // child: GestureDetector(
+              //     onTap: (){
+              //       Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowSecond();
+              //        Navigator.pop(context);
+              //     },
+              //   child: Image.asset('assets/eng_tab.png',))),
+              //   Positioned.fill(
+              //   top: MediaQuery.of(context).size.height * 0.53,
+              // left: MediaQuery.of(context).size.width * 0.15,
+              // right: MediaQuery.of(context).size.width * 0.15,
+              // // bottom: MediaQuery.of(context).size.height * 0.22,
+              //   child: GestureDetector(
+              //     onTap: (){
+              //       Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowThird();
+              //        Navigator.pop(context);
+              //     },
+              //     child: Image.asset('assets/ur_tab.png',))),
+              //   Positioned.fill(
+              //   top: MediaQuery.of(context).size.height * 0.7,
+              // left: MediaQuery.of(context).size.width * 0.15,
+              // right: MediaQuery.of(context).size.width * 0.15,
+              // // bottom: MediaQuery.of(context).size.height * 0.00001,
+              //   child: GestureDetector(
+              //     onTap: (){
+              //       Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFor();
+              //        Navigator.pop(context);
+              //     },
+              //     child: Image.asset('assets/tur_tab.png',))),
+
+
+
+
+              //      Positioned.fill(
+              //  top: MediaQuery.of(context).size.height * 0.92,
+              // left: MediaQuery.of(context).size.width * 0.15,
+              // right: MediaQuery.of(context).size.width * 0.15,
+              // child: InkWell(
+              //     onTap: (){
+              //        print('ghgf');
+              //        Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowFive();
+              //        Navigator.pop(context);
+              //     },
+              //   child: Image.asset('assets/ar_tab.png',))),
+              //   Positioned.fill(
+              //  top: MediaQuery.of(context).size.height * 0.76,
+              // left: MediaQuery.of(context).size.width * 0.15,
+              // right: MediaQuery.of(context).size.width * 0.15,
+              // child: InkWell(
+              //     onTap: (){
+              //       Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowSix();
+              //        Navigator.pop(context);
+              //     },
+              //   child: Image.asset('assets/eng_tab.png',))),
+
+
               // Positioned(child: child)
             ],
           )

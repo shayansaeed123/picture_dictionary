@@ -120,6 +120,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           voiceUrl = '${type['urdu_voice']}';
                         } else if (textVisibilityProvider .isForTextVisible) {
                           voiceUrl = '${type['turkish_voice']}';
+                        } else if (textVisibilityProvider .isFiveTextVisible) {
+                          voiceUrl = '${type['chinese_voice']}';
+                        } else if (textVisibilityProvider .isSixTextVisible) {
+                          voiceUrl = '${type['pashto_voice']}';
                         } else {
                           voiceUrl = '${type['english_voice']}';
                         }
@@ -210,6 +214,27 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                         Provider.of<TextVisibilityProvider>(
                                                 context)
                                             .isForTextVisible,
+                                      ),
+
+
+                                      reusableVisibility(
+                                        reusableCategoryTextBtn(
+                                            context,
+                                            '${type['chinese'].toString().capitalize}',
+                                            colorController.chineseTextBtnColor,''),
+                                        Provider.of<TextVisibilityProvider>(
+                                                context)
+                                            .isFiveTextVisible,
+                                      ),
+                                      reusableVisibility(
+                                        reusableCategoryTextBtn(
+                                            context,
+                                            '${type['pashto'].toString().capitalize}',
+                                            colorController
+                                                .pashtoTextBtnColor,''),
+                                        Provider.of<TextVisibilityProvider>(
+                                                context)
+                                            .isSixTextVisible,
                                       ),
                                       }
                                     ],

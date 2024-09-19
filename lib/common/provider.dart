@@ -5,11 +5,15 @@ class TextVisibilityProvider with ChangeNotifier {
   bool isSecondTextVisible = false;
   bool isThirdTextVisible = false;
   bool isForTextVisible = false;
+  bool isFiveTextVisible = false;
+  bool isSixTextVisible = false;
   bool englishbtn = true;
   bool eng = false;
   bool ar = false;
   bool ur = false;
   bool tr = false;
+  bool ps = false;
+  bool ch = false;
 
   void toggleFirstTextVisibility() {
     isFirstTextVisible = !isFirstTextVisible;
@@ -31,9 +35,18 @@ class TextVisibilityProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleFiveTextVisibility() {
+    isFiveTextVisible = !isFiveTextVisible;
+    notifyListeners();
+  }
+
+  void toggleSixTextVisibility() {
+    isSixTextVisible = !isSixTextVisible;
+    notifyListeners();
+  }
+
   void toggleEnglishTextVisibility() {
     englishbtn = !englishbtn;
-
     notifyListeners();
   }
 
@@ -57,6 +70,16 @@ class TextVisibilityProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void hideFiveText() {
+    isFiveTextVisible = false;
+    notifyListeners();
+  }
+
+  void hideSixText() {
+    isSixTextVisible = false;
+    notifyListeners();
+  }
+
   void hideEnglishText() {
     englishbtn = !englishbtn;
     notifyListeners();
@@ -68,6 +91,8 @@ class TextVisibilityProvider with ChangeNotifier {
     isThirdTextVisible = true;
     isForTextVisible = false;
     englishbtn = false;
+    isFiveTextVisible = false;
+    isSixTextVisible = false;
     notifyListeners();
   }
   void hideAllTextsAndShowFirst() {
@@ -76,6 +101,8 @@ class TextVisibilityProvider with ChangeNotifier {
     isThirdTextVisible = false;
     isForTextVisible = false;
     englishbtn = false;
+    isFiveTextVisible = false;
+    isSixTextVisible = false;
     notifyListeners();
   }
   void hideAllTextsAndShowSecond() {
@@ -84,6 +111,8 @@ class TextVisibilityProvider with ChangeNotifier {
     isThirdTextVisible = false;
     isForTextVisible = false;
     englishbtn = false;
+    isFiveTextVisible = false;
+    isSixTextVisible = false;
     notifyListeners();
   }
 
@@ -93,6 +122,30 @@ class TextVisibilityProvider with ChangeNotifier {
     isThirdTextVisible = false;
     isForTextVisible = true;
     englishbtn = false;
+    isFiveTextVisible = false;
+    isSixTextVisible = false;
+    notifyListeners();
+  }
+
+  void hideAllTextsAndShowFive() {
+    isFirstTextVisible = false;
+    isSecondTextVisible = false;
+    isThirdTextVisible = false;
+    isForTextVisible = false;
+    englishbtn = false;
+    isFiveTextVisible = true;
+    isSixTextVisible = false;
+    notifyListeners();
+  }
+
+  void hideAllTextsAndShowSix() {
+    isFirstTextVisible = false;
+    isSecondTextVisible = false;
+    isThirdTextVisible = false;
+    isForTextVisible = false;
+    englishbtn = false;
+    isFiveTextVisible = false;
+    isSixTextVisible = true;
     notifyListeners();
   }
 

@@ -18,6 +18,8 @@ class ColorController extends GetxController{
       Color arabicTextBtnColor = Color(0xFF15a79d);
       Color urduTextBtnColor = Color(0xFF4d53ff);
       Color turkishTextBtnColor = Color(0xFFdd46ba);
+      Color chineseTextBtnColor = Color(0xFF9d4766);
+      Color pashtoTextBtnColor = Color(0xFF959d47);
 
 }
 ColorController colorController=Get.put(ColorController());

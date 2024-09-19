@@ -152,6 +152,13 @@ PictureRepo pictureRepo = PictureRepo();
                   reusableVisibility(reusableItemBackground(context, 'assets/drag_round_img.png'),
                   Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                   ),
+
+                  // reusableVisibility(reusableItemBackground(context, 'assets/octa_round_img.png'),
+                  // Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
+                  // ),
+                  // reusableVisibility(reusableItemBackground(context, 'assets/drag_round_img.png'),
+                  // Provider.of<TextVisibilityProvider>(context).isSixTextVisible,
+                  // ),
                   
                   
                   // Positioned(
@@ -194,7 +201,11 @@ PictureRepo pictureRepo = PictureRepo();
                           voiceUrl = '${item['urdu_voice']}';
                         } else if (textVisibilityProvider.isForTextVisible) {
                           voiceUrl = '${item['turkish_voice']}';
-                        } else {
+                        } else if (textVisibilityProvider .isFiveTextVisible) {
+                          voiceUrl = '${item['chinese_voice']}';
+                        } else if (textVisibilityProvider .isSixTextVisible) {
+                          voiceUrl = '${item['pashto_voice']}';
+                        }else {
                           voiceUrl = '${item['english_voice']}';
                         }
                         // playAudioFromUrl('${item['english_voice']}');

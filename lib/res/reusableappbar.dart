@@ -35,9 +35,18 @@ import 'package:provider/provider.dart';
             reusableVisibility(reusablehomeBtn('TUR', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+            reusableVisibility(reusablehomeBtn('CHI', (){
+              Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
+            }), Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,),
+            reusableVisibility(reusablehomeBtn('PAS', (){
+              Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
+            }), Provider.of<TextVisibilityProvider>(context).isSixTextVisible,),
             reusableVisibility(reusablehomeBtn('ENG', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).englishbtn,),
+
+
+            
           ],),
           // Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
           //   return Row(

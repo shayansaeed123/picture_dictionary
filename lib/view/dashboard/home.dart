@@ -191,6 +191,10 @@ int _selectedIndex = 0;
                                           Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
                                           reusableVisibility(reusabletext('| öğrenmek', colorController.homeTxtColor, 24.0), 
                                           Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                                          reusableVisibility(reusabletext('| 學習', colorController.homeTxtColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,),
+                                          reusableVisibility(reusabletext('| زده کړه', colorController.homeTxtColor, 24.0), 
+                                          Provider.of<TextVisibilityProvider>(context).isSixTextVisible,),
                                         ],),
         
                     ],)
@@ -243,6 +247,11 @@ int _selectedIndex = 0;
                                             Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
                                             reusableVisibility(reusabletext('| Oyun oynamak'.truncateWithEllipsis(11), colorController.homeTxtColor, 24.0), 
                                             Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+
+                                            reusableVisibility(reusabletext('| 玩遊戲', colorController.homeTxtColor, 24.0), 
+                                            Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,),
+                                            reusableVisibility(reusabletext('| لوبه وکړئ'.truncateWithEllipsis(11), colorController.homeTxtColor, 24.0), 
+                                            Provider.of<TextVisibilityProvider>(context).isSixTextVisible,),
                     ],),
                 //     Consumer<TextVisibilityProvider>(
                 //           builder: (context, textVisibilityProvider, child) {
