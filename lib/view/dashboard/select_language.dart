@@ -98,7 +98,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   },
                 child: Image.asset(
                   width: MediaQuery.of(context).size.width * 0.73,
-                  'assets/eng_tab.png',))
+                  'assets/pashto.png',))
                     ],
                   ),
                 )
