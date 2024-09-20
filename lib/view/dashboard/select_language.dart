@@ -90,7 +90,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   },
                 child: Image.asset(
                   width: MediaQuery.of(context).size.width * 0.73,
-                  'assets/ar_tab.png',)),
+                  'assets/chinese.png',)),
                   InkWell(
                   onTap: (){
                     Provider.of<TextVisibilityProvider>(context, listen: false).hideAllTextsAndShowSix();
