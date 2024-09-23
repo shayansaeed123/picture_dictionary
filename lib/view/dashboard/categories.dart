@@ -60,7 +60,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
     // List<String> categories = item.map((e) => e['english'] as String).toList();
     return Scaffold(
         key: _scaffoldKey,
-        // backgroundColor: Color(0xFFffb64d),
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
         }, 'CATEGORIES'),
