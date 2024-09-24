@@ -34,7 +34,7 @@ class _GamePageTwoState extends State<voicegameone> {
   Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {
   try {
     final response = await http.post(
-      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
+      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/get_limited_items.php'),
       body: {
         'type_id': selectedCategory.toString(),
       },
@@ -109,7 +109,7 @@ late Future<Map<String, dynamic>> itemsFuture2;
 
   Future<Map<String, dynamic>> clearData()async{
     final response = await http.post(
-      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/clear_result.php'),
+      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/clear_result.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
       },
@@ -127,7 +127,7 @@ Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId,) async
     // _isLoading = false;
     // print('myshared ${MySharedPrefrence().get_cat_id()}');
     final response = await http.post(
-      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
+      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/get_limited_items.php'),
       body: {
         'type_id': selectedCategory.toString(),
         // MySharedPrefrence().get_cat_id(),

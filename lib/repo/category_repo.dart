@@ -11,11 +11,12 @@ class PictureRepo{
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   late BuildContext context;
+  static const baseUrl = 'https://kulyatudawah.com/';
   Future<List<Map<String, dynamic>>> fetchData() async {
     _isLoading = true;
    try{
     _isLoading = false;
-     final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_types.php'));
+     final response = await http.get(Uri.parse('${baseUrl}public/vocgame/apis/get_types.php'));
 
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
@@ -43,7 +44,7 @@ class PictureRepo{
     _isLoading = true;
     try{
       _isLoading = false;
-      final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
+      final response = await http.get(Uri.parse('${baseUrl}public/vocgame/apis/get_items.php'));
 
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);
@@ -74,7 +75,7 @@ class PictureRepo{
     _isLoading = true;
     try{
       _isLoading = false;
-      final response = await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_types.php'));
+      final response = await http.get(Uri.parse('${baseUrl}public/vocgame/apis/get_types.php'));
 
     if (response.statusCode == 200) {
       dynamic jsonResponse = jsonDecode(response.body);

@@ -85,7 +85,7 @@ class _GamePageThreeState extends State<GamePageThree> {
 
   Future<Map<String, dynamic>> questionApi()async{
     final response = await http.post(
-      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/add_question_answers_status.php'),
+      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/add_question_answers_status.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
         'type_id': widget.selectedCategory.toString(),
@@ -108,7 +108,7 @@ class _GamePageThreeState extends State<GamePageThree> {
 
    Future<Map<String, dynamic>> CountApi() async {
   final response = await http.post(
-    Uri.parse('https://kulyatudawah.com/public/vocgame/apis/count_question_answers.php'),
+    Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/count_question_answers.php'),
     body: {
       'user_id': MySharedPrefrence().get_user_id().toString(),
       'type_id': widget.selectedCategory.toString(),
@@ -325,7 +325,7 @@ int count = 1;
   Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
   try {
     final response = await http.post(
-      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
+      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/get_limited_items.php'),
       body: {
         'type_id': widget.selectedCategory.toString(),
         // MySharedPrefrence().get_cat_id(),
@@ -364,7 +364,7 @@ int count = 1;
   Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {
   try {
     final response = await http.post(
-      Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_limited_items.php'),
+      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/get_limited_items.php'),
       body: {
         'type_id': widget.selectedCategory.toString(),
       },

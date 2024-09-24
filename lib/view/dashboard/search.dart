@@ -53,7 +53,7 @@ class _SearchItemState extends State<SearchItem> {
   Future<void> fetchData() async {
     try {
       final response = await http.get(
-          Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_types.php'));
+          Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/get_types.php'));
 
       if (response.statusCode == 200) {
         dynamic jsonResponse = jsonDecode(response.body);
