@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:940006378866:android:7404f609f663f0600721eb",
         "android_client_info": {
-          "package_name": "com.ideaz.PictureDict"
+          "package_name": "com.ideaz.PictureDictt"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "940006378866-nbkbbqdepbcm7ligvmhflgilqhm6034g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ideaz.PictureDict",
+            "package_name": "com.ideaz.PictureDictt",
             "certificate_hash": "d054473a432c1eb86ca6df66c8c6f3b6a7bc1633"
           }
         },

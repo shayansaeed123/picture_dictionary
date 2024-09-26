@@ -116,7 +116,7 @@ Future<int> getSelectedIndex() async {
 
   Future<Map<String, dynamic>> questionApi()async{
     final response = await http.post(
-      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/wheels_add_question_answers_status_voice.php'),
+      Uri.parse('${PictureRepo.baseUrl}apis/wheels_add_question_answers_status_voice.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
         'type_id': widget.selectedCategory.toString(),
@@ -139,7 +139,7 @@ Future<int> getSelectedIndex() async {
 
    Future<Map<String, dynamic>> CountApi() async {
   final response = await http.post(
-    Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/wheels_count_question_answers_voice.php'),
+    Uri.parse('${PictureRepo.baseUrl}apis/wheels_count_question_answers_voice.php'),
     body: {
       'user_id': MySharedPrefrence().get_user_id().toString(),
       'type_id': widget.selectedCategory.toString(),
@@ -366,7 +366,7 @@ Widget build(BuildContext context) {
   Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId) async {
   try {
     final response = await http.post(
-      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/get_limited_items.php'),
+      Uri.parse('${PictureRepo.baseUrl}apis/get_limited_items.php'),
       body: {
         'type_id': widget.selectedCategory.toString(),
         // MySharedPrefrence().get_cat_id(),
@@ -405,7 +405,7 @@ Widget build(BuildContext context) {
   Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {
   try {
     final response = await http.post(
-      Uri.parse('${PictureRepo.baseUrl}public/vocgame/apis/get_limited_items.php'),
+      Uri.parse('${PictureRepo.baseUrl}apis/get_limited_items.php'),
       body: {
         'type_id': widget.selectedCategory.toString(),
       },

@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
  Future<void> verifyuser() async {
-  var url = '${PictureRepo.baseUrl}public/vocgame/apis/verify_app_users.php';
+  var url = '${PictureRepo.baseUrl}apis/verify_app_users.php';
   
   var body = {
     'email': MySharedPrefrence().get_user_email(),
