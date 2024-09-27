@@ -318,48 +318,9 @@ class _SearchItemState extends State<SearchItem> {
   @override
   void initState() {
     super.initState();
-<<<<<<< HEAD
     fetchAllData();
     _searchController.addListener(() {
       onSearchChange(_searchController.text);
-=======
-    selectedCategory = 'Fruits'; // Default selected category
-    categoriesFuture = pictureRepo.fetchCategories();
-    itemsFuture = pictureRepo.fetchItemsByCategory(selectedCategory);
-    items = [];
-    filteredItems = [];
-    fetchData();
-  }
-
-  Future<void> fetchData() async {
-    try {
-      final response = await http.get(
-          Uri.parse('${PictureRepo.baseUrl}apis/get_types.php'));
-
-      if (response.statusCode == 200) {
-        dynamic jsonResponse = jsonDecode(response.body);
-        List<Map<String, dynamic>> listResponse =
-            jsonResponse['types'].cast<Map<String, dynamic>>();
-        setState(() {
-          items = listResponse;
-          filteredItems = items;
-        });
-      } else {
-        throw Exception('Failed to load data');
-      }
-    } catch (e) {
-      print('Error : $e');
-      rethrow;
-    }
-  }
-
-  void filterItems(String query) {
-    setState(() {
-      filteredItems = items
-          .where((item) =>
-              item['english'].toLowerCase().contains(query.toLowerCase()))
-          .toList();
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
     });
   }
 

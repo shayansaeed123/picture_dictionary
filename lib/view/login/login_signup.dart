@@ -7,7 +7,6 @@ import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
-import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusabledailog.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
@@ -123,17 +122,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-<<<<<<< HEAD
   Future<void> verifyuser() async {
-=======
- Future<void> verifyuser() async {
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
-=======
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
->>>>>>> Stashed changes
   var url = '${PictureRepo.baseUrl}apis/verify_app_users.php';
   
   var body = {

@@ -3,7 +3,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/common/provider.dart';
-import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableitemdetailsrow.dart';
 import 'package:picture_dictionary/res/reusablenextitembtn.dart';
@@ -193,18 +192,6 @@ void moveToPreviousItem() {
                             Colors.pink.shade200, context,(){
                               playAudioFromUrl(currentVoiceTur);
                             }),
-<<<<<<< Updated upstream
-
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
-=======
-
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
->>>>>>> Stashed changes
                             reusableitemdetailsrow('${currentNameChi.toString().toUpperCase()}', colorController.chineseTextBtnColor,
                             colorController.chineseTextBtnColor, context,(){
                               playAudioFromUrl(currentVoiceChi);
@@ -244,19 +231,7 @@ void moveToPreviousItem() {
                           voiceUrl = '${currentVoiceUr}';
                         } else if (textVisibilityProvider .isForTextVisible) {
                           voiceUrl = '${currentVoiceTur}';
-<<<<<<< Updated upstream
-                        }else if (textVisibilityProvider .isFiveTextVisible) {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
                         } else if (textVisibilityProvider .isFiveTextVisible) {
-=======
-                        }else if (textVisibilityProvider .isFiveTextVisible) {
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
-=======
-                        }else if (textVisibilityProvider .isFiveTextVisible) {
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
->>>>>>> Stashed changes
                           voiceUrl = '${currentVoiceChi}';
                         } else if (textVisibilityProvider .isSixTextVisible) {
                           voiceUrl = '${currentVoicePas}';
@@ -285,19 +260,7 @@ void moveToPreviousItem() {
                           voiceUrl = '${currentVoiceUr}';
                         } else if (textVisibilityProvider .isForTextVisible) {
                           voiceUrl = '${currentVoiceTur}';
-<<<<<<< Updated upstream
-                        }else if (textVisibilityProvider .isFiveTextVisible) {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
                         } else if (textVisibilityProvider .isFiveTextVisible) {
-=======
-                        }else if (textVisibilityProvider .isFiveTextVisible) {
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
-=======
-                        }else if (textVisibilityProvider .isFiveTextVisible) {
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
->>>>>>> Stashed changes
                           voiceUrl = '${currentVoiceChi}';
                         } else if (textVisibilityProvider .isSixTextVisible) {
                           voiceUrl = '${currentVoicePas}';

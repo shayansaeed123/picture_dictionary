@@ -321,74 +321,11 @@ int count = 1;
                           
                           )),
                       ),
-<<<<<<< HEAD
               ],
             ),
           );
         }
         }))
-=======
-                    ),
-                  
-                ],
-                 ),
-                 SizedBox(height: MediaQuery.of(context).size.height * .01,),
-                 for (var item in repeatedItems)
-                    InkWell(
-                      onTap: (){
-                        questionID = item['id'];
-                        questionApi();
-                        CountApi();
-                        _refreshItems();
-                        selectedContainerIndex = -1;
-                        print('Count value every click $countValue');
-                        if(count == 10){
-                          count = 0;
-                          setState(() {
-                            if(int.parse(countValue.toString()) >= int.parse('6')){
-                              reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
-                            }else{
-                              reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
-                            }
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
-                          });
-                        }else{
-                          setState(() {
-                            count++;
-                          });
-                        }
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * .25,
-                        width: MediaQuery.of(context).size.width * .8,
-                        decoration: BoxDecoration(image: DecorationImage(
-                          image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
-                        child: Center(child: 
-                        Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
-                                          SizedBox(height: 16.0),
-                                          Row(children: [
-                                            reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-
-                                            reusableVisibility(reusabletext('| ${item['chinese'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['pashto'].toString().capitalize}', colorController.whiteColor, 24.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isSixTextVisible,),
-                                          ],),
-                        ]
-                        )
-                        // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
-                        
-                        )),
-                    ),
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
             ],
           ),
           

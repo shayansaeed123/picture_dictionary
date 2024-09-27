@@ -110,12 +110,7 @@ late Future<Map<String, dynamic>> itemsFuture2;
 
   Future<Map<String, dynamic>> clearData()async{
     final response = await http.post(
-<<<<<<< Updated upstream
-=======
       Uri.parse('${PictureRepo.baseUrl}apis/clear_voice_and_wheel_results.php'),
-      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
->>>>>>> Stashed changes
-      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
       },

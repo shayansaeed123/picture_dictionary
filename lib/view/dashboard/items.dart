@@ -155,18 +155,6 @@ PictureRepo pictureRepo = PictureRepo();
                   reusableVisibility(reusableItemBackground(context, 'assets/drag_round_img.png'),
                   Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                   ),
-<<<<<<< Updated upstream
-
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
-=======
-
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
->>>>>>> Stashed changes
                   reusableVisibility(reusableItemBackground(context, 'assets/octa_round_img.png'),
                   Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
                   ),
@@ -283,22 +271,7 @@ PictureRepo pictureRepo = PictureRepo();
                            BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                            ),
-<<<<<<< Updated upstream
-
-                            reusableVisibility(reusableItemTextBtn(context, colorController.chineseTextBtnColor, '${item['chinese'].toString().capitalize}',
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
                            reusableVisibility(reusableItemTextBtn(context, colorController.chineseTextBtnColor, '${item['chinese'].toString().capitalize}',
-=======
-
-                            reusableVisibility(reusableItemTextBtn(context, colorController.chineseTextBtnColor, '${item['chinese'].toString().capitalize}',
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
-=======
-
-                            reusableVisibility(reusableItemTextBtn(context, colorController.chineseTextBtnColor, '${item['chinese'].toString().capitalize}',
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
->>>>>>> Stashed changes
                            BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
                            ),

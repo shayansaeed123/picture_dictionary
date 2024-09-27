@@ -247,135 +247,6 @@ int count = 1;
                   ],
                 ),
               ),
-<<<<<<< Updated upstream
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height *1,
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding:  EdgeInsets.all(MediaQuery.of(context).size.width * .05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  reusabletext('Quiz # $count', colorController.blackColor, 22),
-                  reusabletext('Score: $countValue/10', colorController.blackColor, 22)
-                ],
-              ),
-            ),
-            Expanded(
-              child: FutureBuilder<Map<String, dynamic>>(future: _itemsFuture2,builder: (context, snapshot) {
-                 if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(child: reusableloadingrow(context, true));
-      } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
-      } else {
-        Map<String, dynamic> itemsMap = snapshot.data!;
-        List<dynamic> items = itemsMap['items'];
-        List<dynamic> repeatedItems = itemsMap['repeatedItems'];
-        print('question id $questionID');
-        print('answer id $answerID');
-        print('userId ${MySharedPrefrence().get_user_id()}');
-        print('type_id ${widget.selectedCategory.toString()}');
-
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-           
-            children: [
-               SizedBox(height: MediaQuery.of(context).size.height * .01,),
-                 for (var item in repeatedItems)
-                    InkWell(
-                      onTap: (){
-                        questionID = item['id'];
-                        // questionApi();
-                        // CountApi();
-                        // _refreshItems();
-                        print('Count value every click $countValue');
-                        if(count == 10){
-                          count = 0;
-                          setState(() {
-                            if(int.parse(countValue.toString()) >= int.parse('6')){
-                              reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
-                            }else{
-                              reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
-                            }
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
-                          });
-                        }else{
-                          setState(() {
-                            count++;
-                          });
-                        }
-                        
-                      },
-                       child: Column(
-                        children: [
-                          reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['english_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['arabic_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['urdu_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['turkish_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isForTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['chinese_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['pashto_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['english_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).englishbtn),
-                        ],
-                       )
-                    ),
-
-              Padding(
-                padding: const EdgeInsets.only(top: 25),
-                child: GridView(
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
-                
-                  children: [
-                    // for (var item in items)
-                    
-                    for (int index = 0; index < items.length; index++)
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
-                        child: InkWell(
-                          onTap: (){
-                            
-=======
               Expanded(
                 child: FutureBuilder<Map<String, dynamic>>(future: _itemsFuture2,builder: (context, snapshot) {
                    if (snapshot.connectionState == ConnectionState.waiting) {
@@ -407,7 +278,6 @@ int count = 1;
                           print('Count value every click $countValue');
                           if(count == 10){
                             count = 0;
->>>>>>> Stashed changes
                             setState(() {
                               if(int.parse(countValue.toString()) >= int.parse('6')){
                                 reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
@@ -452,48 +322,12 @@ int count = 1;
                          reusableVisibility(Padding(
                            padding: const EdgeInsets.all(8.0),
                            child: AudioPlayerWidget(
-                                          audioUrl: '${item['chinese_voice'].toString()}',
-                                        ),
-                         ), Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
-                         reusableVisibility(Padding(
-                           padding: const EdgeInsets.all(8.0),
-                           child: AudioPlayerWidget(
-                                          audioUrl: '${item['pashto_voice'].toString()}',
-                                        ),
-                         ), Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
-                         reusableVisibility(Padding(
-                           padding: const EdgeInsets.all(8.0),
-                           child: AudioPlayerWidget(
                                           audioUrl: '${item['english_voice'].toString()}',
                                         ),
                          ), Provider.of<TextVisibilityProvider>(context).englishbtn),
                           ],
                          )
                       ),
-<<<<<<< Updated upstream
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
-                                Provider.of<TextVisibilityProvider>(context).englishbtn),
-                                reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
-                                Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
-                                reusableVisibility(Center(child: Text(items[index]['arabic'],style: TextStyle(fontSize: 18),)), 
-                                Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
-                                reusableVisibility(Center(child: Text(items[index]['urdu'],style: TextStyle(fontSize: 18),)), 
-                                Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
-                                reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
-                                Provider.of<TextVisibilityProvider>(context).isForTextVisible),
-
-                                reusableVisibility(Center(child: Text(items[index]['chinese'],style: TextStyle(fontSize: 18),)), 
-                                Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
-                                reusableVisibility(Center(child: Text(items[index]['pashto'],style: TextStyle(fontSize: 18),)), 
-                                Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
-                              ],
-                            )
-                            ),
-=======
       
                 Padding(
                   padding: const EdgeInsets.only(top: 25),
@@ -529,7 +363,6 @@ int count = 1;
                                 border: Border.all(
                           color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
                           width: 5,
->>>>>>> Stashed changes
                         ),
                               ),
                               child: Column(
@@ -545,11 +378,6 @@ int count = 1;
                                   Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
                                   reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
                                   Provider.of<TextVisibilityProvider>(context).isForTextVisible),
-
-                                  reusableVisibility(Center(child: Text(items[index]['chinese'],style: TextStyle(fontSize: 18),)), 
-                                  Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
-                                  reusableVisibility(Center(child: Text(items[index]['pashto'],style: TextStyle(fontSize: 18),)), 
-                                  Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
                                 ],
                               )
                               ),

@@ -107,19 +107,7 @@ late Future<Map<String, dynamic>> itemsFuture2;
 
   Future<Map<String, dynamic>> clearData()async{
     final response = await http.post(
-<<<<<<< Updated upstream
-      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
       Uri.parse('${PictureRepo.baseUrl}apis/clear_voice_and_wheel_results.php'),
-=======
-      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
-=======
-      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
->>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
->>>>>>> Stashed changes
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
       },
@@ -258,13 +246,6 @@ int unlockedIndex = 0;
           voiceUrl = '${type['urdu_voice']}';
         } else if (textVisibilityProvider.isForTextVisible) {
           voiceUrl = '${type['turkish_voice']}';
-<<<<<<< Updated upstream
-        }else if (textVisibilityProvider.isFiveTextVisible) {
-          voiceUrl = '${type['chinese_voice']}';
-        } else if (textVisibilityProvider.isSixTextVisible) {
-          voiceUrl = '${type['pashto_voice']}';
-        } else {
-=======
         } 
          else if (textVisibilityProvider.isFiveTextVisible) {
           voiceUrl = '${type['chinese_voice']}';
@@ -272,7 +253,6 @@ int unlockedIndex = 0;
           voiceUrl = '${type['pashto_voice']}';
         } 
         else {
->>>>>>> Stashed changes
           voiceUrl = '${type['english_voice']}';
         }
 
@@ -375,12 +355,7 @@ int unlockedIndex = 0;
               Provider.of<TextVisibilityProvider>(context).isForTextVisible,
             ),
 
-<<<<<<< Updated upstream
-
-            reusableVisibility(
-=======
               reusableVisibility(
->>>>>>> Stashed changes
               reusableCategoryTextBtn(
                 context,
                 '${type['chinese'].toString().capitalize}',
