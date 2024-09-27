@@ -23,6 +23,7 @@ class _SplashState extends State<Splash> {
     // TODO: implement initState
     super.initState();
     login(context);
+    print(MySharedPrefrence().get_user_id().toString());
   }
   bool _isLoggedIn = false;
 
@@ -46,7 +47,7 @@ class _SplashState extends State<Splash> {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
 
-    if(user != null){
+    if(MySharedPrefrence().get_user_id() != 0){
       Timer(Duration(seconds: 0), () {
         print('check user login ${user}');
         Navigator.pushReplacement(

@@ -123,7 +123,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           voiceUrl = '${type['chinese_voice']}';
                         } else if (textVisibilityProvider .isSixTextVisible) {
                           voiceUrl = '${type['pashto_voice']}';
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+                        }else {
+=======
+=======
+>>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
+>>>>>>> Stashed changes
                         } else {
+>>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
                           voiceUrl = '${type['english_voice']}';
                         }
                         pictureRepo.playAudioFromUrl(voiceUrl);
@@ -215,7 +225,18 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                             .isForTextVisible,
                                       ),
 
+<<<<<<< Updated upstream
 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
+=======
+
+>>>>>>> d906ecdacf2b9959c47229110c0f2875b2524582
+>>>>>>> Stashed changes
                                       reusableVisibility(
                                         reusableCategoryTextBtn(
                                             context,

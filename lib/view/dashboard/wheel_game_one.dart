@@ -88,7 +88,7 @@ late Future<Map<String, dynamic>> itemsFuture2;
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     
-    if (user != null) {
+    if (MySharedPrefrence().get_user_id() != 0) {
       // userid = user.uid.toString();
       setState(() {
         
@@ -110,6 +110,11 @@ late Future<Map<String, dynamic>> itemsFuture2;
 
   Future<Map<String, dynamic>> clearData()async{
     final response = await http.post(
+<<<<<<< Updated upstream
+=======
+      Uri.parse('${PictureRepo.baseUrl}apis/clear_voice_and_wheel_results.php'),
+      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
+>>>>>>> Stashed changes
       Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
@@ -245,7 +250,13 @@ int unlockedIndex = 0;
           voiceUrl = '${type['urdu_voice']}';
         } else if (textVisibilityProvider.isForTextVisible) {
           voiceUrl = '${type['turkish_voice']}';
-        } else {
+        }
+        else if (textVisibilityProvider.isFiveTextVisible) {
+          voiceUrl = '${type['chinese_voice']}';
+        } else if (textVisibilityProvider.isSixTextVisible) {
+          voiceUrl = '${type['pashto_voice']}';
+        }
+         else {
           voiceUrl = '${type['english_voice']}';
         }
 
@@ -337,6 +348,24 @@ int unlockedIndex = 0;
                 '',
               ),
               Provider.of<TextVisibilityProvider>(context).isForTextVisible,
+            ),
+              reusableVisibility(
+              reusableCategoryTextBtn(
+                context,
+                '${type['chinese'].toString().capitalize}',
+                colorController.chineseTextBtnColor,
+                '',
+              ),
+              Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
+            ),
+            reusableVisibility(
+              reusableCategoryTextBtn(
+                context,
+                '${type['pashto'].toString().capitalize}',
+                colorController.pashtoTextBtnColor,
+                '',
+              ),
+              Provider.of<TextVisibilityProvider>(context).isSixTextVisible,
             ),
           ],
         ),

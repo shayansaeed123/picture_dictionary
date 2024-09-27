@@ -10,6 +10,7 @@ import 'package:picture_dictionary/res/reusabledailog.dart';
 class PictureRepo{
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  static const baseUrl = 'https://alqamoosulmusawwar.com/Backend/';
   late BuildContext context;
   static const baseUrl = 'https://alqamoosulmusawwar.com/Backend/';
   Future<List<Map<String, dynamic>>> fetchData() async {

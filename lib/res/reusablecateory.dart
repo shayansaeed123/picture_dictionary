@@ -1,16 +1,12 @@
-
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 
 Widget reusableCategory(BuildContext context, String imgUrl, String text, Function ontap){
-
   return GestureDetector(
                           onTap: () {
-                            ontap();
+                            ontap(); 
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -48,3 +44,5 @@ Widget reusableCategory(BuildContext context, String imgUrl, String text, Functi
                           ),
                         );
 }
+
+
