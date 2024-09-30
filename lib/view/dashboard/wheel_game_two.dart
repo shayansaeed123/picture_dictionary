@@ -286,6 +286,11 @@ Widget build(BuildContext context) {
                                               Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
                                               reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
                                               Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+
+                                              reusableVisibility(reusabletext('| ${item['chinese'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,),
+                                              reusableVisibility(reusabletext('| ${item['pashto'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isSixTextVisible,),
                                             ],),
                           ]
                           )
