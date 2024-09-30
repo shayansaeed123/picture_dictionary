@@ -15,6 +15,7 @@ Text  reusabletext(String txt, Color clr, double txtsize,) {
 
 class spinkits{
 
+  // ignore: prefer_const_constructors
   SpinKitWave spinKit = SpinKitWave(
   color: Colors.black,
   size: 25,

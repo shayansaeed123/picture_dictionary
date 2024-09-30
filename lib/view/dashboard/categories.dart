@@ -60,6 +60,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
     // List<String> categories = item.map((e) => e['english'] as String).toList();
     return Scaffold(
         key: _scaffoldKey,
+        // backgroundColor: Color(0xFFffb64d),
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
         }, 'CATEGORIES'),
@@ -123,7 +124,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           voiceUrl = '${type['chinese_voice']}';
                         } else if (textVisibilityProvider .isSixTextVisible) {
                           voiceUrl = '${type['pashto_voice']}';
-                        } else {
+                        }else {
                           voiceUrl = '${type['english_voice']}';
                         }
                         pictureRepo.playAudioFromUrl(voiceUrl);
@@ -214,7 +215,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                                 context)
                                             .isForTextVisible,
                                       ),
-
 
                                       reusableVisibility(
                                         reusableCategoryTextBtn(

@@ -63,7 +63,7 @@ class _GamePageThreeState extends State<GamePageThree> {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     
-    if (user != null) {
+    if (MySharedPrefrence().get_user_id() != 0) {
       // userid = user.uid.toString();
       setState(() {
         
@@ -140,6 +140,7 @@ class _GamePageThreeState extends State<GamePageThree> {
   late Future<Map<String,dynamic>> repeatedItems;
   String questionID = '';
   String answerID = '';
+
          int selectedContainerIndex = -1;
          // Function to save the selected index in SharedPreferences
 void saveSelectedIndex(int index) async {
@@ -156,161 +157,179 @@ Future<int> getSelectedIndex() async {
 int count = 1;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Play"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
-      body: Container(
-        decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    // eb8815 f5d12d
-                    colorController.bgColorup,
-                    colorController.bgColordown,
+    return WillPopScope(
+         onWillPop: () async {
+           final response = await http.post(
+      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
+      body: {
+        'user_id': MySharedPrefrence().get_user_id().toString(),
+      },
+    );
+    var data;
+    if(response.statusCode == 200){
+       data = jsonDecode(response.body.toString());
+      print('Clear Data Api Response : ${data}');
+      return true;
+    }
+   
+        return true;
+        
+      },
+      child: Scaffold(
+        appBar: AppBar(title: Text("Play"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
+        body: Container(
+          decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      // eb8815 f5d12d
+                      colorController.bgColorup,
+                      colorController.bgColordown,
+                    ],
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height *1,
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding:  EdgeInsets.all(MediaQuery.of(context).size.width * .05),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    reusabletext('Quiz # $count', colorController.blackColor, 22),
+                    reusabletext('Score: $countValue/10', colorController.blackColor, 22)
                   ],
                 ),
               ),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height *1,
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding:  EdgeInsets.all(MediaQuery.of(context).size.width * .05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  reusabletext('Quiz # $count', colorController.blackColor, 22),
-                  reusabletext('Score: $countValue/10', colorController.blackColor, 22)
-                ],
-              ),
-            ),
-            Expanded(
-              child: FutureBuilder<Map<String, dynamic>>(future: _itemsFuture2,builder: (context, snapshot) {
-                 if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(child: reusableloadingrow(context, true));
-      } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
-      } else {
-        Map<String, dynamic> itemsMap = snapshot.data!;
-        List<dynamic> items = itemsMap['items'];
-        List<dynamic> repeatedItems = itemsMap['repeatedItems'];
-        print('question id $questionID');
-        print('answer id $answerID');
-        print('userId ${MySharedPrefrence().get_user_id()}');
-        print('type_id ${widget.selectedCategory.toString()}');
-
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GridView(
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10),
-              
-                children: [
-                  // for (var item in items)
-                  
-                  for (int index = 0; index < items.length; index++)
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
-                      child: InkWell(
+              Expanded(
+                child: FutureBuilder<Map<String, dynamic>>(future: _itemsFuture2,builder: (context, snapshot) {
+                   if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: reusableloadingrow(context, true));
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else {
+          Map<String, dynamic> itemsMap = snapshot.data!;
+          List<dynamic> items = itemsMap['items'];
+          List<dynamic> repeatedItems = itemsMap['repeatedItems'];
+          print('question id $questionID');
+          print('answer id $answerID');
+          print('userId ${MySharedPrefrence().get_user_id()}');
+          print('type_id ${widget.selectedCategory.toString()}');
+      
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GridView(
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10),
+                
+                  children: [
+                    // for (var item in items)
+                    
+                    for (int index = 0; index < items.length; index++)
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
+                        child: InkWell(
+                          onTap: (){
+                            
+                            setState(() {
+                              selectedContainerIndex = index;
+                               
+                            });
+                            answerID = items[index]['id'];
+                            saveSelectedIndex(index);
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * .45,
+                            decoration: BoxDecoration(
+                              // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
+                              color: colorController.whiteColor,
+                              borderRadius: BorderRadius.circular(13),
+                              border: Border.all(
+                        color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
+                        width: 5,
+                      ),
+                            ),
+                            child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
+                              return Image.asset('assets/placeholder_not_found.png');
+                            },)
+                            ),
+                        ),
+                      ),
+                    
+                  ],
+                   ),
+                   SizedBox(height: MediaQuery.of(context).size.height * .01,),
+                   for (var item in repeatedItems)
+                      InkWell(
                         onTap: (){
-                          
-                          setState(() {
-                            selectedContainerIndex = index;
-                             
-                          });
-                          answerID = items[index]['id'];
-                          saveSelectedIndex(index);
+                          questionID = item['id'];
+                          questionApi();
+                          CountApi();
+                          _refreshItems();
+                          selectedContainerIndex = -1;
+                          print('Count value every click $countValue');
+                          if(count == 10){
+                            count = 0;
+                            setState(() {
+                              if(int.parse(countValue.toString()) >= int.parse('6')){
+                                reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
+                              }else{
+                                reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
+                              }
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
+                            });
+                          }else{
+                            setState(() {
+                              count++;
+                            });
+                          }
                         },
                         child: Container(
-                          height: MediaQuery.of(context).size.height * .45,
-                          decoration: BoxDecoration(
-                            // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                            color: colorController.whiteColor,
-                            borderRadius: BorderRadius.circular(13),
-                            border: Border.all(
-                      color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                      width: 2,
-                    ),
-                          ),
-                          child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
-                            return Image.asset('assets/placeholder_not_found.png');
-                          },)
-                          ),
-                      ),
-                    ),
-                  
-                ],
-                 ),
-                 SizedBox(height: MediaQuery.of(context).size.height * .01,),
-                 for (var item in repeatedItems)
-                    InkWell(
-                      onTap: (){
-                        questionID = item['id'];
-                        questionApi();
-                        CountApi();
-                        _refreshItems();
-                        selectedContainerIndex = -1;
-                        print('Count value every click $countValue');
-                        if(count == 10){
-                          count = 0;
-                          setState(() {
-                            if(int.parse(countValue.toString()) >= int.parse('6')){
-                              reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
-                            }else{
-                              reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
-                            }
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
-                          });
-                        }else{
-                          setState(() {
-                            count++;
-                          });
-                        }
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * .25,
-                        width: MediaQuery.of(context).size.width * .8,
-                        decoration: BoxDecoration(image: DecorationImage(
-                          image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
-                        child: Center(child: 
-                        Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
-                                          SizedBox(height: 16.0),
-                                          Row(children: [
-                                            reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-
-                                            reusableVisibility(reusabletext('| ${item['chinese'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                          height: MediaQuery.of(context).size.height * .25,
+                          width: MediaQuery.of(context).size.width * .8,
+                          decoration: BoxDecoration(image: DecorationImage(
+                            image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
+                          child: Center(child: 
+                          Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
+                                            SizedBox(height: 16.0),
+                                            Row(children: [
+                                              reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                                              reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                                              reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                                              reusableVisibility(reusabletext('| ${item['chinese'].toString().capitalize}', colorController.whiteColor, 22.0), 
                                             Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,),
                                             reusableVisibility(reusabletext('| ${item['pashto'].toString().capitalize}', colorController.whiteColor, 24.0), 
                                             Provider.of<TextVisibilityProvider>(context).isSixTextVisible,),
-                                          ],),
-                        ]
-                        )
-                        // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
-                        
-                        )),
-                    ),
+                                            ],),
+                          ]
+                          )
+                          // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
+                          
+                          )),
+                      ),
+              ],
+            ),
+          );
+        }
+        }))
             ],
           ),
-        );
-      }
-  }))
-          ],
+          
         ),
-        
       ),
     );
   }

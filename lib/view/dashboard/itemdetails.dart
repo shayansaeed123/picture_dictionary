@@ -3,13 +3,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:picture_dictionary/common/provider.dart';
-import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableitemdetailsrow.dart';
 import 'package:picture_dictionary/res/reusablenextitembtn.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:provider/provider.dart';
-
+import 'package:picture_dictionary/controller/color_controller.dart';
 class ItemDetails extends StatefulWidget {
   // String ar_voice ,ur_voice , en_voice, tr_voice , ar_name , ur_name , en_name , tr_name , img;
   int current,id;
@@ -27,6 +26,7 @@ class ItemDetails extends StatefulWidget {
   required this.items,
   required this.current,
   required this.id,
+  required Map<String, dynamic> item,
   });
 
   @override
@@ -73,10 +73,9 @@ String currentImageUrl = ''; // Add this variable to hold the current image URL
     (item) => int.parse(item['id']) == widget.id,
     orElse: () => null!,
   );
-
   setState(() {
     if (currentItem != null) {
-      currentImageUrl = currentItem['image'] ?? '';
+     currentImageUrl = currentItem['image'] ?? '';
       currentNameEng = currentItem['english'] ?? '';
       currentNameUr = currentItem['urdu'] ?? '';
       currentNameAr = currentItem['arabic'] ?? '';
@@ -104,11 +103,10 @@ void moveToNextItem() {
   if (widget.current < widget.items.length ) {
     setState(() {
       widget.current++; // Move to the next ID
-      widget.id = int.parse(widget.items[widget.current]['id']); // Update ID
+      widget.id = int.parse(widget.items[widget.current]['id']);
       print(widget.id);
-      updateImageAndName(); // Update image and name when ID changes
+      updateImageAndName();
     });
-    // Fetch data for the new ID from the API
     // fetchData(currentItemId);
   }
 }
@@ -117,17 +115,14 @@ void moveToPreviousItem() {
   if (widget.current > 0) {
     setState(() {
       widget.current--; 
-      widget.id = int.parse(widget.items[widget.current]['id']); // Update ID
+      widget.id = int.parse(widget.items[widget.current]['id']);
       print(widget.id);
-      updateImageAndName(); // Update image and name when ID changes
+      updateImageAndName();
       // print('hello');
     });
-
     // fetchData(currentItemId);
   }
 }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,7 +192,6 @@ void moveToPreviousItem() {
                             Colors.pink.shade200, context,(){
                               playAudioFromUrl(currentVoiceTur);
                             }),
-
                             reusableitemdetailsrow('${currentNameChi.toString().toUpperCase()}', colorController.chineseTextBtnColor,
                             colorController.chineseTextBtnColor, context,(){
                               playAudioFromUrl(currentVoiceChi);
@@ -237,7 +231,7 @@ void moveToPreviousItem() {
                           voiceUrl = '${currentVoiceUr}';
                         } else if (textVisibilityProvider .isForTextVisible) {
                           voiceUrl = '${currentVoiceTur}';
-                        }else if (textVisibilityProvider .isFiveTextVisible) {
+                        } else if (textVisibilityProvider .isFiveTextVisible) {
                           voiceUrl = '${currentVoiceChi}';
                         } else if (textVisibilityProvider .isSixTextVisible) {
                           voiceUrl = '${currentVoicePas}';
@@ -266,7 +260,7 @@ void moveToPreviousItem() {
                           voiceUrl = '${currentVoiceUr}';
                         } else if (textVisibilityProvider .isForTextVisible) {
                           voiceUrl = '${currentVoiceTur}';
-                        }else if (textVisibilityProvider .isFiveTextVisible) {
+                        } else if (textVisibilityProvider .isFiveTextVisible) {
                           voiceUrl = '${currentVoiceChi}';
                         } else if (textVisibilityProvider .isSixTextVisible) {
                           voiceUrl = '${currentVoicePas}';

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
-import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/re_text.dart';
 import 'package:picture_dictionary/res/reusabledailog.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
@@ -32,6 +32,8 @@ class _LoginPageState extends State<LoginPage> {
   var _password = '';
   var _username = '';
   bool isLoginPage = true;
+
+  int newdata = 0;
 
 
   signInWithGoogle() async {
@@ -95,12 +97,14 @@ class _LoginPageState extends State<LoginPage> {
       if(isLoginPage){
        UserCredential userCredential = await auth.signInWithEmailAndPassword(email: _emailController.text.toString(), password: _passwordController.text.toString());
        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
-       
+       MySharedPrefrence().set_user_email(userCredential.user!.email);
+        setState(() {
+         verifyuser();
+      });
       }else{
        await auth.createUserWithEmailAndPassword(email: _emailController.text.toString(), password: _passwordController.text.toString());
         isLoginPage = true;
         setState(() {
-
         });
       }
       setState(() {
@@ -118,44 +122,81 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
- Future<void> verifyuser() async {
+  Future<void> verifyuser() async {
   var url = '${PictureRepo.baseUrl}apis/verify_app_users.php';
   
   var body = {
-    'email': MySharedPrefrence().get_user_email(),
+    'email': await MySharedPrefrence().get_user_email(), // Wait for email
     'verified': '1',
-  };
-  
-  var headers = {
-    'Content-Type': 'application/json',
   };
 
   var response = await http.post(
     Uri.parse(url),
-    // headers: headers,
     body: body,
   );
 
   if (response.statusCode == 200) {
- 
     print('Post request successful!');
-   final Map<String, dynamic> data = json.decode(response.body);
-   setState(() {});
-   MySharedPrefrence().set_user_id(data['user_id']);
-   print(MySharedPrefrence().get_user_id());
+    final Map<String, dynamic> data = json.decode(response.body);
 
-   
-    print("Id no");
-    print(body);
-       Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+    // Save the user ID in shared preferences
+     MySharedPrefrence().set_user_id(data['user_id']);
+
+    print("User ID set: ${data['user_id']}");
+
+    // Test if the ID is correctly saved
+    int savedUserId = await MySharedPrefrence().get_user_id();
+    print("Retrieved User ID: $savedUserId");
+
+    // Navigate to HomePage
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+
     print(response.body);
-    
   } else {
-   reusabledialog(context, "Login Failed",
-            "An error occurred while trying to log in.", "Ok", () {});
+    // Show error dialog
+    reusabledialog(context, "Login Failed",
+        "An error occurred while trying to log in.", "Ok", () {});
     print('Post request failed with status: ${response.statusCode}');
   }
 }
+
+//  Future<void> verifyuser() async {
+//   var url = 'https://kulyatudawah.com/public/vocgame/apis/verify_app_users.php';
+  
+//   var body = {
+//     'email': MySharedPrefrence().get_user_email(),
+//     'verified': '1',
+//   };
+  
+//   var headers = {
+//     'Content-Type': 'application/json',
+//   };
+
+//   var response = await http.post(
+//     Uri.parse(url),
+//     // headers: headers,
+//     body: body,
+//   );
+
+//   if (response.statusCode == 200) {
+ 
+//     print('Post request successful!');
+//    final Map<String, dynamic> data = json.decode(response.body);
+//    setState(() {});
+//    MySharedPrefrence().set_user_id(data['user_id']);
+//    print(MySharedPrefrence().get_user_id());
+
+//     print("Id no");
+//     print(body);
+//        Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
+//     print(response.body);
+    
+//   } else {
+//    reusabledialog(context, "Login Failed",
+//             "An error occurred while trying to log in.", "Ok", () {});
+//     print('Post request failed with status: ${response.statusCode}');
+//   }
+// }
 
   @override
   void initState() {

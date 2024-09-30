@@ -358,6 +358,11 @@ int count = 1;
                                 Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
                                 reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
                                 Provider.of<TextVisibilityProvider>(context).isForTextVisible),
+
+                                reusableVisibility(Center(child: Text(items[index]['chinese'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
+                                reusableVisibility(Center(child: Text(items[index]['pashto'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
                               ],
                             )
                             ),

@@ -1,11 +1,9 @@
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
-
 
 Widget reusableloadingrow(BuildContext context, bool isLoading) {
   return isLoading == true

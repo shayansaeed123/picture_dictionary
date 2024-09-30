@@ -94,7 +94,7 @@ Future<int> getSelectedIndex() async {
     final auth = FirebaseAuth.instance;
     final user = auth.currentUser;
     
-    if (user != null) {
+    if (MySharedPrefrence().get_user_id() != 0) {
       // userid = user.uid.toString();
       setState(() {
         
@@ -167,189 +167,213 @@ Future<int> getSelectedIndex() async {
 
 }
 
+
+
+
+
+
+
 int count = 1;
  @override
 Widget build(BuildContext context) {
   double radius = 100.0; 
-  return Scaffold(
-    appBar: AppBar(
-      title: Text("Wheel Game"),
-      backgroundColor: Color(0xFFffb64d),
-      automaticallyImplyLeading: false,
-    ),
-    body: Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            colorController.bgColorup,
-            colorController.bgColordown,
-          ],
-        ),
+  return WillPopScope(
+     onWillPop: () async {
+           final response = await http.post(
+      Uri.parse('${PictureRepo.baseUrl}apis/clear_voice_and_wheel_results.php'),
+      body: {
+        'user_id': MySharedPrefrence().get_user_id().toString(),
+      },
+    );
+    var data;
+    if(response.statusCode == 200){
+       data = jsonDecode(response.body.toString());
+      print('Clear Data Api Response : ${data}');
+      return true;
+    }
+   
+        return true;
+        
+      },
+    child: Scaffold(
+      appBar: AppBar(
+        title: Text("Wheel Game"),
+        backgroundColor: Color(0xFFffb64d),
+        automaticallyImplyLeading: false,
       ),
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(MediaQuery.of(context).size.width * .05),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                reusabletext('Quiz # $count', colorController.blackColor, 22),
-                reusabletext('Score: $countValue/10', colorController.blackColor, 22),
-              ],
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              colorController.bgColorup,
+              colorController.bgColordown,
+            ],
           ),
-          Expanded(
-            child: FutureBuilder<Map<String, dynamic>>(
-              future: _itemsFuture2,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: reusableloadingrow(context, true));
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  Map<String, dynamic> itemsMap = snapshot.data!;
-                  List<dynamic> items = itemsMap['items'];
-                  List<dynamic> repeatedItems = itemsMap['repeatedItems'];
-
-                  return SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: MediaQuery.of(context).size.height * .01),
-                        for (var item in repeatedItems)
-                          InkWell(
-                            onTap: () {
-                              questionID = item['id'];
-                              questionApi();
-                              CountApi();
-                              _refreshItems();
-                              if (count == 10) {
-                                count = 0;
-                                setState(() {
-                                  if (int.parse(countValue.toString()) >= int.parse('6')) {
-                                    reusableAnimation(context, 'assets/congrats.json', 'Next', countValue);
-                                  } else {
-                                    reusableAnimation(context, 'assets/failed.json', 'Try Again', countValue);
-                                  }
-                                });
-                              } else {
-                                setState(() {
-                                  count++;
-                                });
-                              }
-                            },
-                         
-                            child: Container(
-                        height: MediaQuery.of(context).size.height * .15,
-                        width: MediaQuery.of(context).size.width * .8,
-                        decoration: BoxDecoration(image: DecorationImage(
-                          image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
-                        child: Center(child: 
-                        
-                        Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+        ),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * .05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  reusabletext('Quiz # $count', colorController.blackColor, 22),
+                  reusabletext('Score: $countValue/10', colorController.blackColor, 22),
+                ],
+              ),
+            ),
+            Expanded(
+              child: FutureBuilder<Map<String, dynamic>>(
+                future: _itemsFuture2,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: reusableloadingrow(context, true));
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    Map<String, dynamic> itemsMap = snapshot.data!;
+                    List<dynamic> items = itemsMap['items'];
+                    List<dynamic> repeatedItems = itemsMap['repeatedItems'];
+    
+                    return SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                        reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
-                                          SizedBox(height: 16.0),
-                                          Row(children: [
-                                            reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
-                                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-                                          ],),
-                        ]
-                        )
-                       
-                        )),
-                        
-                          ),
-                     Padding(
-                       padding: const EdgeInsets.only(top: 20),
-                       child: Center(
-                         child: AnimatedBuilder(
-                           animation: _controller,
-                           builder: (context, child) {
-                             return Container(
-                               width: radius * 1 + 190, 
-                               height: radius * 1 + 190, 
-                               child: Stack(
-                                 alignment: Alignment.center,
-                                 children: [
-                                   ...List.generate(items.length, (index) {
-                                     double angle = 2 * pi * index / items.length;
-                                     double x = radius * cos(angle + _controller.value * 2 * pi);
-                                     double y = radius * sin(angle + _controller.value * 2 * pi);
-                                     return Positioned(
-                                       left: x + radius - 2,
-                                       top: y + radius - 2,
-                                       child: Container(
-                                         decoration: BoxDecoration(
-                                           shape: BoxShape.circle,
-                                           border: Border.all(
-                        color: Colors.orange,
-                        width: 4.0,
+                          SizedBox(height: MediaQuery.of(context).size.height * .01),
+                          for (var item in repeatedItems)
+                            InkWell(
+                              onTap: () {
+                                questionID = item['id'];
+                                questionApi();
+                                CountApi();
+                                _refreshItems();
+                                if (count == 10) {
+                                  count = 0;
+                                  setState(() {
+                                    if (int.parse(countValue.toString()) >= int.parse('6')) {
+                                      reusableAnimation(context, 'assets/congrats.json', 'Next', countValue);
+                                    } else {
+                                      reusableAnimation(context, 'assets/failed.json', 'Try Again', countValue);
+                                    }
+                                  });
+                                } else {
+                                  setState(() {
+                                    count++;
+                                  });
+                                }
+                              },
+                           
+                              child: Container(
+                          height: MediaQuery.of(context).size.height * .15,
+                          width: MediaQuery.of(context).size.width * .8,
+                          decoration: BoxDecoration(image: DecorationImage(
+                            image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
+                          child: Center(child: 
+                          
+                          Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
+                                            SizedBox(height: 16.0),
+                                            Row(children: [
+                                              reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                                              reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                                              reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                                            ],),
+                          ]
+                          )
+                          )),
+                          
+                            ),
+                       Padding(
+                         padding: const EdgeInsets.only(top: 20),
+                         child: Center(
+                           child: AnimatedBuilder(
+                             animation: _controller,
+                             builder: (context, child) {
+                               return Container(
+                                 width: radius * 1 + 190,
+                                 height: radius * 1 + 190,
+                                 child: Stack(
+                                   alignment: Alignment.center,
+                                   children: [
+                                     ...List.generate(items.length, (index) {
+                                       double angle = 2 * pi * index / items.length;
+                                       double x = radius * cos(angle + _controller.value * 2 * pi);
+                                       double y = radius * sin(angle + _controller.value * 2 * pi);
+                                       return Positioned(
+                                         left: x + radius - 2,
+                                         top: y + radius - 2,
+                                         child: Container(
+                                           decoration: BoxDecoration(
+                                             shape: BoxShape.circle,
+                                             border: Border.all(
+                          color: Colors.orange,
+                          width: 4.0,
+                                             ),
+                                           ),
+                                           child: Column(
+                                             children: [
+                          for (var item in repeatedItems)
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  selectedContainerIndex = index;
+                                });
+                                answerID = items[index]['id'];
+                                saveSelectedIndex(index);
+                                questionID = item['id'];
+                                questionApi();
+                                CountApi();
+                                _refreshItems();
+                                if (count == 10) {
+                                  count = 0;
+                                  setState(() {
+                                    if (int.parse(countValue.toString()) >= int.parse('6')) {
+                                      reusableAnimation(context, 'assets/congrats.json', 'Next', countValue);
+                                    } else {
+                                      reusableAnimation(context, 'assets/failed.json', 'Try Again', countValue);
+                                    }
+                                  });
+                                } else {
+                                  setState(() {
+                                    count++;
+                                  });
+                                }
+                              },
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(items[index]['image']),
+                                radius: 40.0,
+                              ),
+                            ),
+                                             ],
                                            ),
                                          ),
-                                         child: Column(
-                                           children: [
-                        for (var item in repeatedItems)
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                selectedContainerIndex = index;
-                              });
-                              answerID = items[index]['id'];
-                              saveSelectedIndex(index);
-                              questionID = item['id'];
-                              questionApi();
-                              CountApi();
-                              _refreshItems();
-                              if (count == 10) {
-                                count = 0;
-                                setState(() {
-                                  if (int.parse(countValue.toString()) >= int.parse('6')) {
-                                    reusableAnimation(context, 'assets/congrats.json', 'Next', countValue);
-                                  } else {
-                                    reusableAnimation(context, 'assets/failed.json', 'Try Again', countValue);
-                                  }
-                                });
-                              } else {
-                                setState(() {
-                                  count++;
-                                });
-                              }
-                            },
-                            child: CircleAvatar(
-                              backgroundImage: NetworkImage(items[index]['image']),
-                              radius: 40.0,
-                            ),
-                          ),
-                                           ],
-                                         ),
-                                       ),
-                                     );
-                                   }),
-                                 ],
-                               ),
-                             );
-                           },
+                                       );
+                                     }),
+                                   ],
+                                 ),
+                               );
+                             },
+                           ),
                          ),
                        ),
-                     ),
-                      ],
-                    ),
-                  );
-                }
-              },
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );

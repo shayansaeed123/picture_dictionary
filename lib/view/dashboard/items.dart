@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/utils.dart';
+import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
@@ -140,6 +141,8 @@ PictureRepo pictureRepo = PictureRepo();
               Map<String, dynamic> item = items[index];
                             int currentItem = index;
                             int id = int.parse(items[index]['id']);
+                            print("items id $id");
+                          
               return Stack(
                 children: [
                   reusableItemBackground(context, 'assets/tilt_round_img.png'),
@@ -152,7 +155,6 @@ PictureRepo pictureRepo = PictureRepo();
                   reusableVisibility(reusableItemBackground(context, 'assets/drag_round_img.png'),
                   Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                   ),
-
                   reusableVisibility(reusableItemBackground(context, 'assets/octa_round_img.png'),
                   Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
                   ),
@@ -193,7 +195,6 @@ PictureRepo pictureRepo = PictureRepo();
                     Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
                       return InkWell(
                       onTap: (){
-
                         String voiceUrl;
                         if (textVisibilityProvider.isFirstTextVisible) {
                           voiceUrl = '${item['arabic_voice']}';
@@ -223,6 +224,8 @@ PictureRepo pictureRepo = PictureRepo();
                           items: items,
                           current: currentItem,
                           id: id,
+                           
+                          item: {},
                           )));
                       },
                       child: Container(
@@ -268,8 +271,7 @@ PictureRepo pictureRepo = PictureRepo();
                            BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isForTextVisible,
                            ),
-
-                            reusableVisibility(reusableItemTextBtn(context, colorController.chineseTextBtnColor, '${item['chinese'].toString().capitalize}',
+                           reusableVisibility(reusableItemTextBtn(context, colorController.chineseTextBtnColor, '${item['chinese'].toString().capitalize}',
                            BorderRadius.only(bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),),
                            Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,
                            ),
