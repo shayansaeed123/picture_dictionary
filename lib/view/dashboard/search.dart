@@ -55,22 +55,7 @@
 //       final response = await http.get(
 //           Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_types.php'));
 
-//       if (response.statusCode == 200) {
-//         dynamic jsonResponse = jsonDecode(response.body);
-//         List<Map<String, dynamic>> listResponse =
-//             jsonResponse['types'].cast<Map<String, dynamic>>();
-//         setState(() {
-//           items = listResponse;
-//           filteredItems = items;
-//         });
-//       } else {
-//         throw Exception('Failed to load data');
-//       }
-//     } catch (e) {
-//       print('Error : $e');
-//       rethrow;
-//     }
-//   }
+
 
 //   void filterItems(String query) {
 //     setState(() {
