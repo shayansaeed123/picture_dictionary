@@ -5,6 +5,7 @@ import 'package:picture_dictionary/res/re_text.dart';
 
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/game_page_two.dart';
+import 'package:picture_dictionary/view/dashboard/select_word_game_one.dart';
 import 'package:picture_dictionary/view/dashboard/voice_game_one.dart';
 
 import 'wheel_game_one.dart';
@@ -96,7 +97,10 @@ Widget build(BuildContext context) {
                 ),
               ],
             ),
-               InkWell(
+               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -104,7 +108,7 @@ Widget build(BuildContext context) {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.all(MediaQuery.of(context).size.width * .03),
+                    margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
                     width: MediaQuery.of(context).size.width * .45,
                     height: MediaQuery.of(context).size.height * .2,
                     decoration: BoxDecoration(
@@ -124,6 +128,38 @@ Widget build(BuildContext context) {
                     ),
                   ),
                 ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SelectWordGameOne()), 
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
+                    width: MediaQuery.of(context).size.width * .45,
+                    height: MediaQuery.of(context).size.height * .2,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(11),
+                      image: DecorationImage(
+                        image: AssetImage('assets/gaming.jpg'),
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Expanded(
+                      child: Center(
+                        child: reusabletext(
+                          'SELECT WORD GAME',
+                           colorController.whiteColor,
+                          20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                ],
+               )
           ],
         ),
       ),

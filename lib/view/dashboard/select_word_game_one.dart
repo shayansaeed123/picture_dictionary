@@ -1,7 +1,8 @@
 
-
 import 'dart:convert';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,23 +16,22 @@ import 'package:picture_dictionary/res/reusableCategoryTextBtn.dart';
 import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
-import 'package:picture_dictionary/view/dashboard/game_page_three.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
+import 'package:picture_dictionary/view/dashboard/select_word_game_two.dart';
 import 'package:picture_dictionary/view/dashboard/voice_game_two.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
-class voicegameone extends StatefulWidget {
-  const voicegameone({super.key});
+class SelectWordGameOne extends StatefulWidget {
+  const SelectWordGameOne({super.key});
 
   @override
-  State<voicegameone> createState() => _GamePageTwoState();
+  State<SelectWordGameOne> createState() => _SelectWordGameOneState();
 }
 
-class _GamePageTwoState extends State<voicegameone> {
-
-  Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {
+class _SelectWordGameOneState extends State<SelectWordGameOne> {
+ Future<Map<String, dynamic>> fetchGameCategories2(String categoryId) async {
   try {
     final response = await http.post(
       Uri.parse('${PictureRepo.baseUrl}apis/get_limited_items.php'),
@@ -109,7 +109,7 @@ late Future<Map<String, dynamic>> itemsFuture2;
 
   Future<Map<String, dynamic>> clearData()async{
     final response = await http.post(
-      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
+      Uri.parse('${PictureRepo.baseUrl}apis/clear_word_result.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
       },
@@ -265,7 +265,7 @@ int unlockedIndex = 0;
 
              final result = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => voicegametwo( 
+              MaterialPageRoute(builder: (context) => SelectWordGameTwo( 
                 itemsFuture: itemsFuture,
                 selectedCategory: selectedCategory,
                 itemsFuture2: itemsFuture2,)),

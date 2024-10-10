@@ -15,25 +15,26 @@ import 'package:picture_dictionary/res/reusableAnimation.dart';
 import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:http/http.dart' as http;
+import 'package:picture_dictionary/res/reusableloginbtn.dart';
 import 'package:picture_dictionary/view/dashboard/game_page_two.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../res/audioplayer.dart';
 
-class voicegametwo extends StatefulWidget {
+class SelectWordGameTwo extends StatefulWidget {
   final String selectedCategory;
   final Future<List<Map<String, dynamic>>> itemsFuture;
   final Future<Map<String, dynamic>> itemsFuture2;
-  const voicegametwo({Key? key,required this.selectedCategory, required this.itemsFuture,
+  const SelectWordGameTwo({Key? key,required this.selectedCategory, required this.itemsFuture,
   required this.itemsFuture2
   }) : super(key: key);
 
   @override
-  State<voicegametwo> createState() => _GamePageThreeState();
+  State<SelectWordGameTwo> createState() => _SelectWordGameTwoState();
 }
 
-class _GamePageThreeState extends State<voicegametwo> {
+class _SelectWordGameTwoState extends State<SelectWordGameTwo> {
   late Future<List<Map<String, dynamic>>> _itemsFuture;
   late Future<Map<String, dynamic>> _itemsFuture2;
    String countValue = '0';
@@ -114,7 +115,7 @@ class _GamePageThreeState extends State<voicegametwo> {
 
   Future<Map<String, dynamic>> questionApi()async{
     final response = await http.post(
-      Uri.parse('${PictureRepo.baseUrl}apis/add_question_answers_status_voice.php'),
+      Uri.parse('${PictureRepo.baseUrl}apis/add_words_answers_status.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
         'type_id': widget.selectedCategory.toString(),
@@ -137,7 +138,7 @@ class _GamePageThreeState extends State<voicegametwo> {
 
    Future<Map<String, dynamic>> CountApi() async {
   final response = await http.post(
-    Uri.parse('${PictureRepo.baseUrl}apis/count_question_answers_voice.php'),
+    Uri.parse('${PictureRepo.baseUrl}apis/count_word_answers.php'),
     body: {
       'user_id': MySharedPrefrence().get_user_id().toString(),
       'type_id': widget.selectedCategory.toString(),
@@ -199,7 +200,7 @@ int count = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Voice Game"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
+      appBar: AppBar(title: Text("Select Word Game"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
       body: Container(
         decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -315,31 +316,53 @@ int count = 1;
 
 
                        reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
+                         padding:  EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).width * 0.13,vertical: MediaQuery.sizeOf(context).height * 0.011),
                          child: AudioPlayerWidget(
                                         audioUrl: '${item['english_voice'].toString()}',
                                       ),
                        ), Provider.of<TextVisibilityProvider>(context).englishbtn),
+
+                       Container(
+                        margin: EdgeInsets.all(MediaQuery.of(context).size.width * .02),
+                    width: MediaQuery.of(context).size.width * .55,
+                    height: MediaQuery.of(context).size.height * .16,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(11),
+                      image: DecorationImage(
+                        image: NetworkImage(item['image']),
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    // child: ,
+                       ),
+                        // Image.network(item['image'],errorBuilder: (context, error, stackTrace) {
+                        //       return Image.asset('assets/placeholder_not_found.png');
+                        //     },)
                         ],
                        )
                     ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 25),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                // height: MediaQuery.of(context).size.height * 0.4,
                 child: GridView(
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 1.4,
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
+                  mainAxisSpacing: 10
+                  ),
                 
                   children: [
                     // for (var item in items)
                     
                     for (int index = 0; index < items.length; index++)
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
-                        child: InkWell(
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
+                      //   child: 
+                        InkWell(
                           onTap: (){
                             
                             setState(() {
@@ -363,34 +386,83 @@ int count = 1;
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-
-                                Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
-                              return Image.asset('assets/placeholder_not_found.png');
-                            },)
-                                // reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).englishbtn),
-                                // reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['arabic'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['urdu'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isForTextVisible),
-
-                                // reusableVisibility(Center(child: Text(items[index]['chinese'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['pashto'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
+                
+                            //     Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
+                            //   return Image.asset('assets/placeholder_not_found.png');
+                            // },)
+                                reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).englishbtn),
+                                reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
+                                reusableVisibility(Center(child: Text(items[index]['arabic'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
+                                reusableVisibility(Center(child: Text(items[index]['urdu'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
+                                reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isForTextVisible),
+                
+                                reusableVisibility(Center(child: Text(items[index]['chinese'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
+                                reusableVisibility(Center(child: Text(items[index]['pashto'],style: TextStyle(fontSize: 18),)), 
+                                Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
                               ],
                             )
                             ),
                         ),
-                      ),
+                      // ),
                        ],
                    ),
               ),
-               SizedBox(height: MediaQuery.of(context).size.height * .01,),
+              // Container(
+              //   width: MediaQuery.of(context).size.width * 0.8,
+              //   height: MediaQuery.of(context).size.height * 0.3, // Adjust this height as needed
+              //   child: GridView.builder(
+              //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //       crossAxisCount: 2,
+              //       crossAxisSpacing: 10,
+              //       mainAxisSpacing: 10,
+              //     ),
+              //     itemCount: items.length,
+              //     shrinkWrap: true,
+              //     physics: NeverScrollableScrollPhysics(),
+              //     itemBuilder: (context, index) {
+              //       return InkWell(
+              //         onTap: () {
+              //           setState(() {
+              //             selectedContainerIndex = index;
+              //           });
+              //           answerID = items[index]['id'];
+              //           saveSelectedIndex(index);
+              //         },
+              //         child: Container(
+              //           // padding: EdgeInsets.all(1.0), // Add padding to avoid text being too close to the edges
+              //           decoration: BoxDecoration(
+              //                       border: Border.all(color: Colors.black), // Optional: for visibility
+              //           ),
+              //           child: Column(
+              //                       mainAxisAlignment: MainAxisAlignment.center, // Center the text vertically
+              //                       children: [
+              //                         Expanded(
+              //                           child: Center(
+              //                             child: reusableVisibility(
+              //                               Text(
+              //         items[index]['english'],
+              //         style: TextStyle(fontSize: 18, overflow: TextOverflow.visible), // Adjust text size
+              //         textAlign: TextAlign.center, // Center the text
+              //                               ),
+              //                               Provider.of<TextVisibilityProvider>(context).englishbtn,
+              //                             ),
+              //                           ),
+              //                         ),
+              //                       ],
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
+
+              //  SizedBox(height: MediaQuery.of(context).size.height * .01,),
                  for (var item in repeatedItems)
                     InkWell(
                       onTap: (){
@@ -418,7 +490,7 @@ int count = 1;
                         
                       },
                       child: Container(
-                        height: MediaQuery.of(context).size.height * .19,
+                        height: MediaQuery.of(context).size.height * .1,
                         width: MediaQuery.of(context).size.width * .8,
                         decoration: BoxDecoration(image: DecorationImage(
                           

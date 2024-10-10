@@ -36,6 +36,8 @@ class ItemDetails extends StatefulWidget {
 class _ItemDetailsState extends State<ItemDetails> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final AudioPlayer audioPlayer = AudioPlayer();
+  late PageController _pageController;
+  late int _currentPageIndex;
   Future<void> playAudioFromUrl(String url) async {
     await audioPlayer.play(UrlSource(url));
     if(url == 1){
@@ -64,6 +66,8 @@ String currentImageUrl = ''; // Add this variable to hold the current image URL
   void initState() {
     super.initState();
     // Initialize the image and name based on the initial ID
+    _pageController = PageController(initialPage: widget.current);
+    _currentPageIndex = widget.current;
     updateImageAndName();
   }
 
@@ -99,30 +103,62 @@ String currentImageUrl = ''; // Add this variable to hold the current image URL
 
 
 
+// void moveToNextItem() {
+//   if (widget.current < widget.items.length ) {
+//     setState(() {
+//       widget.current++; // Move to the next ID
+//       widget.id = int.parse(widget.items[widget.current]['id']);
+//       print(widget.id);
+//       updateImageAndName();
+//     });
+//     // fetchData(currentItemId);
+//   }
+// }
+
 void moveToNextItem() {
-  if (widget.current < widget.items.length ) {
+  if (_currentPageIndex < widget.items.length ) {
     setState(() {
-      widget.current++; // Move to the next ID
-      widget.id = int.parse(widget.items[widget.current]['id']);
+      _currentPageIndex++; // Move to the next ID
+      widget.id = int.parse(widget.items[_currentPageIndex]['id']);
       print(widget.id);
+       _pageController.jumpToPage(_currentPageIndex); // Synchronize the PageController
       updateImageAndName();
     });
     // fetchData(currentItemId);
   }
 }
 
+// void moveToPreviousItem() {
+//   if (widget.current > 0) {
+//     setState(() {
+//       widget.current--; 
+//       widget.id = int.parse(widget.items[widget.current]['id']);
+//       print(widget.id);
+//       updateImageAndName();
+//       // print('hello');
+//     });
+//     // fetchData(currentItemId);
+//   }
+// }
+
 void moveToPreviousItem() {
-  if (widget.current > 0) {
+  if (_currentPageIndex > 0) {
     setState(() {
-      widget.current--; 
-      widget.id = int.parse(widget.items[widget.current]['id']);
+      _currentPageIndex--; 
+      widget.id = int.parse(widget.items[_currentPageIndex]['id']);
       print(widget.id);
+       _pageController.jumpToPage(_currentPageIndex); // Synchronize the PageController
       updateImageAndName();
       // print('hello');
     });
     // fetchData(currentItemId);
   }
 }
+@override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,148 +178,250 @@ void moveToPreviousItem() {
           ),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.03),
-                  width: MediaQuery.of(context).size.width * .76,
-                  height: MediaQuery.of(context).size.height * .42,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.white),
-                      child: 
-                      CachedNetworkImage(imageUrl: '${currentImageUrl}',
-                            errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
-                            width: double.infinity,
-                            fit: BoxFit.contain,
-                            filterQuality: FilterQuality.high,
-                            placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
-                            ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
-                  width: MediaQuery.of(context).size.width * .76,
-                  height: MediaQuery.of(context).size.height * .28,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.white),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: PageView.builder(
+          controller: _pageController,
+          itemCount: widget.items.length,
+          onPageChanged: (index) {
+            setState(() {
+              _currentPageIndex = index;
+              widget.id = int.parse(widget.items[index]['id']);
+              updateImageAndName();
+            });
+          },
+          itemBuilder: (context, index) {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.02),
+                      width: MediaQuery.of(context).size.width * .76,
+                      height: MediaQuery.of(context).size.height * .32,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.white),
+                          child: 
+                          CachedNetworkImage(imageUrl: '${currentImageUrl}',
+                                errorWidget: (context, url, error) => Image.asset('assets/placeholder_not_found.png'),
+                                width: double.infinity,
+                                fit: BoxFit.contain,
+                                filterQuality: FilterQuality.high,
+                                placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
+                                ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        reusableitemdetailsrow('${currentNameAr}', Color(0xFF17a493),
-                            const Color.fromARGB(255, 51, 219, 177), context,(){
-                              playAudioFromUrl(currentVoiceAr);
-                            }),
-                        reusableitemdetailsrow('${currentNameEng.toString().toUpperCase()}', Color(0xFF9753fe),
-                            Color.fromARGB(255, 161, 136, 204), context,(){
-                              playAudioFromUrl(currentVoiceEng);
-                            }),
-                        reusableitemdetailsrow('${currentNameUr.toString().toUpperCase()}', Color(0xFF4e59ff),
-                            Color(0xFF5d80fe), context,(){
-                              playAudioFromUrl(currentVoiceUr);
-                            }),
-                        reusableitemdetailsrow('${currentNameTur.toString().toUpperCase()}', Color(0xFFe14abe),
-                            Colors.pink.shade200, context,(){
-                              playAudioFromUrl(currentVoiceTur);
-                            }),
-                            reusableitemdetailsrow('${currentNameChi.toString().toUpperCase()}', colorController.chineseTextBtnColor,
-                            colorController.chineseTextBtnColor, context,(){
-                              playAudioFromUrl(currentVoiceChi);
-                            }),
-                        reusableitemdetailsrow('${currentNamePas.toString().toUpperCase()}', colorController.pashtoTextBtnColor,
-                            colorController.pashtoTextBtnColor, context,(){
-                              playAudioFromUrl(currentVoicePas);
-                            }),
+                        Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width * .1,
+                              child: reusablenextitembtn(context, (){
+                              //how to move to next item
+                              print(
+                                widget.current
+                              );
+                              moveToPreviousItem();
+                              setState(() {});
+                              String voiceUrl;
+                              if (textVisibilityProvider .isFirstTextVisible) {
+                                voiceUrl = '${currentVoiceAr}';
+                              } else if (textVisibilityProvider .isThirdTextVisible) {
+                                voiceUrl = '${currentVoiceUr}';
+                              } else if (textVisibilityProvider .isForTextVisible) {
+                                voiceUrl = '${currentVoiceTur}';
+                              } else if (textVisibilityProvider .isFiveTextVisible) {
+                                voiceUrl = '${currentVoiceChi}';
+                              } else if (textVisibilityProvider .isSixTextVisible) {
+                                voiceUrl = '${currentVoicePas}';
+                              } else {
+                                voiceUrl = '${currentVoiceEng}';
+                              }
+                              // playAudioFromUrl('${item['english_voice']}');
+                              playAudioFromUrl(voiceUrl);
+                              setState(() {});
+                                                        },'assets/back_blue.png'),
+                            );
+                          },),
+
+
+                        Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.01),
+                      width: MediaQuery.of(context).size.width * .6,
+                      height: MediaQuery.of(context).size.height * .43,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.white),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            reusableitemdetailsrow('${currentNameAr}', Color(0xFF17a493),
+                                const Color.fromARGB(255, 51, 219, 177), context,(){
+                                  playAudioFromUrl(currentVoiceAr);
+                                }),
+                            reusableitemdetailsrow('${currentNameEng.toString().toUpperCase()}', Color(0xFF9753fe),
+                                Color.fromARGB(255, 161, 136, 204), context,(){
+                                  playAudioFromUrl(currentVoiceEng);
+                                }),
+                            reusableitemdetailsrow('${currentNameUr.toString().toUpperCase()}', Color(0xFF4e59ff),
+                                Color(0xFF5d80fe), context,(){
+                                  playAudioFromUrl(currentVoiceUr);
+                                }),
+                            reusableitemdetailsrow('${currentNameTur.toString().toUpperCase()}', Color(0xFFe14abe),
+                                Colors.pink.shade200, context,(){
+                                  playAudioFromUrl(currentVoiceTur);
+                                }),
+                                reusableitemdetailsrow('${currentNameChi.toString().toUpperCase()}', colorController.chineseTextBtnColor,
+                                colorController.chineseTextBtnColor, context,(){
+                                  playAudioFromUrl(currentVoiceChi);
+                                }),
+                            reusableitemdetailsrow('${currentNamePas.toString().toUpperCase()}', colorController.pashtoTextBtnColor,
+                                colorController.pashtoTextBtnColor, context,(){
+                                  playAudioFromUrl(currentVoicePas);
+                                }),
+                          ],
+                        ),
+                      ),
+                    ),
+                     Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width * .1,
+                              child: reusablenextitembtn(context, (){
+                              //how to move to next item
+                              print(
+                                widget.current
+                              );
+                              moveToNextItem();
+                              setState(() {});
+                              String voiceUrl;
+                              if (textVisibilityProvider .isFirstTextVisible) {
+                                voiceUrl = '${currentVoiceAr}';
+                              } else if (textVisibilityProvider .isThirdTextVisible) {
+                                voiceUrl = '${currentVoiceUr}';
+                              } else if (textVisibilityProvider .isForTextVisible) {
+                                voiceUrl = '${currentVoiceTur}';
+                              } else if (textVisibilityProvider .isFiveTextVisible) {
+                                voiceUrl = '${currentVoiceChi}';
+                              } else if (textVisibilityProvider .isSixTextVisible) {
+                                voiceUrl = '${currentVoicePas}';
+                              } else {
+                                voiceUrl = '${currentVoiceEng}';
+                              }
+                              // playAudioFromUrl('${item['english_voice']}');
+                              playAudioFromUrl(voiceUrl);
+                              setState(() {});
+                                                        },'assets/next_blue.png'),
+                            );
+                          },),
                       ],
                     ),
-                  ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.005),
+                      width: MediaQuery.of(context).size.width * .76,
+                      height: MediaQuery.of(context).size.height * .05,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.transparent),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Center(
+                            child: Text('${_currentPageIndex + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
+                          ),
+                          // Center(
+                          //   child: Text('Swipe>>',style: TextStyle(color: Color(0xFFaf2307)),),
+                          // ),
+                        ],
+                      )
+                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(
+                    //       top: MediaQuery.of(context).size.height * 0.015),
+                    //   width: MediaQuery.of(context).size.width * .76,
+                    //   height: MediaQuery.of(context).size.height * .07,
+                    //   alignment: Alignment.center,
+                    //   decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(16),
+                    //       color: Colors.transparent),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                    //         return reusablenextitembtn(context, (){
+                    //         //how to move to next item
+                    //         print(
+                    //           widget.current
+                    //         );
+                    //         moveToPreviousItem();
+                    //         setState(() {});
+                    //         String voiceUrl;
+                    //         if (textVisibilityProvider .isFirstTextVisible) {
+                    //           voiceUrl = '${currentVoiceAr}';
+                    //         } else if (textVisibilityProvider .isThirdTextVisible) {
+                    //           voiceUrl = '${currentVoiceUr}';
+                    //         } else if (textVisibilityProvider .isForTextVisible) {
+                    //           voiceUrl = '${currentVoiceTur}';
+                    //         } else if (textVisibilityProvider .isFiveTextVisible) {
+                    //           voiceUrl = '${currentVoiceChi}';
+                    //         } else if (textVisibilityProvider .isSixTextVisible) {
+                    //           voiceUrl = '${currentVoicePas}';
+                    //         } else {
+                    //           voiceUrl = '${currentVoiceEng}';
+                    //         }
+                    //         // playAudioFromUrl('${item['english_voice']}');
+                    //         playAudioFromUrl(voiceUrl);
+                    //         setState(() {});
+                    //       },'assets/back_blue.png');
+                    //       },),
+                          
+                    //       Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
+                    //       Text('${_currentPageIndex + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
+                    //       Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                    //         return reusablenextitembtn(context, (){
+                    //         //how to move to next item
+                    //         print(
+                    //           widget.current
+                    //         );
+                    //         moveToNextItem();
+                    //         setState(() {});
+                    //         String voiceUrl;
+                    //         if (textVisibilityProvider .isFirstTextVisible) {
+                    //           voiceUrl = '${currentVoiceAr}';
+                    //         } else if (textVisibilityProvider .isThirdTextVisible) {
+                    //           voiceUrl = '${currentVoiceUr}';
+                    //         } else if (textVisibilityProvider .isForTextVisible) {
+                    //           voiceUrl = '${currentVoiceTur}';
+                    //         } else if (textVisibilityProvider .isFiveTextVisible) {
+                    //           voiceUrl = '${currentVoiceChi}';
+                    //         } else if (textVisibilityProvider .isSixTextVisible) {
+                    //           voiceUrl = '${currentVoicePas}';
+                    //         } else {
+                    //           voiceUrl = '${currentVoiceEng}';
+                    //         }
+                    //         // playAudioFromUrl('${item['english_voice']}');
+                    //         playAudioFromUrl(voiceUrl);
+                    //         setState(() {});
+                    //       },'assets/next_blue.png');
+                    //       },),
+                    //       // reusablenextitembtn(context, (){
+                    //       //   print(
+                    //       //     widget.current
+                    //       //   );
+                    //       //   //how to move to back item
+                    //       //   moveToNextItem();
+                    //       // },'assets/next_blue.png'),
+                    //     ],
+                    //   ),
+                    // ),
+                  ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.015),
-                  width: MediaQuery.of(context).size.width * .76,
-                  height: MediaQuery.of(context).size.height * .07,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.transparent),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
-                        return reusablenextitembtn(context, (){
-                        //how to move to next item
-                        print(
-                          widget.current
-                        );
-                        moveToPreviousItem();
-                        setState(() {});
-                        String voiceUrl;
-                        if (textVisibilityProvider .isFirstTextVisible) {
-                          voiceUrl = '${currentVoiceAr}';
-                        } else if (textVisibilityProvider .isThirdTextVisible) {
-                          voiceUrl = '${currentVoiceUr}';
-                        } else if (textVisibilityProvider .isForTextVisible) {
-                          voiceUrl = '${currentVoiceTur}';
-                        } else if (textVisibilityProvider .isFiveTextVisible) {
-                          voiceUrl = '${currentVoiceChi}';
-                        } else if (textVisibilityProvider .isSixTextVisible) {
-                          voiceUrl = '${currentVoicePas}';
-                        } else {
-                          voiceUrl = '${currentVoiceEng}';
-                        }
-                        // playAudioFromUrl('${item['english_voice']}');
-                        playAudioFromUrl(voiceUrl);
-                        setState(() {});
-                      },'assets/back_blue.png');
-                      },),
-                      
-                      Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
-                      Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
-                        return reusablenextitembtn(context, (){
-                        //how to move to next item
-                        print(
-                          widget.current
-                        );
-                        moveToNextItem();
-                        setState(() {});
-                        String voiceUrl;
-                        if (textVisibilityProvider .isFirstTextVisible) {
-                          voiceUrl = '${currentVoiceAr}';
-                        } else if (textVisibilityProvider .isThirdTextVisible) {
-                          voiceUrl = '${currentVoiceUr}';
-                        } else if (textVisibilityProvider .isForTextVisible) {
-                          voiceUrl = '${currentVoiceTur}';
-                        } else if (textVisibilityProvider .isFiveTextVisible) {
-                          voiceUrl = '${currentVoiceChi}';
-                        } else if (textVisibilityProvider .isSixTextVisible) {
-                          voiceUrl = '${currentVoicePas}';
-                        } else {
-                          voiceUrl = '${currentVoiceEng}';
-                        }
-                        // playAudioFromUrl('${item['english_voice']}');
-                        playAudioFromUrl(voiceUrl);
-                        setState(() {});
-                      },'assets/next_blue.png');
-                      },),
-                      // reusablenextitembtn(context, (){
-                      //   print(
-                      //     widget.current
-                      //   );
-                      //   //how to move to back item
-                      //   moveToNextItem();
-                      // },'assets/next_blue.png'),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              );
+            }
           ),
         ));
   }
