@@ -147,10 +147,75 @@ Widget build(BuildContext context) {
                         fit: BoxFit.cover,
                       ),
                     ),
+                    child: Center(
+                      child: reusabletext(
+                        'SELECT WORD',
+                         colorController.whiteColor,
+                        20,
+                      ),
+                    ),
+                  ),
+                ),
+                ],
+               ),
+
+
+
+
+               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => wheelgameone()), 
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
+                    width: MediaQuery.of(context).size.width * .45,
+                    height: MediaQuery.of(context).size.height * .2,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(11),
+                      image: DecorationImage(
+                        image: AssetImage('assets/gaming.jpg'),
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Center(
+                      child: reusabletext(
+                        'MATCH WORD',
+                         colorController.whiteColor,
+                        20,
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SelectWordGameOne()), 
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
+                    width: MediaQuery.of(context).size.width * .45,
+                    height: MediaQuery.of(context).size.height * .2,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(11),
+                      image: DecorationImage(
+                        image: AssetImage('assets/gaming.jpg'),
+                        filterQuality: FilterQuality.high,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     child: Expanded(
                       child: Center(
                         child: reusabletext(
-                          'SELECT WORD GAME',
+                          '',
                            colorController.whiteColor,
                           20,
                         ),

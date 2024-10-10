@@ -55,11 +55,10 @@ android {
 
     signingConfigs {
        release {
-        keyAlias 'upload'
-        keyPassword 'picture123'     
-        storeFile file('picture.keystore.jks')
-        storePassword 'picture123'
-
+        keyAlias 'key'
+        keyPassword 'pic123'     
+        storeFile file('key.jks')
+        storePassword 'pic123'
        }
       }
 

@@ -291,7 +291,7 @@ int _selectedIndex = 0;
               child: CircleAvatar(
                 // backgroundColor: Colors.cyan,
               radius: MediaQuery.of(context).size.height * 0.065,
-              child: Image.asset('assets/con.png'),
+              child: Image.asset('assets/_con.png'),
               ),
             )
           )
