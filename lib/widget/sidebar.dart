@@ -100,11 +100,13 @@ class _SideBarState extends State<SideBar> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Image.asset(
-                    'assets/ic_launcher.png',
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width * .5,
-                    height: MediaQuery.of(context).size.height * .1,
+                  Expanded(
+                    child: Image.asset(
+                      'assets/ic_launcher.png',
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width * .5,
+                      height: MediaQuery.of(context).size.height * .1,
+                    ),
                   ),
                   Text(
                     '${FirebaseAuth.instance.currentUser == null || FirebaseAuth.instance.currentUser!.displayName == null ? '' : FirebaseAuth.instance.currentUser!.displayName}',
@@ -131,6 +133,8 @@ class _SideBarState extends State<SideBar> {
                     var categoryAr = snapshot.data![index]['arabic'];
                     var categoryUr = snapshot.data![index]['urdu'];
                     var categoryTur = snapshot.data![index]['turkish'];
+                    var categoryChi = snapshot.data![index]['chinese'];
+                    var categoryPas = snapshot.data![index]['pashto'];
 
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -158,6 +162,20 @@ class _SideBarState extends State<SideBar> {
                           }),
                           Provider.of<TextVisibilityProvider>(context)
                               .isForTextVisible,
+                        ),
+                         reusableVisibility(
+                          reusableSidebarItems(context, categoryChi, () {
+                            hello(categoryChi);
+                          }),
+                          Provider.of<TextVisibilityProvider>(context)
+                              .isFiveTextVisible,
+                        ),
+                        reusableVisibility(
+                          reusableSidebarItems(context, categoryPas, () {
+                            hello(categoryPas);
+                          }),
+                          Provider.of<TextVisibilityProvider>(context)
+                              .isSixTextVisible,
                         ),
                       ],
                     );
