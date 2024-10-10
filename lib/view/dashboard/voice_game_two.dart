@@ -299,7 +299,6 @@ int count = 1;
                                         audioUrl: '${item['turkish_voice'].toString()}',
                                       ),
                        ), Provider.of<TextVisibilityProvider>(context).isForTextVisible),
-
                        reusableVisibility(Padding(
                          padding: const EdgeInsets.all(8.0),
                          child: AudioPlayerWidget(
@@ -312,8 +311,6 @@ int count = 1;
                                         audioUrl: '${item['pashto_voice'].toString()}',
                                       ),
                        ), Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
-
-
                        reusableVisibility(Padding(
                          padding: const EdgeInsets.all(8.0),
                          child: AudioPlayerWidget(
@@ -363,7 +360,6 @@ int count = 1;
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-
                                 Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
                               return Image.asset('assets/placeholder_not_found.png');
                             },)
