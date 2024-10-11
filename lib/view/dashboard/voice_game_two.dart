@@ -317,6 +317,18 @@ int count = 1;
                        reusableVisibility(Padding(
                          padding: const EdgeInsets.all(8.0),
                          child: AudioPlayerWidget(
+                                        audioUrl: '${item['chinese_voice'].toString()}',
+                                      ),
+                       ), Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
+                       reusableVisibility(Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: AudioPlayerWidget(
+                                        audioUrl: '${item['pashto_voice'].toString()}',
+                                      ),
+                       ), Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
+                       reusableVisibility(Padding(
+                         padding: const EdgeInsets.all(8.0),
+                         child: AudioPlayerWidget(
                                         audioUrl: '${item['english_voice'].toString()}',
                                       ),
                        ), Provider.of<TextVisibilityProvider>(context).englishbtn),
@@ -363,7 +375,6 @@ int count = 1;
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-
                                 Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
                               return Image.asset('assets/placeholder_not_found.png');
                             },)
@@ -377,7 +388,6 @@ int count = 1;
                                 // Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
                                 // reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
                                 // Provider.of<TextVisibilityProvider>(context).isForTextVisible),
-
                                 // reusableVisibility(Center(child: Text(items[index]['chinese'],style: TextStyle(fontSize: 18),)), 
                                 // Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
                                 // reusableVisibility(Center(child: Text(items[index]['pashto'],style: TextStyle(fontSize: 18),)), 
