@@ -313,19 +313,6 @@ int count = 1;
                                       ),
                        ), Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
 
-
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['chinese_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['pashto_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
                        reusableVisibility(Padding(
                          padding: const EdgeInsets.all(8.0),
                          child: AudioPlayerWidget(
@@ -369,7 +356,7 @@ int count = 1;
                               borderRadius: BorderRadius.circular(13),
                               border: Border.all(
                         color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                        width: 2,
+                        width: 3,
                       ),
                             ),
                             child: Column(

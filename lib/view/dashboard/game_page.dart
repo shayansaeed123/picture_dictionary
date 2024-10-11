@@ -5,6 +5,7 @@ import 'package:picture_dictionary/res/re_text.dart';
 
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/game_page_two.dart';
+import 'package:picture_dictionary/view/dashboard/match_word_game_one.dart';
 import 'package:picture_dictionary/view/dashboard/select_word_game_one.dart';
 import 'package:picture_dictionary/view/dashboard/voice_game_one.dart';
 
@@ -166,7 +167,7 @@ Widget build(BuildContext context) {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => wheelgameone()), 
+                      MaterialPageRoute(builder: (context) => MatchWordGameOne()), 
                     );
                   },
                   child: Container(
@@ -194,7 +195,7 @@ Widget build(BuildContext context) {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SelectWordGameOne()), 
+                      MaterialPageRoute(builder: (context) => MatchWordGameOne()), 
                     );
                   },
                   child: Container(

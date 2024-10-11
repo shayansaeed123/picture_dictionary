@@ -254,7 +254,7 @@ int count = 1;
                               borderRadius: BorderRadius.circular(13),
                               border: Border.all(
                         color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                        width: 5,
+                        width: 3,
                       ),
                             ),
                             child: Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {

@@ -380,7 +380,7 @@ int count = 1;
                               borderRadius: BorderRadius.circular(13),
                               border: Border.all(
                         color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                        width: 2,
+                        width: 3,
                       ),
                             ),
                             child: Column(
