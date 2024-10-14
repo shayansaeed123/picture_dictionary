@@ -198,312 +198,336 @@ Future<int> getSelectedIndex() async {
 int count = 1;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Voice Game"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
-      body: Container(
-        decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    // eb8815 f5d12d
-                    colorController.bgColorup,
-                    colorController.bgColordown,
+    return WillPopScope(
+      onWillPop: () async {
+           final response = await http.post(
+      Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
+      body: {
+        'user_id': MySharedPrefrence().get_user_id().toString(),
+      },
+    );
+    var data;
+    if(response.statusCode == 200){
+       data = jsonDecode(response.body.toString());
+      print('Clear Data Api Response : ${data}');
+      return true;
+    }
+    Navigator.pop(context, countValue);
+        return true;
+        
+      },
+      child: Scaffold(
+        appBar: AppBar(title: Text("Voice Game"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
+        body: Container(
+          decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      // eb8815 f5d12d
+                      colorController.bgColorup,
+                      colorController.bgColordown,
+                    ],
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height *1,
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding:  EdgeInsets.all(MediaQuery.of(context).size.width * .05),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    reusabletext('Quiz # $count', colorController.blackColor, 22),
+                    reusabletext('Score: $countValue/10', colorController.blackColor, 22)
                   ],
                 ),
               ),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height *1,
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding:  EdgeInsets.all(MediaQuery.of(context).size.width * .05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  reusabletext('Quiz # $count', colorController.blackColor, 22),
-                  reusabletext('Score: $countValue/10', colorController.blackColor, 22)
-                ],
-              ),
-            ),
-            Expanded(
-              child: FutureBuilder<Map<String, dynamic>>(future: _itemsFuture2,builder: (context, snapshot) {
-                 if (snapshot.connectionState == ConnectionState.waiting) {
-        return Center(child: reusableloadingrow(context, true));
-      } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
-      } else {
-        Map<String, dynamic> itemsMap = snapshot.data!;
-        List<dynamic> items = itemsMap['items'];
-        List<dynamic> repeatedItems = itemsMap['repeatedItems'];
-        print('question id $questionID');
-        print('answer id $answerID');
-        print('userId ${MySharedPrefrence().get_user_id()}');
-        print('type_id ${widget.selectedCategory.toString()}');
-
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-           
-            children: [
-               SizedBox(height: MediaQuery.of(context).size.height * .01,),
-                 for (var item in repeatedItems)
-                    InkWell(
-                      onTap: (){
-                        questionID = item['id'];
-                        // questionApi();
-                        // CountApi();
-                        // _refreshItems();
-                        print('Count value every click $countValue');
-                        if(count == 10){
-                          count = 0;
-                          setState(() {
-                            if(int.parse(countValue.toString()) >= int.parse('6')){
-                              reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
-                            }else{
-                              reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
-                            }
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
-                          });
-                        }else{
-                          setState(() {
-                            count++;
-                          });
-                        }
-                        
-                      },
-                       child: Column(
-                        children: [
-                          reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['english_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['arabic_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['urdu_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['turkish_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isForTextVisible),
-
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['chinese_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['pashto_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
-
-                       reusableVisibility(Padding(
-                         padding: const EdgeInsets.all(8.0),
-                         child: AudioPlayerWidget(
-                                        audioUrl: '${item['english_voice'].toString()}',
-                                      ),
-                       ), Provider.of<TextVisibilityProvider>(context).englishbtn),
-                        ],
-                       )
-                    ),
-
-              Padding(
-                padding: const EdgeInsets.only(top: 25),
-                child: GridView(
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10),
-                
-                  children: [
-                    // for (var item in items)
-                    
-                    for (int index = 0; index < items.length; index++)
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
-                        child: InkWell(
-                          onTap: (){
-                            
+              Expanded(
+                child: FutureBuilder<Map<String, dynamic>>(future: _itemsFuture2,builder: (context, snapshot) {
+                   if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: reusableloadingrow(context, true));
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else {
+          Map<String, dynamic> itemsMap = snapshot.data!;
+          List<dynamic> items = itemsMap['items'];
+          List<dynamic> repeatedItems = itemsMap['repeatedItems'];
+          print('question id $questionID');
+          print('answer id $answerID');
+          print('userId ${MySharedPrefrence().get_user_id()}');
+          print('type_id ${widget.selectedCategory.toString()}');
+      
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+             
+              children: [
+                 SizedBox(height: MediaQuery.of(context).size.height * .01,),
+                   for (var item in repeatedItems)
+                      InkWell(
+                        onTap: (){
+                          questionID = item['id'];
+                          // questionApi();
+                          // CountApi();
+                          // _refreshItems();
+                          print('Count value every click $countValue');
+                          if(count == 10){
+                            count = 0;
                             setState(() {
-                              selectedContainerIndex = index;
-                               
+                              if(int.parse(countValue.toString()) >= int.parse('6')){
+                                reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
+                              }else{
+                                reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
+                              }
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
                             });
-                            answerID = items[index]['id'];
-                            saveSelectedIndex(index);
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * .45,
-                            decoration: BoxDecoration(
-                              // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                              color: colorController.whiteColor,
-                              borderRadius: BorderRadius.circular(13),
-                              border: Border.all(
-                        color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
-                        width: 3,
+                          }else{
+                            setState(() {
+                              count++;
+                            });
+                          }
+                          
+                        },
+                         child: Column(
+                          children: [
+                            reusableVisibility(Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: AudioPlayerWidget(
+                                          audioUrl: '${item['english_voice'].toString()}',
+                                        ),
+                         ), Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
+                         reusableVisibility(Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: AudioPlayerWidget(
+                                          audioUrl: '${item['arabic_voice'].toString()}',
+                                        ),
+                         ), Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
+                         reusableVisibility(Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: AudioPlayerWidget(
+                                          audioUrl: '${item['urdu_voice'].toString()}',
+                                        ),
+                         ), Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
+                         reusableVisibility(Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: AudioPlayerWidget(
+                                          audioUrl: '${item['turkish_voice'].toString()}',
+                                        ),
+                         ), Provider.of<TextVisibilityProvider>(context).isForTextVisible),
+      
+                         reusableVisibility(Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: AudioPlayerWidget(
+                                          audioUrl: '${item['chinese_voice'].toString()}',
+                                        ),
+                         ), Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
+                         reusableVisibility(Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: AudioPlayerWidget(
+                                          audioUrl: '${item['pashto_voice'].toString()}',
+                                        ),
+                         ), Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
+      
+                         reusableVisibility(Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: AudioPlayerWidget(
+                                          audioUrl: '${item['english_voice'].toString()}',
+                                        ),
+                         ), Provider.of<TextVisibilityProvider>(context).englishbtn),
+                          ],
+                         )
                       ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.network(items[index]['image'],errorBuilder: (context, error, stackTrace) {
-                              return Image.asset('assets/placeholder_not_found.png');
-                            },)
-                                // reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).englishbtn),
-                                // reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['arabic'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['urdu'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isForTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['chinese'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
-                                // reusableVisibility(Center(child: Text(items[index]['pashto'],style: TextStyle(fontSize: 18),)), 
-                                // Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
-                              ],
-                            )
-                            ),
+      
+                Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: GridView(
+                    shrinkWrap: true,
+                    // physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
+                  
+                    children: [
+                      // for (var item in items)
+                      
+                      for (int index = 0; index < items.length; index++)
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * .02,),
+                          child: InkWell(
+                            onTap: (){
+                              
+                              setState(() {
+                                selectedContainerIndex = index;
+                                 
+                              });
+                              answerID = items[index]['id'];
+                              saveSelectedIndex(index);
+                            },
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * .45,
+                              decoration: BoxDecoration(
+                                // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
+                                color: colorController.whiteColor,
+                                borderRadius: BorderRadius.circular(13),
+                                border: Border.all(
+                          color:  selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
+                          width: 3,
                         ),
+                              ),
+                              // child: Column(
+                              //   mainAxisAlignment: MainAxisAlignment.center,
+                              //   children: [
+                              child:     Center(
+                                child: Image.network(items[index]['image'],
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                  return Image.asset('assets/placeholder_not_found.png');
+                                },),
+                              )
+                                  // reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
+                                  // Provider.of<TextVisibilityProvider>(context).englishbtn),
+                                  // reusableVisibility(Center(child: Text(items[index]['english'],style: TextStyle(fontSize: 18),)), 
+                                  // Provider.of<TextVisibilityProvider>(context).isSecondTextVisible),
+                                  // reusableVisibility(Center(child: Text(items[index]['arabic'],style: TextStyle(fontSize: 18),)), 
+                                  // Provider.of<TextVisibilityProvider>(context).isFirstTextVisible),
+                                  // reusableVisibility(Center(child: Text(items[index]['urdu'],style: TextStyle(fontSize: 18),)), 
+                                  // Provider.of<TextVisibilityProvider>(context).isThirdTextVisible),
+                                  // reusableVisibility(Center(child: Text(items[index]['turkish'],style: TextStyle(fontSize: 18),)), 
+                                  // Provider.of<TextVisibilityProvider>(context).isForTextVisible),
+                                  // reusableVisibility(Center(child: Text(items[index]['chinese'],style: TextStyle(fontSize: 18),)), 
+                                  // Provider.of<TextVisibilityProvider>(context).isFiveTextVisible),
+                                  // reusableVisibility(Center(child: Text(items[index]['pashto'],style: TextStyle(fontSize: 18),)), 
+                                  // Provider.of<TextVisibilityProvider>(context).isSixTextVisible),
+                              //   ],
+                              // )
+                              ),
+                          ),
+                        ),
+                         ],
+                     ),
+                ),
+                 SizedBox(height: MediaQuery.of(context).size.height * .01,),
+                   for (var item in repeatedItems)
+                      InkWell(
+                        onTap: (){
+                          questionID = item['id'];
+                          questionApi();
+                          CountApi();
+                          _refreshItems();
+                          selectedContainerIndex = -1;
+                          print('Count value every click $countValue');
+                          if(count == 10){
+                            count = 0;
+                            setState(() {
+                              if(int.parse(countValue.toString()) >= int.parse('6')){
+                                reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
+                              }else{
+                                reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
+                              }
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
+                            });
+                          }else{
+                            setState(() {
+                              count++;
+                            });
+                          }
+                          
+                        },
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * .19,
+                          width: MediaQuery.of(context).size.width * .8,
+                          decoration: BoxDecoration(image: DecorationImage(
+                            
+                            image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
+                          child: Center(child: 
+                          
+                          Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          reusabletext('SUBMIT', colorController.whiteColor, 24.0),
+                          ]
+                          )
+                          // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
+                          
+                          )),
                       ),
-                       ],
-                   ),
-              ),
-               SizedBox(height: MediaQuery.of(context).size.height * .01,),
-                 for (var item in repeatedItems)
-                    InkWell(
-                      onTap: (){
-                        questionID = item['id'];
-                        questionApi();
-                        CountApi();
-                        _refreshItems();
-                        selectedContainerIndex = -1;
-                        print('Count value every click $countValue');
-                        if(count == 10){
-                          count = 0;
-                          setState(() {
-                            if(int.parse(countValue.toString()) >= int.parse('6')){
-                              reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
-                            }else{
-                              reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
-                            }
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
-                          });
-                        }else{
-                          setState(() {
-                            count++;
-                          });
-                        }
-                        
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * .19,
-                        width: MediaQuery.of(context).size.width * .8,
-                        decoration: BoxDecoration(image: DecorationImage(
+                   
+                  //  SizedBox(height: MediaQuery.of(context).size.height * .01,),
+                  //  for (var item in repeatedItems)
+                  //     InkWell(
+                  //       onTap: (){
+                  //         questionID = item['id'];
+                  //         questionApi();
+                  //         CountApi();
+                  //         _refreshItems();
+                  //         print('Count value every click $countValue');
+                  //         if(count == 10){
+                  //           count = 0;
+                  //           setState(() {
+                  //             if(int.parse(countValue.toString()) >= int.parse('6')){
+                  //               reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
+                  //             }else{
+                  //               reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
+                  //             }
+                  //             // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
+                  //           });
+                  //         }else{
+                  //           setState(() {
+                  //             count++;
+                  //           });
+                  //         }
                           
-                          image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
-                        child: Center(child: 
+                  //       },
+                  //        child: AudioPlayerWidget(
+                  //                       audioUrl: '${item['english_voice'].toString()}',
+                  //                     ),
+      
                         
-                        Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                        reusabletext('SUBMIT', colorController.whiteColor, 24.0),
-                        ]
-                        )
-                        // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
-                        
-                        )),
-                    ),
-                 
-                //  SizedBox(height: MediaQuery.of(context).size.height * .01,),
-                //  for (var item in repeatedItems)
-                //     InkWell(
-                //       onTap: (){
-                //         questionID = item['id'];
-                //         questionApi();
-                //         CountApi();
-                //         _refreshItems();
-                //         print('Count value every click $countValue');
-                //         if(count == 10){
-                //           count = 0;
-                //           setState(() {
-                //             if(int.parse(countValue.toString()) >= int.parse('6')){
-                //               reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
-                //             }else{
-                //               reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
-                //             }
-                //             // Navigator.push(context, MaterialPageRoute(builder: (context) => GamePageTwo(),));
-                //           });
-                //         }else{
-                //           setState(() {
-                //             count++;
-                //           });
-                //         }
-                        
-                //       },
-                //        child: AudioPlayerWidget(
-                //                       audioUrl: '${item['english_voice'].toString()}',
-                //                     ),
-
-                      
-                      // child: Container(
-                      //   height: MediaQuery.of(context).size.height * .25,
-                      //   width: MediaQuery.of(context).size.width * .8,
-                      //   decoration: BoxDecoration(image: DecorationImage(
+                        // child: Container(
+                        //   height: MediaQuery.of(context).size.height * .25,
+                        //   width: MediaQuery.of(context).size.width * .8,
+                        //   decoration: BoxDecoration(image: DecorationImage(
+                            
+                        //     image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
+                        //   child: Center(child: 
                           
-                      //     image: AssetImage('assets/et_bg.png'),filterQuality: FilterQuality.high,fit: BoxFit.contain,)),
-                      //   child: Center(child: 
+                        //   Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //       AudioPlayerWidget(
+                        //                 audioUrl: '${item['english_voice'].toString()}',
+                        //               ),
                         
-                      //   Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: [
-                      //       AudioPlayerWidget(
-                      //                 audioUrl: '${item['english_voice'].toString()}',
-                      //               ),
-                      
-                      //     //  playAudioFromUrl('${item['english'].toString()}'),
-                      //   // reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0), 
-                      //                     SizedBox(height: 16.0),
-                      //                     Row(children: [
-                      //                       reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                      //                       Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                      //                       reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
-                      //                       Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                      //                       reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
-                      //                       Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-                      //                     ],),
-                      //   ]
-                      //   )
-                      //   // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
-                        
-                      //   )),
-                    // ),
+                        //     //  playAudioFromUrl('${item['english'].toString()}'),
+                        //   // reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0), 
+                        //                     SizedBox(height: 16.0),
+                        //                     Row(children: [
+                        //                       reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                        //                       Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
+                        //                       reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                        //                       Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
+                        //                       reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                        //                       Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
+                        //                     ],),
+                        //   ]
+                        //   )
+                        //   // reusabletext('${item['english'].toString().capitalize}',colorController.whiteColor,22)
+                          
+                        //   )),
+                      // ),
+              ],
+            ),
+          );
+        }
+        }))
             ],
           ),
-        );
-      }
-  }))
-          ],
+          
         ),
-        
       ),
     );
   }

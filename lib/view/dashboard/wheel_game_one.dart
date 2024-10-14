@@ -269,16 +269,26 @@ int unlockedIndex = 0;
                 selectedCategory: selectedCategory,
                 itemsFuture2: itemsFuture2,)),
             );
-            setState(() {});
-            if (result != null) {
-              setState(() {
-                countValue = result;
-              });
-            }
+          //   setState(() {});
+          //   if (result != null) {
+          //     setState(() {
+          //       countValue = result;
+          //     });
+          //   }
          
-          if (index == unlockedIndex && int.parse(countValue!) >= 6) {
-            unlockedIndex++;
-          }
+          // if (index == unlockedIndex && int.parse(countValue!) >= 6) {
+          //   unlockedIndex++;
+          // }
+
+          if (result != null && mounted) {
+                        setState(() {
+                          countValue = result; // Set countValue from GamePageThree
+                          print("Updated countValue: $countValue");
+                          if (int.parse(countValue!) >= 6 && index == unlockedIndex) {
+                            unlockedIndex++; // Unlock the next index
+                          }
+                        });
+                      }
         });
       }
     },

@@ -38,7 +38,7 @@ Widget build(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
                   onTap: () {
@@ -99,7 +99,7 @@ Widget build(BuildContext context) {
               ],
             ),
                Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
                   onTap: () {
@@ -161,7 +161,7 @@ Widget build(BuildContext context) {
                ),
 
                Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
                   onTap: () {
@@ -191,36 +191,36 @@ Widget build(BuildContext context) {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MatchWordGameOne()), 
-                    );
-                  },
-                  child: Container(
-                    margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
-                    width: MediaQuery.of(context).size.width * .45,
-                    height: MediaQuery.of(context).size.height * .2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(11),
-                      image: DecorationImage(
-                        image: AssetImage('assets/gaming.jpg'),
-                        filterQuality: FilterQuality.high,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Expanded(
-                      child: Center(
-                        child: reusabletext(
-                          '',
-                           colorController.whiteColor,
-                          20,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // InkWell(
+                //   onTap: () {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(builder: (context) => MatchWordGameOne()), 
+                //     );
+                //   },
+                //   child: Container(
+                //     margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
+                //     width: MediaQuery.of(context).size.width * .45,
+                //     height: MediaQuery.of(context).size.height * .2,
+                //     decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(11),
+                //       image: DecorationImage(
+                //         image: AssetImage('assets/gaming.jpg'),
+                //         filterQuality: FilterQuality.high,
+                //         fit: BoxFit.cover,
+                //       ),
+                //     ),
+                //     child: Expanded(
+                //       child: Center(
+                //         child: reusabletext(
+                //           '',
+                //            colorController.whiteColor,
+                //           20,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 ],
                )
           ],

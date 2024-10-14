@@ -171,7 +171,7 @@ int count = 1;
       print('Clear Data Api Response : ${data}');
       return true;
     }
-   
+    Navigator.pop(context, countValue);
         return true;
         
       },

@@ -48,7 +48,7 @@ class _SplashState extends State<Splash> {
     final user = auth.currentUser;
 
     if(MySharedPrefrence().get_user_id() != 0){
-      Timer(Duration(seconds: 0), () {
+      Timer(Duration(seconds: 2), () {
         print('check user login ${user}');
         Navigator.pushReplacement(
         context,
@@ -58,7 +58,7 @@ class _SplashState extends State<Splash> {
       );
       });
     }else{
-      Timer(Duration(seconds: 0), () {
+      Timer(Duration(seconds: 2), () {
         print('check user without login ${user}');
         Navigator.pushReplacement(
         context,
