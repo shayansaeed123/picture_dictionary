@@ -403,8 +403,6 @@ class _LoginPageState extends State<LoginPage> {
                                 child: isLoginPage ? reusabletext(
                                     'SIGN IN', colorController.blackColor, 18) : reusabletext(
                                     'SIGN UP', colorController.blackColor, 18)),
-                                //     SizedBox(
-                                // height: MediaQuery.of(context).size.height * .01),
                                      TextButton(onPressed: (){
                             setState(() {
                         
