@@ -293,7 +293,7 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
                                                   8.0), // Add some spacing
                                           padding: EdgeInsets.all(
                                               MediaQuery.sizeOf(context).width *
-                                                  0.04),
+                                                  0.035),
                                           decoration: BoxDecoration(
                                             // color: selectedContainerIndex == index ? Colors.green : colorController.whiteColor,
                                             color: colorController.whiteColor,
@@ -324,9 +324,9 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
                                 // Displaying the concatenated selected words below the word options
                                 Text(
                                   selectedWords.join(
-                                      ' '), // Join selected words with spaces
+                                      ''), // Join selected words with spaces
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                   ),

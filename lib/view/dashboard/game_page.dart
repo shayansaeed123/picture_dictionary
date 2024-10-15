@@ -54,18 +54,18 @@ Widget build(BuildContext context) {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(11),
                       image: DecorationImage(
-                        image: AssetImage('assets/gaming.jpg'),
+                        image: AssetImage('assets/match-image.jpg'),
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: Center(
-                      child: reusabletext(
-                        'MATCH IMAGE',
-                        colorController.whiteColor,
-                        20,
-                      ),
-                    ),
+                    // child: Center(
+                    //   child: reusabletext(
+                    //     'MATCH IMAGE',
+                    //     colorController.whiteColor,
+                    //     20,
+                    //   ),
+                    // ),
                   ),
                 ),
                 InkWell(
@@ -82,18 +82,18 @@ Widget build(BuildContext context) {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(11),
                       image: DecorationImage(
-                        image: AssetImage('assets/gaming.jpg'),
+                        image: AssetImage('assets/voice-game.jpg'),
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: Center(
-                      child: reusabletext(
-                        'VOICE GAME',
-                         colorController.whiteColor,
-                        20,
-                      ),
-                    ),
+                    // child: Center(
+                    //   child: reusabletext(
+                    //     'VOICE GAME',
+                    //      colorController.whiteColor,
+                    //     20,
+                    //   ),
+                    // ),
                   ),
                 ),
               ],
@@ -115,18 +115,18 @@ Widget build(BuildContext context) {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(11),
                       image: DecorationImage(
-                        image: AssetImage('assets/gaming.jpg'),
+                        image: AssetImage('assets/wheel-game.jpg'),
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: Center(
-                      child: reusabletext(
-                        'WHEEL GAME',
-                         colorController.whiteColor,
-                        20,
-                      ),
-                    ),
+                    // child: Center(
+                    //   child: reusabletext(
+                    //     'WHEEL GAME',
+                    //      colorController.whiteColor,
+                    //     20,
+                    //   ),
+                    // ),
                   ),
                 ),
                 InkWell(
@@ -143,86 +143,86 @@ Widget build(BuildContext context) {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(11),
                       image: DecorationImage(
-                        image: AssetImage('assets/gaming.jpg'),
+                        image: AssetImage('assets/select-word.jpg'),
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: Center(
-                      child: reusabletext(
-                        'SELECT WORD',
-                         colorController.whiteColor,
-                        20,
-                      ),
-                    ),
+                    // child: Center(
+                    //   child: reusabletext(
+                    //     'SELECT WORD',
+                    //      colorController.whiteColor,
+                    //     20,
+                    //   ),
+                    // ),
                   ),
                 ),
                 ],
                ),
 
-               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MatchWordGameOne()), 
-                    );
-                  },
-                  child: Container(
-                    margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
-                    width: MediaQuery.of(context).size.width * .45,
-                    height: MediaQuery.of(context).size.height * .2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(11),
-                      image: DecorationImage(
-                        image: AssetImage('assets/gaming.jpg'),
-                        filterQuality: FilterQuality.high,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Center(
-                      child: reusabletext(
-                        'MATCH WORD',
-                         colorController.whiteColor,
-                        20,
-                      ),
-                    ),
-                  ),
-                ),
-                // InkWell(
-                //   onTap: () {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(builder: (context) => MatchWordGameOne()), 
-                //     );
-                //   },
-                //   child: Container(
-                //     margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
-                //     width: MediaQuery.of(context).size.width * .45,
-                //     height: MediaQuery.of(context).size.height * .2,
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(11),
-                //       image: DecorationImage(
-                //         image: AssetImage('assets/gaming.jpg'),
-                //         filterQuality: FilterQuality.high,
-                //         fit: BoxFit.cover,
-                //       ),
-                //     ),
-                //     child: Expanded(
-                //       child: Center(
-                //         child: reusabletext(
-                //           '',
-                //            colorController.whiteColor,
-                //           20,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                ],
-               )
+              //  Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     InkWell(
+              //     onTap: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(builder: (context) => MatchWordGameOne()), 
+              //       );
+              //     },
+              //     child: Container(
+              //       margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
+              //       width: MediaQuery.of(context).size.width * .45,
+              //       height: MediaQuery.of(context).size.height * .2,
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(11),
+              //         image: DecorationImage(
+              //           image: AssetImage('assets/gaming.jpg'),
+              //           filterQuality: FilterQuality.high,
+              //           fit: BoxFit.cover,
+              //         ),
+              //       ),
+              //       child: Center(
+              //         child: reusabletext(
+              //           'MATCH WORD',
+              //            colorController.whiteColor,
+              //           20,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              //   // InkWell(
+              //   //   onTap: () {
+              //   //     Navigator.push(
+              //   //       context,
+              //   //       MaterialPageRoute(builder: (context) => MatchWordGameOne()), 
+              //   //     );
+              //   //   },
+              //   //   child: Container(
+              //   //     margin: EdgeInsets.all(MediaQuery.of(context).size.width * .01),
+              //   //     width: MediaQuery.of(context).size.width * .45,
+              //   //     height: MediaQuery.of(context).size.height * .2,
+              //   //     decoration: BoxDecoration(
+              //   //       borderRadius: BorderRadius.circular(11),
+              //   //       image: DecorationImage(
+              //   //         image: AssetImage('assets/gaming.jpg'),
+              //   //         filterQuality: FilterQuality.high,
+              //   //         fit: BoxFit.cover,
+              //   //       ),
+              //   //     ),
+              //   //     child: Expanded(
+              //   //       child: Center(
+              //   //         child: reusabletext(
+              //   //           '',
+              //   //            colorController.whiteColor,
+              //   //           20,
+              //   //         ),
+              //   //       ),
+              //   //     ),
+              //   //   ),
+              //   // ),
+              //   ],
+              //  )
           ],
         ),
       ),
