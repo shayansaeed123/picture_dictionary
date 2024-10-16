@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/utils.dart';
+import 'package:lottie/lottie.dart';
 import 'package:picture_dictionary/common/MySharedPrefrence.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
@@ -167,8 +168,14 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
     categoriesFuture = pictureRepo.fetchCategories();
     // itemsFuture = fetchGameCategories(selectedCategory);
     itemsFuture2 = fetchGameCategories2();
+  }
 
-    // clearData();
+    Future<void> refreshGameCategories() async {
+    // Fetch the API data again to refresh the items
+    setState(() {
+      itemsFuture2 = fetchGameCategories2(); // Refresh the data
+      selectedWords.clear();
+    });
   }
 
   int unlockedIndex = 0;
@@ -339,8 +346,18 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
                                         print(selectedWordString);
                                     if (selectedWordString.toLowerCase() == imageName.toLowerCase()) {
                                           print("Word is match"); // Match case
+                                          showDialog(context: context, builder: (context) {
+                                            return Container(child: Lottie.asset('assets/congrats.json'),);
+                                          },);
+                                          setState(() {refreshGameCategories();});
+                                          Future.delayed(Duration(seconds: 1),() => Navigator.pop(context),);
                                         } else {
                                           print("Word is not match"); // No match case
+                                          showDialog(context: context, builder: (context) {
+                                            return Container(child: Lottie.asset('assets/failed.json'),);
+                                          },);
+                                          setState(() {refreshGameCategories();});
+                                          Future.delayed(Duration(seconds: 1),() => Navigator.pop(context),);
                                         }
                                   },
                                   child: Container(
