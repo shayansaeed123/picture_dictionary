@@ -171,9 +171,8 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
   }
 
     Future<void> refreshGameCategories() async {
-    // Fetch the API data again to refresh the items
     setState(() {
-      itemsFuture2 = fetchGameCategories2(); // Refresh the data
+      itemsFuture2 = fetchGameCategories2();
       selectedWords.clear();
     });
   }
