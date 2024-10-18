@@ -104,7 +104,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           // itemCount: isLogin()
                           //     ? data.length
                           //     : 3, // Show all items if logged in, else show only 3
-                          itemCount: data.length > 5 ? data.length - 2 : 0,
+                          itemCount: data.length > 5 ? data.length : 0,
                           // item.length > 5 ? item.length - 2 : 0,
                           itemBuilder: (context, index) {
                             Map<String, dynamic> type = data[index];
@@ -113,7 +113,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             return GestureDetector(
                               onTap: () {
                                 if (!isLocked) {
-                                  String voiceUrl;
+                                String voiceUrl;
                         if (textVisibilityProvider .isFirstTextVisible) {
                           voiceUrl = '${type['arabic_voice']}';
                         } else if (textVisibilityProvider .isThirdTextVisible) {

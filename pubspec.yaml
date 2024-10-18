@@ -109,7 +109,7 @@ flutter:
   #         style: italic
     - family: urdu2
       fonts:
-        - asset: assets/fonts/Jameel Noori Nastaleeq Kasheeda.ttf
+        - asset: assets/fonts/Alvi-Nastaleeq_Regular.ttf
 
     - family: arabicfont
       fonts:

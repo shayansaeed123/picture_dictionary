@@ -13,65 +13,58 @@ class AboutUs extends StatefulWidget {
 class _AboutUsState extends State<AboutUs> {
   String aboutusTextEnglish = """
 English Language:
+
 Picture Dictionary | PD
-Play And Learn In Four Different Languages
-Picture Dictionary or PD is fun; this one has excellent pictures with good attention to detail. 
-Picture Dictionary or PD allows children and adults to learn more about shapes, colors, fruits, 
-vegetables, and many more.
-Picture Dictionary or PD comes in 4 different languages;
+
+Play And Learn In six Different Languages
+
+Picture Dictionary or PD is fun; this one has excellent pictures with good attention to detail. Picture Dictionary or PD allows children and adults to learn more about shapes, colors, fruits, vegetables, and many more.
+
+Picture Dictionary or PD comes in 6 different languages;
 Urdu
 English
 Arabic
 Turkish
-So Play and learn vocabulary in English, Arabic, Turkish, and Urdu. It can also help you improve 
-your pronunciation and allow you to learn, write and speak specific things in 4 different 
-languages. 
-Picture Dictionary can be used globally, and users from different regions and languages can use 
-it for learning purposes.
-PD also has games that can be used for revision. If you are learning fruits’ names through 
-Picture Dictionary, you can take the test for correction in a fun way.
+Chinese
+Pashto
+
+So Play and learn vocabulary in English, Arabic, Turkish, Chinese, Pashto, and Urdu. It can also help you improve your pronunciation and allow you to learn, write and speak specific things in 6 different languages. 
+
+Picture Dictionary can be used globally, and users from different regions and languages can use it for learning purposes.
+
+PD also has games that can be used for revision. If you are learning fruits’ names through Picture Dictionary, you can take the test for correction in a fun way.
+
 """;
 String aboutusTextUrdu = """
-اردوزابن:
-ابوصتریتغل | یپ ڈی
-ںیلیھک اور اچر فلتخم ااب ںم س ں ںیھک
-ابوصتری تغل ای یپ ڈی اکی رفتحیےہ؛ اس س ں الیصفتایھچ وتہج ےک اسھت دمعہ/رتہبنیاصتوریوموجدںیہ. رچکپ ڈرنشکی ای یپ ڈی وچبم 
-اور ڑبوموک ولکشم ، روگنم ، ولھپم ، زبسویم اور تہب یس زیچوم ےکابرے س ں زمدی اجےنن اکومعقدیتیےہ۔
-رچکپ ڈرنشکی ای یپ ڈی۴فلتخم ااب ںم س ں اکم رکیتےہ۔
+اردو  زبان:
+باتصویرلغت | پی ڈی
+کھیلیں اور چھمختلف زبانوں میں سیکھیں
+باتصویر لغت  یا پی ڈی ایک تفریح ہے؛ اس میں تفصیلا اچھی توجہ کے ساتھ عمدہ/بہترین تصاویرموجود ہیں. پکچر ڈکشنری یا پی ڈی بچوں اور بڑوں کو شکلوں ، رنگوں ، پھلوں ، سبزیوں اور بہت سی چیزوں کے بارے میں مزید جاننے کا موقع دیتی ہے۔
+پکچر ڈکشنری یا پی ڈی6 مختلف زبانوں میں کام کرتی ہے۔
 اردو
-ی
- 
-ارگن ي
-رعیب
-رتیک
-وت آےیئ ارگنزیی ، رعیب ، رتیک اور اردو س ں ںیلیھک اور اافلظ ںیھک۔ ہی آپ وک اےنپ ظفلتوک رتہب انبےن س ں یھب دمد رکیتےہ اور آپ 
-وک۴فلتخم ااب ںم س ں وصخمص زیچںی ےنھکیس ، ےنھکل اور وبےنل یک وہستلدیتیےہ۔ 
-ابوصت يتغلوک اعیمل حطس رپ اامعتسل ایک اجاتکس ےہ ، اور فلتخم وطخم اور ااب ںم ےکاصر نی ا ے ےنھکیس ےک صاق د ےکےیل اامعتسل 
-رکےتکس ںیہ۔
-یپ ڈی س ں اےسی لیھک یھب ںیہ وج درہایئ ےک ےیل اامعتسل سوےتکس ںیہ۔ ارگ آپ ابوصت يتغلےک ذرہعی ولھپم ےکانم ھکیس رےہ ںیہ،
-وت آپ رفتیحی ااداا س ں زمدیرتہبی ےک ےیل ٹسییھبےل ےتکس ںیہ۔
+انگريزی
+عربی
+ترکی
+تو آئیے  انگریزی ، عربی ، ترکی ،چائینیز،پشتواور  اردو میں کھیلیں اور الفاظ سیکھیں۔ یہ آپ کو اپنے تلفظ کو بہتر بنانے میں بھی مدد کرتی ہے اور آپ کو6 مختلف زبانوں میں مخصوص چیزیں سیکھنے ، لکھنے اور بولنے کی سہولت دیتی ہے۔ 
+باتصوير لغت  کو عالمی سطح پر استعمال کیا جاسکتا ہے ، اور مختلف خطوں اور زبانوں کے صارفین اسے سیکھنے کے مقاصد کےلیے استعمال کرسکتے ہیں۔
+پی ڈی میں ایسے کھیل بھی ہیں جو دہرائی  کے لیے استعمال ہوسکتے ہیں۔ اگر آپ  باتصوير لغت کے ذریعہ پھلوں کے نام سیکھ رہے ہیں، تو آپ تفریحی انداز میں مزیدبہتری کے لیے ٹیسٹ بھی لے سکتے ہیں۔ 
 """;
 String aboutusTextArabi = """
-عیب زابن: 
-القاموس املصور/یب دی
-العب وتعلم يف أربع لغات خمتلفة.
- القاموس املصور قاموس ممتع ، ي
-تضمن صورا مجيلة و رائعة باالستِيعاب.
-يتيح القاموس املصور للصغار والكبار فرصة اتلعلم من خالل األشاكل، و األلوان، و صور الفواكه 
-واخلرضاوات وغري ذلك من أشياء خمتلفة.
-القاموس املصور حيتوى ىلع أربع لغات:
-األردية
-االجنلزيية
+عربی زبان: 
+القاموس المصور/بی دی
+العب وتعلم في ست لغات مختلفة.
+القاموس المصور قاموس ممتع ، يتضمن صورًا جميلة و رائعة بالاستِيعاب.
+يتيح القاموس المصور للصغار والكبار فرصة التعلم من خلال الأشكال، و الألوان، و صور  الفواكه والخضراوات وغير ذلك من أشياء مختلفة.
+القاموس المصور يحتوى على ست لغات:
 العربية
-الرتكية
-تعال! العب وتعلم املفردات يف اللغة اإلجنلزييةو العربية و الرتكية و األردية.و هذا سيساعدك يف 
-حتسني اتللفظ، ويسهل لك اتللكم و الكتابة يف أربع لغات خمتلفة.
-يمكن استخدام القاموس املصور اعمليا، ويستطيع ساكن مناطق خمتلفة مع اختالف لغاتهم أن 
-يستفيدوا منه يف جمال اتلعلم.
-و يف هذا اتلطبيق ألعاب ة
-ّ
-مسلي يمكن استخدامها للمراجعة، إذا تتعلم بهذا القاموس أسماء 
-الفواكه فتستطيع أن ختترب نفسك بأسلوب ممتع.
+الانجليزية
+الأردية
+التركية
+الصينة
+البشتوية
+تعال! العب وتعلم المفردات في اللغة الإنجليزية و العربية و التركية و الأردية والصينية والبشتوية. و هذا سيساعدك في تحسين التلفظ، ويسهل لك التكلم و الكتابة في ست لغات مختلفة.
+يمكن استخدام القاموس المصور عالميا، ويستطيع سكان مناطق مختلفة مع اختلاف لغاتهم أن يستفيدوا منه في مجال التعلم.
+و في هذا التطبيق ألعاب مسليّة يمكن استخدامها للمراجعة، إذا تتعلم بهذا القاموس أسماء الفواكه فتستطيع أن تختبر نفسك بأسلوب ممتع.
 """;
 String aboutusTextTurkey = """
 Türkçe : 
@@ -107,8 +100,8 @@ kendinizide de test edebilirsiniz.
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               reusabletext(aboutusTextEnglish, colorController.whiteColor, 16),
-              Text(aboutusTextUrdu, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu2')),
-              Text(aboutusTextArabi, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu')),
+              Text(aboutusTextUrdu, textAlign: TextAlign.right, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu2')),
+              Text(aboutusTextArabi, textAlign: TextAlign.right, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu')),
               reusabletext(aboutusTextTurkey, colorController.whiteColor, 16),
             ],
           ),
