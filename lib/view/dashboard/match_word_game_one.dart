@@ -102,61 +102,6 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
     }
   }
 
-//   Future<Map<String, dynamic>> clearData()async{
-//     final response = await http.post(
-//       Uri.parse('${PictureRepo.baseUrl}apis/clear_word_result.php'),
-//       body: {
-//         'user_id': MySharedPrefrence().get_user_id().toString(),
-//       },
-//     );
-//     var data;
-//     if(response.statusCode == 200){
-//        data = jsonDecode(response.body.toString());
-//       print('Clear Data Api Response : ${data}');
-//       return data;
-//     }
-//     return data;
-//    }
-// Future<List<Map<String, dynamic>>> fetchGameCategories(String categoryId,) async {
-//   try {
-//     // _isLoading = false;
-//     // print('myshared ${MySharedPrefrence().get_cat_id()}');
-//     final response = await http.post(
-//       Uri.parse('${PictureRepo.baseUrl}apis/get_limited_items_game5.php'),
-//       body: {
-//         'type_id': selectedCategory.toString(),
-//         // MySharedPrefrence().get_cat_id(),
-//       },
-//     );
-// setState(() {});
-//     print('ID1 ${selectedCategory}');
-// setState(() {});
-//     if (response.statusCode == 200) {
-//       dynamic jsonResponse = jsonDecode(response.body);
-//       List<Map<String, dynamic>> items = [];
-//       for (var category in jsonResponse) {
-//         if (category['type_id'] == categoryId) {
-//           items.addAll(category['items'].cast<Map<String, dynamic>>());
-//           // Check if repeated items exist and add them
-//           if (category.containsKey('repeateditems')) {
-//             items.addAll(category['repeateditems'].cast<Map<String, dynamic>>());
-//           }
-//           break;
-//         }
-//       }
-//       print('Game All Items $items');
-//       return items;
-//     } else {
-//       throw Exception('failed to load data');
-//     }
-//   } catch (e) {
-//     print('Error: $e');
-//     throw Exception('failed to load data');
-//   } finally {
-//     // _isLoading = false;
-//   }
-//    }
-
   late Random random;
   late int randomNumber;
 
