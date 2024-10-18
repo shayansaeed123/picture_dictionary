@@ -184,19 +184,6 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        //        final response = await http.post(
-        //   Uri.parse('${PictureRepo.baseUrl}apis/clear_result.php'),
-        //   body: {
-        //     'user_id': MySharedPrefrence().get_user_id().toString(),
-        //   },
-        // );
-        // var data;
-        // if(response.statusCode == 200){
-        //    data = jsonDecode(response.body.toString());
-        //   print('Clear Data Api Response : ${data}');
-        //   return true;
-        // }
-        // Navigator.pop(context, countValue);
         return true;
       },
       child: Scaffold(
