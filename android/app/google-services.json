@@ -7,18 +7,58 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:940006378866:android:7404f609f663f0600721eb",
+        "mobilesdk_app_id": "1:940006378866:android:3f9e7ff9c75eb4320721eb",
         "android_client_info": {
-          "package_name": "com.ideaz.PictureDict"
+          "package_name": "com.ideaz.alqamoosulmusawwar"
         }
       },
       "oauth_client": [
         {
-          "client_id": "940006378866-nbkbbqdepbcm7ligvmhflgilqhm6034g.apps.googleusercontent.com",
+          "client_id": "940006378866-6c1vj793ne0fnftn9u42vrigg0g96jq1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ideaz.PictureDict",
+            "package_name": "com.ideaz.alqamoosulmusawwar",
+            "certificate_hash": "ded453c779f762cb7207e4d31552ee3977f959bb"
+          }
+        },
+        {
+          "client_id": "940006378866-c1renodsb4oj0qjct437suhts79pcev5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ideaz.alqamoosulmusawwar",
             "certificate_hash": "d054473a432c1eb86ca6df66c8c6f3b6a7bc1633"
+          }
+        },
+        {
+          "client_id": "940006378866-cdr1mqa40hc92koosd4u1eph7nlbpi45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ideaz.alqamoosulmusawwar",
+            "certificate_hash": "09e67713c2bb80b7b9e6117af94aed206d04f0d2"
+          }
+        },
+        {
+          "client_id": "940006378866-f685na3ja448doc71gr2o5h2smchr27c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ideaz.alqamoosulmusawwar",
+            "certificate_hash": "ad9ea1932750bea0265b943085fe449c93a24855"
+          }
+        },
+        {
+          "client_id": "940006378866-hs8a0q3asrebf4dm5nq8ib32ir3vj2nh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ideaz.alqamoosulmusawwar",
+            "certificate_hash": "bb1cd966afcbbb1b270115f126016ed28f1ea143"
+          }
+        },
+        {
+          "client_id": "940006378866-m9nqn2tf8ot2nc2nrv2npffdm9qn1pn5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ideaz.alqamoosulmusawwar",
+            "certificate_hash": "1785496468f8ea96d9462cc82786e2f77403202d"
           }
         },
         {

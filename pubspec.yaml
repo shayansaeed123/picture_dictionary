@@ -54,6 +54,7 @@ dependencies:
   change_app_package_name: 
   shared_preferences:
   just_audio: 
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

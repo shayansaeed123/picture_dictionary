@@ -1,4 +1,4 @@
-package com.ideaz.PictureDict
+package com.ideaz.alqamoosulmusawwar
 
 import io.flutter.embedding.android.FlutterActivity
 

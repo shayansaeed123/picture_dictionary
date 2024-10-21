@@ -175,18 +175,18 @@ Widget build(BuildContext context) {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(11),
                       image: DecorationImage(
-                        image: AssetImage('assets/gaming.jpg'),
+                        image: AssetImage('assets/word2.jpg'),
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: Center(
-                      child: reusabletext(
-                        'MATCH WORD',
-                         colorController.whiteColor,
-                        20,
-                      ),
-                    ),
+                    // child: Center(
+                    //   child: reusabletext(
+                    //     'MATCH WORD',
+                    //      colorController.whiteColor,
+                    //     20,
+                    //   ),
+                    // ),
                   ),
                 ),
                 // InkWell(

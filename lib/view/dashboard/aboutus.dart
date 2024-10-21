@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
-import 'package:picture_dictionary/res/re_text.dart';
+import 'package:picture_dictionary/res/reusableloading.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
@@ -11,6 +12,8 @@ class AboutUs extends StatefulWidget {
 }
 
 class _AboutUsState extends State<AboutUs> {
+  late WebViewController _controller;
+  bool _isLoading = false;
   String aboutusTextEnglish = """
 English Language:
 
@@ -92,19 +95,35 @@ kendinizide de test edebilirsiniz.
     return Scaffold(
       appBar: AppBar(title: Text('About Us'),),
       backgroundColor: colorController.bgColorup,
-      body: SingleChildScrollView(
+      body: Container(
+        height: MediaQuery.sizeOf(context).height,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              reusabletext(aboutusTextEnglish, colorController.whiteColor, 16),
-              Text(aboutusTextUrdu, textAlign: TextAlign.right, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu2')),
-              Text(aboutusTextArabi, textAlign: TextAlign.right, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu')),
-              reusabletext(aboutusTextTurkey, colorController.whiteColor, 16),
-            ],
-          ),
+          child: WebView(
+                  initialUrl: 'https://alqamoosulmusawwar.com/Backend/about.php',
+                  javascriptMode: JavascriptMode.unrestricted,
+                  backgroundColor: colorController.bgColorup,
+                  onWebViewCreated: (WebViewController webViewController){
+                    _controller = webViewController;
+                  },
+                  onPageStarted: (String url){
+                    // Utils.snakbarSuccess(context, 'Page is Loading');
+                    print('$url ');
+                  },
+                  onWebResourceError: (error) {
+                    Center(child: reusableloadingrow(context, _isLoading));
+                  },
+                ),
+          // Column(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     reusabletext(aboutusTextEnglish, colorController.whiteColor, 16),
+          //     Text(aboutusTextUrdu, textAlign: TextAlign.right, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu2')),
+          //     Text(aboutusTextArabi, textAlign: TextAlign.right, style: TextStyle(color:  colorController.whiteColor,fontSize:  16,fontFamily: 'urdu')),
+          //     reusabletext(aboutusTextTurkey, colorController.whiteColor, 16),
+          //   ],
+          // ),
         ),
       ),
     );
