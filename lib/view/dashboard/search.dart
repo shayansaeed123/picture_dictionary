@@ -203,13 +203,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/utils.dart';
+import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/controller/color_controller.dart';
 import 'package:picture_dictionary/repo/category_repo.dart';
+import 'package:picture_dictionary/res/reusableCategoryTextBtn.dart';
+import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
 import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class SearchItem extends StatefulWidget {
   const SearchItem({super.key});
@@ -279,18 +284,51 @@ class _SearchItemState extends State<SearchItem> {
       }
     }
   }
-  void performSearch(String text) {
-    setState(() {
-      filteredItems = items.where((item) {
-        return item['english']
-            .toString()
-            .toLowerCase()
-            .contains(text.toLowerCase());
-      }).toList();
-    });
+  // void performSearch(String text) {
+  //   setState(() {
+  //     filteredItems = items.where((item) {
+  //       return item['english']
+  //           .toString()
+  //           .toLowerCase()
+  //           .contains(text.toLowerCase());
+  //     }).toList();
+  //   });
 
-    print("Filtered Items: $filteredItems");
-  }
+  //   print("Filtered Items: $filteredItems");
+  // }
+
+  void performSearch(String text) {
+  setState(() {
+    filteredItems = items.where((item) {
+      return item['english']
+              .toString()
+              .toLowerCase()
+              .contains(text.toLowerCase()) || 
+             item['urdu']
+              .toString()
+              .toLowerCase()
+              .contains(text.toLowerCase()) || 
+             item['arabic']
+              .toString()
+              .toLowerCase()
+              .contains(text.toLowerCase()) || 
+             item['turkish']
+              .toString()
+              .toLowerCase()
+              .contains(text.toLowerCase()) || 
+             item['chinese']
+              .toString()
+              .toLowerCase()
+              .contains(text.toLowerCase()) || 
+             item['pashto']
+              .toString()
+              .toLowerCase()
+              .contains(text.toLowerCase());
+    }).toList();
+  });
+
+  print("Filtered Items: $filteredItems");
+}
 
   void onSearchChange(String text) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
@@ -445,28 +483,83 @@ class _SearchItemState extends State<SearchItem> {
                                     'assets/placeholder_loading.png'),
                               ),
                             ),
-                            Container(
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.height * 0.05,
-                              margin: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * .001),
-                              padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.height * .003),
-                              decoration: BoxDecoration(
-                                  color: colorController.categoryBtnColor,
-                                  borderRadius: BorderRadius.circular(8.0)),
-                              child: Center(
-                                child: Text(
-                                  '${filteredItems[index]['english']}',
-                                  textAlign: TextAlign.center,
-                                  softWrap: true,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'English1',
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // Container(
+                            //   width: double.infinity,
+                            //   height: MediaQuery.of(context).size.height * 0.05,
+                            //   margin: EdgeInsets.all(
+                            //       MediaQuery.of(context).size.height * .001),
+                            //   padding: EdgeInsets.all(
+                            //       MediaQuery.of(context).size.height * .003),
+                            //   decoration: BoxDecoration(
+                            //       color: colorController.categoryBtnColor,
+                            //       borderRadius: BorderRadius.circular(8.0)),
+                            //   child: Center(
+                            //     child: Text(
+                            //       '${c['english']}',
+                            //       textAlign: TextAlign.center,
+                            //       softWrap: true,
+                            //       style: TextStyle(
+                            //         color: Colors.white,
+                            //         fontFamily: 'English1',
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+
+                            reusableCategoryTextBtn(
+                                          context, 
+                                          '${filteredItems[index]['english'].toString().capitalize}',
+                                          colorController.categoryBtnColor,'English1'),
+                                      reusableVisibility(
+                                        reusableCategoryTextBtn(
+                                            context,
+                                            '${filteredItems[index]['arabic'].toString().capitalize}',
+                                            colorController.arabicTextBtnColor,
+                                            'arabicfont',
+                                            ),
+                                        Provider.of<TextVisibilityProvider>(
+                                                context)
+                                            .isFirstTextVisible,
+                                      ),
+                                      reusableVisibility(
+                                        reusableCategoryTextBtn(
+                                            context,
+                                            '${filteredItems[index]['urdu'].toString().capitalize}',
+                                            colorController.urduTextBtnColor,'urdu2'),
+                                        Provider.of<TextVisibilityProvider>(
+                                                context)
+                                            .isThirdTextVisible,
+                                      ),
+                                      reusableVisibility(
+                                        reusableCategoryTextBtn(
+                                            context,
+                                            '${filteredItems[index]['turkish'].toString().capitalize}',
+                                            colorController
+                                                .turkishTextBtnColor,''),
+                                        Provider.of<TextVisibilityProvider>(
+                                                context)
+                                            .isForTextVisible,
+                                      ),
+
+                                      reusableVisibility(
+                                        reusableCategoryTextBtn(
+                                            context,
+                                            '${filteredItems[index]['chinese'].toString().capitalize}',
+                                            colorController.chineseTextBtnColor,''),
+                                        Provider.of<TextVisibilityProvider>(
+                                                context)
+                                            .isFiveTextVisible,
+                                      ),
+                                      reusableVisibility(
+                                        reusableCategoryTextBtn(
+                                            context,
+                                            '${filteredItems[index]['pashto'].toString().capitalize}',
+                                            colorController
+                                                .pashtoTextBtnColor,''),
+                                        Provider.of<TextVisibilityProvider>(
+                                                context)
+                                            .isSixTextVisible,
+                                      ),
                           ],
                         ),
                       ),
