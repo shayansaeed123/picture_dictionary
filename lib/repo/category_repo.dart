@@ -87,14 +87,10 @@ class PictureRepo{
     } else {
        print('Error');
        throw Exception('failed to load data');
-      // return reusabledialog(context, "Error",
-      //       "Please check your internet connection", "Ok", () {});
     }
   }catch(e){
     print(e.toString());
     throw Exception('failed to load data');
-    // return reusabledialog(context, "Error",
-    //         "Please check your internet connection", "Ok", () {});
   }finally{
     _isLoading = false;
   }
