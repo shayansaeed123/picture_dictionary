@@ -42,9 +42,6 @@ import 'package:provider/provider.dart';
             reusableVisibility(reusablehomeBtn('ENG', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).englishbtn,),
-
-
-            
           ],),
           // Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
           //   return Row(
