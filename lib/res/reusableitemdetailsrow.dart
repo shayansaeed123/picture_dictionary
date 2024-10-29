@@ -23,8 +23,6 @@ Widget reusableitemdetailsrow(String name, Color  color, bordercolor, BuildConte
           onTap();
         },
         child: Container(
-                        // padding: EdgeInsets.all(MediaQuery.of(context).size.height * .01),
-                        // height: MediaQuery.of(context).size.height * .05,
                         margin: EdgeInsets.only(right: MediaQuery.of(context).size.height * .01,),
                         padding: EdgeInsets.all(MediaQuery.of(context).size.height * .006),
                           decoration: BoxDecoration(
