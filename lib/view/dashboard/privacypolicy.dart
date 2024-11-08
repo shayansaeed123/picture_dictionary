@@ -40,8 +40,10 @@ Picture Dictionary, you can take the test for correction in a fun way.
       backgroundColor: colorController.bgColorup,
       appBar: AppBar(title: Text('Privacy Policy'),),
       body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        primary: true,
         child:  Container(
-        height: MediaQuery.sizeOf(context).height,
+        height: MediaQuery.sizeOf(context).height * 1.7,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: WebView(

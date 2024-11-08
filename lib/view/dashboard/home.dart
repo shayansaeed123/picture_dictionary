@@ -14,6 +14,7 @@ import 'package:picture_dictionary/view/dashboard/aboutus.dart';
 import 'package:picture_dictionary/view/dashboard/categories.dart';
 import 'package:picture_dictionary/view/dashboard/game_page.dart';
 import 'package:picture_dictionary/view/dashboard/privacypolicy.dart';
+import 'package:picture_dictionary/view/dashboard/select_language.dart';
 import 'package:picture_dictionary/view/login/login_signup.dart';
 import 'package:provider/provider.dart';
 extension TruncateText on String {
@@ -117,6 +118,8 @@ Future<bool> _onWillPop() async {
               title: Text('Setting'),
               onTap: () {
                 // Handle help tap
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
               },
             ),
             ListTile(
