@@ -21,25 +21,25 @@ import 'package:provider/provider.dart';
         automaticallyImplyLeading: false,
         actions: [
           Row(children: [
-            reusableVisibility(reusablehomeBtn('AR', (){
+            reusableVisibility(reusablehomeBtn('عربی', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-            reusableVisibility(reusablehomeBtn('ENG', (){
+            reusableVisibility(reusablehomeBtn('ENGLISH', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).isSecondTextVisible,),
-            reusableVisibility(reusablehomeBtn('UR', (){
+            reusableVisibility(reusablehomeBtn('اردو', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-            reusableVisibility(reusablehomeBtn('TUR', (){
+            reusableVisibility(reusablehomeBtn('Türkçe', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-            reusableVisibility(reusablehomeBtn('CHI', (){
+            reusableVisibility(reusablehomeBtn('CHINESE', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,),
-            reusableVisibility(reusablehomeBtn('PAS', (){
+            reusableVisibility(reusablehomeBtn('پشتو', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).isSixTextVisible,),
-            reusableVisibility(reusablehomeBtn('ENG', (){
+            reusableVisibility(reusablehomeBtn('ENGLISH', (){
               Navigator.push(context, MaterialPageRoute(builder:  (context) => SelectLanguage(),));
             }), Provider.of<TextVisibilityProvider>(context).englishbtn,),
           ],),

@@ -50,22 +50,24 @@ class _SplashState extends State<Splash> {
     if(MySharedPrefrence().get_user_id() != 0){
       Timer(Duration(seconds: 2), () {
         print('check user login ${user}');
-        Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                WillPopScope(onWillPop: () async => false, child: HomePage())),
-      );
+      //   Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) =>
+      //           WillPopScope(onWillPop: () async => false, child: HomePage())),
+      // );
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
       });
     }else{
       Timer(Duration(seconds: 2), () {
         print('check user without login ${user}');
-        Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                WillPopScope(onWillPop: () async => false, child: LoginPage())),
-      );
+        // Navigator.pushReplacement(
+        // context,
+        // MaterialPageRoute(
+        //     builder: (context) =>
+        //         WillPopScope(onWillPop: () async => false, child: LoginPage())),
+      // );
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
       });
     }
   }

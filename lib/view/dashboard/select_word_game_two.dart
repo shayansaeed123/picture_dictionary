@@ -342,14 +342,15 @@ int count = 1;
       
                          Container(
                           margin: EdgeInsets.all(MediaQuery.of(context).size.width * .02),
-                      width: MediaQuery.of(context).size.width * .55,
-                      height: MediaQuery.of(context).size.height * .16,
+                          padding: EdgeInsets.all(MediaQuery.of(context).size.width * .10),
+                      width: MediaQuery.of(context).size.width * .6,
+                      height: MediaQuery.of(context).size.height * .26,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(11),
                         image: DecorationImage(
                           image: NetworkImage(item['image']),
                           filterQuality: FilterQuality.high,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       // child: ,

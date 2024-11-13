@@ -34,14 +34,15 @@ class _SelectLanguageState extends State<SelectLanguage> {
             children: [
               Positioned.fill(
                 // top: MediaQuery.of(context).size.height * 0.01,
-              left: MediaQuery.of(context).size.width * 0.15,
+              left: MediaQuery.of(context).size.width * 0.17,
               right: MediaQuery.of(context).size.width * 0.15,
                 child: Image.asset('assets/rope.png',fit: BoxFit.contain,)),
 
                 Positioned.fill(
-                  top: MediaQuery.of(context).size.height * 0.1,
+                  top: MediaQuery.of(context).size.height * 0.24,
                   left: MediaQuery.of(context).size.width * 0.15,
               right: MediaQuery.of(context).size.width * 0.15,
+              bottom: MediaQuery.of(context).size.height * 0.03,
               // bottom: MediaQuery.of(context).size.height * 0.42,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +55,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                        Navigator.pop(context);
                                         },
                                       child: Image.asset(
-                                        width: MediaQuery.of(context).size.width * 0.73,
+                                        width: MediaQuery.of(context).size.width * 0.58,
                                         'assets/ar_tab.png',)),
                       GestureDetector(
                   onTap: (){
@@ -62,7 +63,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                      Navigator.pop(context);
                   },
                 child: Image.asset(
-                  width: MediaQuery.of(context).size.width * 0.73,
+                  width: MediaQuery.of(context).size.width * 0.58,
                   'assets/eng_tab.png',)),
                   GestureDetector(
                   onTap: (){
@@ -70,7 +71,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                      Navigator.pop(context);
                   },
                   child: Image.asset(
-                    width: MediaQuery.of(context).size.width * 0.73,
+                    width: MediaQuery.of(context).size.width * 0.58,
                     'assets/ur_tab.png',)),
                     GestureDetector(
                   onTap: (){
@@ -78,7 +79,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                      Navigator.pop(context);
                   },
                   child: Image.asset(
-               width: MediaQuery.of(context).size.width * 0.73,
+               width: MediaQuery.of(context).size.width * 0.58,
               'assets/tur_tab.png',)),
               GestureDetector(
                   onTap: (){
@@ -87,7 +88,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                      Navigator.pop(context);
                   },
                 child: Image.asset(
-                  width: MediaQuery.of(context).size.width * 0.73,
+                  width: MediaQuery.of(context).size.width * 0.58,
                   'assets/chinese.png',)),
                   InkWell(
                   onTap: (){
@@ -95,7 +96,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                      Navigator.pop(context);
                   },
                 child: Image.asset(
-                  width: MediaQuery.of(context).size.width * 0.73,
+                  width: MediaQuery.of(context).size.width * 0.58,
                   'assets/pashto.png',))
                     ],
                   ),

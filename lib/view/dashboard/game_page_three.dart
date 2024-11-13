@@ -301,18 +301,22 @@ int count = 1;
                           Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                          reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
+                          // reusabletext('${item['english'].toString().capitalize} ', colorController.whiteColor, 24.0),
                                             SizedBox(height: 16.0),
                                             Row(children: [
-                                              reusableVisibility(reusabletext('| ${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              reusableVisibility(reusabletext('${item['english'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              Provider.of<TextVisibilityProvider>(context).englishbtn,),
+                                              reusableVisibility(reusabletext('${item['english'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              Provider.of<TextVisibilityProvider>(context).isSecondTextVisible,),
+                                              reusableVisibility(reusabletext('${item['arabic'].toString().capitalize}', colorController.whiteColor, 22.0), 
                                               Provider.of<TextVisibilityProvider>(context).isFirstTextVisible,),
-                                              reusableVisibility(reusabletext('| ${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              reusableVisibility(reusabletext('${item['urdu'].toString().capitalize}', colorController.whiteColor, 22.0), 
                                               Provider.of<TextVisibilityProvider>(context).isThirdTextVisible,),
-                                              reusableVisibility(reusabletext('| ${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                              reusableVisibility(reusabletext('${item['turkish'].toString().capitalize}', colorController.whiteColor, 24.0), 
                                               Provider.of<TextVisibilityProvider>(context).isForTextVisible,),
-                                              reusableVisibility(reusabletext('| ${item['chinese'].toString().capitalize}', colorController.whiteColor, 22.0), 
+                                              reusableVisibility(reusabletext('${item['chinese'].toString().capitalize}', colorController.whiteColor, 22.0), 
                                             Provider.of<TextVisibilityProvider>(context).isFiveTextVisible,),
-                                            reusableVisibility(reusabletext('| ${item['pashto'].toString().capitalize}', colorController.whiteColor, 24.0), 
+                                            reusableVisibility(reusabletext('${item['pashto'].toString().capitalize}', colorController.whiteColor, 24.0), 
                                             Provider.of<TextVisibilityProvider>(context).isSixTextVisible,),
                                             ],),
                           ]

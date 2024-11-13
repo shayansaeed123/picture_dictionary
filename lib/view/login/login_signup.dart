@@ -99,12 +99,13 @@ class _LoginPageState extends State<LoginPage> {
     try{
       if(isLoginPage){
        UserCredential userCredential = await auth.signInWithEmailAndPassword(email: _emailController.text.toString(), password: _passwordController.text.toString());
-       Navigator.push(context,
-                            MaterialPageRoute(
-                              builder: (context) => WillPopScope(
-                                  onWillPop: () async => false,
-                                  child: HomePage()),
-                            ));
+      //  Navigator.push(context,
+      //                       MaterialPageRoute(
+      //                         builder: (context) => WillPopScope(
+      //                             onWillPop: () async => false,
+      //                             child: HomePage()),
+      //                       ));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
        MySharedPrefrence().set_user_email(userCredential.user!.email);
         setState(() {
          verifyuser();
@@ -157,12 +158,13 @@ class _LoginPageState extends State<LoginPage> {
     print("Retrieved User ID: $savedUserId");
 
     // Navigate to HomePage
-    Navigator.pushReplacement(context,
-                            MaterialPageRoute(
-                              builder: (context) => WillPopScope(
-                                  onWillPop: () async => false,
-                                  child: HomePage()),
-                            ));
+    // Navigator.pushReplacement(context,
+    //                         MaterialPageRoute(
+    //                           builder: (context) => WillPopScope(
+    //                               onWillPop: () async => false,
+    //                               child: HomePage()),
+    //                         ));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),));
 
     print(response.body);
   } else {

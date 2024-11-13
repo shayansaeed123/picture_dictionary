@@ -195,7 +195,7 @@ void moveToPreviousItem() {
                     Container(
                       margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.02),
-                      width: MediaQuery.of(context).size.width * .76,
+                      width: MediaQuery.of(context).size.width * .8,
                       height: MediaQuery.of(context).size.height * .32,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -210,45 +210,45 @@ void moveToPreviousItem() {
                                 placeholder: (context, url) => Image.asset('assets/placeholder_loading.png'),
                                 ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width * .1,
-                              child: reusablenextitembtn(context, (){
-                              //how to move to next item
-                              print(
-                                widget.current
-                              );
-                              moveToPreviousItem();
-                              setState(() {});
-                              String voiceUrl;
-                              if (textVisibilityProvider .isFirstTextVisible) {
-                                voiceUrl = '${currentVoiceAr}';
-                              } else if (textVisibilityProvider .isThirdTextVisible) {
-                                voiceUrl = '${currentVoiceUr}';
-                              } else if (textVisibilityProvider .isForTextVisible) {
-                                voiceUrl = '${currentVoiceTur}';
-                              } else if (textVisibilityProvider .isFiveTextVisible) {
-                                voiceUrl = '${currentVoiceChi}';
-                              } else if (textVisibilityProvider .isSixTextVisible) {
-                                voiceUrl = '${currentVoicePas}';
-                              } else {
-                                voiceUrl = '${currentVoiceEng}';
-                              }
-                              // playAudioFromUrl('${item['english_voice']}');
-                              playAudioFromUrl(voiceUrl);
-                              setState(() {});
-                                                        },'assets/back_blue.png'),
-                            );
-                          },),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //   children: [
+                        // Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                        //     return Container(
+                        //       width: MediaQuery.of(context).size.width * .1,
+                        //       child: reusablenextitembtn(context, (){
+                        //       //how to move to next item
+                        //       print(
+                        //         widget.current
+                        //       );
+                        //       moveToPreviousItem();
+                        //       setState(() {});
+                        //       String voiceUrl;
+                        //       if (textVisibilityProvider .isFirstTextVisible) {
+                        //         voiceUrl = '${currentVoiceAr}';
+                        //       } else if (textVisibilityProvider .isThirdTextVisible) {
+                        //         voiceUrl = '${currentVoiceUr}';
+                        //       } else if (textVisibilityProvider .isForTextVisible) {
+                        //         voiceUrl = '${currentVoiceTur}';
+                        //       } else if (textVisibilityProvider .isFiveTextVisible) {
+                        //         voiceUrl = '${currentVoiceChi}';
+                        //       } else if (textVisibilityProvider .isSixTextVisible) {
+                        //         voiceUrl = '${currentVoicePas}';
+                        //       } else {
+                        //         voiceUrl = '${currentVoiceEng}';
+                        //       }
+                        //       // playAudioFromUrl('${item['english_voice']}');
+                        //       playAudioFromUrl(voiceUrl);
+                        //       setState(() {});
+                        //                                 },'assets/back_blue.png'),
+                        //     );
+                        //   },),
 
 
                         Container(
                       margin: EdgeInsets.only(
                           top: MediaQuery.of(context).size.height * 0.01),
-                      width: MediaQuery.of(context).size.width * .6,
+                      width: MediaQuery.of(context).size.width * .8,
                       height: MediaQuery.of(context).size.height * .43,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -275,149 +275,151 @@ void moveToPreviousItem() {
                                   playAudioFromUrl(currentVoiceTur);
                                 }),
                                 reusableitemdetailsrow('${currentNameChi.toString().toUpperCase()}', colorController.chineseTextBtnColor,
-                                colorController.chineseTextBtnColor, context,(){
+                                const Color(0xFFac6c84), context,(){
                                   playAudioFromUrl(currentVoiceChi);
                                 }),
                             reusableitemdetailsrow('${currentNamePas.toString().toUpperCase()}', colorController.pashtoTextBtnColor,
-                                colorController.pashtoTextBtnColor, context,(){
+                                const Color(0xFFbcc494), context,(){
                                   playAudioFromUrl(currentVoicePas);
                                 }),
                           ],
                         ),
                       ),
                     ),
-                     Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
-                            return Container(
-                              width: MediaQuery.of(context).size.width * .1,
-                              child: reusablenextitembtn(context, (){
-                              //how to move to next item
-                              print(
-                                widget.current
-                              );
-                              moveToNextItem();
-                              setState(() {});
-                              String voiceUrl;
-                              if (textVisibilityProvider .isFirstTextVisible) {
-                                voiceUrl = '${currentVoiceAr}';
-                              } else if (textVisibilityProvider .isThirdTextVisible) {
-                                voiceUrl = '${currentVoiceUr}';
-                              } else if (textVisibilityProvider .isForTextVisible) {
-                                voiceUrl = '${currentVoiceTur}';
-                              } else if (textVisibilityProvider .isFiveTextVisible) {
-                                voiceUrl = '${currentVoiceChi}';
-                              } else if (textVisibilityProvider .isSixTextVisible) {
-                                voiceUrl = '${currentVoicePas}';
-                              } else {
-                                voiceUrl = '${currentVoiceEng}';
-                              }
-                              // playAudioFromUrl('${item['english_voice']}');
-                              playAudioFromUrl(voiceUrl);
-                              setState(() {});
-                                                        },'assets/next_blue.png'),
-                            );
-                          },),
-                      ],
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height * 0.005),
-                      width: MediaQuery.of(context).size.width * .76,
-                      height: MediaQuery.of(context).size.height * .05,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.transparent),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Center(
-                            child: Text('${_currentPageIndex + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
-                          ),
-                          // Center(
-                          //   child: Text('Swipe>>',style: TextStyle(color: Color(0xFFaf2307)),),
-                          // ),
-                        ],
-                      )
-                    ),
+                    //  Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                    //         return Container(
+                    //           width: MediaQuery.of(context).size.width * .1,
+                    //           child: reusablenextitembtn(context, (){
+                    //           //how to move to next item
+                    //           print(
+                    //             widget.current
+                    //           );
+                    //           moveToNextItem();
+                    //           setState(() {});
+                    //           String voiceUrl;
+                    //           if (textVisibilityProvider .isFirstTextVisible) {
+                    //             voiceUrl = '${currentVoiceAr}';
+                    //           } else if (textVisibilityProvider .isThirdTextVisible) {
+                    //             voiceUrl = '${currentVoiceUr}';
+                    //           } else if (textVisibilityProvider .isForTextVisible) {
+                    //             voiceUrl = '${currentVoiceTur}';
+                    //           } else if (textVisibilityProvider .isFiveTextVisible) {
+                    //             voiceUrl = '${currentVoiceChi}';
+                    //           } else if (textVisibilityProvider .isSixTextVisible) {
+                    //             voiceUrl = '${currentVoicePas}';
+                    //           } else {
+                    //             voiceUrl = '${currentVoiceEng}';
+                    //           }
+                    //           // playAudioFromUrl('${item['english_voice']}');
+                    //           playAudioFromUrl(voiceUrl);
+                    //           setState(() {});
+                    //                                     },'assets/next_blue.png'),
+                    //         );
+                    //       },),
+                    //   ],
+                    // ),
+
                     // Container(
                     //   margin: EdgeInsets.only(
-                    //       top: MediaQuery.of(context).size.height * 0.015),
+                    //       top: MediaQuery.of(context).size.height * 0.005),
                     //   width: MediaQuery.of(context).size.width * .76,
-                    //   height: MediaQuery.of(context).size.height * .07,
+                    //   height: MediaQuery.of(context).size.height * .05,
                     //   alignment: Alignment.center,
                     //   decoration: BoxDecoration(
                     //       borderRadius: BorderRadius.circular(16),
                     //       color: Colors.transparent),
-                    //   child: Row(
+                    //   child: Column(
                     //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     //     children: [
-                    //       Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
-                    //         return reusablenextitembtn(context, (){
-                    //         //how to move to next item
-                    //         print(
-                    //           widget.current
-                    //         );
-                    //         moveToPreviousItem();
-                    //         setState(() {});
-                    //         String voiceUrl;
-                    //         if (textVisibilityProvider .isFirstTextVisible) {
-                    //           voiceUrl = '${currentVoiceAr}';
-                    //         } else if (textVisibilityProvider .isThirdTextVisible) {
-                    //           voiceUrl = '${currentVoiceUr}';
-                    //         } else if (textVisibilityProvider .isForTextVisible) {
-                    //           voiceUrl = '${currentVoiceTur}';
-                    //         } else if (textVisibilityProvider .isFiveTextVisible) {
-                    //           voiceUrl = '${currentVoiceChi}';
-                    //         } else if (textVisibilityProvider .isSixTextVisible) {
-                    //           voiceUrl = '${currentVoicePas}';
-                    //         } else {
-                    //           voiceUrl = '${currentVoiceEng}';
-                    //         }
-                    //         // playAudioFromUrl('${item['english_voice']}');
-                    //         playAudioFromUrl(voiceUrl);
-                    //         setState(() {});
-                    //       },'assets/back_blue.png');
-                    //       },),
-                          
-                    //       Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
-                    //       Text('${_currentPageIndex + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
-                    //       Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
-                    //         return reusablenextitembtn(context, (){
-                    //         //how to move to next item
-                    //         print(
-                    //           widget.current
-                    //         );
-                    //         moveToNextItem();
-                    //         setState(() {});
-                    //         String voiceUrl;
-                    //         if (textVisibilityProvider .isFirstTextVisible) {
-                    //           voiceUrl = '${currentVoiceAr}';
-                    //         } else if (textVisibilityProvider .isThirdTextVisible) {
-                    //           voiceUrl = '${currentVoiceUr}';
-                    //         } else if (textVisibilityProvider .isForTextVisible) {
-                    //           voiceUrl = '${currentVoiceTur}';
-                    //         } else if (textVisibilityProvider .isFiveTextVisible) {
-                    //           voiceUrl = '${currentVoiceChi}';
-                    //         } else if (textVisibilityProvider .isSixTextVisible) {
-                    //           voiceUrl = '${currentVoicePas}';
-                    //         } else {
-                    //           voiceUrl = '${currentVoiceEng}';
-                    //         }
-                    //         // playAudioFromUrl('${item['english_voice']}');
-                    //         playAudioFromUrl(voiceUrl);
-                    //         setState(() {});
-                    //       },'assets/next_blue.png');
-                    //       },),
-                    //       // reusablenextitembtn(context, (){
-                    //       //   print(
-                    //       //     widget.current
-                    //       //   );
-                    //       //   //how to move to back item
-                    //       //   moveToNextItem();
-                    //       // },'assets/next_blue.png'),
+                    //       Center(
+                    //         child: Text('${_currentPageIndex + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
+                    //       ),
+                    //       // Center(
+                    //       //   child: Text('Swipe>>',style: TextStyle(color: Color(0xFFaf2307)),),
+                    //       // ),
                     //     ],
-                    //   ),
+                    //   )
                     // ),
+
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.015),
+                      width: MediaQuery.of(context).size.width * .76,
+                      height: MediaQuery.of(context).size.height * .07,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.transparent),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                            return reusablenextitembtn(context, (){
+                            //how to move to next item
+                            print(
+                              widget.current
+                            );
+                            moveToPreviousItem();
+                            setState(() {});
+                            String voiceUrl;
+                            if (textVisibilityProvider .isFirstTextVisible) {
+                              voiceUrl = '${currentVoiceAr}';
+                            } else if (textVisibilityProvider .isThirdTextVisible) {
+                              voiceUrl = '${currentVoiceUr}';
+                            } else if (textVisibilityProvider .isForTextVisible) {
+                              voiceUrl = '${currentVoiceTur}';
+                            } else if (textVisibilityProvider .isFiveTextVisible) {
+                              voiceUrl = '${currentVoiceChi}';
+                            } else if (textVisibilityProvider .isSixTextVisible) {
+                              voiceUrl = '${currentVoicePas}';
+                            } else {
+                              voiceUrl = '${currentVoiceEng}';
+                            }
+                            // playAudioFromUrl('${item['english_voice']}');
+                            playAudioFromUrl(voiceUrl);
+                            setState(() {});
+                          },'assets/back_blue.png');
+                          },),
+                          
+                          // Text('${widget.current + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
+                          Text('${_currentPageIndex + 1}/${widget.items.length}',style: TextStyle(color: Color(0xFFaf2307)),),
+                          Consumer<TextVisibilityProvider>(builder: (context, textVisibilityProvider, child) {
+                            return reusablenextitembtn(context, (){
+                            //how to move to next item
+                            print(
+                              widget.current
+                            );
+                            moveToNextItem();
+                            setState(() {});
+                            String voiceUrl;
+                            if (textVisibilityProvider .isFirstTextVisible) {
+                              voiceUrl = '${currentVoiceAr}';
+                            } else if (textVisibilityProvider .isThirdTextVisible) {
+                              voiceUrl = '${currentVoiceUr}';
+                            } else if (textVisibilityProvider .isForTextVisible) {
+                              voiceUrl = '${currentVoiceTur}';
+                            } else if (textVisibilityProvider .isFiveTextVisible) {
+                              voiceUrl = '${currentVoiceChi}';
+                            } else if (textVisibilityProvider .isSixTextVisible) {
+                              voiceUrl = '${currentVoicePas}';
+                            } else {
+                              voiceUrl = '${currentVoiceEng}';
+                            }
+                            // playAudioFromUrl('${item['english_voice']}');
+                            playAudioFromUrl(voiceUrl);
+                            setState(() {});
+                          },'assets/next_blue.png');
+                          },),
+                          // reusablenextitembtn(context, (){
+                          //   print(
+                          //     widget.current
+                          //   );
+                          //   //how to move to back item
+                          //   moveToNextItem();
+                          // },'assets/next_blue.png'),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               );
