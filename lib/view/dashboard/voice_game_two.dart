@@ -345,7 +345,6 @@ int count = 1;
                   padding: const EdgeInsets.only(top: 25),
                   child: GridView(
                     shrinkWrap: true,
-                    // physics: NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
