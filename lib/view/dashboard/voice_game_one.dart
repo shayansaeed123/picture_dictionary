@@ -270,12 +270,7 @@ int unlockedIndex = 0;
                 selectedCategory: selectedCategory,
                 itemsFuture2: itemsFuture2,)),
             );
-            // setState(() {});
-            // if (result != null) {
-            //   setState(() {
-            //     countValue = result;
-            //   });
-            // }
+            
 
             if (result != null && mounted) {
                         setState(() {
