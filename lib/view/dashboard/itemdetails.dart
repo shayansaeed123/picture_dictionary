@@ -164,7 +164,7 @@ void moveToPreviousItem() {
     return Scaffold(
       key: _scaffoldKey,
       drawer: SideBar(),
-        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();},'${currentNameEng.toString().toUpperCase()}'),
+        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();},''),
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -262,7 +262,7 @@ void moveToPreviousItem() {
                                 const Color.fromARGB(255, 51, 219, 177), context,(){
                                   playAudioFromUrl(currentVoiceAr);
                                 }),
-                            reusableitemdetailsrow('${currentNameEng.toString().toUpperCase()}', Color(0xFF9753fe),
+                            reusableitemdetailsrow('${currentNameEng[0].toString().toUpperCase() + currentNameEng.substring(1).toLowerCase()}', Color(0xFF9753fe),
                                 Color.fromARGB(255, 161, 136, 204), context,(){
                                   playAudioFromUrl(currentVoiceEng);
                                 }),
@@ -270,7 +270,7 @@ void moveToPreviousItem() {
                                 Color(0xFF5d80fe), context,(){
                                   playAudioFromUrl(currentVoiceUr);
                                 }),
-                            reusableitemdetailsrow('${currentNameTur.toString().toUpperCase()}', Color(0xFFe14abe),
+                            reusableitemdetailsrow('${currentNameTur[0].toString().toUpperCase()+ currentNameTur.substring(1).toLowerCase()}', Color(0xFFe14abe),
                                 Colors.pink.shade200, context,(){
                                   playAudioFromUrl(currentVoiceTur);
                                 }),

@@ -63,7 +63,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         // backgroundColor: Color(0xFFffb64d),
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
-        }, 'CATEGORIES'),
+        }, ''),
         drawer: SideBar(),
         body: Stack(
           children: [

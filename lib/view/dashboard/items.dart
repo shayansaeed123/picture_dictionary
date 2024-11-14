@@ -109,7 +109,7 @@ PictureRepo pictureRepo = PictureRepo();
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();}, 'Categories Name'),
+        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();}, ''),
         drawer: SideBar(),
         body: Container(
           decoration: BoxDecoration(

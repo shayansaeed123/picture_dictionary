@@ -18,7 +18,7 @@ Widget reusableitemdetailsrow(String name, Color color, bordercolor,
           child: Center(
               child: Text(
             name,
-            style: TextStyle(color: ColorController().whiteColor, fontSize: 15,fontWeight: FontWeight.bold),
+            style: TextStyle(color: ColorController().whiteColor, fontSize: 16.5),
           )),
         ),
       ),
