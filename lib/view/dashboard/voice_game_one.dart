@@ -189,7 +189,7 @@ int unlockedIndex = 0;
         // backgroundColor: Color(0xFFffb64d),
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
-        }, "CATEGORIES"),
+        }, ""),
         drawer: SideBar(),
         body: Stack(
           children: [

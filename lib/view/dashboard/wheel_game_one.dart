@@ -110,7 +110,7 @@ late Future<Map<String, dynamic>> itemsFuture2;
 
   Future<Map<String, dynamic>> clearData()async{
     final response = await http.post(
-      Uri.parse('${PictureRepo.baseUrl}apis/clear_voice_and_wheel_results.php'),
+      Uri.parse('${PictureRepo.baseUrl}apis/clear_wheel_results.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
       },
@@ -190,7 +190,7 @@ int unlockedIndex = 0;
         // backgroundColor: Color(0xFFffb64d),
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
-        }, "CATEGORIES"),
+        }, ""),
         drawer: SideBar(),
         body: Stack(
           children: [

@@ -133,7 +133,7 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Play"),
+          title: Text("MATCH WORD"),
           backgroundColor: Color(0xFFffb64d),
           automaticallyImplyLeading: false,
         ),

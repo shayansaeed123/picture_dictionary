@@ -180,7 +180,7 @@ Widget build(BuildContext context) {
   return WillPopScope(
      onWillPop: () async {
            final response = await http.post(
-      Uri.parse('${PictureRepo.baseUrl}apis/clear_voice_and_wheel_results.php'),
+      Uri.parse('${PictureRepo.baseUrl}apis/clear_wheel_results.php'),
       body: {
         'user_id': MySharedPrefrence().get_user_id().toString(),
       },

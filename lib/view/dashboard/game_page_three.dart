@@ -176,7 +176,7 @@ int count = 1;
         
       },
       child: Scaffold(
-        appBar: AppBar(title: Text("Play"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
+        appBar: AppBar(title: Text("IMAGE GAME"),backgroundColor: Color(0xFFffb64d),automaticallyImplyLeading: false,),
         body: Container(
           decoration: BoxDecoration(
                   gradient: LinearGradient(
