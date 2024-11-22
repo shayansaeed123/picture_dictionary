@@ -79,7 +79,7 @@ Future<bool> _onWillPop() async {
         appBar: reusableappbar(context, (){
           // ZoomDrawer.of(context)!.open();
           _scaffoldKey.currentState!.openDrawer();
-        },'Home'),
+        },''),
         drawer: Drawer(
           backgroundColor: colorController.sidebarBg,
         child: ListView(

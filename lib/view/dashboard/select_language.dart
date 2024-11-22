@@ -22,7 +22,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
         drawer: SideBar(),
         appBar: reusableappbar(context, (){
           _scaffoldKey.currentState!.openDrawer();
-        }, 'Choose Language'),
+        }, ''),
         body: Container(
           height:  double.infinity,
           width: double.infinity,

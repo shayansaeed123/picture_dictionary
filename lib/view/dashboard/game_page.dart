@@ -26,7 +26,7 @@ Widget build(BuildContext context) {
   return Scaffold(
     appBar: reusableappbar(context, () {
       _scaffoldKey.currentState!.openDrawer();
-    }, 'GAMES'),
+    }, ''),
     body: Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Container(
