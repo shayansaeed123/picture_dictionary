@@ -7,6 +7,7 @@ import 'package:picture_dictionary/view/dashboard/game_page_two.dart';
 import 'package:picture_dictionary/view/dashboard/match_word_game_one.dart';
 import 'package:picture_dictionary/view/dashboard/select_word_game_one.dart';
 import 'package:picture_dictionary/view/dashboard/voice_game_one.dart';
+import 'package:picture_dictionary/widget/sidebar.dart';
 import 'wheel_game_one.dart';
 
 
@@ -24,9 +25,9 @@ class _GamesState extends State<Games> {
  @override
 Widget build(BuildContext context) {
   return Scaffold(
-    appBar: reusableappbar(context, () {
-      _scaffoldKey.currentState!.openDrawer();
-    }, ''),
+    key: _scaffoldKey,
+        appBar: reusableappbar(context, (){_scaffoldKey.currentState!.openDrawer();}, ''),
+        drawer: SideBar(),
     body: Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Container(

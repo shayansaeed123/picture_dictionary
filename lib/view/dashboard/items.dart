@@ -129,7 +129,7 @@ PictureRepo pictureRepo = PictureRepo();
              if(snapshot.connectionState == ConnectionState.waiting){
               return Center(child: reusableloadingrow(context, true),);
              }else if(!snapshot.hasData){
-              return Center(child: Text('data'));
+              return Center(child: Image.asset('assets/no_net.png',fit: BoxFit.cover, filterQuality: FilterQuality.high,));
              }else{
               List<Map<String, dynamic>> items = snapshot.data!;
               return 

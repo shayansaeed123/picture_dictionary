@@ -91,7 +91,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         return Center(child: reusableloadingrow(context, true));
                       } else if (!snapshot.hasData) {
                         return 
-                        Center(child: Text('No Data Found'));
+                        Center(child: Image.asset('assets/no_net.png',fit: BoxFit.cover, filterQuality: FilterQuality.high,));
                       } else {
                         List<Map<String, dynamic>> data = snapshot.data!;
                         return GridView.builder(

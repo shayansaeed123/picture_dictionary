@@ -15,11 +15,35 @@ Widget reusableitemdetailsrow(String name, Color color, bordercolor,
             color: color,
             borderRadius: BorderRadius.circular(11),
           ),
-          child: Center(
-              child: Text(
-            name,
-            style: TextStyle(color: ColorController().whiteColor, fontSize: 16.5),
-          )),
+          child: 
+          // InkWell(
+          //   onTap: (){
+          //     onTap();
+          //   },
+          //   child: 
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Center(
+                child: Text(
+              name,
+              style: TextStyle(color: ColorController().whiteColor, fontSize: 16.5),
+            )),
+            // Container(
+            // // margin: EdgeInsets.only(
+            // //   right: MediaQuery.of(context).size.height * .01,
+            // // ),
+            // // padding: EdgeInsets.all(MediaQuery.of(context).size.height * .006),
+            // // decoration: BoxDecoration(
+            // //     shape: BoxShape.circle,
+            // //     border: Border.all(color: bordercolor, width: 4),
+            // //     color: color),
+            // child: Center(
+            //     child: Icon(Icons.volume_up, color: Colors.white, size:  MediaQuery.of(context).size.height * .03)),
+            //         ),
+              ],
+            ),
+          // )
         ),
       ),
       InkWell(
@@ -36,7 +60,7 @@ Widget reusableitemdetailsrow(String name, Color color, bordercolor,
               border: Border.all(color: bordercolor, width: 4),
               color: color),
           child: Center(
-              child: Icon(Icons.volume_up, color: Colors.white, size: 30)),
+              child: Icon(Icons.volume_up, color: Colors.white, size:  MediaQuery.of(context).size.height * .03)),
         ),
       ),
     ],

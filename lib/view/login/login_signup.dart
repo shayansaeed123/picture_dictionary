@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   bool isLoginPage = true;
 
   int newdata = 0;
-
+  bool _isPasswordVisible = false; // Track password visibility
 
   signInWithGoogle() async {
     setState(() {
@@ -371,13 +371,24 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                                 return null;
                               },
-                                obscureText: true,
+                                obscureText: !_isPasswordVisible, // Hide or show password
                                 obscuringCharacter: '*',
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: colorController.textformfillColor,
                                   prefixIcon: const Icon(Icons.password_outlined,
                                       color: Colors.white),
+                                      suffixIcon: IconButton(
+          icon: Icon(
+            _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            setState(() {
+              _isPasswordVisible = !_isPasswordVisible; // Toggle visibility
+            });
+          },
+        ),
                                   hintText: 'Password',
                                   hintStyle: TextStyle(color: Colors.white),
                                   border: OutlineInputBorder(

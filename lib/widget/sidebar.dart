@@ -122,7 +122,7 @@ class _SideBarState extends State<SideBar> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: reusableloadingrow(context, true));
               } else if (!snapshot.hasData) {
-                return Center(child: Text('No Data Found'));
+                return Center(child: Image.asset('assets/no_net.png',fit: BoxFit.cover, filterQuality: FilterQuality.high,));
               } else {
                 return ListView.separated(
                   padding: EdgeInsets.zero,

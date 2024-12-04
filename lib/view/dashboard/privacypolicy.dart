@@ -13,7 +13,7 @@ class PrivacyPolicy extends StatefulWidget {
 
 class _PrivacyPolicyState extends State<PrivacyPolicy> {
     late WebViewController _controller;
-     bool _isLoading = false;
+     bool _isLoading = true;
   String PrivacyText = """
 English Language:
 Picture Dictionary | PD
@@ -39,10 +39,14 @@ Picture Dictionary, you can take the test for correction in a fun way.
     return Scaffold(
       backgroundColor: colorController.bgColorup,
       appBar: AppBar(title: Text('Privacy Policy'),),
-      body: SingleChildScrollView(
-        physics: AlwaysScrollableScrollPhysics(),
-        primary: true,
-        child:  Container(
+      body: 
+      // SingleChildScrollView(
+      //   physics: AlwaysScrollableScrollPhysics(),
+      //   primary: true,
+      //   child:  
+        Stack(
+          children: [
+            Container(
         height: MediaQuery.sizeOf(context).height * 1.7,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -54,9 +58,19 @@ Picture Dictionary, you can take the test for correction in a fun way.
                     _controller = webViewController;
                   },
                   onPageStarted: (String url){
-                    // Utils.snakbarSuccess(context, 'Page is Loading');
-                    print('$url ');
+                     // Show loading indicator when the page starts loading
+              setState(() {
+                _isLoading = true;
+              });
+              print('Page loading started: $url');
                   },
+                  onPageFinished: (String url) {
+              // Hide loading indicator when the page finishes loading
+              setState(() {
+                _isLoading = false;
+              });
+              print('Page loading finished: $url');
+            },
                   onWebResourceError: (error) {
                     Center(child: reusableloadingrow(context, _isLoading));
                   },
@@ -73,6 +87,16 @@ Picture Dictionary, you can take the test for correction in a fun way.
           // ),
         ),
       ),
+       // Loading Indicator
+          if (_isLoading)
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(child: reusableloadingrow(context, true),),
+              ],
+            )
+          ],
+        )
         // Column(
         //   mainAxisAlignment: MainAxisAlignment.start,
         //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +104,7 @@ Picture Dictionary, you can take the test for correction in a fun way.
         //     reusabletext(PrivacyText, colorController.whiteColor, 14),
         //   ],
         // ),
-      ),
+      // ),
     );
   }
 }

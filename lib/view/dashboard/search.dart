@@ -210,6 +210,7 @@ import 'package:picture_dictionary/repo/category_repo.dart';
 import 'package:picture_dictionary/res/reusableCategoryTextBtn.dart';
 import 'package:picture_dictionary/res/reusableVisibility.dart';
 import 'package:picture_dictionary/res/reusableappbar.dart';
+import 'package:picture_dictionary/res/reusableloading.dart';
 import 'package:picture_dictionary/view/dashboard/itemdetails.dart';
 import 'package:picture_dictionary/view/dashboard/items.dart';
 import 'package:picture_dictionary/widget/sidebar.dart';
@@ -234,6 +235,7 @@ class _SearchItemState extends State<SearchItem> {
   String selectedCategory = '';
   late Future<List<String>> categoriesFuture;
   late Future<List<Map<String, dynamic>>> itemsFuture;
+  bool isLoading = true; // Flag to track loading state
 
   final AudioPlayer audioPlayer = AudioPlayer();
   Future<void> playAudioFromUrl(String url) async {
@@ -280,7 +282,9 @@ class _SearchItemState extends State<SearchItem> {
           itemsTwo = tempItemsTwo;
           items = items + itemsTwo;
           filteredItems = items;
+          isLoading = false;
         });
+        
       }
     }
   }
@@ -362,7 +366,7 @@ class _SearchItemState extends State<SearchItem> {
         drawer: SideBar(),
         appBar: reusableappbar(context, () {
           _scaffoldKey.currentState!.openDrawer();
-        }, 'Search Item'),
+        }, ''),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -417,6 +421,9 @@ class _SearchItemState extends State<SearchItem> {
                   keyboardType: TextInputType.text,
                 ),
               ),
+              isLoading
+              ? Center(child: reusableloadingrow(context, true),) // Show loading while fetching data
+              : 
               Expanded(
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

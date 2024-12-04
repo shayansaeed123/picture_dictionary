@@ -280,7 +280,7 @@ int count = 1;
                             count = 0;
                             setState(() {
                               if(int.parse(countValue.toString()) >= int.parse('6')){
-                                reusableAnimation(context, 'assets/congrats.json', 'Next',countValue);
+                                reusableAnimationWin(context, 'assets/win.png', 'Next',countValue);
                               }else{
                                 reusableAnimation(context, 'assets/failed.json', 'Try Again',countValue);
                               }

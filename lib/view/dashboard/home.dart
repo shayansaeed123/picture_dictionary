@@ -105,7 +105,7 @@ Future<bool> _onWillPop() async {
                 ],),
             ),
               ListTile(
-                leading: Icon(Icons.settings),
+                leading: Icon(Icons.home),
                 title: Text('Home'),
                 onTap: () {
                   // Handle settings tap
@@ -114,8 +114,8 @@ Future<bool> _onWillPop() async {
               ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.help),
-              title: Text('Setting'),
+              leading: Icon(Icons.language),
+              title: Text('Languages'),
               onTap: () {
                 // Handle help tap
                 Navigator.pop(context);
@@ -132,7 +132,7 @@ Future<bool> _onWillPop() async {
             ),
             // Spacer(),
             ListTile(
-              leading: Icon(Icons.exit_to_app),
+              leading: Icon(Icons.file_copy),
               title: Text('About Us'),
               onTap: () {
                 // Handle logout tap

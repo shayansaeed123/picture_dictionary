@@ -13,7 +13,7 @@ class AboutUs extends StatefulWidget {
 
 class _AboutUsState extends State<AboutUs> {
   late WebViewController _controller;
-  bool _isLoading = false;
+  bool _isLoading = true;
   String aboutusTextEnglish = """
 English Language:
 
@@ -95,7 +95,9 @@ kendinizide de test edebilirsiniz.
     return Scaffold(
       appBar: AppBar(title: Text('About Us'),),
       backgroundColor: colorController.bgColorup,
-      body: Container(
+      body: Stack(
+        children: [
+          Container(
         height: MediaQuery.sizeOf(context).height,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -107,13 +109,24 @@ kendinizide de test edebilirsiniz.
                     _controller = webViewController;
                   },
                   onPageStarted: (String url){
-                    // Utils.snakbarSuccess(context, 'Page is Loading');
-                    print('$url ');
+                     // Show loading indicator when the page starts loading
+              setState(() {
+                _isLoading = true;
+              });
+              print('Page loading started: $url');
                   },
+                  onPageFinished: (String url) {
+              // Hide loading indicator when the page finishes loading
+              setState(() {
+                _isLoading = false;
+              });
+              print('Page loading finished: $url');
+            },
                   onWebResourceError: (error) {
                     Center(child: reusableloadingrow(context, _isLoading));
                   },
                 ),
+                
           // Column(
           //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
           //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,6 +139,16 @@ kendinizide de test edebilirsiniz.
           // ),
         ),
       ),
+      // Loading Indicator
+          if (_isLoading)
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(child: reusableloadingrow(context, true),),
+              ],
+            )
+        ],
+      )
     );
   }
 }

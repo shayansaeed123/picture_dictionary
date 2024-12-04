@@ -166,8 +166,7 @@ class _MatchWordGameOneState extends State<MatchWordGameOne> {
                           return Center(
                               child: reusableloadingrow(context, true));
                         } else if (snapshot.hasError) {
-                          return Center(
-                              child: Text('Error: ${snapshot.error}'));
+                          return Center(child: Image.asset('assets/no_net.png',fit: BoxFit.cover, filterQuality: FilterQuality.high,));
                         } else {
                           Map<String, dynamic> itemsMap = snapshot.data!;
                           List<dynamic> items = itemsMap['items'];
