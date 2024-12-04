@@ -30,7 +30,6 @@ class _SelectLanguageState extends State<SelectLanguage> {
             image: DecorationImage(image: AssetImage('assets/second_page.png'),fit:  BoxFit.fill),
           ),
           child: Stack(
-            // alignment: Alignment.center,
             children: [
               Positioned.fill(
                 // top: MediaQuery.of(context).size.height * 0.01,
@@ -176,27 +175,6 @@ class _SelectLanguageState extends State<SelectLanguage> {
               // Positioned(child: child)
             ],
           )
-          // Center(
-          //   child: Column(
-              
-          //     children: [
-          //       Expanded(
-          //         child: Container(
-          //                   //         height:  double.infinity,
-          //                   // width: double.infinity,
-          //           decoration: BoxDecoration(
-          //                     image: DecorationImage(image: AssetImage('assets/rope.png'),fit:  BoxFit.contain),
-          //                   ),
-          //                   child: Container(
-          //                     child: Column(children: [
-
-          //                     ],),
-          //                   )
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // ),
         ),
       ),
     );
