@@ -1,4 +1,4 @@
-// import 'package:device_preview/device_preview.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,11 +15,11 @@ void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    // DevicePreview(
-    // enabled: true,
-    // builder: (context) => 
+    DevicePreview(
+    enabled: true,
+    builder: (context) => 
     MyApp(), // Wrap your app
-  // ),
+  ),
   );
 }
 

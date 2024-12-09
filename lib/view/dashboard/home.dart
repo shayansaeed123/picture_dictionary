@@ -101,7 +101,7 @@ Future<bool> _onWillPop() async {
                   Image.asset('assets/ic_launcher.png',alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width * .5,
                   height: MediaQuery.of(context).size.height * .1,),
-                  Text('${FirebaseAuth.instance.currentUser == null || FirebaseAuth.instance.currentUser!.displayName == null? '' : FirebaseAuth.instance.currentUser!.displayName }',)
+                  Expanded(child: Text('${FirebaseAuth.instance.currentUser == null || FirebaseAuth.instance.currentUser!.displayName == null? '' : FirebaseAuth.instance.currentUser!.displayName }',))
                 ],),
             ),
               ListTile(

@@ -55,7 +55,7 @@ Widget build(BuildContext context) {
                       image: DecorationImage(
                         image: AssetImage('assets/match-image.jpg'),
                         filterQuality: FilterQuality.high,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     // child: Center(
@@ -83,7 +83,7 @@ Widget build(BuildContext context) {
                       image: DecorationImage(
                         image: AssetImage('assets/voice-game.jpg'),
                         filterQuality: FilterQuality.high,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     // child: Center(
@@ -116,7 +116,7 @@ Widget build(BuildContext context) {
                       image: DecorationImage(
                         image: AssetImage('assets/wheel-game.jpg'),
                         filterQuality: FilterQuality.high,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     // child: Center(
@@ -144,7 +144,7 @@ Widget build(BuildContext context) {
                       image: DecorationImage(
                         image: AssetImage('assets/select-word.jpg'),
                         filterQuality: FilterQuality.high,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     // child: Center(
@@ -178,7 +178,7 @@ Widget build(BuildContext context) {
                       image: DecorationImage(
                         image: AssetImage('assets/word2.jpg'),
                         filterQuality: FilterQuality.high,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     // child: Center(
