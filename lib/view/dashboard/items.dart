@@ -91,18 +91,6 @@ PictureRepo pictureRepo = PictureRepo();
   //   filteredItems = _data.where((item) => item['type_id'] == category).toList();
   // }
   
-
-  // Future<List<dynamic>> fetchData() async {
-  //   final response =
-  //       await http.get(Uri.parse('https://kulyatudawah.com/public/vocgame/apis/get_items.php'));
-  //   if (response.statusCode == 200) {
-  //     print('Shayannnn Iteemmmmmmmm ${response.body}');
-  //     return json.decode(response.body);
-  //   } else {
-  //     throw Exception('Failed to load data');
-  //   }
-  // }
-  
   
   
   @override
