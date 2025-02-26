@@ -288,18 +288,6 @@ class _SearchItemState extends State<SearchItem> {
       }
     }
   }
-  // void performSearch(String text) {
-  //   setState(() {
-  //     filteredItems = items.where((item) {
-  //       return item['english']
-  //           .toString()
-  //           .toLowerCase()
-  //           .contains(text.toLowerCase());
-  //     }).toList();
-  //   });
-
-  //   print("Filtered Items: $filteredItems");
-  // }
 
   void performSearch(String text) {
   setState(() {
