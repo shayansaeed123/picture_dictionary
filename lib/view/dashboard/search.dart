@@ -490,29 +490,6 @@ class _SearchItemState extends State<SearchItem> {
                                     'assets/placeholder_loading.png'),
                               ),
                             ),
-                            // Container(
-                            //   width: double.infinity,
-                            //   height: MediaQuery.of(context).size.height * 0.05,
-                            //   margin: EdgeInsets.all(
-                            //       MediaQuery.of(context).size.height * .001),
-                            //   padding: EdgeInsets.all(
-                            //       MediaQuery.of(context).size.height * .003),
-                            //   decoration: BoxDecoration(
-                            //       color: colorController.categoryBtnColor,
-                            //       borderRadius: BorderRadius.circular(8.0)),
-                            //   child: Center(
-                            //     child: Text(
-                            //       '${c['english']}',
-                            //       textAlign: TextAlign.center,
-                            //       softWrap: true,
-                            //       style: TextStyle(
-                            //         color: Colors.white,
-                            //         fontFamily: 'English1',
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
-
                             reusableCategoryTextBtn(
                                           context, 
                                           '${filteredItems[index]['english'].toString().capitalize}',
