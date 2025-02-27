@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:picture_dictionary/POB/Examination.dart';
+import 'package:picture_dictionary/POB/Prescription.dart';
+import 'package:picture_dictionary/POB/Test.dart';
 import 'package:picture_dictionary/POB/Visit.dart';
 
 class HomePage extends StatefulWidget {
@@ -62,9 +65,9 @@ class _HomePageState extends State<HomePage> {
               child: TabBarView(
                 children: [
                  Visit(),
-                //  Examination(),
-                //  Test(),
-                //  Prescription(),
+                 Examination(),
+                 Test(),
+                 Prescription(),
                 ],
               ),
             ),
