@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:picture_dictionary/POB/HomePage.dart';
+import 'package:picture_dictionary/POB/setting.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,11 +17,11 @@ void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
-    DevicePreview(
-    enabled: true,
-    builder: (context) => 
+    // DevicePreview(
+    // enabled: true,
+    // builder: (context) => 
     MyApp(), // Wrap your app
-  ),
+  // ),
   );
 }
 
@@ -45,7 +47,8 @@ class _MyAppState extends State<MyApp> {
       create: (context) => TextVisibilityProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Splash(),
+        // home: Splash(),
+        home: HomePage(),
         theme: ThemeData(
           fontFamily: 'English1'
         ),
