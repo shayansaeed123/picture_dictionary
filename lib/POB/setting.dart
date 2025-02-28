@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:picture_dictionary/res/reusablesetting.dart';
+import 'package:picture_dictionary/POB/reusablesetting.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
