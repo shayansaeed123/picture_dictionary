@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:picture_dictionary/POB/HomePage.dart';
-import 'package:picture_dictionary/POB/setting.dart';
 import 'package:picture_dictionary/common/provider.dart';
 import 'package:picture_dictionary/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,8 +45,8 @@ class _MyAppState extends State<MyApp> {
       create: (context) => TextVisibilityProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // home: Splash(),
-        home: HomePage(),
+        home: Splash(),
+        // home: HomePage(),
         theme: ThemeData(
           fontFamily: 'English1'
         ),
