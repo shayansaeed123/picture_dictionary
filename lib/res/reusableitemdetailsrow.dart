@@ -24,11 +24,16 @@ Widget reusableitemdetailsrow(String name, Color color, bordercolor,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Center(
+                SizedBox(width: MediaQuery.of(context).size.width * 0.03), // for left padding
+                Expanded(
                 child: Text(
-              name,
-              style: TextStyle(color: ColorController().whiteColor, fontSize: 16.5),
-            )),
+                  name,
+                  style: TextStyle(
+                      color: ColorController().whiteColor, fontSize: 16.5),
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
             // Container(
             // // margin: EdgeInsets.only(
             // //   right: MediaQuery.of(context).size.height * .01,
