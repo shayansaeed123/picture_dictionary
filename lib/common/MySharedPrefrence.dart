@@ -530,6 +530,46 @@ class MySharedPrefrence {
     return preferences.read('user_company_id') ?? '';
   }
 
+  void setMatchGameId(int? matchGameId) {
+    preferences.write('match_game_id', matchGameId ?? 0);
+  }
+
+  int getMatchGameId() {
+    return preferences.read('match_game_id') ?? 0;
+  }
+
+  void setVoiceGameId(int? voiceGameId) {
+    preferences.write('voice_game_id', voiceGameId ?? 0);
+  }
+
+  int getVoiceGameId() {
+    return preferences.read('voice_game_id') ?? 0;
+  }
+
+  void setWheelGameId(int? wheelGameId) {
+    preferences.write('wheel_game_id', wheelGameId ?? 0);
+  }
+
+  int getWheelGameId() {
+    return preferences.read('wheel_game_id') ?? 0;
+  }
+
+  void setWordGameId(int? wordGameId) {
+    preferences.write('word_game_id', wordGameId ?? 0);
+  }
+
+  int getWordGameId() {
+    return preferences.read('word_game_id') ?? 0;
+  }
+
+  void setMatchWordGameId(int? matchWordGameId) {
+    preferences.write('match_word_game_id', matchWordGameId ?? 0);
+  }
+
+  int getMatchWordGameId() {
+    return preferences.read('match_word_game_id') ?? 0;
+  }
+
   void logout() {
     preferences.erase();
   }

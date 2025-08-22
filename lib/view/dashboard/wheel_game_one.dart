@@ -175,6 +175,7 @@ setState(() {});
     categoriesFuture = pictureRepo.fetchCategories();
     itemsFuture = fetchGameCategories(selectedCategory);
     itemsFuture2 =  fetchGameCategories2(selectedCategory);
+    unlockedIndex = MySharedPrefrence().getWheelGameId();
     clearData();
     
   }
@@ -286,6 +287,7 @@ int unlockedIndex = 0;
                           print("Updated countValue: $countValue");
                           if (int.parse(countValue!) >= 6 && index == unlockedIndex) {
                             unlockedIndex++; // Unlock the next index
+                            MySharedPrefrence().setWheelGameId(unlockedIndex);
                           }
                         });
                       }
